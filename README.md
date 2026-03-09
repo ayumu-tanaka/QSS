@@ -30,6 +30,7 @@ GitHub Pages: [https://ayumu-tanaka.github.io/QSS/](https://ayumu-tanaka.github.
 ## 参考
 
 * [QSS GitHubレポジトリ](https://github.com/kosukeimai/qss)
+* [QSS Student Resources](https://press.princeton.edu/student-resources/quantitative-social-science)
 * [DSS GitHubレポジトリ](https://github.com/ellaudet/DSS)
 * [DSS INSTRUCTOR RESOURCES](https://ellaudet.github.io/dss_instructor_resources/)
 
