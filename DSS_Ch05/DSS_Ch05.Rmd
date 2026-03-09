@@ -1,0 +1,153 @@
+---
+title: |
+    | 第5章: 説明（観察データによる因果効果の推定）
+subtitle: |
+    | Elena Llaudet & Kosuke Imai. 
+    | Data Analysis for Social Science: A Friendly and Practical Introduction.
+author: ""
+date: "2026-03-09"
+output:
+#  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 5.1 観察研究と共変量
+
+---
+
+## 観察研究 (Observational Studies)
+
+* 研究者が処置を無作為に割り当て**ない**研究。
+* **メリット**: 倫理的・物理的な理由で実験できない現象も分析可能。
+* **デメリット**: **共変量** (Confounders) によるバイアスが発生しやすい。
+
+---
+
+## 共変量 (Confounders)
+
+* 処置 ($X$) と結果 ($Y$) の両方に影響を与える変数。
+* これにより、処置群と統制群が「平均的に同一」ではなくなり、単純な平均の差では因果効果を測定できなくなる。
+
+# 5.2 重回帰分析 (Multiple Regression)
+
+---
+
+## なぜ重回帰か？
+
+* 単純な回帰 ($\hat{Y} = \hat{\alpha} + \hat{\beta} X$) では、他の要因を考慮できない。
+* **重回帰**では、複数の独立変数を同時にモデルに含めることができる。
+* 数式: $\hat{Y} = \hat{\alpha} + \hat{\beta}_1 X_1 + \hat{\beta}_2 X_2 + \dots$
+* これにより、「$X_2$ などの**他の要因を一定に保ったまま**、$X_1$ が $Y$ に与える影響」を推定できる。
+
+# 5.3 データの読み込みと準備
+
+---
+
+## ウクライナの選挙データ
+
+* 2014年ウクライナ議会選挙のデータ。
+* **関心**: ロシアのテレビ放送を視聴できることが、親ロシア派への投票に与える影響。
+
+```{r}
+# データの読み込み
+precincts <- read.csv("UA_precincts.csv")
+# 最初の数行を表示
+head(precincts)
+```
+
+# 5.4 共変量の制御
+
+---
+
+## ロシア放送の影響
+
+* 単純に比較すると、ロシア放送を受信できる地域は、もともと親ロシア的な傾向が強い可能性がある（交絡）。
+* そこで、**過去の投票率** (`prior_pro_russian`) を制御変数として追加する。
+
+---
+
+## ロシア放送の影響: Rコード
+
+\footnotesize
+
+```{r}
+# 重回帰モデルの推定
+model_mult <- lm(pro_russian ~ russian_tv + prior_pro_russian, 
+                 data = precincts)
+# 結果の表示
+summary(model_mult)
+```
+
+\normalsize
+
+---
+
+## 推定値の解釈
+
+* `russian_tv` の係数: 過去の投票率を一定に保ったとき、ロシア放送が受信可能であることで、今回の親ロシア派の得票率が平均で何%変化したか。
+
+# 5.5 回帰モデルの比較
+
+---
+
+## モデル間の比較
+
+* 制御変数を入れる前と後で係数がどう変わるかを確認する。
+
+\footnotesize
+
+```{r}
+# 単純回帰
+model_sim <- lm(pro_russian ~ russian_tv, data = precincts)
+coef(model_sim)["russian_tv"]
+
+# 重回帰（過去の投票率を制御）
+coef(model_mult)["russian_tv"]
+```
+
+\normalsize
+
+# 5.6 散布図と回帰平面（視覚化）
+
+---
+
+## 3次元的な関係の理解
+
+* 複数の変数の関係をプロットする。
+
+\footnotesize
+
+```{r, fig.height=3.5, out.height="30%", fig.align="center"}
+# 高度な可視化の代わりに、制御変数ごとの回帰直線を確認（概念図）
+plot(precincts$prior_pro_russian, precincts$pro_russian,
+     col = ifelse(precincts$russian_tv == 1, "red", "blue"),
+     xlab = "Prior Pro-Russian Vote", 
+     ylab = "Current Pro-Russian Vote",
+     main = "Regression with Control Variable")
+legend("topleft", legend = c("Russian TV", "No Russian TV"), 
+       col = c("red", "blue"), pch = 1)
+```
+
+\normalsize
+
+# 5.7 まとめ
+
+---
+
+## 第5章のまとめ
+
+* **観察研究**では、共変量（交絡因子）の存在を常に警戒する必要がある。
+* **重回帰分析**を用いることで、他の要因を「一定に保つ（コントロールする）」ことができる。
+* 適切な制御変数を含めることで、観察データからも、より信頼性の高い因果効果の推定が可能になる。
+* ただし、**観察されていない共変量**によるバイアスの可能性は常に残る。

@@ -1,0 +1,374 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{Montpellier}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{第7章: 不確実性の数値化}
+\subtitle{Elena Llaudet \& Kosuke Imai.\\
+Data Analysis for Social Science: A Friendly and Practical
+Introduction.}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\section{7.1
+なぜ不確実性を測るのか？}\label{ux306aux305cux4e0dux78baux5b9fux6027ux3092ux6e2cux308bux306eux304b}
+
+\begin{frame}{推測統計学の課題}
+\phantomsection\label{ux63a8ux6e2cux7d71ux8a08ux5b66ux306eux8ab2ux984c}
+\begin{itemize}
+\tightlist
+\item
+  我々が手にするデータは通常、母集団からの\textbf{標本} (Sample)
+  に過ぎない。
+\item
+  標本から計算された数値（標本平均など）は、抽出のたびに変動する。
+\item
+  \textbf{目標}:
+  標本から得られた推定値が、母集団の真の値からどれくらい離れている可能性があるか（不確実性）を数値化する。
+\item
+  主要な道具：
+
+  \begin{enumerate}
+  \tightlist
+  \item
+    \textbf{信頼区間} (Confidence Intervals)
+  \item
+    \textbf{仮説検定} (Hypothesis Testing)
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\section{7.2 信頼区間}\label{ux4fe1ux983cux533aux9593}
+
+\begin{frame}[fragile]{標本平均の95\%信頼区間}
+\phantomsection\label{ux6a19ux672cux5e73ux5747ux306e95ux4fe1ux983cux533aux9593}
+\begin{itemize}
+\tightlist
+\item
+  標本平均を中心として、母平均が含まれる可能性が高い範囲。
+\item
+  数式（大標本の場合）: \(\bar{X} \pm 1.96 \times SE\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(SE\) (標準誤差)
+    \(= \frac{\sigma}{\sqrt{n}} \approx \frac{S}{\sqrt{n}}\)
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bes }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"BES.csv"}\NormalTok{))}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(bes)}
+\NormalTok{sample\_mean }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(bes}\SpecialCharTok{$}\NormalTok{leave)}
+\NormalTok{se }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{var}\NormalTok{(bes}\SpecialCharTok{$}\NormalTok{leave)}\SpecialCharTok{/}\NormalTok{n)}
+
+\CommentTok{\# 95\%信頼区間}
+\FunctionTok{c}\NormalTok{(sample\_mean }\SpecialCharTok{{-}} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ se, sample\_mean }\SpecialCharTok{+} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ se)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4657127 0.4780655
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{平均の差の信頼区間}
+\phantomsection\label{ux5e73ux5747ux306eux5deeux306eux4fe1ux983cux533aux9593}
+\begin{itemize}
+\tightlist
+\item
+  処置効果の推定値（平均の差）の不確実性を評価する。
+\end{itemize}
+
+\footnotesize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{star }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"STAR.csv"}\NormalTok{)}
+\NormalTok{star}\SpecialCharTok{$}\NormalTok{small }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{classtype }\SpecialCharTok{==} \StringTok{"small"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{treatment }\OtherTok{\textless{}{-}}\NormalTok{ star}\SpecialCharTok{$}\NormalTok{reading[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]}
+\NormalTok{control }\OtherTok{\textless{}{-}}\NormalTok{ star}\SpecialCharTok{$}\NormalTok{reading[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{0}\NormalTok{]}
+
+\NormalTok{diff\_means }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(treatment) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(control)}
+\NormalTok{se\_diff }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{var}\NormalTok{(treatment)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(treatment) }
+                \SpecialCharTok{+} \FunctionTok{var}\NormalTok{(control)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(control))}
+
+\CommentTok{\# 95\%信頼区間}
+\FunctionTok{c}\NormalTok{(diff\_means }\SpecialCharTok{{-}} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ se\_diff, }
+\NormalTok{  diff\_means }\SpecialCharTok{+} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ se\_diff)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  3.167621 11.253473
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\section{7.3 仮説検定}\label{ux4eeeux8aacux691cux5b9a}
+
+\begin{frame}{帰無仮説と対立仮説}
+\phantomsection\label{ux5e30ux7121ux4eeeux8aacux3068ux5bfeux7acbux4eeeux8aac}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{帰無仮説 (\(H_0\))}:
+  「効果はない（差はゼロである）」という仮定。
+\item
+  \textbf{対立仮説 (\(H_1\))}:
+  「効果がある（差はゼロではない）」という主張。
+\item
+  \textbf{p値} (p-value):
+  帰無仮説が正しいと仮定したとき、観測された値（またはそれ以上に極端な値）が得られる確率。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    p値 \textless{} 0.05
+    であれば、帰無仮説を棄却し、「統計的に有意」と判断する。
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{平均の差の検定 (Z検定/t検定)}
+\phantomsection\label{ux5e73ux5747ux306eux5deeux306eux691cux5b9a-zux691cux5b9atux691cux5b9a}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# テスト統計量 (Z{-}score)}
+\NormalTok{z\_obs }\OtherTok{\textless{}{-}}\NormalTok{ diff\_means }\SpecialCharTok{/}\NormalTok{ se\_diff}
+\NormalTok{z\_obs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.495654
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# p値の計算}
+\DecValTok{2} \SpecialCharTok{*} \FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{abs}\NormalTok{(z\_obs))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0004729011
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  p値が非常に小さいため、少人数学級の効果は統計的に有意である。
+\end{itemize}
+\end{frame}
+
+\section{7.4
+回帰係数の有意性}\label{ux56deux5e30ux4fc2ux6570ux306eux6709ux610fux6027}
+
+\begin{frame}[fragile]{回帰分析の結果の解釈}
+\phantomsection\label{ux56deux5e30ux5206ux6790ux306eux7d50ux679cux306eux89e3ux91c8}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{summary()} で各係数の標準誤差、t統計量、p値を確認できる。
+\end{itemize}
+
+\footnotesize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{uas }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"UA\_survey.csv"}\NormalTok{)}
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(pro\_russian\_vote }\SpecialCharTok{\textasciitilde{}}\NormalTok{ russian\_tv }\SpecialCharTok{+}\NormalTok{ within\_25km, }
+          \AttributeTok{data =}\NormalTok{ uas)}
+\FunctionTok{summary}\NormalTok{(fit)}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept)  0.1959065 0.03457823  5.665602 3.032123e-08
+## russian_tv   0.2875934 0.07652437  3.758194 2.000236e-04
+## within_25km -0.2080644 0.07681051 -2.708802 7.079846e-03
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{Pr(\textgreater{}\textbar{}t\textbar{})} 列が 0.05
+  未満であれば、その変数の影響は統計的に有意である。
+\end{itemize}
+\end{frame}
+
+\section{7.5 まとめ}\label{ux307eux3068ux3081}
+
+\begin{frame}{第7章のまとめ}
+\phantomsection\label{ux7b2c7ux7ae0ux306eux307eux3068ux3081}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{不確実性}を無視してデータから結論を出すことはできない。
+\item
+  \textbf{信頼区間}は、推定値の「幅」を提示する。
+\item
+  \textbf{仮説検定}は、観測された結果が単なる偶然（サンプリングの偏り）で説明できるかどうかを判断する。
+\item
+  \textbf{p値 \textless{} 0.05}
+  は慣習的な基準であるが、文脈に応じた解釈が重要である。
+\end{itemize}
+\end{frame}
+
+\end{document}
