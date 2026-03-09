@@ -7,7 +7,7 @@ subtitle: |
 author: ""
 date: "2026-03-09"
 output:
-  slidy_presentation: default
+#  slidy_presentation: default
   beamer_presentation:
     theme: Montpellier
     latex_engine: lualatex
@@ -131,15 +131,11 @@ sqrt(four)
 
 * `read.csv()` 関数を用いてCSVファイルを読み込み、オブジェクトに格納する。
 
-```{r, eval=FALSE}
+```{r}
 # データセットの読み込み
 star <- read.csv("STAR.csv")
 ```
 
-```{r, echo=FALSE}
-# 展示用にGitHub_DSSフォルダから読み込む
-star <- read.csv("../GitHub_DSS/STAR.csv")
-```
 
 ---
 

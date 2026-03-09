@@ -1,0 +1,179 @@
+---
+title: |
+    | 第4章: 予測
+subtitle: |
+    | Elena Llaudet & Kosuke Imai. 
+    | Data Analysis for Social Science: A Friendly and Practical Introduction.
+author: ""
+date: "2026-03-09"
+output:
+#  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 4.1 予測とは何か？
+
+---
+
+## 予測の重要性
+
+* 過去のデータを用いて、未知の状況や未来の結果を推測する。
+* 社会科学における例：
+    * 選挙結果の予測
+    * 経済指標（GDP成長率など）の予測
+    * 犯罪率や教育効果の予測
+* 予測の精度を上げるために、**線形回帰** (Linear Regression) という手法を学ぶ。
+
+# 4.2 散布図と線形関係
+
+---
+
+## データの読み込み (1)
+
+* 2019年ウクライナ大統領選挙の投票区レベルデータを使用する。
+
+```{r}
+# データの読み込み
+precincts <- read.csv("UA_precincts.csv")
+# 最初の数行を表示
+head(precincts)
+```
+
+---
+
+## 散布図の作成
+
+* 2つの数値変数の関係を視覚化する。
+* 例：過去の親ロシア派への投票率（`prior_pro_russian`）と、今回の親ロシア派への投票率（`pro_russian`）。
+
+---
+
+## 散布図のコード
+
+```{r, fig.height=3.5, out.height="30%", fig.align="center"}
+# 散布図のプロット
+plot(precincts$prior_pro_russian, precincts$pro_russian,
+     xlab = "Prior Pro-Russian Vote (%)", 
+     ylab = "Current Pro-Russian Vote (%)",
+     main = "Relationship between Prior and Current Vote Shares")
+```
+
+# 4.3 線形回帰モデル
+
+---
+
+## 回帰直線
+
+* 散布図の点の間を通る「最もよく当てはまる」直線を引く。
+* 数式： $\hat{Y} = \hat{\alpha} + \hat{\beta} X$
+    * $\hat{Y}$: 予測値
+    * $X$: 説明変数（独立変数）
+    * $\hat{\alpha}$: 切片 (Intercept)
+    * $\hat{\beta}$: 傾き (Slope)
+
+---
+
+## 最小二乗法 (OLS)
+
+* **最小二乗法** (Ordinary Least Squares: OLS)
+* 観測値 $Y_i$ と予測値 $\hat{Y}_i$ の差（**残差**, Residual）の二乗和を最小にする $\hat{\alpha}$ と $\hat{\beta}$ を求める。
+
+# 4.4 Rでの回帰分析
+
+---
+
+## lm() 関数の使用
+
+* `lm(従属変数 ~ 説明変数, data = データフレーム)`
+
+\footnotesize
+
+```{r}
+# 回帰モデルの推定
+model <- lm(pro_russian ~ prior_pro_russian, data = precincts)
+```
+
+\normalsize
+
+---
+
+## モデルの結果
+
+\footnotesize
+
+```{r}
+# 結果の表示
+summary(model)
+```
+
+\normalsize
+
+---
+
+## 推定値の解釈
+
+* `(Intercept)` ($\hat{\alpha}$): 説明変数が0のときの期待値（理論値）。
+* `prior_pro_russian` ($\hat{\beta}$): 過去の投票率が1%上がると、今回の投票率が何%変化するか。
+
+# 4.5 予測値の算出
+
+---
+
+## 予測の実行
+
+* 推定された係数を用いて、特定の過去の投票率（例：60%）のときの予測値を算出する。
+
+```{r}
+# 係数の取り出し
+coef(model)
+
+# 過去の投票率が60%の場合の予測値
+# pro_russian = alpha + beta * 60
+-11.45 + (0.74) * 60
+```
+
+---
+
+## predict() 関数
+
+```{r}
+# predict関数を用いた予測
+new_data <- data.frame(prior_pro_russian = 60)
+predict(model, newdata = new_data)
+```
+
+# 4.6 モデルの適合度
+
+---
+
+## 決定係数 (R-squared)
+
+* $R^2$ は、モデルがデータの変動をどれだけ説明できているかを示す。
+* 0から1の間の値を取り、1に近いほどモデルの当てはまりが良い。
+
+```{r}
+# summaryの結果からR-squaredを確認
+summary(model)$r.squared
+```
+
+# 4.7 まとめ
+
+---
+
+## 第4章のまとめ
+
+* 線形回帰を用いて、ある変数から別の変数を予測する方法を学んだ。
+* 最小二乗法 (OLS) の仕組みを理解した。
+* Rの `lm()` 関数を用いて回帰分析を実行し、その結果（切片、傾き、決定係数）を解釈した。
+* `predict()` 関数を用いて未知のデータの予測値を算出した。

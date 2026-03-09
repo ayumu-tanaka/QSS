@@ -13,7 +13,7 @@ output:
     latex_engine: lualatex
     keep_tex: true
     includes:
-      in_header: ../DSS_Ch01/header_beamer.tex
+      in_header: header_beamer.tex
 ---
 
 ```{r setup, echo=FALSE}
@@ -109,14 +109,9 @@ $$ X \rightarrow Y $$
 
 ## データの読み込み
 
-```{r, eval=FALSE}
+```{r}
 # データセットの読み込み
 star <- read.csv("STAR.csv")
-```
-
-```{r, echo=FALSE}
-# 展示用にGitHub_DSSフォルダから読み込む
-star <- read.csv("../GitHub_DSS/STAR.csv")
 ```
 
 ```{r}

@@ -13,7 +13,7 @@ output:
     latex_engine: lualatex
     keep_tex: true
     includes:
-      in_header: ../DSS_Ch01/header_beamer.tex
+      in_header: header_beamer.tex
 ---
 
 ```{r setup, echo=FALSE}
@@ -58,14 +58,9 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ## データの読み込みと確認
 
-```{r, eval=FALSE}
+```{r}
 # BESデータの読み込み
 bes <- read.csv("BES.csv")
-```
-
-```{r, echo=FALSE}
-# 展示用にGitHub_DSSフォルダから読み込む
-bes <- read.csv("../GitHub_DSS/BES.csv")
 ```
 
 ```{r}
@@ -183,14 +178,9 @@ sd(bes1$age[bes1$leave == 1])
 
 * 地区レベルのデータを使用する。
 
-```{r, eval=FALSE}
+```{r}
 # 地区レベルデータの読み込み
 dis <- read.csv("UK_districts.csv")
-dis1 <- na.omit(dis)
-```
-
-```{r, echo=FALSE}
-dis <- read.csv("../GitHub_DSS/UK_districts.csv")
 dis1 <- na.omit(dis)
 ```
 
