@@ -1,16 +1,18 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% remove section numbering
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -19,19 +21,16 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{section title}
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -44,21 +43,19 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
 \usetheme[]{Montpellier}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -75,6 +72,14 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -86,13 +91,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -100,7 +105,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -109,7 +114,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -118,6 +123,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -142,12 +148,9 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{第2章: 無作為化実験による因果効果の推定}
 \subtitle{Elena Llaudet \& Kosuke Imai.\\
@@ -159,11 +162,12 @@ Introduction.}
 \begin{document}
 \frame{\titlepage}
 
+\hypertarget{starux30d7ux30edux30b8ux30a7ux30afux30c8}{%
 \section{2.1
-STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
+STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}}
 
 \begin{frame}{STARプロジェクトの概要}
-\phantomsection\label{starux30d7ux30edux30b8ux30a7ux30afux30c8ux306eux6982ux8981}
+\protect\hypertarget{starux30d7ux30edux30b8ux30a7ux30afux30c8ux306eux6982ux8981}{}
 \begin{itemize}
 \tightlist
 \item
@@ -183,11 +187,12 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux51e6ux7f6eux5909ux6570ux3068ux7d50ux679cux5909ux6570}{%
 \section{2.2
-処置変数と結果変数}\label{ux51e6ux7f6eux5909ux6570ux3068ux7d50ux679cux5909ux6570}
+処置変数と結果変数}\label{ux51e6ux7f6eux5909ux6570ux3068ux7d50ux679cux5909ux6570}}
 
 \begin{frame}{因果関係の方向性}
-\phantomsection\label{ux56e0ux679cux95a2ux4fc2ux306eux65b9ux5411ux6027}
+\protect\hypertarget{ux56e0ux679cux95a2ux4fc2ux306eux65b9ux5411ux6027}{}
 \begin{itemize}
 \tightlist
 \item
@@ -216,7 +221,7 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{frame}
 
 \begin{frame}[fragile]{処置変数と結果変数の定義}
-\phantomsection\label{ux51e6ux7f6eux5909ux6570ux3068ux7d50ux679cux5909ux6570ux306eux5b9aux7fa9}
+\protect\hypertarget{ux51e6ux7f6eux5909ux6570ux3068ux7d50ux679cux5909ux6570ux306eux5b9aux7fa9}{}
 \begin{itemize}
 \tightlist
 \item
@@ -245,10 +250,11 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{itemize}
 \end{frame}
 
-\section{2.3 個別因果効果}\label{ux500bux5225ux56e0ux679cux52b9ux679c}
+\hypertarget{ux500bux5225ux56e0ux679cux52b9ux679c}{%
+\section{2.3 個別因果効果}\label{ux500bux5225ux56e0ux679cux52b9ux679c}}
 
 \begin{frame}{潜在的結果と個別因果効果}
-\phantomsection\label{ux6f5cux5728ux7684ux7d50ux679cux3068ux500bux5225ux56e0ux679cux52b9ux679c}
+\protect\hypertarget{ux6f5cux5728ux7684ux7d50ux679cux3068ux500bux5225ux56e0ux679cux52b9ux679c}{}
 \begin{itemize}
 \tightlist
 \item
@@ -268,7 +274,7 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{frame}
 
 \begin{frame}{因果推論の根本問題}
-\phantomsection\label{ux56e0ux679cux63a8ux8ad6ux306eux6839ux672cux554fux984c}
+\protect\hypertarget{ux56e0ux679cux63a8ux8ad6ux306eux6839ux672cux554fux984c}{}
 \begin{itemize}
 \tightlist
 \item
@@ -280,10 +286,11 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{itemize}
 \end{frame}
 
-\section{2.4 平均因果効果}\label{ux5e73ux5747ux56e0ux679cux52b9ux679c}
+\hypertarget{ux5e73ux5747ux56e0ux679cux52b9ux679c}{%
+\section{2.4 平均因果効果}\label{ux5e73ux5747ux56e0ux679cux52b9ux679c}}
 
 \begin{frame}{平均因果効果（平均処置効果）}
-\phantomsection\label{ux5e73ux5747ux56e0ux679cux52b9ux679cux5e73ux5747ux51e6ux7f6eux52b9ux679c}
+\protect\hypertarget{ux5e73ux5747ux56e0ux679cux52b9ux679cux5e73ux5747ux51e6ux7f6eux52b9ux679c}{}
 \begin{itemize}
 \item
   個人の効果の代わりに、集団における因果効果の平均に注目する。
@@ -296,7 +303,7 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{frame}
 
 \begin{frame}{無作為化実験と平均の差推定量}
-\phantomsection\label{ux7121ux4f5cux70baux5316ux5b9fux9a13ux3068ux5e73ux5747ux306eux5deeux63a8ux5b9aux91cf}
+\protect\hypertarget{ux7121ux4f5cux70baux5316ux5b9fux9a13ux3068ux5e73ux5747ux306eux5deeux63a8ux5b9aux91cf}{}
 \begin{itemize}
 \tightlist
 \item
@@ -315,11 +322,12 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux5c11ux4ebaux6570ux5b66ux7d1aux306fux751fux5f92ux306eux6210ux7e3eux3092ux5411ux4e0aux3055ux305bux308bux304b}{%
 \section{2.5
-少人数学級は生徒の成績を向上させるか？}\label{ux5c11ux4ebaux6570ux5b66ux7d1aux306fux751fux5f92ux306eux6210ux7e3eux3092ux5411ux4e0aux3055ux305bux308bux304b}
+少人数学級は生徒の成績を向上させるか？}\label{ux5c11ux4ebaux6570ux5b66ux7d1aux306fux751fux5f92ux306eux6210ux7e3eux3092ux5411ux4e0aux3055ux305bux308bux304b}}
 
 \begin{frame}[fragile]{データの読み込み}
-\phantomsection\label{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f}{}
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# データセットの読み込み}
@@ -346,7 +354,7 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{frame}
 
 \begin{frame}[fragile]{Rの関係演算子と新しい変数の作成}
-\phantomsection\label{rux306eux95a2ux4fc2ux6f14ux7b97ux5b50ux3068ux65b0ux3057ux3044ux5909ux6570ux306eux4f5cux6210}
+\protect\hypertarget{rux306eux95a2ux4fc2ux6f14ux7b97ux5b50ux3068ux65b0ux3057ux3044ux5909ux6570ux306eux4f5cux6210}{}
 \begin{itemize}
 \tightlist
 \item
@@ -385,7 +393,7 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{frame}
 
 \begin{frame}[fragile]{新しい変数 `small' を確認する}
-\phantomsection\label{ux65b0ux3057ux3044ux5909ux6570-small-ux3092ux78baux8a8dux3059ux308b}
+\protect\hypertarget{ux65b0ux3057ux3044ux5909ux6570-small-ux3092ux78baux8a8dux3059ux308b}{}
 \begin{itemize}
 \tightlist
 \item
@@ -409,8 +417,8 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile]{変数の部分集合化と平均の計算}
-\phantomsection\label{ux5909ux6570ux306eux90e8ux5206ux96c6ux5408ux5316ux3068ux5e73ux5747ux306eux8a08ux7b97}
+\begin{frame}[fragile]{変数の部分集合化と平均の計算 (1)}
+\protect\hypertarget{ux5909ux6570ux306eux90e8ux5206ux96c6ux5408ux5316ux3068ux5e73ux5747ux306eux8a08ux7b97-1}{}
 \begin{itemize}
 \tightlist
 \item
@@ -438,7 +446,10 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \begin{verbatim}
 ## [1] 632.7026
 \end{verbatim}
+\end{frame}
 
+\begin{frame}[fragile]{変数の部分集合化と平均の計算 (2)}
+\protect\hypertarget{ux5909ux6570ux306eux90e8ux5206ux96c6ux5408ux5316ux3068ux5e73ux5747ux306eux8a08ux7b97-2}{}
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# 統制群（標準規模学級）の読解力の平均}
@@ -452,7 +463,7 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{frame}
 
 \begin{frame}[fragile]{平均の差推定量の計算（読解力と算数）}
-\phantomsection\label{ux5e73ux5747ux306eux5deeux63a8ux5b9aux91cfux306eux8a08ux7b97ux8aadux89e3ux529bux3068ux7b97ux6570}
+\protect\hypertarget{ux5e73ux5747ux306eux5deeux63a8ux5b9aux91cfux306eux8a08ux7b97ux8aadux89e3ux529bux3068ux7b97ux6570}{}
 \scriptsize
 
 \begin{Shaded}
@@ -481,7 +492,7 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{frame}
 
 \begin{frame}[fragile]{平均の差推定量の計算（卒業率）}
-\phantomsection\label{ux5e73ux5747ux306eux5deeux63a8ux5b9aux91cfux306eux8a08ux7b97ux5352ux696dux7387}
+\protect\hypertarget{ux5e73ux5747ux306eux5deeux63a8ux5b9aux91cfux306eux8a08ux7b97ux5352ux696dux7387}{}
 \scriptsize
 
 \begin{Shaded}
@@ -526,10 +537,11 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
 \end{itemize}
 \end{frame}
 
-\section{2.6 まとめ}\label{ux307eux3068ux3081}
+\hypertarget{ux307eux3068ux3081}{%
+\section{2.6 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}[fragile]{第2章のまとめ}
-\phantomsection\label{ux7b2c2ux7ae0ux306eux307eux3068ux3081}
+\protect\hypertarget{ux7b2c2ux7ae0ux306eux307eux3068ux3081}{}
 \begin{itemize}
 \tightlist
 \item

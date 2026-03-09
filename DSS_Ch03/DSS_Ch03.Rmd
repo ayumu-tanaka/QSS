@@ -7,7 +7,7 @@ subtitle: |
 author: ""
 date: "2026-03-09"
 output:
-  slidy_presentation: default
+#  slidy_presentation: default
   beamer_presentation:
     theme: Montpellier
     latex_engine: lualatex
@@ -95,16 +95,23 @@ prop.table(table(bes$vote))
 
 ---
 
-## 欠損データの処理
+## 欠損データの処理 (1)
 
 * Rでは欠損値を `NA` で表す。
-* `mean()` などの関数では、`na.rm = TRUE` を指定してNAを除外する必要がある。
-* `na.omit()` は、NAを含む行をすべて削除する。
 
 ```{r}
 # 欠損値を含む教育水準の確認
 table(bes$education, exclude = NULL)
+```
 
+---
+
+## 欠損データの処理 (2)
+
+* `mean()` などの関数では、`na.rm = TRUE` を指定してNAを除外する必要がある。
+* `na.omit()` は、NAを含む行をすべて削除する。
+
+```{r}
 # NAを除外して平均を計算
 mean(bes$leave, na.rm = TRUE)
 
@@ -114,17 +121,29 @@ bes1 <- na.omit(bes)
 
 ---
 
-## 二元度数表と二元比率表
+## 二元度数表
 
 * 2つの変数の関係を「クロス集計表」で確認する。
 
 ```{r}
 # 離脱支持(leave)と教育水準(education)の二元度数表
 table(bes1$leave, bes1$education)
+```
 
+---
+
+## 二元比率表
+
+* 行ごとの比率を確認する。
+
+\footnotesize
+
+```{r}
 # 行ごとの比率 (margin = 1)
 prop.table(table(bes1$leave, bes1$education), margin = 1)
 ```
+
+\normalsize
 
 ---
 
@@ -133,9 +152,10 @@ prop.table(table(bes1$leave, bes1$education), margin = 1)
 * `hist()` で数値変数の分布を視覚化する。
 * `freq = FALSE` で密度ヒストグラム（面積の合計が1）を作成できる。
 
-```{r, fig.height=4}
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
 # 年齢のヒストグラム（離脱支持者のみ）
-hist(bes1$age[bes1$leave == 1], main = "Supporters Age", xlab = "Age")
+hist(bes1$age[bes1$leave == 1], 
+     main = "Supporters Age", xlab = "Age")
 ```
 
 ---
@@ -159,10 +179,9 @@ sd(bes1$age[bes1$leave == 1])
 
 ---
 
-## 散布図
+## 散布図 (1)
 
-* `plot()` で2つの数値変数の関係をプロットする。
-* `abline()` で平均値を示す直線などを追加できる。
+* 地区レベルのデータを使用する。
 
 ```{r, eval=FALSE}
 # 地区レベルデータの読み込み
@@ -175,11 +194,23 @@ dis <- read.csv("../GitHub_DSS/UK_districts.csv")
 dis1 <- na.omit(dis)
 ```
 
-```{r, fig.height=4}
-plot(dis1$high_education, dis1$leave, xlab = "High Education (%)", ylab = "Leave Vote (%)")
+---
+
+## 散布図 (2)
+
+* `plot()` で2つの数値変数の関係をプロットする。
+* `abline()` で平均値を示す直線などを追加できる。
+
+\footnotesize
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+plot(dis1$high_education, dis1$leave, 
+     xlab = "High Education (%)", 
+     ylab = "Leave Vote (%)")
 abline(v = mean(dis1$high_education), lty = "dashed")
 abline(h = mean(dis1$leave), lty = "dashed")
 ```
+
+\normalsize
 
 ---
 
