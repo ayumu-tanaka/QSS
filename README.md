@@ -37,6 +37,6 @@ GitHub Pages: [https://ayumu-tanaka.github.io/QSS/](https://ayumu-tanaka.github.
 
 **出典：**
 
-- 今井　耕介 著  粕谷　祐子 訳  原田　勝孝 訳  久保　浩樹 訳『社会科学のためのデータ分析入門　（上）（下）』岩波書店、2018年 [https://www.iwanami.co.jp/book/b352348.html](https://www.iwanami.co.jp/book/b352348.html)
-- エレーナ・ローデ 著  今井　耕介 著  原田　勝孝 訳『新・社会科学のためのデータ分析入門　導入編』岩波書店、2025年 [https://www.iwanami.co.jp/book/b656062.html](https://www.iwanami.co.jp/book/b656062.html)
+- 今井耕介著、粕谷祐子・原田勝孝・久保浩樹訳『社会科学のためのデータ分析入門　（上）（下）』岩波書店、2018年 [https://www.iwanami.co.jp/book/b352348.html](https://www.iwanami.co.jp/book/b352348.html)
+- エレーナ・ローデ、今井耕介著、原田勝孝訳『新・社会科学のためのデータ分析入門　導入編』岩波書店、2025年 [https://www.iwanami.co.jp/book/b656062.html](https://www.iwanami.co.jp/book/b656062.html)
 
