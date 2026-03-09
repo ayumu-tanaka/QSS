@@ -43,12 +43,15 @@ knitr::opts_chunk$set(echo = TRUE,
 
 * 2019年ウクライナ大統領選挙の投票区レベルデータを使用する。
 
+\footnotesize
 ```{r}
 # データの読み込み
 precincts <- read.csv("UA_precincts.csv")
 # 最初の数行を表示
 head(precincts)
 ```
+
+\normalsize
 
 ---
 
@@ -61,12 +64,12 @@ head(precincts)
 
 ## 散布図のコード
 
-```{r, fig.height=3.5, out.height="30%", fig.align="center"}
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
 # 散布図のプロット
 plot(precincts$prior_pro_russian, precincts$pro_russian,
      xlab = "Prior Pro-Russian Vote (%)", 
      ylab = "Current Pro-Russian Vote (%)",
-     main = "Relationship between Prior and Current Vote Shares")
+     main = "Prior and Current Vote Shares")
 ```
 
 # 4.3 線形回帰モデル
@@ -110,10 +113,9 @@ model <- lm(pro_russian ~ prior_pro_russian, data = precincts)
 
 ## モデルの結果
 
-\footnotesize
+\scriptsize
 
 ```{r}
-# 結果の表示
 summary(model)
 ```
 
@@ -140,7 +142,7 @@ coef(model)
 
 # 過去の投票率が60%の場合の予測値
 # pro_russian = alpha + beta * 60
--11.45 + (0.74) * 60
+-14.32 + (0.797) * 60
 ```
 
 ---
