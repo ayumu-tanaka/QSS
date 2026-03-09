@@ -1,0 +1,548 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{Montpellier}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{第2章: 無作為化実験による因果効果の推定}
+\subtitle{Elena Llaudet \& Kosuke Imai.\\
+Data Analysis for Social Science: A Friendly and Practical
+Introduction.}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\section{2.1
+STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}
+
+\begin{frame}{STARプロジェクトの概要}
+\phantomsection\label{starux30d7ux30edux30b8ux30a7ux30afux30c8ux306eux6982ux8981}
+\begin{itemize}
+\tightlist
+\item
+  1980年代にテネシー州で実施された「生徒と教師の学習達成率プロジェクト」。
+\item
+  目的: 学級の大きさが生徒の成績に及ぼす影響を検証すること。
+\item
+  幼稚園児を小学3年生の終わりまで、以下のいずれかに\textbf{無作為に割り当て}た：
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{少人数学級} (13人〜17人)
+  \item
+    \textbf{標準規模学級} (22人〜25人)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{2.2
+処置変数と結果変数}\label{ux51e6ux7f6eux5909ux6570ux3068ux7d50ux679cux5909ux6570}
+
+\begin{frame}{因果関係の方向性}
+\phantomsection\label{ux56e0ux679cux95a2ux4fc2ux306eux65b9ux5411ux6027}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{因果関係}: 2つの変数の間の原因と結果の関係。
+\item
+  \textbf{処置変数 (\(X\))}: 変化が発生する変数（原因）。
+\item
+  \textbf{結果変数 (\(Y\))}:
+  処置変数の変化に応答して変化しうる変数（結果）。
+\end{itemize}
+
+\[ X \rightarrow Y \]
+
+\begin{itemize}
+\tightlist
+\item
+  STARプロジェクトでの関心：
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{少人数学級} (処置変数) \(\rightarrow\)
+    \textbf{生徒の学業成績} (結果変数)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{処置変数と結果変数の定義}
+\phantomsection\label{ux51e6ux7f6eux5909ux6570ux3068ux7d50ux679cux5909ux6570ux306eux5b9aux7fa9}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{処置変数 (\(X\))}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    処置 (\(X_i = 1\)): 処置があるという状態（少人数学級に通った）。
+  \item
+    統制 (\(X_i = 0\)): 処置がないという状態（標準規模学級に通った）。
+  \end{itemize}
+\item
+  \textbf{結果変数 (\(Y\))}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{reading} (読解力テストの点数)
+  \item
+    \texttt{math} (算数テストの点数)
+  \item
+    \texttt{graduated} (高校卒業を示す二値変数: 1=卒業,
+    0=卒業しなかった)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{2.3 個別因果効果}\label{ux500bux5225ux56e0ux679cux52b9ux679c}
+
+\begin{frame}{潜在的結果と個別因果効果}
+\phantomsection\label{ux6f5cux5728ux7684ux7d50ux679cux3068ux500bux5225ux56e0ux679cux52b9ux679c}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{潜在的結果}:
+  処置を受けた場合と受けなかった場合のそれぞれの結果。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(Y_i(X_i = 1)\): 個人\(i\)が処置を受けた場合の潜在的結果。
+  \item
+    \(Y_i(X_i = 0)\): 個人\(i\)が統制条件下での潜在的結果。
+  \end{itemize}
+\item
+  \textbf{個別因果効果} = \(Y_i(X_i = 1) - Y_i(X_i = 0)\)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{因果推論の根本問題}
+\phantomsection\label{ux56e0ux679cux63a8ux8ad6ux306eux6839ux672cux554fux984c}
+\begin{itemize}
+\tightlist
+\item
+  現実の世界では、同じ個人について\textbf{両方の潜在的結果を同時に観察することは決してない}。
+\item
+  観察できるのは\textbf{現実の結果}のみであり、\textbf{反事実の結果}は観察できない。
+\item
+  したがって、個人レベルでの因果効果を直接計算することは不可能である。
+\end{itemize}
+\end{frame}
+
+\section{2.4 平均因果効果}\label{ux5e73ux5747ux56e0ux679cux52b9ux679c}
+
+\begin{frame}{平均因果効果（平均処置効果）}
+\phantomsection\label{ux5e73ux5747ux56e0ux679cux52b9ux679cux5e73ux5747ux51e6ux7f6eux52b9ux679c}
+\begin{itemize}
+\item
+  個人の効果の代わりに、集団における因果効果の平均に注目する。
+\item
+  もし全員の両方の潜在的結果を観察できれば：
+
+  \[平均処置効果 \] \[= 個別因果効果の平均 \]
+  \[=\overline{Y(X=1)} - \overline{Y(X=0)}\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{無作為化実験と平均の差推定量}
+\phantomsection\label{ux7121ux4f5cux70baux5316ux5b9fux9a13ux3068ux5e73ux5747ux306eux5deeux63a8ux5b9aux91cf}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{無作為化実験}: 処置の割り当てが無作為に行われる研究デザイン。
+\item
+  無作為化により、処置群と統制群は、処置以外のすべての特徴において\textbf{平均的に互いに同一（比較可能）}になる。
+\item
+  この場合、現実の結果を用いて平均処置効果を推定できる：
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{平均の差推定量} =
+    \(\overline{Y}_{\text{処置群}} - \overline{Y}_{\text{統制群}}\)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{2.5
+少人数学級は生徒の成績を向上させるか？}\label{ux5c11ux4ebaux6570ux5b66ux7d1aux306fux751fux5f92ux306eux6210ux7e3eux3092ux5411ux4e0aux3055ux305bux308bux304b}
+
+\begin{frame}[fragile]{データの読み込み}
+\phantomsection\label{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# データセットの読み込み}
+\NormalTok{star }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"STAR.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# データの最初の数行を表示}
+\FunctionTok{head}\NormalTok{(star)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   classtype reading math graduated
+## 1     small     578  610         1
+## 2   regular     612  612         1
+## 3   regular     583  606         1
+## 4     small     661  648         1
+## 5     small     614  636         1
+## 6   regular     610  603         0
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Rの関係演算子と新しい変数の作成}
+\phantomsection\label{rux306eux95a2ux4fc2ux6f14ux7b97ux5b50ux3068ux65b0ux3057ux3044ux5909ux6570ux306eux4f5cux6210}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{==} を用いて、特定の値と等しいかを評価できる。
+\item
+  \texttt{ifelse()} 関数を用いて、条件に基づいて新しい変数を作成する。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 論理テストの例}
+\DecValTok{3} \SpecialCharTok{==} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{3} \SpecialCharTok{==} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 少人数学級に通ったかを示す新しい二値変数 \textquotesingle{}small\textquotesingle{} を作成}
+\NormalTok{star}\SpecialCharTok{$}\NormalTok{small }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{classtype }\SpecialCharTok{==} \StringTok{"small"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{新しい変数 `small' を確認する}
+\phantomsection\label{ux65b0ux3057ux3044ux5909ux6570-small-ux3092ux78baux8a8dux3059ux308b}
+\begin{itemize}
+\tightlist
+\item
+  データの最初の数行を表示
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(star)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   classtype reading math graduated small
+## 1     small     578  610         1     1
+## 2   regular     612  612         1     0
+## 3   regular     583  606         1     0
+## 4     small     661  648         1     1
+## 5     small     614  636         1     1
+## 6   regular     610  603         0     0
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{変数の部分集合化と平均の計算}
+\phantomsection\label{ux5909ux6570ux306eux90e8ux5206ux96c6ux5408ux5316ux3068ux5e73ux5747ux306eux8a08ux7b97}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{{[}{]}} を用いて、特定の条件を満たす観察を抽出する。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 読解力の全体平均}
+\FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{reading)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 628.803
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 処置群（少人数学級）の読解力の平均}
+\FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{reading[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 632.7026
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 統制群（標準規模学級）の読解力の平均}
+\FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{reading[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{0}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 625.492
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{平均の差推定量の計算（読解力と算数）}
+\phantomsection\label{ux5e73ux5747ux306eux5deeux63a8ux5b9aux91cfux306eux8a08ux7b97ux8aadux89e3ux529bux3068ux7b97ux6570}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 読解力についての平均の差推定量}
+\FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{reading[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{reading[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{0}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7.210547
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 算数についての平均の差推定量}
+\FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{math[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{math[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{0}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.989905
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{平均の差推定量の計算（卒業率）}
+\phantomsection\label{ux5e73ux5747ux306eux5deeux63a8ux5b9aux91cfux306eux8a08ux7b97ux5352ux696dux7387}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 卒業についての平均の差推定量}
+\FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{graduated[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{graduated[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{0}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.007031124
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 解釈の補助}
+\FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{graduated[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\CommentTok{\# 処置群の卒業率}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8735043
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{graduated[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{0}\NormalTok{]) }\CommentTok{\# 統制群の卒業率}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8664731
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{解釈}:
+  少人数学級に通うことで、高校を卒業する確率が平均で約0.7パーセンテージポイント上昇した。
+\end{itemize}
+\end{frame}
+
+\section{2.6 まとめ}\label{ux307eux3068ux3081}
+
+\begin{frame}[fragile]{第2章のまとめ}
+\phantomsection\label{ux7b2c2ux7ae0ux306eux307eux3068ux3081}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{因果効果}: 処置変数が結果変数に与える影響。
+\item
+  \textbf{因果推論の根本問題}: 反事実の結果は観察できない。
+\item
+  \textbf{無作為化実験}:
+  処置群と統制群を比較可能にし、\textbf{平均の差推定量}を用いて平均因果効果を有効に推定できる。
+\item
+  Rの操作: \texttt{==} 演算子、\texttt{ifelse()}
+  による変数の作成、\texttt{{[}{]}} によるデータの部分集合化を学んだ。
+\end{itemize}
+\end{frame}
+
+\end{document}

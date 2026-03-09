@@ -1,0 +1,519 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第1章: イントロダクション}
+\subtitle{Elena Llaudet \& Kosuke Imai.\\
+Data Analysis for Social Science: A Friendly and Practical
+Introduction.}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux672cux66f8ux306eux6982ux89b3}{%
+\section{1.1 本書の概観}\label{ux672cux66f8ux306eux6982ux89b3}}
+
+\begin{frame}{本書の目的と構成}
+\protect\hypertarget{ux672cux66f8ux306eux76eeux7684ux3068ux69cbux6210}{}
+\begin{itemize}
+\tightlist
+\item
+  社会科学におけるデータ分析の基本を、予備知識なしの状態から学ぶ。
+\item
+  統計ソフトRを用いて現実世界のデータを分析する。
+\item
+  計量社会科学研究の3つの基本的な目標を学ぶ：
+
+  \begin{enumerate}
+  \tightlist
+  \item
+    \textbf{測定} (Measurement)
+  \item
+    \textbf{予測} (Prediction)
+  \item
+    \textbf{説明}（因果推論、Causality）
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{各章の概要}
+\protect\hypertarget{ux5404ux7ae0ux306eux6982ux8981}{}
+\begin{itemize}
+\tightlist
+\item
+  第1章：イントロダクション（Rの基本操作）
+\item
+  第2章：無作為化実験による因果効果の推定（説明）
+\item
+  第3章：社会調査研究による母集団の特徴の推論（測定）
+\item
+  第4章：線形回帰を用いた結果の予測（予測）
+\item
+  第5章：観察データによる因果効果の推定（説明）
+\item
+  第6章：確率
+\item
+  第7章：不確実性の数値化
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux306aux305cux30c7ux30fcux30bfux5206ux6790ux3092ux5b66ux3076ux306eux304b}{%
+\section{1.4
+なぜデータ分析を学ぶのか？}\label{ux306aux305cux30c7ux30fcux30bfux5206ux6790ux3092ux5b66ux3076ux306eux304b}}
+
+\begin{frame}{データ分析スキルの重要性}
+\protect\hypertarget{ux30c7ux30fcux30bfux5206ux6790ux30b9ux30adux30ebux306eux91cdux8981ux6027}{}
+\begin{itemize}
+\tightlist
+\item
+  社会科学者として、母集団の特徴を測り、予測を行い、因果関係を解明するためにデータが必要。
+\item
+  意思決定者に情報を提供するデータアナリストの需要が高まっている。
+\item
+  ビッグデータ時代において、計量研究に精通することは非常に価値のあるスキル。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{コードの学習}
+\protect\hypertarget{ux30b3ux30fcux30c9ux306eux5b66ux7fd2}{}
+\begin{itemize}
+\tightlist
+\item
+  コンピュータに特定の命令（プログラミング言語）を与えることで分析を実行する。
+\item
+  本書では、世界中で広く利用されている統計プログラミング言語 \textbf{R}
+  を使用する。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux6e96ux5099-rux3068rstudio}{%
+\section{1.5 準備 (RとRStudio)}\label{ux6e96ux5099-rux3068rstudio}}
+
+\begin{frame}{RとRStudio}
+\protect\hypertarget{rux3068rstudio}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{R}: 統計計算とグラフィックスのためのソフトウェア（エンジン）。
+\item
+  \textbf{RStudio}: Rをより使いやすくするためのインターフェース（IDE）。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{作業ディレクトリの設定}
+\protect\hypertarget{ux4f5cux696dux30c7ux30a3ux30ecux30afux30c8ux30eaux306eux8a2dux5b9a}{}
+\begin{itemize}
+\tightlist
+\item
+  データセットを読み込む前に、Rにファイルの場所を教える必要がある。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 作業ディレクトリの設定例}
+\CommentTok{\# setwd("\textasciitilde{}/Desktop/DSS") }
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\hypertarget{rux306eux7d39ux4ecb}{%
+\section{1.6 Rの紹介}\label{rux306eux7d39ux4ecb}}
+
+\begin{frame}[fragile]{Rで計算をする}
+\protect\hypertarget{rux3067ux8a08ux7b97ux3092ux3059ux308b}{}
+\begin{itemize}
+\tightlist
+\item
+  Rを計算機として使用できる。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1} \SpecialCharTok{+} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{オブジェクトの作成}
+\protect\hypertarget{ux30aaux30d6ux30b8ux30a7ux30afux30c8ux306eux4f5cux6210}{}
+\begin{itemize}
+\tightlist
+\item
+  情報を「オブジェクト」として保存する（\texttt{\textless{}-}
+  割り当て演算子）。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{four }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{+} \DecValTok{3}
+\NormalTok{four}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hello }\OtherTok{\textless{}{-}} \StringTok{"hi, nice to meet you"}
+\NormalTok{hello}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "hi, nice to meet you"
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{関数の使用}
+\protect\hypertarget{ux95a2ux6570ux306eux4f7fux7528}{}
+\begin{itemize}
+\tightlist
+\item
+  関数は特定の操作を実行する（\texttt{関数名(引数)}）。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(}\DecValTok{16}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(four)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\end{frame}
+
+\hypertarget{ux30c7ux30fcux30bfux3092ux8aadux307fux8fbcux3093ux3067ux7406ux89e3ux3059ux308b}{%
+\section{1.7
+データを読み込んで理解する}\label{ux30c7ux30fcux30bfux3092ux8aadux307fux8fbcux3093ux3067ux7406ux89e3ux3059ux308b}}
+
+\begin{frame}[fragile]{データの読み込み}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{read.csv()}
+  関数を用いてCSVファイルを読み込み、オブジェクトに格納する。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# データセットの読み込み}
+\NormalTok{star }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"STAR.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{データの理解}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux7406ux89e3}{}
+\begin{itemize}
+\tightlist
+\item
+  読み込んだデータの中身や構造を確認する。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 最初の6行を表示}
+\FunctionTok{head}\NormalTok{(star)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   classtype reading math graduated
+## 1     small     578  610         1
+## 2   regular     612  612         1
+## 3   regular     583  606         1
+## 4     small     661  648         1
+## 5     small     614  636         1
+## 6   regular     610  603         0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 次元の確認（行数, 列数）}
+\FunctionTok{dim}\NormalTok{(star)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1274    4
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{変数の種類}
+\protect\hypertarget{ux5909ux6570ux306eux7a2eux985e}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{文字変数} (Character variables): テキストデータ。
+\item
+  \textbf{数値変数} (Numeric variables): 数字。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{二値変数} (Binary variables):
+    0か1の2つの値のみ（ダミー変数）。
+  \item
+    \textbf{非二値変数} (Non-binary variables):
+    それ以外の数値（例：テストの点数）。
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux5e73ux5747ux5024ux3092ux8a08ux7b97ux3057ux89e3ux91c8ux3059ux308b}{%
+\section{1.8
+平均値を計算し、解釈する}\label{ux5e73ux5747ux5024ux3092ux8a08ux7b97ux3057ux89e3ux91c8ux3059ux308b}}
+
+\begin{frame}[fragile]{変数へのアクセス}
+\protect\hypertarget{ux5909ux6570ux3078ux306eux30a2ux30afux30bbux30b9}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\$} 記号を用いて、データフレーム内の特定の変数にアクセスする。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# reading変数の最初の数値を表示}
+\FunctionTok{head}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{reading)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 578 612 583 661 614 610
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{平均値の計算}
+\protect\hypertarget{ux5e73ux5747ux5024ux306eux8a08ux7b97}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{mean()} 関数を用いて平均値を計算する。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 読解力テストの平均点}
+\FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{reading)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 628.803
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 卒業率（二値変数）の平均}
+\FunctionTok{mean}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{graduated)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8697017
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{解釈}
+\protect\hypertarget{ux89e3ux91c8}{}
+\begin{itemize}
+\tightlist
+\item
+  二値変数の平均値に100を掛けると、その特徴を持つ割合（\%）になる。
+\item
+  例：\texttt{graduated}
+  の平均が0.87であれば、約87\%の生徒が卒業したことを意味する。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{1.9 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{第1章のまとめ}
+\protect\hypertarget{ux7b2c1ux7ae0ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  RとRStudioの基本的な操作を学んだ。
+\item
+  データの読み込み方法、データフレームの構造、変数の種類を理解した。
+\item
+  \texttt{mean()}
+  関数を用いて記述統計量（平均値）を算出し、その解釈方法を学んだ。
+\item
+  次章からは、いよいよ実際の研究例を用いて因果関係の推定（説明）に取り組む。
+\end{itemize}
+\end{frame}
+
+\end{document}
