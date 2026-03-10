@@ -78,7 +78,7 @@ barplot(isaf.ptable,
 ## 棒グラフの描画: 結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="70%", fig.align="center"}
 isaf.ptable <- prop.table(table(ISAF = afghan$violent.exp.ISAF, exclude = NULL))
 barplot(isaf.ptable,
         names.arg = c("No harm", "Harm", "Nonresponse"), 
@@ -114,7 +114,7 @@ hist(afghan$age,
 ## 年齢の分布: 結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="70%", fig.align="center"}
 hist(afghan$age, 
      freq = FALSE, 
      ylim = c(0, 0.04), 
@@ -150,7 +150,7 @@ text(x = median(afghan$educ.years) + 2, y = 0.4, "Median", col = "red")
 ## 教育年数の分布: 結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="70%", fig.align="center"}
 hist(afghan$educ.years, freq = FALSE, 
      breaks = seq(from = -0.5, to = 18.5, by = 1),
      xlab = "Years of Education", 
@@ -186,7 +186,7 @@ boxplot(educ.years ~ province,
 ## 州別の教育年数: 結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="70%", fig.align="center"}
 boxplot(educ.years ~ province, data = afghan, 
         main = "Education by Province", ylab = "Years of education", xlab = "Province")
 ```
