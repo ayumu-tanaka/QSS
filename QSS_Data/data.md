@@ -46,7 +46,7 @@
 | [names.csv](names.csv) | 米国国勢調査局の苗字リストデータ | [表示](names.html) |
 | [FLCensusVTD.csv](FLCensusVTD.csv) | フロリダ州の投票区レベル国勢調査データ | [表示](FLCensusVTD.html) |
 | [polls12.csv](polls12.csv) | 2012年米国大統領選挙世論調査データ | [表示](polls12.html) |
-| [chinawomen.csv](chinawomen.csv) | 中国における性比と農作物価格データ | |
-| [filedrawer.csv](filedrawer.csv) | TESSプログラム学術研究データ | |
-| [published.csv](published.csv) | 学術雑誌掲載論文データ | |
-| [nazis.csv](nazis.csv) | 1932年ドイツ選挙分析データ | |
+| [chinawomen.csv](chinawomen.csv) | 中国における性比と農作物価格データ | [表示](chinawomen.html) |
+| [filedrawer.csv](filedrawer.csv) | TESSプログラム学術研究データ | [表示](filedrawer.html) |
+| [published.csv](published.csv) | 学術雑誌掲載論文データ | [表示](published.html) |
+| [nazis.csv](nazis.csv) | 1932年ドイツ選挙分析データ | [表示](nazis.html) |
