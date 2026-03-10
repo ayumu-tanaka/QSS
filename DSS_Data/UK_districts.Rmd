@@ -1,0 +1,31 @@
+---
+title: "UK_districts.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## UK_districts.csv
+
+このデータセットは、英国の地区レベルの Brexit 投票結果データです。
+
+### 変数定義
+
+- `name`: 地区名
+- `leave`: 離脱への投票率 (%)
+- `high_education`: 高等教育を受けた住民の割合 (%)
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("UK_districts.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 英国地区レベル選挙データ (UK_districts.csv)')
+```

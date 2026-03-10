@@ -1,0 +1,32 @@
+---
+title: "UA_precincts.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## UA_precincts.csv
+
+このデータセットは、ロシアのテレビ放送視聴がウクライナの投票区レベルの得票率に与えた影響を調査したデータです。
+
+### 変数定義
+
+- `russian_tv`: ロシアのテレビ放送を視聴できるか (`1` = Yes, `0` = No)
+- `pro_russian`: 2014年選挙での親ロシア派の得票率 (%)
+- `prior_pro_russian`: 前回の選挙での親ロシア派の得票率 (%)
+- `within_25km`: ロシア国境から25km以内か (`1` = Yes, `0` = No)
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("UA_precincts.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: ウクライナ投票区レベルデータ (UA_precincts.csv)')
+```

@@ -1,0 +1,32 @@
+---
+title: "BES.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## BES.csv
+
+このデータセットは、英国選挙研究 (BES) による Brexit に関する世論調査データです。
+
+### 変数定義
+
+- `vote`: 投票先 (`leave`: 離脱, `remain`: 残留)
+- `leave`: 離脱に投票したか (`1` = Yes, `0` = No)
+- `education`: 教育レベル（数値が高いほど高学歴）
+- `age`: 回答者の年齢
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("BES.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 英国選挙研究データ (BES.csv)')
+```

@@ -1,0 +1,32 @@
+---
+title: "STAR.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## STAR.csv
+
+このデータセットは、少人数学級が児童の学習到達度に与える影響を調査した「STARプロジェクト」のデータです。
+
+### 変数定義
+
+- `classtype`: 割り当てられた学級の種類 (`small`: 小人数学級, `regular`: 通常学級)
+- `reading`: 読解テストのスコア
+- `math`: 算数テストのスコア
+- `graduated`: 高校を卒業したか (`1` = Yes, `0` = No)
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("STAR.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: STARプロジェクトデータ (STAR.csv)')
+```

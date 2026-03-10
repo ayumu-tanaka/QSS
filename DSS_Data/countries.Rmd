@@ -1,0 +1,33 @@
+---
+title: "countries.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## countries.csv
+
+このデータセットは、国別のGDPと夜間光（衛星データ）を用いた経済成長予測のためのデータです。
+
+### 変数定義
+
+- `country`: 国名
+- `gdp`: 当該期間のGDP
+- `prior_gdp`: 前期間のGDP
+- `light`: 当該期間の夜間光の強度
+- `prior_light`: 前期間の夜間光の強度
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("countries.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 国別GDP・夜間光データ (countries.csv)')
+```

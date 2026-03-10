@@ -1,0 +1,31 @@
+---
+title: "UA_survey.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## UA_survey.csv
+
+このデータセットは、ロシアのテレビ放送視聴がウクライナ人の投票行動に与える影響を調査した世論調査データです。
+
+### 変数定義
+
+- `russian_tv`: ロシアのテレビ放送を視聴できるか (`1` = Yes, `0` = No)
+- `pro_russian_vote`: 2014年選挙で親ロシア派政党に投票したか (`1` = Yes, `0` = No)
+- `within_25km`: ロシア国境から25km以内か (`1` = Yes, `0` = No)
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("UA_survey.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: ウクライナ世論調査データ (UA_survey.csv)')
+```
