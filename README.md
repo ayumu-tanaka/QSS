@@ -27,7 +27,7 @@ GitHub Pages: [https://ayumu-tanaka.github.io/QSS/](https://ayumu-tanaka.github.
 | 10 | DSS | 第2章 無作為化実験による因果効果の推定 | [PDF](DSS_Ch02/DSS_Ch02.pdf) | [RMD](DSS_Ch02/DSS_Ch02.Rmd) |
 | 11 | DSS | 第3章 社会調査研究による母集団の特徴の推論 | [PDF](DSS_Ch03/DSS_Ch03.pdf) | [RMD](DSS_Ch03/DSS_Ch03.Rmd) |
 | 12 | DSS | 第4章 予測 | [PDF](DSS_Ch04/DSS_Ch04.pdf) | [RMD](DSS_Ch04/DSS_Ch04.Rmd) |
-| 13 | DSS | 第5章 説明（観察データによる因果効果の推定） | [PDF](DSS_Ch05/DSS_Ch05.pdf) | [RMD](DSS_Ch05/DSS_Ch05.Rmd) |
+| 13 | DSS | 第5章 観察データによる因果効果の推定 | [PDF](DSS_Ch05/DSS_Ch05.pdf) | [RMD](DSS_Ch05/DSS_Ch05.Rmd) |
 | 14 | DSS | 第6章 確率 | [PDF](DSS_Ch06/DSS_Ch06.pdf) | [RMD](DSS_Ch06/DSS_Ch06.Rmd) |
 | 15 | DSS | 第7章 不確実性の数値化 | [PDF](DSS_Ch07/DSS_Ch07.pdf) | [RMD](DSS_Ch07/DSS_Ch07.Rmd) |
 

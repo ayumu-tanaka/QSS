@@ -1,16 +1,18 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% remove section numbering
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -19,19 +21,16 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{section title}
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -44,21 +43,19 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
 \usetheme[]{Montpellier}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -75,6 +72,14 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -86,13 +91,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -100,7 +105,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -109,7 +114,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -118,6 +123,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -142,12 +148,9 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{第5章: 観察データによる因果効果の推定}
 \subtitle{Elena Llaudet \& Kosuke Imai.\\
@@ -159,11 +162,12 @@ Introduction.}
 \begin{document}
 \frame{\titlepage}
 
+\hypertarget{ux89b3ux5bdfux7814ux7a76ux3068ux5171ux5909ux91cf}{%
 \section{5.1
-観察研究と共変量}\label{ux89b3ux5bdfux7814ux7a76ux3068ux5171ux5909ux91cf}
+観察研究と共変量}\label{ux89b3ux5bdfux7814ux7a76ux3068ux5171ux5909ux91cf}}
 
 \begin{frame}{観察研究 (Observational Studies)}
-\phantomsection\label{ux89b3ux5bdfux7814ux7a76-observational-studies}
+\protect\hypertarget{ux89b3ux5bdfux7814ux7a76-observational-studies}{}
 \begin{itemize}
 \tightlist
 \item
@@ -177,7 +181,7 @@ Introduction.}
 \end{frame}
 
 \begin{frame}{共変量 (Confounders)}
-\phantomsection\label{ux5171ux5909ux91cf-confounders}
+\protect\hypertarget{ux5171ux5909ux91cf-confounders}{}
 \begin{itemize}
 \tightlist
 \item
@@ -187,11 +191,12 @@ Introduction.}
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux91cdux56deux5e30ux5206ux6790-multiple-regression}{%
 \section{5.2 重回帰分析 (Multiple
-Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}
+Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}}
 
 \begin{frame}{なぜ重回帰か？}
-\phantomsection\label{ux306aux305cux91cdux56deux5e30ux304b}
+\protect\hypertarget{ux306aux305cux91cdux56deux5e30ux304b}{}
 \begin{itemize}
 \tightlist
 \item
@@ -209,11 +214,12 @@ Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux6e96ux5099}{%
 \section{5.3
-データの読み込みと準備}\label{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux6e96ux5099}
+データの読み込みと準備}\label{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux6e96ux5099}}
 
 \begin{frame}[fragile]{ウクライナの選挙データ}
-\phantomsection\label{ux30a6ux30afux30e9ux30a4ux30caux306eux9078ux6319ux30c7ux30fcux30bf}
+\protect\hypertarget{ux30a6ux30afux30e9ux30a4ux30caux306eux9078ux6319ux30c7ux30fcux30bf}{}
 \begin{itemize}
 \tightlist
 \item
@@ -243,10 +249,11 @@ Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}
 \end{verbatim}
 \end{frame}
 
-\section{5.4 共変量の制御}\label{ux5171ux5909ux91cfux306eux5236ux5fa1}
+\hypertarget{ux5171ux5909ux91cfux306eux5236ux5fa1}{%
+\section{5.4 共変量の制御}\label{ux5171ux5909ux91cfux306eux5236ux5fa1}}
 
 \begin{frame}[fragile]{ロシア放送の影響}
-\phantomsection\label{ux30edux30b7ux30a2ux653eux9001ux306eux5f71ux97ff}
+\protect\hypertarget{ux30edux30b7ux30a2ux653eux9001ux306eux5f71ux97ff}{}
 \begin{itemize}
 \tightlist
 \item
@@ -258,7 +265,7 @@ Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}
 \end{frame}
 
 \begin{frame}[fragile]{ロシア放送の影響: Rコード}
-\phantomsection\label{ux30edux30b7ux30a2ux653eux9001ux306eux5f71ux97ff-rux30b3ux30fcux30c9}
+\protect\hypertarget{ux30edux30b7ux30a2ux653eux9001ux306eux5f71ux97ff-rux30b3ux30fcux30c9}{}
 \footnotesize
 
 \begin{Shaded}
@@ -297,7 +304,7 @@ Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}
 \end{frame}
 
 \begin{frame}[fragile]{推定値の解釈}
-\phantomsection\label{ux63a8ux5b9aux5024ux306eux89e3ux91c8}
+\protect\hypertarget{ux63a8ux5b9aux5024ux306eux89e3ux91c8}{}
 \begin{itemize}
 \tightlist
 \item
@@ -306,11 +313,12 @@ Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux56deux5e30ux30e2ux30c7ux30ebux306eux6bd4ux8f03}{%
 \section{5.5
-回帰モデルの比較}\label{ux56deux5e30ux30e2ux30c7ux30ebux306eux6bd4ux8f03}
+回帰モデルの比較}\label{ux56deux5e30ux30e2ux30c7ux30ebux306eux6bd4ux8f03}}
 
 \begin{frame}[fragile]{モデル間の比較}
-\phantomsection\label{ux30e2ux30c7ux30ebux9593ux306eux6bd4ux8f03}
+\protect\hypertarget{ux30e2ux30c7ux30ebux9593ux306eux6bd4ux8f03}{}
 \begin{itemize}
 \tightlist
 \item
@@ -347,11 +355,12 @@ Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}
 \normalsize
 \end{frame}
 
+\hypertarget{ux6563ux5e03ux56f3ux3068ux56deux5e30ux5e73ux9762ux8996ux899aux5316}{%
 \section{5.6
-散布図と回帰平面（視覚化）}\label{ux6563ux5e03ux56f3ux3068ux56deux5e30ux5e73ux9762ux8996ux899aux5316}
+散布図と回帰平面（視覚化）}\label{ux6563ux5e03ux56f3ux3068ux56deux5e30ux5e73ux9762ux8996ux899aux5316}}
 
 \begin{frame}[fragile]{3次元的な関係の理解}
-\phantomsection\label{ux6b21ux5143ux7684ux306aux95a2ux4fc2ux306eux7406ux89e3}
+\protect\hypertarget{ux6b21ux5143ux7684ux306aux95a2ux4fc2ux306eux7406ux89e3}{}
 \begin{itemize}
 \tightlist
 \item
@@ -378,10 +387,11 @@ Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}
 \normalsize
 \end{frame}
 
-\section{5.7 まとめ}\label{ux307eux3068ux3081}
+\hypertarget{ux307eux3068ux3081}{%
+\section{5.7 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}{第5章のまとめ}
-\phantomsection\label{ux7b2c5ux7ae0ux306eux307eux3068ux3081}
+\protect\hypertarget{ux7b2c5ux7ae0ux306eux307eux3068ux3081}{}
 \begin{itemize}
 \tightlist
 \item
