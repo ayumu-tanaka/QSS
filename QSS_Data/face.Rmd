@@ -1,0 +1,38 @@
+---
+title: "face.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## face.csv
+
+このデータセットは、候補者の顔の「有能さ（competence）」の印象が選挙結果に与える影響を調査した実験データです（QSS 表4.4）。
+
+### 変数定義
+
+- `year`: 選挙年
+- `state`: 州名
+- `winner`: 当選者名
+- `loser`: 落選者名
+- `w.party`: 当選者の政党 (`D` = 民主党, `R` = 共和党)
+- `l.party`: 落選者の政党 (`D` = 民主党, `R` = 共和党)
+- `d.comp`: 民主党候補者の有能さスコア
+- `r.comp`: 共和党候補者の有能さスコア
+- `d.votes`: 民主党候補者の得票数
+- `r.votes`: 共和党候補者の得票数
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("face.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 顔の印象実験データ (face.csv)')
+```

@@ -1,0 +1,34 @@
+---
+title: "women.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## women.csv
+
+このデータセットは、インドの村議会における女性の割当制（reserved seats）が政策に与える影響を調査した実験データです（QSS 表4.7）。
+
+### 変数定義
+
+- `GP`: 村議会 (Gram Panchayat) のID
+- `village`: 村のID
+- `reserved`: 女性の割当制が導入されたか (`1` = Yes, `0` = No)
+- `female`: 議長が女性か (`1` = Yes, `0` = No)
+- `irrigation`: 修復された灌漑施設の数
+- `water`: 修復された飲用水施設の数
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("women.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 女性政策立案者実験データ (women.csv)')
+```

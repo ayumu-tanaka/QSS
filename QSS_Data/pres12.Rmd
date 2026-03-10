@@ -1,0 +1,32 @@
+---
+title: "pres12.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## pres12.csv
+
+このデータセットは、2012年米国大統領選挙の州別確定結果です（QSS 表4.5）。
+
+### 変数定義
+
+- `state`: 州名略称
+- `Obama`: オバマ候補（民主党）の得票率 (%)
+- `Romney`: ロムニー候補（共和党）の得票率 (%)
+- `EV`: 当該州の選挙人数 (Electoral Votes)
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("pres12.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 15, autoWidth = TRUE),
+          caption = 'Table: 2012年大統領選結果 (pres12.csv)')
+```

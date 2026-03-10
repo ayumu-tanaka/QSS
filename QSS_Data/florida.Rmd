@@ -1,0 +1,35 @@
+---
+title: "florida.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## florida.csv
+
+このデータセットは、フロリダ州の郡別大統領選挙データ（1996年・2000年）を含んでいます（QSS 表4.6）。バタフライ投票用紙の影響分析に使用されます。
+
+### 変数定義
+
+- `county`: 郡名
+- `Clinton96`: 1996年クリントン候補の得票数
+- `Dole96`: 1996年ドール候補の得票数
+- `Perot96`: 1996年ペロー候補の得票数
+- `Bush00`: 2000年ブッシュ候補の得票数
+- `Gore00`: 2000年ゴア候補の得票数
+- `Buchanan00`: 2000年ブキャナン候補の得票数
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("florida.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: フロリダ州郡別選挙データ (florida.csv)')
+```

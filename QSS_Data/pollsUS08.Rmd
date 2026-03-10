@@ -1,0 +1,32 @@
+---
+title: "pollsUS08.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## pollsUS08.csv
+
+このデータセットは、2008年米国大統領選挙の全国世論調査データです（QSS 表4.3）。
+
+### 変数定義
+
+- `Pollster`: 調査機関名
+- `McCain`: マケイン候補の支持率 (%)
+- `Obama`: オバマ候補の支持率 (%)
+- `middate`: 調査実施期間の中間日
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("pollsUS08.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 2008年大統領選全国世論調査 (pollsUS08.csv)')
+```

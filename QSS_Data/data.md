@@ -25,12 +25,12 @@
 | [unvoting.csv](unvoting.csv) | 国連総会投票データ | [表示](unvoting.html) |
 | [pres08.csv](pres08.csv) | 2008年米国大統領選挙結果データ | [表示](pres08.html) |
 | [polls08.csv](polls08.csv) | 2008年米国大統領選挙世論調査データ | [表示](polls08.html) |
-| [pollsUS08.csv](pollsUS08.csv) | 2008年米国大統領選挙全国世論調査データ | |
-| [face.csv](face.csv) | 顔の印象実験データ | |
-| [pres12.csv](pres12.csv) | 2012年米国大統領選挙結果データ | |
-| [florida.csv](florida.csv) | フロリダ州の郡別大統領選挙データ（1996年・2000年） | |
-| [women.csv](women.csv) | 女性政策立案者実験データ | |
-| [MPs.csv](MPs.csv) | 英国下院議員の個人資産データ | |
+| [pollsUS08.csv](pollsUS08.csv) | 2008年米国大統領選挙全国世論調査データ | [表示](pollsUS08.html) |
+| [face.csv](face.csv) | 顔の印象実験データ | [表示](face.html) |
+| [pres12.csv](pres12.csv) | 2012年米国大統領選挙結果データ | [表示](pres12.html) |
+| [florida.csv](florida.csv) | フロリダ州の郡別大統領選挙データ（1996年・2000年） | [表示](florida.html) |
+| [women.csv](women.csv) | 女性政策立案者実験データ | [表示](women.html) |
+| [MPs.csv](MPs.csv) | 英国下院議員の個人資産データ | [表示](MPs.html) |
 | [intrade08.csv](intrade08.csv) | 2008年Intrade予測市場データ | |
 | [intrade12.csv](intrade12.csv) | 2012年Intrade予測市場データ | |
 | [progresa.csv](progresa.csv) | Progresaプログラム（条件付き現金給付）データ | |

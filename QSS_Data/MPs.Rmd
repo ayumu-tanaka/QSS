@@ -1,0 +1,38 @@
+---
+title: "MPs.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## MPs.csv
+
+このデータセットは、イギリス下院議員の当選・落選がその後の個人資産形成に与える影響を調査した研究のデータです（QSS 表4.8）。回帰不連続デザイン（RDD）の分析に使用されます。
+
+### 変数定義
+
+- `surname`: 氏（姓）
+- `firstname`: 名前
+- `party`: 政党 (`labour` = 労働党, `tory` = 保守党)
+- `ln.gross`: 死去時の総資産（自然対数）
+- `ln.net`: 死去時の純資産（自然対数）
+- `yob`: 出生年
+- `yod`: 死去年
+- `margin.pre`: 前回の選挙における得票率マージン
+- `region`: 選挙区の地域
+- `margin`: 当該選挙における得票率マージン（当選と落選の境界線）
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("MPs.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 英国下院議員資産データ (MPs.csv)')
+```
