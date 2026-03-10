@@ -1,0 +1,424 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第6章: 確率}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux78baux7387ux306eux57faux672c}{%
+\section{6.1 確率の基本}\label{ux78baux7387ux306eux57faux672c}}
+
+\begin{frame}[fragile]{確率の定義と誕生日問題}
+\protect\hypertarget{ux78baux7387ux306eux5b9aux7fa9ux3068ux8a95ux751fux65e5ux554fux984c}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{頻度主義}: 無限回の試行における相対頻度。
+\item
+  \textbf{ベイズ主義}: 主観的な確信の度合い。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birthday }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(k) \{}
+\NormalTok{    logdenom }\OtherTok{\textless{}{-}}\NormalTok{ k }\SpecialCharTok{*} \FunctionTok{log}\NormalTok{(}\DecValTok{365}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{lfactorial}\NormalTok{(}\DecValTok{365} \SpecialCharTok{{-}}\NormalTok{ k)}
+\NormalTok{    lognumer }\OtherTok{\textless{}{-}} \FunctionTok{lfactorial}\NormalTok{(}\DecValTok{365}\NormalTok{)}
+    \DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{exp}\NormalTok{(lognumer }\SpecialCharTok{{-}}\NormalTok{ logdenom)}
+\NormalTok{\}}
+\NormalTok{k }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{50}\NormalTok{; bday }\OtherTok{\textless{}{-}} \FunctionTok{birthday}\NormalTok{(k)}
+\FunctionTok{plot}\NormalTok{(k, bday, }\AttributeTok{xlab =} \StringTok{"Number of people"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Probability"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Birthday Problem"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-1-1} \end{center}
+\normalsize
+\end{frame}
+
+\hypertarget{ux6761ux4ef6ux4ed8ux304dux78baux7387}{%
+\section{6.2 条件付き確率}\label{ux6761ux4ef6ux4ed8ux304dux78baux7387}}
+
+\begin{frame}[fragile]{結合確率・周辺確率・条件付き確率}
+\protect\hypertarget{ux7d50ux5408ux78baux7387ux5468ux8fbaux78baux7387ux6761ux4ef6ux4ed8ux304dux78baux7387}{}
+\begin{itemize}
+\tightlist
+\item
+  フロリダ州の有権者データ（\texttt{FLVoters.csv}）を使用。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FLVoters }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"FLVoters.csv"}\NormalTok{))}
+\CommentTok{\# 周辺確率（人種）}
+\NormalTok{margin.race }\OtherTok{\textless{}{-}} \FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(FLVoters}\SpecialCharTok{$}\NormalTok{race))}
+\CommentTok{\# 条件付き確率（女性における人種の割合）}
+\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(FLVoters}\SpecialCharTok{$}\NormalTok{race[FLVoters}\SpecialCharTok{$}\NormalTok{gender }\SpecialCharTok{==} \StringTok{"f"}\NormalTok{]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##       asian       black    hispanic      native       other       white 
+## 0.016997747 0.138849068 0.136391563 0.003481466 0.032357157 0.671922998
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 結合確率（人種と性別）}
+\NormalTok{joint.p }\OtherTok{\textless{}{-}} \FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(}\AttributeTok{race =}\NormalTok{ FLVoters}\SpecialCharTok{$}\NormalTok{race, }\AttributeTok{gender =}\NormalTok{ FLVoters}\SpecialCharTok{$}\NormalTok{gender))}
+\NormalTok{joint.p}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           gender
+## race                 f           m
+##   asian    0.009107868 0.010095468
+##   black    0.074399210 0.056622408
+##   hispanic 0.073082410 0.057719741
+##   native   0.001865467 0.001316800
+##   other    0.017337869 0.016679469
+##   white    0.360035115 0.321738176
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{独立性 (Independence)}
+\protect\hypertarget{ux72ecux7acbux6027-independence}{}
+\begin{itemize}
+\tightlist
+\item
+  \(P(A, B) = P(A)P(B)\) が成り立つとき、\(A\) と \(B\) は独立である。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{margin.gender }\OtherTok{\textless{}{-}} \FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(FLVoters}\SpecialCharTok{$}\NormalTok{gender))}
+\CommentTok{\# 周辺確率の積 vs 結合確率}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{c}\NormalTok{(margin.race }\SpecialCharTok{*}\NormalTok{ margin.gender[}\StringTok{"f"}\NormalTok{]), }\FunctionTok{c}\NormalTok{(joint.p[, }\StringTok{"f"}\NormalTok{]),}
+     \AttributeTok{xlab =} \StringTok{"P(race) * P(female)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"P(race and female)"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Check for Independence"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-3-1} \end{center}
+\normalsize
+\end{frame}
+
+\hypertarget{ux78baux7387ux5206ux5e03}{%
+\section{6.3 確率分布}\label{ux78baux7387ux5206ux5e03}}
+
+\begin{frame}[fragile]{二項分布 (Binomial Distribution)}
+\protect\hypertarget{ux4e8cux9805ux5206ux5e03-binomial-distribution}{}
+\begin{itemize}
+\tightlist
+\item
+  \(n\) 回の試行で成功する回数の分布。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# n=10, p=0.5 のとき、成功回数が5回となる確率}
+\FunctionTok{dbinom}\NormalTok{(}\DecValTok{5}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{prob =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2460938
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 累積分布関数: 成功回数が3回以下となる確率}
+\FunctionTok{pbinom}\NormalTok{(}\DecValTok{3}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{prob =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.171875
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{正規分布 (Normal Distribution)}
+\protect\hypertarget{ux6b63ux898fux5206ux5e03-normal-distribution}{}
+\begin{itemize}
+\tightlist
+\item
+  連続変数の最も重要な分布。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 標準正規分布において、平均から ±1 標準偏差の範囲に入る確率}
+\FunctionTok{pnorm}\NormalTok{(}\DecValTok{1}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6826895
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ±2 標準偏差の範囲（約 95\%）}
+\FunctionTok{pnorm}\NormalTok{(}\DecValTok{2}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9544997
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux5927ux6a19ux672cux5b9aux7406}{%
+\section{6.4 大標本定理}\label{ux5927ux6a19ux672cux5b9aux7406}}
+
+\begin{frame}[fragile]{大数の法則 (Law of Large Numbers)}
+\protect\hypertarget{ux5927ux6570ux306eux6cd5ux5247-law-of-large-numbers}{}
+\begin{itemize}
+\tightlist
+\item
+  サンプルサイズが大きくなるほど、標本平均は期待値に収束する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sims }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{x.unif }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(sims) }\CommentTok{\# 一様分布 [0, 1]}
+\NormalTok{mean.unif }\OtherTok{\textless{}{-}} \FunctionTok{cumsum}\NormalTok{(x.unif) }\SpecialCharTok{/} \DecValTok{1}\SpecialCharTok{:}\NormalTok{sims}
+\FunctionTok{plot}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{sims, mean.unif, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Sample size"}\NormalTok{, }
+     \AttributeTok{ylab =} \StringTok{"Sample mean"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Law of Large Numbers"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-6-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{中心極限定理 (Central Limit Theorem)}
+\protect\hypertarget{ux4e2dux5fc3ux6975ux9650ux5b9aux7406-central-limit-theorem}{}
+\begin{itemize}
+\tightlist
+\item
+  サンプルサイズが大きければ、標本平均の分布は正規分布に従う。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z.unif }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{) \{}
+\NormalTok{    x }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{, }\AttributeTok{min =} \DecValTok{0}\NormalTok{, }\AttributeTok{max =} \DecValTok{1}\NormalTok{) }\CommentTok{\# n=100}
+\NormalTok{    z.unif[i] }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(x) }\SpecialCharTok{{-}} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{/} \FunctionTok{sqrt}\NormalTok{(}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\DecValTok{12} \SpecialCharTok{*} \DecValTok{100}\NormalTok{))}
+\NormalTok{\}}
+\FunctionTok{hist}\NormalTok{(z.unif, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{nclass =} \DecValTok{30}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"z{-}score"}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Central Limit Theorem (Uniform)"}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dnorm}\NormalTok{(x), }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-7-1} \end{center}
+\normalsize
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{6.5 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{第6章のまとめ}
+\protect\hypertarget{ux7b2c6ux7ae0ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{確率}: 不確実な出来事を記述するための数学的な枠組み。
+\item
+  \textbf{条件付き確率と独立性}: 変数間の関係を理解するための鍵。
+\item
+  \textbf{確率分布}:
+  データの発生メカニズムをモデル化する（二項分布、正規分布など）。
+\item
+  \textbf{大標本定理}:
+  標本から母集団を推測するための理論的基礎（大数の法則、中心極限定理）。
+\item
+  Rの操作: \texttt{sample()}, \texttt{dbinom()}, \texttt{pnorm()},
+  \texttt{runif()}, \texttt{rbinom()} などを習得した。
+\end{itemize}
+\end{frame}
+
+\end{document}

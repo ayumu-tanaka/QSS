@@ -1,0 +1,136 @@
+---
+title: |
+    | 第7章: 不確実性
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 7.1 推定と不確実性
+
+---
+
+## 標準誤差 (Standard Error)
+
+* 推定値のばらつき（標準偏差）を**標準誤差**と呼ぶ。
+* サンプルサイズ ($n$) が大きくなるほど、標準誤差は小さくなる。
+
+\scriptsize
+```{r}
+star <- read.csv("STAR.csv")
+# 小人数学級 (1) と標準学級 (2) の読解力スコア
+n.small <- sum(star$classtype == 1 & !is.na(star$g4reading))
+est.small <- mean(star$g4reading[star$classtype == 1], na.rm = TRUE)
+se.small <- sd(star$g4reading[star$classtype == 1], na.rm = TRUE) / sqrt(n.small)
+est.small
+se.small
+```
+\normalsize
+
+# 7.2 信頼区間 (Confidence Intervals)
+
+---
+
+## 95%信頼区間の算出
+
+* 母集団の真の値が一定の確率（例：95%）で含まれると期待される範囲。
+* 公式: $\text{推定値} \pm 1.96 \times \text{標準誤差}$
+
+\scriptsize
+```{r}
+# 95% 信頼区間 (小人数学級の平均)
+ci.small <- c(est.small - 1.96 * se.small, est.small + 1.96 * se.small)
+ci.small
+
+# 平均の差 (ATE) の信頼区間
+n.reg <- sum(star$classtype == 2 & !is.na(star$g4reading))
+est.reg <- mean(star$g4reading[star$classtype == 2], na.rm = TRUE)
+se.reg <- sd(star$g4reading[star$classtype == 2], na.rm = TRUE) / sqrt(n.reg)
+ate.est <- est.small - est.reg
+ate.se <- sqrt(se.small^2 + se.reg^2)
+c(ate.est - 1.96 * ate.se, ate.est + 1.96 * ate.se)
+```
+\normalsize
+
+# 7.3 仮説検定 (Hypothesis Testing)
+
+---
+
+## p値 (p-value)
+
+* **帰無仮説** ($H_0$): 「効果がない（差はゼロである）」という仮定。
+* **p値**: $H_0$ が正しい場合に、観測された結果（またはそれ以上に極端な結果）が得られる確率。
+* p値 < 0.05 であれば、「統計的に有意」と判断し、帰無仮説を棄却する。
+
+\scriptsize
+```{r}
+# 平均の差の検定 (Z検定)
+z.score <- ate.est / ate.se
+2 * pnorm(-abs(z.score)) # 2面p値
+
+# t.test 関数を用いた検定
+t.test(star$g4reading[star$classtype == 1], 
+       star$g4reading[star$classtype == 2])
+```
+\normalsize
+
+# 7.4 回帰分析における不確実性
+
+---
+
+## 回帰係数の有意性
+
+* `summary()` で各係数の標準誤差、t値、p値を確認できる。
+
+\scriptsize
+```{r}
+resume <- read.csv("resume.csv")
+# 人種とコールバック率の回帰
+fit <- lm(call ~ race, data = resume)
+summary(fit)$coefficients
+```
+\normalsize
+
+---
+
+## 信頼区間のプロット
+
+\scriptsize
+```{r, fig.height=4, out.height="70%", fig.align="center"}
+library(maps)
+pres08 <- read.csv("pres08.csv")
+polls08 <- read.csv("polls08.csv")
+# 簡易的な予測誤差のプロット
+errors <- pres08$Obama - tapply(polls08$Obama, polls08$state, mean)[pres08$state]
+hist(errors, main = "Poll Prediction Error", xlab = "Error (%)")
+```
+\normalsize
+
+# 7.5 まとめ
+
+---
+
+## 第7章のまとめ
+
+* **不確実性**: 標本から母集団を推測する際には、常に誤差が伴う。
+* **標準誤差**: 推定値の精度を測る尺度。
+* **信頼区間**: 真の値が含まれる可能性が高い範囲を提示する。
+* **仮説検定**: 観測された結果が偶然によるものかどうかを確率的に判断する。
+* **統計的有意性**: p値が基準（0.05など）を下回るかどうかで判断するが、その解釈には注意が必要。
+* Rの操作: `sd()`, `qt()`, `qnorm()`, `t.test()`, `confint()` などを習得した。

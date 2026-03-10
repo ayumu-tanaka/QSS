@@ -1,0 +1,551 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第1章: イントロダクション}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{rux5165ux9580}{%
+\section{1.1 R入門}\label{rux5165ux9580}}
+
+\begin{frame}[fragile]{計算操作 (Arithmetic Operations)}
+\protect\hypertarget{ux8a08ux7b97ux64cdux4f5c-arithmetic-operations}{}
+\begin{itemize}
+\tightlist
+\item
+  Rは強力な計算機として使用できる。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 基本的な四則演算}
+\DecValTok{5} \SpecialCharTok{+} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{5} \SpecialCharTok{{-}} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{5} \SpecialCharTok{/} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.666667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# べき乗と関数の使用}
+\DecValTok{5} \SpecialCharTok{\^{}} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 125
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\end{frame}
+
+\hypertarget{ux30aaux30d6ux30b8ux30a7ux30afux30c8-objects}{%
+\section{1.2 オブジェクト
+(Objects)}\label{ux30aaux30d6ux30b8ux30a7ux30afux30c8-objects}}
+
+\begin{frame}[fragile]{オブジェクトの作成と上書き}
+\protect\hypertarget{ux30aaux30d6ux30b8ux30a7ux30afux30c8ux306eux4f5cux6210ux3068ux4e0aux66f8ux304d}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\textless{}-}
+  を用いて、計算結果やデータを名前付きの「オブジェクト」として保存する。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result }\OtherTok{\textless{}{-}} \DecValTok{5} \SpecialCharTok{+} \DecValTok{3}
+\NormalTok{result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 文字列の保存}
+\NormalTok{kosuke }\OtherTok{\textless{}{-}} \StringTok{"instructor"}
+\NormalTok{kosuke}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "instructor"
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  オブジェクトは後から上書きできる。また、大文字と小文字は区別される（\texttt{result}
+  と \texttt{Result} は別物）。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux30d9ux30afux30c8ux30eb-vectors}{%
+\section{1.3 ベクトル
+(Vectors)}\label{ux30d9ux30afux30c8ux30eb-vectors}}
+
+\begin{frame}[fragile]{ベクトルの作成}
+\protect\hypertarget{ux30d9ux30afux30c8ux30ebux306eux4f5cux6210}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{c()}
+  関数（concatenate）を用いて、複数の要素をひとまとめにした「ベクトル」を作成する。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 世界人口データ（千人単位）}
+\NormalTok{world.pop }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2525779}\NormalTok{, }\DecValTok{3026003}\NormalTok{, }\DecValTok{3691173}\NormalTok{, }\DecValTok{4449049}\NormalTok{, }
+               \DecValTok{5320817}\NormalTok{, }\DecValTok{6127700}\NormalTok{, }\DecValTok{6916183}\NormalTok{)}
+\NormalTok{world.pop}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2525779 3026003 3691173 4449049 5320817 6127700 6916183
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{要素の抽出}
+\protect\hypertarget{ux8981ux7d20ux306eux62bdux51fa}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{{[}{]}} を用いてベクトルの一部を取り出すことができる。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2番目の要素を取り出す}
+\NormalTok{world.pop[}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3026003
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2番目と4番目を取り出す}
+\NormalTok{world.pop[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3026003 4449049
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3番目以外のすべての要素を取り出す}
+\NormalTok{world.pop[}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2525779 3026003 4449049 5320817 6127700 6916183
+\end{verbatim}
+\end{frame}
+
+\hypertarget{ux95a2ux6570-functions}{%
+\section{1.4 関数 (Functions)}\label{ux95a2ux6570-functions}}
+
+\begin{frame}[fragile]{組み込み関数の使用}
+\protect\hypertarget{ux7d44ux307fux8fbcux307fux95a2ux6570ux306eux4f7fux7528}{}
+\begin{itemize}
+\tightlist
+\item
+  Rには多くの関数が用意されている。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 長さ、最小値、最大値、平均}
+\FunctionTok{length}\NormalTok{(world.pop)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{min}\NormalTok{(world.pop)     }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2525779
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{max}\NormalTok{(world.pop)     }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6916183
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(world.pop)    }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4579529
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{カスタム関数の作成}
+\protect\hypertarget{ux30abux30b9ux30bfux30e0ux95a2ux6570ux306eux4f5cux6210}{}
+\begin{itemize}
+\tightlist
+\item
+  自分で独自の関数を定義することもできる。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 独自の要約関数}
+\NormalTok{my.summary }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)\{ }
+\NormalTok{  s.out }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(x)}
+\NormalTok{  l.out }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(x)}
+\NormalTok{  m.out }\OtherTok{\textless{}{-}}\NormalTok{ s.out }\SpecialCharTok{/}\NormalTok{ l.out}
+\NormalTok{  out }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(s.out, l.out, m.out)}
+  \FunctionTok{names}\NormalTok{(out) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"sum"}\NormalTok{, }\StringTok{"length"}\NormalTok{, }\StringTok{"mean"}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(out)}
+\NormalTok{\}}
+\FunctionTok{my.summary}\NormalTok{(world.pop)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      sum   length     mean 
+## 32056704        7  4579529
+\end{verbatim}
+\end{frame}
+
+\hypertarget{ux30c7ux30fcux30bfux30d5ux30a1ux30a4ux30eb-data-files}{%
+\section{1.5 データファイル (Data
+Files)}\label{ux30c7ux30fcux30bfux30d5ux30a1ux30a4ux30eb-data-files}}
+
+\begin{frame}[fragile]{CSVファイルの読み込み}
+\protect\hypertarget{csvux30d5ux30a1ux30a4ux30ebux306eux8aadux307fux8fbcux307f}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{read.csv()} 関数を用いて、外部のデータセットをRに読み込む。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# UNpopデータの読み込み}
+\NormalTok{UNpop }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"UNpop.csv"}\NormalTok{) }
+
+\CommentTok{\# データフレームの確認}
+\FunctionTok{dim}\NormalTok{(UNpop)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(UNpop, }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   year world.pop
+## 1 1950   2525779
+## 2 1960   3026003
+## 3 1970   3691173
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{データフレームからの変数の抽出}
+\protect\hypertarget{ux30c7ux30fcux30bfux30d5ux30ecux30fcux30e0ux304bux3089ux306eux5909ux6570ux306eux62bdux51fa}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\$} 演算子を用いて、特定の列（変数）にアクセスする。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# world.pop変数の抽出}
+\NormalTok{UNpop}\SpecialCharTok{$}\NormalTok{world.pop}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2525779 3026003 3691173 4449049 5320817 6127700 6916183
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  特定の行や列にインデックス \texttt{{[}行,\ 列{]}}
+  でアクセスすることも可能。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1〜3行目のすべての列}
+\NormalTok{UNpop[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   year world.pop
+## 1 1950   2525779
+## 2 1960   3026003
+## 3 1970   3691173
+\end{verbatim}
+\end{frame}
+
+\hypertarget{ux30d1ux30c3ux30b1ux30fcux30b8-packages}{%
+\section{1.6 パッケージ
+(Packages)}\label{ux30d1ux30c3ux30b1ux30fcux30b8-packages}}
+
+\begin{frame}[fragile]{Rパッケージの利用}
+\protect\hypertarget{rux30d1ux30c3ux30b1ux30fcux30b8ux306eux5229ux7528}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{パッケージ}をインストールすることで、Rの機能を拡張できる。
+\item
+  例：\texttt{foreign} パッケージを用いて、Stata (\texttt{.dta}) や SPSS
+  (\texttt{.sav}) などの他ソフトウェアのデータを読み書きする。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# インストール（初回のみ）}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"foreign"}\NormalTok{)}
+
+\CommentTok{\# パッケージの読み込み}
+\FunctionTok{library}\NormalTok{(foreign)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{1.7 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{第1章のまとめ}
+\protect\hypertarget{ux7b2c1ux7ae0ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{RとRStudio}の基本的な操作方法を習得した。
+\item
+  \textbf{オブジェクト}と\textbf{ベクトル}を用いたデータの保存と操作方法を学んだ。
+\item
+  組み込み関数や自作関数を用いて、データを要約する方法を理解した。
+\item
+  \texttt{read.csv()}
+  を用いてデータフレームを読み込み、操作する方法を学んだ。
+\item
+  データ分析に必要な基礎的なコーディングスキルを身につけた。
+\end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,390 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{Montpellier}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{第5章: 発見}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\section{5.1
+テキストデータ}\label{ux30c6ux30adux30b9ux30c8ux30c7ux30fcux30bf}
+
+\begin{frame}[fragile]{Federalist Papers の分析}
+\phantomsection\label{federalist-papers-ux306eux5206ux6790}
+\begin{itemize}
+\tightlist
+\item
+  テキストマイニングを用いて、著者不明のエッセイの執筆者を推定する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tm)}
+\CommentTok{\# コーパスの読み込み}
+\NormalTok{corpus.raw }\OtherTok{\textless{}{-}} \FunctionTok{VCorpus}\NormalTok{(}\FunctionTok{DirSource}\NormalTok{(}\AttributeTok{directory =} \StringTok{"federalist"}\NormalTok{, }\AttributeTok{pattern =} \StringTok{"fp"}\NormalTok{))}
+\CommentTok{\# 前処理（小文字化、空白削除、句読点削除、ストップワード削除、ステミング）}
+\NormalTok{corpus }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus.raw, }\FunctionTok{content\_transformer}\NormalTok{(tolower))}
+\NormalTok{corpus }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus, stripWhitespace)}
+\NormalTok{corpus }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus, removePunctuation)}
+\NormalTok{corpus }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus, removeNumbers)}
+\NormalTok{corpus }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus, removeWords, }\FunctionTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{))}
+\NormalTok{corpus }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus, stemDocument)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{ワードクラウド (Word Cloud)}
+\phantomsection\label{ux30efux30fcux30c9ux30afux30e9ux30a6ux30c9-word-cloud}
+\begin{itemize}
+\tightlist
+\item
+  出現頻度の高い単語を視覚化する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(wordcloud)}
+\NormalTok{dtm }\OtherTok{\textless{}{-}} \FunctionTok{DocumentTermMatrix}\NormalTok{(corpus)}
+\NormalTok{dtm.mat }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(dtm)}
+\CommentTok{\# 第10論文のワードクラウド}
+\FunctionTok{wordcloud}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(dtm.mat), dtm.mat[}\DecValTok{10}\NormalTok{, ], }\AttributeTok{max.words =} \DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch05_files/figure-beamer/unnamed-chunk-2-1} \end{center}
+\normalsize
+\end{frame}
+
+\section{5.2
+ネットワークデータ}\label{ux30cdux30c3ux30c8ux30efux30fcux30afux30c7ux30fcux30bf}
+
+\begin{frame}[fragile]{ルネサンス期フィレンツェの婚姻関係}
+\phantomsection\label{ux30ebux30cdux30b5ux30f3ux30b9ux671fux30d5ux30a3ux30ecux30f3ux30c4ux30a7ux306eux5a5aux59fbux95a2ux4fc2}
+\begin{itemize}
+\tightlist
+\item
+  どの家族が中心的な役割を果たしていたかをネットワーク指標で測る。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(igraph)}
+\NormalTok{florence }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"florentine.csv"}\NormalTok{, }\AttributeTok{row.names =} \StringTok{"FAMILY"}\NormalTok{)}
+\CommentTok{\# 隣接行列からグラフオブジェクトを作成}
+\NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{graph\_from\_adjacency\_matrix}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(florence), }\AttributeTok{mode =} \StringTok{"undirected"}\NormalTok{)}
+\CommentTok{\# 次数中心性 (Degree Centrality)}
+\FunctionTok{sort}\NormalTok{(}\FunctionTok{degree}\NormalTok{(g), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   MEDICI GUADAGNI  STROZZI 
+##        6        4        4
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{ネットワークの可視化}
+\phantomsection\label{ux30cdux30c3ux30c8ux30efux30fcux30afux306eux53efux8996ux5316}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 間中心性 (Betweenness Centrality) に基づくノードサイズ}
+\FunctionTok{plot}\NormalTok{(g, }\AttributeTok{vertex.size =} \FunctionTok{betweenness}\NormalTok{(g) }\SpecialCharTok{*} \FloatTok{0.5}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Betweenness Centrality in Florence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch05_files/figure-beamer/unnamed-chunk-4-1} \end{center}
+\normalsize
+\end{frame}
+
+\section{5.3
+地理空間データ}\label{ux5730ux7406ux7a7aux9593ux30c7ux30fcux30bf}
+
+\begin{frame}[fragile]{ウォルマートの拡大 (1)}
+\phantomsection\label{ux30a6ux30a9ux30ebux30deux30fcux30c8ux306eux62e1ux5927-1}
+\begin{itemize}
+\tightlist
+\item
+  店舗の緯度・経度データを用いて、全米への拡大プロセスを可視化する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(maps)}
+\NormalTok{walmart }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"walmart.csv"}\NormalTok{)}
+\CommentTok{\# データ構造の確認}
+\FunctionTok{head}\NormalTok{(walmart, }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     opendate                    st.address        city state      long      lat
+## 1 1962-03-01 5801 SW Regional Airport Blvd Bentonville    AR -94.23982 36.35088
+## 2 1962-07-01              2110 WEST WALNUT      Rogers    AR -94.07141 36.34224
+## 3 1964-08-01              1417 HWY 62/65 N    Harrison    AR -93.09345 36.23698
+##                 type
+## 1 DistributionCenter
+## 2        SuperCenter
+## 3        SuperCenter
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{}
+\phantomsection\label{section}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 地図の描画とプロット}
+\FunctionTok{map}\NormalTok{(}\AttributeTok{database =} \StringTok{"state"}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(walmart}\SpecialCharTok{$}\NormalTok{long, walmart}\SpecialCharTok{$}\NormalTok{lat, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{cex =} \FloatTok{0.2}\NormalTok{, }
+       \AttributeTok{col =} \FunctionTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.1}\NormalTok{))}
+\FunctionTok{title}\NormalTok{(}\StringTok{"Expansion of Walmart"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.6\textheight]{QSS_Ch05_files/figure-beamer/unnamed-chunk-6-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{大統領選挙のマップ}
+\phantomsection\label{ux5927ux7d71ux9818ux9078ux6319ux306eux30deux30c3ux30d7}
+\begin{itemize}
+\tightlist
+\item
+  2008年選挙の結果を州ごとに色分けする。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pres08 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"pres08.csv"}\NormalTok{)}
+\NormalTok{pres08}\SpecialCharTok{$}\NormalTok{margin }\OtherTok{\textless{}{-}}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{Obama }\SpecialCharTok{{-}}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{McCain}
+\CommentTok{\# 最初の数件を確認}
+\FunctionTok{head}\NormalTok{(pres08[, }\FunctionTok{c}\NormalTok{(}\StringTok{"state"}\NormalTok{, }\StringTok{"margin"}\NormalTok{)], }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   state margin
+## 1    AL    -21
+## 2    AK    -21
+## 3    AZ     -9
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{}
+\phantomsection\label{section-1}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{map}\NormalTok{(}\AttributeTok{database =} \StringTok{"state"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(pres08)) \{}
+  \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\NormalTok{(pres08}\SpecialCharTok{$}\NormalTok{state[i] }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"AK"}\NormalTok{, }\StringTok{"HI"}\NormalTok{, }\StringTok{"DC"}\NormalTok{))) \{}
+    \FunctionTok{map}\NormalTok{(}\AttributeTok{database =} \StringTok{"state"}\NormalTok{, }\AttributeTok{regions =}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{state.name[i], }
+        \AttributeTok{col =} \FunctionTok{ifelse}\NormalTok{(pres08}\SpecialCharTok{$}\NormalTok{margin[i] }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{), }
+        \AttributeTok{fill =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.6\textheight]{QSS_Ch05_files/figure-beamer/unnamed-chunk-8-1} \end{center}
+\normalsize
+\end{frame}
+
+\section{5.4 まとめ}\label{ux307eux3068ux3081}
+
+\begin{frame}[fragile]{第5章のまとめ}
+\phantomsection\label{ux7b2c5ux7ae0ux306eux307eux3068ux3081}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{テキスト分析}:
+  非構造的な文書データから、著者の特徴やトピック（話題）を抽出する。
+\item
+  \textbf{ネットワーク分析}:
+  要素間のつながり（エッジ）と結節点（ノード）を分析し、中心性を測定する。
+\item
+  \textbf{空間分析}:
+  緯度・経度情報を利用して、現象の地理的な広がりを視覚化する。
+\item
+  Rの操作: \texttt{tm}, \texttt{igraph}, \texttt{maps}
+  パッケージ、\texttt{rgb()} による透過色の設定、\texttt{for}
+  ループによる地図の着色。
+\end{itemize}
+\end{frame}
+
+\end{document}

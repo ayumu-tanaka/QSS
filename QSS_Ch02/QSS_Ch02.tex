@@ -1,0 +1,406 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第2章: 因果関係}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux56e0ux679cux95a2ux4fc2ux3068ux53cdux4e8bux5b9f}{%
+\section{2.1
+因果関係と反事実}\label{ux56e0ux679cux95a2ux4fc2ux3068ux53cdux4e8bux5b9f}}
+
+\begin{frame}{因果効果の定義}
+\protect\hypertarget{ux56e0ux679cux52b9ux679cux306eux5b9aux7fa9}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{因果関係}:
+  ある変数（処置）の変化が別の変数（結果）の変化を引き起こすこと。
+\item
+  \textbf{反事実} (Counterfactual):
+  「もし処置が行われなかったら、結果はどうなっていたか？」という、現実には観察できないシナリオ。
+\item
+  \textbf{因果効果}:
+  「処置が行われた場合の結果」と「反事実の結果」の差。
+\item
+  \textbf{因果推論の根本問題}:
+  同じ個人について、処置を受けた場合と受けなかった場合の両方の結果を同時に観察することはできない。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux7121ux4f5cux70baux5316ux6bd4ux8f03ux8a66ux9a13-rct}{%
+\section{2.2 無作為化比較試験
+(RCT)}\label{ux7121ux4f5cux70baux5316ux6bd4ux8f03ux8a66ux9a13-rct}}
+
+\begin{frame}[fragile]{労働市場における人種差別}
+\protect\hypertarget{ux52b4ux50cdux5e02ux5834ux306bux304aux3051ux308bux4ebaux7a2eux5deeux5225}{}
+\begin{itemize}
+\tightlist
+\item
+  架空の履歴書を送り、名前の響き（人種）によって面接の連絡（コールバック）率がどう変わるかを検証。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{resume }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"resume.csv"}\NormalTok{)}
+\CommentTok{\# 人種別のコールバック率}
+\FunctionTok{tapply}\NormalTok{(resume}\SpecialCharTok{$}\NormalTok{call, resume}\SpecialCharTok{$}\NormalTok{race, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      black      white 
+## 0.06447639 0.09650924
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{社会的圧力と投票率}
+\protect\hypertarget{ux793eux4f1aux7684ux5727ux529bux3068ux6295ux7968ux7387}{}
+\begin{itemize}
+\tightlist
+\item
+  「あなたの投票状況を近所に知らせる」というメッセージが投票率を上げるか？
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{social }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"social.csv"}\NormalTok{)}
+\CommentTok{\# 各グループの投票率}
+\FunctionTok{tapply}\NormalTok{(social}\SpecialCharTok{$}\NormalTok{primary2006, social}\SpecialCharTok{$}\NormalTok{messages, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Civic Duty    Control  Hawthorne  Neighbors 
+##  0.3145377  0.2966383  0.3223746  0.3779482
+\end{verbatim}
+\end{frame}
+
+\hypertarget{ux30c7ux30fcux30bfux306eux90e8ux5206ux96c6ux5408ux5316-subsetting}{%
+\section{2.3 データの部分集合化
+(Subsetting)}\label{ux30c7ux30fcux30bfux306eux90e8ux5206ux96c6ux5408ux5316-subsetting}}
+
+\begin{frame}[fragile]{論理演算子と抽出}
+\protect\hypertarget{ux8ad6ux7406ux6f14ux7b97ux5b50ux3068ux62bdux51fa}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{{[}{]}} や \texttt{subset()}
+  を用いて、特定の条件を満たすデータを抽出する。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 黒人のみのサブセットを作成}
+\NormalTok{resumeB }\OtherTok{\textless{}{-}}\NormalTok{ resume[resume}\SpecialCharTok{$}\NormalTok{race }\SpecialCharTok{==} \StringTok{"black"}\NormalTok{, ]}
+\FunctionTok{mean}\NormalTok{(resumeB}\SpecialCharTok{$}\NormalTok{call)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.06447639
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 複数の条件（黒人かつ女性）}
+\NormalTok{resumeBf }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(resume, }\AttributeTok{subset =}\NormalTok{ (race }\SpecialCharTok{==} \StringTok{"black"} \SpecialCharTok{\&}\NormalTok{ sex }\SpecialCharTok{==} \StringTok{"female"}\NormalTok{))}
+\FunctionTok{mean}\NormalTok{(resumeBf}\SpecialCharTok{$}\NormalTok{call)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.06627784
+\end{verbatim}
+\end{frame}
+
+\hypertarget{ux89b3ux5bdfux7814ux7a76-observational-studies}{%
+\section{2.4 観察研究 (Observational
+Studies)}\label{ux89b3ux5bdfux7814ux7a76-observational-studies}}
+
+\begin{frame}[fragile]{最低賃金と雇用}
+\protect\hypertarget{ux6700ux4f4eux8cc3ux91d1ux3068ux96c7ux7528}{}
+\begin{itemize}
+\tightlist
+\item
+  隣接するニュージャージー州（最低賃金引き上げ）とペンシルベニア州（変化なし）のファストフード店を比較。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{minwage }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"minwage.csv"}\NormalTok{)}
+\CommentTok{\# 州別の雇用変数の作成}
+\NormalTok{minwage}\SpecialCharTok{$}\NormalTok{fullPropAfter }\OtherTok{\textless{}{-}}\NormalTok{ minwage}\SpecialCharTok{$}\NormalTok{fullAfter }\SpecialCharTok{/} 
+\NormalTok{    (minwage}\SpecialCharTok{$}\NormalTok{fullAfter }\SpecialCharTok{+}\NormalTok{ minwage}\SpecialCharTok{$}\NormalTok{partAfter)}
+\CommentTok{\# 州ごとの平均雇用率の差}
+\FunctionTok{tapply}\NormalTok{(minwage}\SpecialCharTok{$}\NormalTok{fullPropAfter, minwage}\SpecialCharTok{$}\NormalTok{location, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        PA centralNJ   northNJ   shoreNJ   southNJ 
+## 0.2722821 0.2512782 0.3749966 0.3451295 0.2356774
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{差の差 (DID) デザイン}
+\protect\hypertarget{ux5deeux306eux5dee-did-ux30c7ux30b6ux30a4ux30f3}{}
+\begin{itemize}
+\tightlist
+\item
+  時間的な変化を比較することで、州固有の要因（交絡因子）を制御する。
+\item
+  \textbf{DID} = (NJの前後差) - (PAの前後差)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 雇用率の変化（前後差）を計算}
+\NormalTok{minwage}\SpecialCharTok{$}\NormalTok{fullPropBefore }\OtherTok{\textless{}{-}}\NormalTok{ minwage}\SpecialCharTok{$}\NormalTok{fullBefore }\SpecialCharTok{/} 
+\NormalTok{    (minwage}\SpecialCharTok{$}\NormalTok{fullBefore }\SpecialCharTok{+}\NormalTok{ minwage}\SpecialCharTok{$}\NormalTok{partBefore)}
+\NormalTok{minwage}\SpecialCharTok{$}\NormalTok{diff }\OtherTok{\textless{}{-}}\NormalTok{ minwage}\SpecialCharTok{$}\NormalTok{fullPropAfter }\SpecialCharTok{{-}}\NormalTok{ minwage}\SpecialCharTok{$}\NormalTok{fullPropBefore}
+
+\CommentTok{\# 差の差の推定}
+\FunctionTok{mean}\NormalTok{(minwage}\SpecialCharTok{$}\NormalTok{diff[minwage}\SpecialCharTok{$}\NormalTok{location }\SpecialCharTok{!=} \StringTok{"PA"}\NormalTok{]) }\SpecialCharTok{{-}} 
+    \FunctionTok{mean}\NormalTok{(minwage}\SpecialCharTok{$}\NormalTok{diff[minwage}\SpecialCharTok{$}\NormalTok{location }\SpecialCharTok{==} \StringTok{"PA"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.06155831
+\end{verbatim}
+\end{frame}
+
+\hypertarget{ux5909ux6570ux306eux8a18ux8ff0ux7d71ux8a08}{%
+\section{2.5
+1変数の記述統計}\label{ux5909ux6570ux306eux8a18ux8ff0ux7d71ux8a08}}
+
+\begin{frame}[fragile]{分位数 (Quantiles) と四分位範囲 (IQR)}
+\protect\hypertarget{ux5206ux4f4dux6570-quantiles-ux3068ux56dbux5206ux4f4dux7bc4ux56f2-iqr}{}
+\begin{itemize}
+\tightlist
+\item
+  分布の形状を理解するための要約統計量。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# NJ州の最低賃金引き上げ前の賃金分布}
+\FunctionTok{summary}\NormalTok{(minwage}\SpecialCharTok{$}\NormalTok{wageBefore[minwage}\SpecialCharTok{$}\NormalTok{location }\SpecialCharTok{!=} \StringTok{"PA"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    4.25    4.25    4.50    4.61    4.87    5.75
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 四分位範囲}
+\FunctionTok{IQR}\NormalTok{(minwage}\SpecialCharTok{$}\NormalTok{wageBefore[minwage}\SpecialCharTok{$}\NormalTok{location }\SpecialCharTok{!=} \StringTok{"PA"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.62
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{標準偏差 (Standard Deviation)}
+\protect\hypertarget{ux6a19ux6e96ux504fux5dee-standard-deviation}{}
+\begin{itemize}
+\tightlist
+\item
+  平均からのばらつきを測定する。
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 雇用率の変化の標準偏差}
+\FunctionTok{sd}\NormalTok{(minwage}\SpecialCharTok{$}\NormalTok{diff[minwage}\SpecialCharTok{$}\NormalTok{location }\SpecialCharTok{!=} \StringTok{"PA"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3010377
+\end{verbatim}
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{2.6 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{第2章のまとめ}
+\protect\hypertarget{ux7b2c2ux7ae0ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{因果推論}の基本は、処置群と（反事実を代表する）対照群を比較することである。
+\item
+  \textbf{RCT}では無作為割り当てにより、2つのグループを比較可能にする。
+\item
+  \textbf{観察研究}では、\textbf{DID}
+  などの手法を用いて、共変量によるバイアスを制御しようと試みる。
+\item
+  Rの操作: \texttt{tapply()}, \texttt{subset()}, \texttt{ifelse()},
+  \texttt{sd()} などの基本的な統計操作を習得した。
+\end{itemize}
+\end{frame}
+
+\end{document}

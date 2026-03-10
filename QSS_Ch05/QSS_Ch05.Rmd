@@ -1,0 +1,167 @@
+---
+title: |
+    | 第5章: 発見
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+#  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 5.1 テキストデータ
+
+---
+
+## Federalist Papers の分析
+
+* テキストマイニングを用いて、著者不明のエッセイの執筆者を推定する。
+
+\scriptsize
+```{r, message=FALSE}
+library(tm)
+# コーパスの読み込み
+corpus.raw <- VCorpus(DirSource(directory = "federalist", pattern = "fp"))
+# 前処理（小文字化、空白削除、句読点削除、ストップワード削除、ステミング）
+corpus <- tm_map(corpus.raw, content_transformer(tolower))
+corpus <- tm_map(corpus, stripWhitespace)
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, removeNumbers)
+corpus <- tm_map(corpus, removeWords, stopwords("english"))
+corpus <- tm_map(corpus, stemDocument)
+```
+\normalsize
+
+---
+
+## ワードクラウド (Word Cloud)
+
+* 出現頻度の高い単語を視覚化する。
+
+\scriptsize
+```{r, fig.height=3.5, out.height="40%", fig.align="center", message=FALSE}
+library(wordcloud)
+dtm <- DocumentTermMatrix(corpus)
+dtm.mat <- as.matrix(dtm)
+# 第10論文のワードクラウド
+wordcloud(colnames(dtm.mat), dtm.mat[10, ], max.words = 20)
+```
+\normalsize
+
+# 5.2 ネットワークデータ
+
+---
+
+## ルネサンス期フィレンツェの婚姻関係
+
+* どの家族が中心的な役割を果たしていたかをネットワーク指標で測る。
+
+\scriptsize
+```{r}
+library(igraph)
+florence <- read.csv("florentine.csv", row.names = "FAMILY")
+# 隣接行列からグラフオブジェクトを作成
+g <- graph_from_adjacency_matrix(as.matrix(florence), mode = "undirected")
+# 次数中心性 (Degree Centrality)
+sort(degree(g), decreasing = TRUE)[1:3]
+```
+\normalsize
+
+---
+
+## ネットワークの可視化
+
+\scriptsize
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+# 間中心性 (Betweenness Centrality) に基づくノードサイズ
+plot(g, vertex.size = betweenness(g) * 0.5, 
+     main = "Betweenness Centrality in Florence")
+```
+\normalsize
+
+# 5.3 地理空間データ
+
+---
+
+## ウォルマートの拡大 (1)
+
+* 店舗の緯度・経度データを用いて、全米への拡大プロセスを可視化する。
+
+\scriptsize
+```{r, message=FALSE}
+library(maps)
+walmart <- read.csv("walmart.csv")
+# データ構造の確認
+head(walmart, n = 3)
+```
+\normalsize
+
+---
+
+## 
+
+\scriptsize
+```{r, fig.height=4, out.height="60%", fig.align="center", message=FALSE}
+# 地図の描画とプロット
+map(database = "state")
+points(walmart$long, walmart$lat, pch = 19, cex = 0.2, 
+       col = rgb(0, 0, 1, alpha = 0.1))
+title("Expansion of Walmart")
+```
+\normalsize
+
+---
+
+## 大統領選挙のマップ
+
+* 2008年選挙の結果を州ごとに色分けする。
+
+\scriptsize
+```{r, message=FALSE}
+pres08 <- read.csv("pres08.csv")
+pres08$margin <- pres08$Obama - pres08$McCain
+# 最初の数件を確認
+head(pres08[, c("state", "margin")], n = 3)
+```
+\normalsize
+
+---
+
+## 
+
+\scriptsize
+```{r, fig.height=4, out.height="60%", fig.align="center", message=FALSE}
+map(database = "state")
+for (i in 1:nrow(pres08)) {
+  if (!(pres08$state[i] %in% c("AK", "HI", "DC"))) {
+    map(database = "state", regions = pres08$state.name[i], 
+        col = ifelse(pres08$margin[i] > 0, "blue", "red"), 
+        fill = TRUE, add = TRUE)
+  }
+}
+```
+\normalsize
+
+# 5.4 まとめ
+
+---
+
+## 第5章のまとめ
+
+* **テキスト分析**: 非構造的な文書データから、著者の特徴やトピック（話題）を抽出する。
+* **ネットワーク分析**: 要素間のつながり（エッジ）と結節点（ノード）を分析し、中心性を測定する。
+* **空間分析**: 緯度・経度情報を利用して、現象の地理的な広がりを視覚化する。
+* Rの操作: `tm`, `igraph`, `maps` パッケージ、`rgb()` による透過色の設定、`for` ループによる地図の着色。

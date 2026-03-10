@@ -1,0 +1,146 @@
+---
+title: |
+    | 第3章: 測定
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 3.1 欠損データの扱い
+
+---
+
+## Rにおける欠損値 (NA)
+
+* 調査回答の拒否などは `NA` (Not Available) として表される。
+* `is.na()` で欠損値を確認し、`na.omit()` で除外できる。
+
+```{r}
+afghan <- read.csv("afghan.csv")
+# 収入データの最初の10件
+head(afghan$income, n = 10)
+
+# 欠損値の数と割合
+sum(is.na(afghan$income))
+mean(is.na(afghan$income))
+
+# NAを除外して平均を計算
+mean(afghan$income, na.rm = TRUE)
+```
+
+# 3.2 1変数分布の視覚化
+
+---
+
+## 棒グラフ (Bar Plot)
+
+* カテゴリ変数の分布を表示する。
+
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+ISAF.ptable <- prop.table(table(ISAF = afghan$violent.exp.ISAF, exclude = NULL))
+barplot(ISAF.ptable, names.arg = c("No harm", "Harm", "Nonresponse"), 
+        main = "Victimization by ISAF", ylab = "Proportion")
+```
+
+---
+
+## ヒストグラム (Histogram)
+
+* 数値変数の分布（密度）を表示する。
+
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+hist(afghan$age, freq = FALSE, xlab = "Age", 
+     main = "Distribution of Age")
+abline(v = median(afghan$age), col = "red") # 中央値に線を引く
+```
+
+---
+
+## 箱ひげ図 (Box Plot)
+
+* グループ間の分布の比較に適している。
+
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+boxplot(educ.years ~ province, data = afghan, 
+        main = "Education by Province", ylab = "Years of Education")
+```
+
+# 3.3 2変数関係の要約
+
+---
+
+## 散布図 (Scatter Plot)
+
+* 2つの数値変数の関係を視覚化する。
+
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+congress <- read.csv("congress.csv")
+rep112 <- subset(congress, subset = (party == "Republican" & congress == 112))
+dem112 <- subset(congress, subset = (party == "Democrat" & congress == 112))
+
+plot(dem112$dwnom1, dem112$dwnom2, col = "blue", pch = 16, 
+     xlab = "Economic", ylab = "Racial", main = "112th Congress")
+points(rep112$dwnom1, rep112$dwnom2, col = "red", pch = 17)
+```
+
+---
+
+## 相関 (Correlation)
+
+* 2変数の線形関係の強さを -1 から 1 で表す。
+
+```{r}
+gini <- read.csv("USGini.csv")
+# 分極化（共和党と民主党の中央値の差）を計算
+dem.median <- tapply(congress$dwnom1[congress$party=="Democrat"], 
+                     congress$congress[congress$party=="Democrat"], median)
+rep.median <- tapply(congress$dwnom1[congress$party=="Republican"], 
+                     congress$congress[congress$party=="Republican"], median)
+# ジニ係数（偶数年のみ）との相関
+cor(gini$gini[seq(2, nrow(gini), 2)], rep.median - dem.median)
+```
+
+# 3.4 クラスタリング
+
+---
+
+## k-means 法
+
+* データを $k$ 個のグループ（クラスタ）に自動的に分類する。
+
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+dwnom112 <- cbind(congress$dwnom1[congress$congress == 112], 
+                 congress$dwnom2[congress$congress == 112])
+# 2つのクラスタに分類
+k112.out <- kmeans(dwnom112, centers = 2, nstart = 5)
+plot(dwnom112, col = k112.out$cluster, xlab = "Economic", ylab = "Racial",
+     main = "k-means Clustering (k=2)")
+```
+
+# 3.5 まとめ
+
+---
+
+## 第3章のまとめ
+
+* **測定**: 複雑な概念（被害、政治的立場など）を数値やカテゴリとして捉える。
+* **視覚化**: 棒グラフ、ヒストグラム、箱ひげ図、散布図を使い分ける。
+* **欠損値**: `NA` の適切な処理が必要。
+* **多変量関係**: 相関関係やクラスタリング（k-means法）を用いて、データの構造を明らかにする。
+* Rの操作: `table()`, `hist()`, `boxplot()`, `cor()`, `kmeans()` などを習得した。

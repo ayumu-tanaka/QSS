@@ -1,0 +1,216 @@
+---
+title: |
+    | 第4章: 予測
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 4.1 選挙結果の予測
+
+---
+
+## ループ (for loop)
+
+* 同じ操作を繰り返し実行する。
+
+\scriptsize
+```{r}
+values <- c(2, 4, 6)
+results <- rep(NA, length(values)) # 結果保存用ベクトル
+
+for (i in 1:length(values)) {
+    results[i] <- values[i] * 2
+}
+results
+```
+\normalsize
+
+---
+
+## 条件分岐 (if statement)
+
+* 条件に応じて異なるコードを実行する。
+
+\scriptsize
+```{r}
+x <- 10
+if (x %% 2 == 0) {
+    cat(x, "is even")
+} else {
+    cat(x, "is odd")
+}
+```
+\normalsize
+
+---
+
+## 世論調査による予測 (1)
+
+* 2008年米大統領選の世論調査データ（`polls08.csv`）を使用。
+
+\scriptsize
+```{r}
+polls08 <- read.csv("polls08.csv")
+pres08 <- read.csv("pres08.csv")
+# オバマの支持マージンを計算
+polls08$margin <- polls08$Obama - polls08$McCain
+# 日付の処理
+polls08$middate <- as.Date(polls08$middate)
+polls08$DaysToElection <- as.Date("2008-11-04") - polls08$middate
+```
+\normalsize
+
+---
+
+## 世論調査による予測 (2)
+
+* 各州の直近の調査結果を平均して予測する。
+
+\scriptsize
+```{r}
+st.names <- unique(polls08$state)
+poll.pred <- rep(NA, 51); names(poll.pred) <- st.names
+
+for (i in 1:51){
+    state.data <- subset(polls08, subset = (state == st.names[i]))
+    latest <- subset(state.data, DaysToElection == min(DaysToElection))
+    poll.pred[i] <- mean(latest$margin)
+}
+# 実際の選挙結果との比較（予測間違いの州）
+pres08$margin <- pres08$Obama - pres08$McCain
+pres08$state[sign(poll.pred) != sign(pres08$margin)]
+```
+\normalsize
+
+# 4.2 線形回帰
+
+---
+
+## 最小二乗法 (Least Squares)
+
+* 予測誤差（残差）の二乗和を最小にする直線を求める。
+
+\scriptsize
+```{r}
+face <- read.csv("face.csv")
+# 得票率の計算
+face$d.share <- face$d.votes / (face$d.votes + face$r.votes)
+face$r.share <- face$r.votes / (face$d.votes + face$r.votes)
+face$diff.share <- face$d.share - face$r.share
+
+# 回帰分析の実行
+fit <- lm(diff.share ~ d.comp, data = face)
+coef(fit)
+```
+\normalsize
+
+---
+
+## 回帰直線と残差
+
+\scriptsize
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+plot(face$d.comp, face$diff.share, xlab = "Competence Score", 
+     ylab = "Vote Margin", main = "Facial Appearance and Election")
+abline(fit, col = "red")
+```
+\normalsize
+
+---
+
+## モデルの適合度 ($R^2$)
+
+* 決定係数 ($R^2$): データの変動のうち、モデルで説明できる割合。
+
+\scriptsize
+```{r}
+# 決定係数の確認
+summary(fit)$r.squared
+
+# RMSE (Root Mean Squared Error)
+sqrt(mean(resid(fit)^2))
+```
+\normalsize
+
+# 4.3 回帰と因果関係
+
+---
+
+## 重回帰分析 (Multiple Regression)
+
+* 複数の説明変数を同時に含める。
+
+\scriptsize
+```{r}
+social <- read.csv("social.csv")
+# メッセージの種類による投票率への影響
+fit.social <- lm(primary2006 ~ messages, data = social)
+summary(fit.social)$coefficients[, 1:2]
+```
+\normalsize
+
+---
+
+## 異質な処置効果 (Heterogeneous Effects)
+
+* 属性（年齢など）によって処置の効果が異なる場合。
+
+\scriptsize
+```{r}
+# 年齢とメッセージの交差項を含めたモデル
+social$age <- 2006 - social$yearofbirth
+fit.age <- lm(primary2006 ~ age * messages, 
+              data = subset(social, messages %in% c("Control", "Neighbors")))
+# 係数の確認
+coef(fit.age)
+```
+\normalsize
+
+---
+
+## 回帰不連続デザイン (RDD)
+
+* 境界（得票率の差 0%）の前後を比較する。
+
+\scriptsize
+```{r}
+MPs <- read.csv("MPs.csv")
+# 労働党の当選・落選の境界付近での資産比較
+MPs.labour <- subset(MPs, subset = (party == "labour"))
+# 境界の左側（落選）と右側（当選）で個別に回帰
+fit.L <- lm(ln.net ~ margin, data = MPs.labour[MPs.labour$margin < 0, ])
+fit.R <- lm(ln.net ~ margin, data = MPs.labour[MPs.labour$margin > 0, ])
+# 境界（margin=0）での予測値の差
+predict(fit.R, newdata = data.frame(margin = 0)) - 
+    predict(fit.L, newdata = data.frame(margin = 0))
+```
+\normalsize
+
+# 4.4 まとめ
+
+---
+
+## 第4章のまとめ
+
+* **予測**: ループや条件分岐を用いて、大量のデータから将来の結果を推測する。
+* **線形回帰**: $Y$ と $X$ の関係を直線で近似し、最小二乗法で係数を推定する。
+* **重回帰**: 複数の要因を同時に制御し、因果関係の理解を深める。
+* **RDD**: 外生的な境界を利用して、観察データから因果効果を抽出する。
+* Rの操作: `for`, `if`, `lm()`, `coef()`, `resid()`, `predict()` などを習得した。

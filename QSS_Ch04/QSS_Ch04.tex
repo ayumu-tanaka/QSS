@@ -1,0 +1,490 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第4章: 予測}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux9078ux6319ux7d50ux679cux306eux4e88ux6e2c}{%
+\section{4.1
+選挙結果の予測}\label{ux9078ux6319ux7d50ux679cux306eux4e88ux6e2c}}
+
+\begin{frame}[fragile]{ループ (for loop)}
+\protect\hypertarget{ux30ebux30fcux30d7-for-loop}{}
+\begin{itemize}
+\tightlist
+\item
+  同じ操作を繰り返し実行する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{values }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+\NormalTok{results }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\FunctionTok{length}\NormalTok{(values)) }\CommentTok{\# 結果保存用ベクトル}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(values)) \{}
+\NormalTok{    results[i] }\OtherTok{\textless{}{-}}\NormalTok{ values[i] }\SpecialCharTok{*} \DecValTok{2}
+\NormalTok{\}}
+\NormalTok{results}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  4  8 12
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{条件分岐 (if statement)}
+\protect\hypertarget{ux6761ux4ef6ux5206ux5c90-if-statement}{}
+\begin{itemize}
+\tightlist
+\item
+  条件に応じて異なるコードを実行する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{10}
+\ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{\%\%} \DecValTok{2} \SpecialCharTok{==} \DecValTok{0}\NormalTok{) \{}
+    \FunctionTok{cat}\NormalTok{(x, }\StringTok{"is even"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+    \FunctionTok{cat}\NormalTok{(x, }\StringTok{"is odd"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 10 is even
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{世論調査による予測 (1)}
+\protect\hypertarget{ux4e16ux8ad6ux8abfux67fbux306bux3088ux308bux4e88ux6e2c-1}{}
+\begin{itemize}
+\tightlist
+\item
+  2008年米大統領選の世論調査データ（\texttt{polls08.csv}）を使用。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{polls08 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"polls08.csv"}\NormalTok{)}
+\NormalTok{pres08 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"pres08.csv"}\NormalTok{)}
+\CommentTok{\# オバマの支持マージンを計算}
+\NormalTok{polls08}\SpecialCharTok{$}\NormalTok{margin }\OtherTok{\textless{}{-}}\NormalTok{ polls08}\SpecialCharTok{$}\NormalTok{Obama }\SpecialCharTok{{-}}\NormalTok{ polls08}\SpecialCharTok{$}\NormalTok{McCain}
+\CommentTok{\# 日付の処理}
+\NormalTok{polls08}\SpecialCharTok{$}\NormalTok{middate }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(polls08}\SpecialCharTok{$}\NormalTok{middate)}
+\NormalTok{polls08}\SpecialCharTok{$}\NormalTok{DaysToElection }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2008{-}11{-}04"}\NormalTok{) }\SpecialCharTok{{-}}\NormalTok{ polls08}\SpecialCharTok{$}\NormalTok{middate}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{世論調査による予測 (2)}
+\protect\hypertarget{ux4e16ux8ad6ux8abfux67fbux306bux3088ux308bux4e88ux6e2c-2}{}
+\begin{itemize}
+\tightlist
+\item
+  各州の直近の調査結果を平均して予測する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{st.names }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(polls08}\SpecialCharTok{$}\NormalTok{state)}
+\NormalTok{poll.pred }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{51}\NormalTok{); }\FunctionTok{names}\NormalTok{(poll.pred) }\OtherTok{\textless{}{-}}\NormalTok{ st.names}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{51}\NormalTok{)\{}
+\NormalTok{    state.data }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(polls08, }\AttributeTok{subset =}\NormalTok{ (state }\SpecialCharTok{==}\NormalTok{ st.names[i]))}
+\NormalTok{    latest }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(state.data, DaysToElection }\SpecialCharTok{==} \FunctionTok{min}\NormalTok{(DaysToElection))}
+\NormalTok{    poll.pred[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(latest}\SpecialCharTok{$}\NormalTok{margin)}
+\NormalTok{\}}
+\CommentTok{\# 実際の選挙結果との比較（予測間違いの州）}
+\NormalTok{pres08}\SpecialCharTok{$}\NormalTok{margin }\OtherTok{\textless{}{-}}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{Obama }\SpecialCharTok{{-}}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{McCain}
+\NormalTok{pres08}\SpecialCharTok{$}\NormalTok{state[}\FunctionTok{sign}\NormalTok{(poll.pred) }\SpecialCharTok{!=} \FunctionTok{sign}\NormalTok{(pres08}\SpecialCharTok{$}\NormalTok{margin)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "IN" "MO" "NC"
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux7ddaux5f62ux56deux5e30}{%
+\section{4.2 線形回帰}\label{ux7ddaux5f62ux56deux5e30}}
+
+\begin{frame}[fragile]{最小二乗法 (Least Squares)}
+\protect\hypertarget{ux6700ux5c0fux4e8cux4e57ux6cd5-least-squares}{}
+\begin{itemize}
+\tightlist
+\item
+  予測誤差（残差）の二乗和を最小にする直線を求める。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{face }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"face.csv"}\NormalTok{)}
+\CommentTok{\# 得票率の計算}
+\NormalTok{face}\SpecialCharTok{$}\NormalTok{d.share }\OtherTok{\textless{}{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{d.votes }\SpecialCharTok{/}\NormalTok{ (face}\SpecialCharTok{$}\NormalTok{d.votes }\SpecialCharTok{+}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.votes)}
+\NormalTok{face}\SpecialCharTok{$}\NormalTok{r.share }\OtherTok{\textless{}{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.votes }\SpecialCharTok{/}\NormalTok{ (face}\SpecialCharTok{$}\NormalTok{d.votes }\SpecialCharTok{+}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.votes)}
+\NormalTok{face}\SpecialCharTok{$}\NormalTok{diff.share }\OtherTok{\textless{}{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{d.share }\SpecialCharTok{{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.share}
+
+\CommentTok{\# 回帰分析の実行}
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(diff.share }\SpecialCharTok{\textasciitilde{}}\NormalTok{ d.comp, }\AttributeTok{data =}\NormalTok{ face)}
+\FunctionTok{coef}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (Intercept)      d.comp 
+##  -0.3122259   0.6603815
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{回帰直線と残差}
+\protect\hypertarget{ux56deux5e30ux76f4ux7ddaux3068ux6b8bux5dee}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(face}\SpecialCharTok{$}\NormalTok{d.comp, face}\SpecialCharTok{$}\NormalTok{diff.share, }\AttributeTok{xlab =} \StringTok{"Competence Score"}\NormalTok{, }
+     \AttributeTok{ylab =} \StringTok{"Vote Margin"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Facial Appearance and Election"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(fit, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch04_files/figure-beamer/unnamed-chunk-6-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{モデルの適合度 (\(R^2\))}
+\protect\hypertarget{ux30e2ux30c7ux30ebux306eux9069ux5408ux5ea6-r2}{}
+\begin{itemize}
+\tightlist
+\item
+  決定係数 (\(R^2\)): データの変動のうち、モデルで説明できる割合。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 決定係数の確認}
+\FunctionTok{summary}\NormalTok{(fit)}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1872936
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# RMSE (Root Mean Squared Error)}
+\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{mean}\NormalTok{(}\FunctionTok{resid}\NormalTok{(fit)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2642361
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux56deux5e30ux3068ux56e0ux679cux95a2ux4fc2}{%
+\section{4.3
+回帰と因果関係}\label{ux56deux5e30ux3068ux56e0ux679cux95a2ux4fc2}}
+
+\begin{frame}[fragile]{重回帰分析 (Multiple Regression)}
+\protect\hypertarget{ux91cdux56deux5e30ux5206ux6790-multiple-regression}{}
+\begin{itemize}
+\tightlist
+\item
+  複数の説明変数を同時に含める。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{social }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"social.csv"}\NormalTok{)}
+\CommentTok{\# メッセージの種類による投票率への影響}
+\NormalTok{fit.social }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(primary2006 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ messages, }\AttributeTok{data =}\NormalTok{ social)}
+\FunctionTok{summary}\NormalTok{(fit.social)}\SpecialCharTok{$}\NormalTok{coefficients[, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                       Estimate  Std. Error
+## (Intercept)        0.314537652 0.002366570
+## messagesControl   -0.017899344 0.002592275
+## messagesHawthorne  0.007836968 0.003347142
+## messagesNeighbors  0.063410569 0.003347208
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{異質な処置効果 (Heterogeneous Effects)}
+\protect\hypertarget{ux7570ux8ceaux306aux51e6ux7f6eux52b9ux679c-heterogeneous-effects}{}
+\begin{itemize}
+\tightlist
+\item
+  属性（年齢など）によって処置の効果が異なる場合。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 年齢とメッセージの交差項を含めたモデル}
+\NormalTok{social}\SpecialCharTok{$}\NormalTok{age }\OtherTok{\textless{}{-}} \DecValTok{2006} \SpecialCharTok{{-}}\NormalTok{ social}\SpecialCharTok{$}\NormalTok{yearofbirth}
+\NormalTok{fit.age }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(primary2006 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{*}\NormalTok{ messages, }
+              \AttributeTok{data =} \FunctionTok{subset}\NormalTok{(social, messages }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Control"}\NormalTok{, }\StringTok{"Neighbors"}\NormalTok{)))}
+\CommentTok{\# 係数の確認}
+\FunctionTok{coef}\NormalTok{(fit.age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           (Intercept)                   age     messagesNeighbors 
+##          0.0974732574          0.0039982107          0.0498294321 
+## age:messagesNeighbors 
+##          0.0006283079
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{回帰不連続デザイン (RDD)}
+\protect\hypertarget{ux56deux5e30ux4e0dux9023ux7d9aux30c7ux30b6ux30a4ux30f3-rdd}{}
+\begin{itemize}
+\tightlist
+\item
+  境界（得票率の差 0\%）の前後を比較する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MPs }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"MPs.csv"}\NormalTok{)}
+\CommentTok{\# 労働党の当選・落選の境界付近での資産比較}
+\NormalTok{MPs.labour }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(MPs, }\AttributeTok{subset =}\NormalTok{ (party }\SpecialCharTok{==} \StringTok{"labour"}\NormalTok{))}
+\CommentTok{\# 境界の左側（落選）と右側（当選）で個別に回帰}
+\NormalTok{fit.L }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln.net }\SpecialCharTok{\textasciitilde{}}\NormalTok{ margin, }\AttributeTok{data =}\NormalTok{ MPs.labour[MPs.labour}\SpecialCharTok{$}\NormalTok{margin }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{, ])}
+\NormalTok{fit.R }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln.net }\SpecialCharTok{\textasciitilde{}}\NormalTok{ margin, }\AttributeTok{data =}\NormalTok{ MPs.labour[MPs.labour}\SpecialCharTok{$}\NormalTok{margin }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{, ])}
+\CommentTok{\# 境界（margin=0）での予測値の差}
+\FunctionTok{predict}\NormalTok{(fit.R, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{margin =} \DecValTok{0}\NormalTok{)) }\SpecialCharTok{{-}} 
+    \FunctionTok{predict}\NormalTok{(fit.L, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{margin =} \DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          1 
+## -0.3680728
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{4.4 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{第4章のまとめ}
+\protect\hypertarget{ux7b2c4ux7ae0ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{予測}:
+  ループや条件分岐を用いて、大量のデータから将来の結果を推測する。
+\item
+  \textbf{線形回帰}: \(Y\) と \(X\)
+  の関係を直線で近似し、最小二乗法で係数を推定する。
+\item
+  \textbf{重回帰}: 複数の要因を同時に制御し、因果関係の理解を深める。
+\item
+  \textbf{RDD}:
+  外生的な境界を利用して、観察データから因果効果を抽出する。
+\item
+  Rの操作: \texttt{for}, \texttt{if}, \texttt{lm()}, \texttt{coef()},
+  \texttt{resid()}, \texttt{predict()} などを習得した。
+\end{itemize}
+\end{frame}
+
+\end{document}

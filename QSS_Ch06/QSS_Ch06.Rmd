@@ -1,0 +1,168 @@
+---
+title: |
+    | 第6章: 確率
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 6.1 確率の基本
+
+---
+
+## 確率の定義と誕生日問題
+
+* **頻度主義**: 無限回の試行における相対頻度。
+* **ベイズ主義**: 主観的な確信の度合い。
+
+\scriptsize
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+birthday <- function(k) {
+    logdenom <- k * log(365) + lfactorial(365 - k)
+    lognumer <- lfactorial(365)
+    1 - exp(lognumer - logdenom)
+}
+k <- 1:50; bday <- birthday(k)
+plot(k, bday, xlab = "Number of people", ylab = "Probability",
+     main = "Birthday Problem")
+abline(h = 0.5, lty = "dashed")
+```
+\normalsize
+
+# 6.2 条件付き確率
+
+---
+
+## 結合確率・周辺確率・条件付き確率
+
+* フロリダ州の有権者データ（`FLVoters.csv`）を使用。
+
+\scriptsize
+```{r}
+FLVoters <- na.omit(read.csv("FLVoters.csv"))
+# 周辺確率（人種）
+margin.race <- prop.table(table(FLVoters$race))
+# 条件付き確率（女性における人種の割合）
+prop.table(table(FLVoters$race[FLVoters$gender == "f"]))
+# 結合確率（人種と性別）
+joint.p <- prop.table(table(race = FLVoters$race, gender = FLVoters$gender))
+joint.p
+```
+\normalsize
+
+---
+
+## 独立性 (Independence)
+
+* $P(A, B) = P(A)P(B)$ が成り立つとき、$A$ と $B$ は独立である。
+
+\scriptsize
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+margin.gender <- prop.table(table(FLVoters$gender))
+# 周辺確率の積 vs 結合確率
+plot(c(margin.race * margin.gender["f"]), c(joint.p[, "f"]),
+     xlab = "P(race) * P(female)", ylab = "P(race and female)",
+     main = "Check for Independence")
+abline(0, 1, lty = "dashed")
+```
+\normalsize
+
+# 6.3 確率分布
+
+---
+
+## 二項分布 (Binomial Distribution)
+
+* $n$ 回の試行で成功する回数の分布。
+
+\scriptsize
+```{r}
+# n=10, p=0.5 のとき、成功回数が5回となる確率
+dbinom(5, size = 10, prob = 0.5)
+
+# 累積分布関数: 成功回数が3回以下となる確率
+pbinom(3, size = 10, prob = 0.5)
+```
+\normalsize
+
+---
+
+## 正規分布 (Normal Distribution)
+
+* 連続変数の最も重要な分布。
+
+\scriptsize
+```{r}
+# 標準正規分布において、平均から ±1 標準偏差の範囲に入る確率
+pnorm(1) - pnorm(-1)
+
+# ±2 標準偏差の範囲（約 95%）
+pnorm(2) - pnorm(-2)
+```
+\normalsize
+
+# 6.4 大標本定理
+
+---
+
+## 大数の法則 (Law of Large Numbers)
+
+* サンプルサイズが大きくなるほど、標本平均は期待値に収束する。
+
+\scriptsize
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+sims <- 1000
+x.unif <- runif(sims) # 一様分布 [0, 1]
+mean.unif <- cumsum(x.unif) / 1:sims
+plot(1:sims, mean.unif, type = "l", xlab = "Sample size", 
+     ylab = "Sample mean", main = "Law of Large Numbers")
+abline(h = 0.5, lty = "dashed")
+```
+\normalsize
+
+---
+
+## 中心極限定理 (Central Limit Theorem)
+
+* サンプルサイズが大きければ、標本平均の分布は正規分布に従う。
+
+\scriptsize
+```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+z.unif <- rep(NA, 1000)
+for (i in 1:1000) {
+    x <- runif(100, min = 0, max = 1) # n=100
+    z.unif[i] <- (mean(x) - 0.5) / sqrt(1 / (12 * 100))
+}
+hist(z.unif, freq = FALSE, nclass = 30, xlab = "z-score", 
+     main = "Central Limit Theorem (Uniform)")
+curve(dnorm(x), add = TRUE, col = "red")
+```
+\normalsize
+
+# 6.5 まとめ
+
+---
+
+## 第6章のまとめ
+
+* **確率**: 不確実な出来事を記述するための数学的な枠組み。
+* **条件付き確率と独立性**: 変数間の関係を理解するための鍵。
+* **確率分布**: データの発生メカニズムをモデル化する（二項分布、正規分布など）。
+* **大標本定理**: 標本から母集団を推測するための理論的基礎（大数の法則、中心極限定理）。
+* Rの操作: `sample()`, `dbinom()`, `pnorm()`, `runif()`, `rbinom()` などを習得した。

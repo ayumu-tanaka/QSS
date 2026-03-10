@@ -1,6 +1,6 @@
 ---
 title: |
-    | 第5章: 説明（観察データによる因果効果の推定）
+    | 第5章: 観察データによる因果効果の推定
 subtitle: |
     | Elena Llaudet & Kosuke Imai. 
     | Data Analysis for Social Science: A Friendly and Practical Introduction.

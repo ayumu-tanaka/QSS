@@ -1,0 +1,253 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第8章: 次の一歩}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux518dux73feux53efux80fdux306aux7814ux7a76}{%
+\section{8.1
+再現可能な研究}\label{ux518dux73feux53efux80fdux306aux7814ux7a76}}
+
+\begin{frame}{再現可能性 (Reproducibility) の重要性}
+\protect\hypertarget{ux518dux73feux53efux80fdux6027-reproducibility-ux306eux91cdux8981ux6027}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{再現可能な研究}:
+  他の研究者が同じデータとコードを用いて、同じ結果を得られること。
+\item
+  透明性の確保と、科学的知見の蓄積のために不可欠。
+\item
+  ツール：
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{R Markdown}: コード、結果、文章を一つのドキュメントに統合。
+  \item
+    \textbf{Git / GitHub}: バージョン管理とコードの共有。
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux7814ux7a76ux8ad6ux6587ux306eux57f7ux7b46}{%
+\section{8.2
+研究論文の執筆}\label{ux7814ux7a76ux8ad6ux6587ux306eux57f7ux7b46}}
+
+\begin{frame}{論文の構成}
+\protect\hypertarget{ux8ad6ux6587ux306eux69cbux6210}{}
+\begin{enumerate}
+\tightlist
+\item
+  \textbf{イントロダクション}: 研究の問いと背景。
+\item
+  \textbf{データと測定}: どのようなデータを用い、変数をどう定義したか。
+\item
+  \textbf{データ分析}: 因果推論や予測の手法。
+\item
+  \textbf{結果}: 図表を用いた効果的な提示。
+\item
+  \textbf{結論}: 知見のまとめと限界。
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{結果の提示}
+\protect\hypertarget{ux7d50ux679cux306eux63d0ux793a}{}
+\begin{itemize}
+\tightlist
+\item
+  表だけでなく、\textbf{図 (Graphs)} を効果的に用いる。
+\item
+  推定値だけでなく、その\textbf{不確実性 (Standard Errors, Confidence
+  Intervals)} を必ず示す。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux7814ux7a76ux502bux7406}{%
+\section{8.3 研究倫理}\label{ux7814ux7a76ux502bux7406}}
+
+\begin{frame}{データ分析における倫理}
+\protect\hypertarget{ux30c7ux30fcux30bfux5206ux6790ux306bux304aux3051ux308bux502bux7406}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{プライバシーの保護}: 個人情報の匿名化。
+\item
+  \textbf{研究の公正性}: 都合の悪い結果を隠さない（p-hacking の回避）。
+\item
+  \textbf{透明性}: データとコードの公開を推奨。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux3055ux3089ux306aux308bux5b66ux7fd2ux306eux305fux3081ux306b}{%
+\section{8.4
+さらなる学習のために}\label{ux3055ux3089ux306aux308bux5b66ux7fd2ux306eux305fux3081ux306b}}
+
+\begin{frame}{今後の学習の方向性}
+\protect\hypertarget{ux4ecaux5f8cux306eux5b66ux7fd2ux306eux65b9ux5411ux6027}{}
+\begin{enumerate}
+\tightlist
+\item
+  \textbf{高度な統計学・計量経済学}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    固定効果モデル、パネルデータ分析、操作変数法など。
+  \end{itemize}
+\item
+  \textbf{機械学習 (Machine Learning)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    大規模データからの予測やパターンの発見。
+  \end{itemize}
+\item
+  \textbf{プログラミングスキル}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    スケールアップのための効率的なコーディング。
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{8.5 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}{本書のまとめ}
+\protect\hypertarget{ux672cux66f8ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  データを R で操作し、現実世界の問いに答える基礎を学んだ。
+\item
+  \textbf{測定、予測、説明 (因果推論)}
+  という3つの大きな目標を意識すること。
+\item
+  データ分析は、社会を理解し、より良い政策決定を行うための強力な道具である。
+\item
+  常に批判的思考を持ち、不確実性を忘れずに分析を続けること。
+\end{itemize}
+\end{frame}
+
+\end{document}

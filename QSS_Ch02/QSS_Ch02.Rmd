@@ -1,0 +1,151 @@
+---
+title: |
+    | 第2章: 因果関係
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 2.1 因果関係と反事実
+
+---
+
+## 因果効果の定義
+
+* **因果関係**: ある変数（処置）の変化が別の変数（結果）の変化を引き起こすこと。
+* **反事実** (Counterfactual): 「もし処置が行われなかったら、結果はどうなっていたか？」という、現実には観察できないシナリオ。
+* **因果効果**: 「処置が行われた場合の結果」と「反事実の結果」の差。
+* **因果推論の根本問題**: 同じ個人について、処置を受けた場合と受けなかった場合の両方の結果を同時に観察することはできない。
+
+# 2.2 無作為化比較試験 (RCT)
+
+---
+
+## 労働市場における人種差別
+
+* 架空の履歴書を送り、名前の響き（人種）によって面接の連絡（コールバック）率がどう変わるかを検証。
+
+```{r}
+resume <- read.csv("resume.csv")
+# 人種別のコールバック率
+tapply(resume$call, resume$race, mean)
+```
+
+---
+
+## 社会的圧力と投票率
+
+* 「あなたの投票状況を近所に知らせる」というメッセージが投票率を上げるか？
+
+```{r}
+social <- read.csv("social.csv")
+# 各グループの投票率
+tapply(social$primary2006, social$messages, mean)
+```
+
+# 2.3 データの部分集合化 (Subsetting)
+
+---
+
+## 論理演算子と抽出
+
+* `[]` や `subset()` を用いて、特定の条件を満たすデータを抽出する。
+
+```{r}
+# 黒人のみのサブセットを作成
+resumeB <- resume[resume$race == "black", ]
+mean(resumeB$call)
+
+# 複数の条件（黒人かつ女性）
+resumeBf <- subset(resume, subset = (race == "black" & sex == "female"))
+mean(resumeBf$call)
+```
+
+# 2.4 観察研究 (Observational Studies)
+
+---
+
+## 最低賃金と雇用
+
+* 隣接するニュージャージー州（最低賃金引き上げ）とペンシルベニア州（変化なし）のファストフード店を比較。
+
+```{r}
+minwage <- read.csv("minwage.csv")
+# 州別の雇用変数の作成
+minwage$fullPropAfter <- minwage$fullAfter / 
+    (minwage$fullAfter + minwage$partAfter)
+# 州ごとの平均雇用率の差
+tapply(minwage$fullPropAfter, minwage$location, mean)
+```
+
+---
+
+## 差の差 (DID) デザイン
+
+* 時間的な変化を比較することで、州固有の要因（交絡因子）を制御する。
+* **DID** = (NJの前後差) - (PAの前後差)
+
+```{r}
+# 雇用率の変化（前後差）を計算
+minwage$fullPropBefore <- minwage$fullBefore / 
+    (minwage$fullBefore + minwage$partBefore)
+minwage$diff <- minwage$fullPropAfter - minwage$fullPropBefore
+
+# 差の差の推定
+mean(minwage$diff[minwage$location != "PA"]) - 
+    mean(minwage$diff[minwage$location == "PA"])
+```
+
+# 2.5 1変数の記述統計
+
+---
+
+## 分位数 (Quantiles) と四分位範囲 (IQR)
+
+* 分布の形状を理解するための要約統計量。
+
+```{r}
+# NJ州の最低賃金引き上げ前の賃金分布
+summary(minwage$wageBefore[minwage$location != "PA"])
+
+# 四分位範囲
+IQR(minwage$wageBefore[minwage$location != "PA"])
+```
+
+---
+
+## 標準偏差 (Standard Deviation)
+
+* 平均からのばらつきを測定する。
+
+```{r}
+# 雇用率の変化の標準偏差
+sd(minwage$diff[minwage$location != "PA"])
+```
+
+# 2.6 まとめ
+
+---
+
+## 第2章のまとめ
+
+* **因果推論**の基本は、処置群と（反事実を代表する）対照群を比較することである。
+* **RCT**では無作為割り当てにより、2つのグループを比較可能にする。
+* **観察研究**では、**DID** などの手法を用いて、共変量によるバイアスを制御しようと試みる。
+* Rの操作: `tapply()`, `subset()`, `ifelse()`, `sd()` などの基本的な統計操作を習得した。
