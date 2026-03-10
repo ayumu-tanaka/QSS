@@ -1,0 +1,35 @@
+---
+title: "congress.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## congress.csv
+
+このデータセットは、米国議会議員の理想点（DW-NOMINATEスコア）データを含んでいます（QSS 表3.3）。
+
+### 変数定義
+
+- `congress`: 議会番号
+- `district`: 選挙区番号
+- `state`: 州名
+- `party`: 政党 (`Democrat` または `Republican`)
+- `name`: 議員名
+- `dwnom1`: 第1次元の DW-NOMINATE スコア（経済的自由主義 vs 保守主義）
+- `dwnom2`: 第2次元の DW-NOMINATE スコア（人種問題・社会問題に関する立場）
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("congress.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 議員の思想スコアデータ (congress.csv)')
+```

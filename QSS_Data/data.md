@@ -17,9 +17,9 @@
 | [leaders.csv](leaders.csv) | 指導者暗殺データ | [表示](leaders.html) |
 | [afghan.csv](afghan.csv) | アフガニスタン世論調査データ（個人レベル） | [表示](afghan.html) |
 | [afghan-village.csv](afghan-village.csv) | アフガニスタンの村レベルデータ | [表示](afghan-village.html) |
-| [congress.csv](congress.csv) | 議員の理想点（思想スコア）データ | |
-| [USGini.csv](USGini.csv) | 米国のジニ係数データ | |
-| [gayreshaped.csv](gayreshaped.csv) | 同性婚研究データ（整形済み） | |
+| [congress.csv](congress.csv) | 議員の理想点（思想スコア）データ | [表示](congress.html) |
+| [USGini.csv](USGini.csv) | 米国のジニ係数データ | [表示](USGini.html) |
+| [gayreshaped.csv](gayreshaped.csv) | 同性婚研究データ（整形済み） | [表示](gayreshaped.html) |
 | [ccap2012.csv](ccap2012.csv) | 選挙キャンペーン分析プロジェクト（CCAP）データ | |
 | [vignettes.csv](vignettes.csv) | 政治的効力感データ | |
 | [unvoting.csv](unvoting.csv) | 国連総会投票データ | |

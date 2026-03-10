@@ -1,0 +1,30 @@
+---
+title: "USGini.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## USGini.csv
+
+このデータセットは、米国の所得不平等を示すジニ係数の時系列データです（QSS 表3.4）。
+
+### 変数定義
+
+- `year`: 西暦年
+- `gini`: 所得のジニ係数（大きいほど不平等）
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("USGini.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 15, autoWidth = TRUE),
+          caption = 'Table: 米国のジニ係数データ (USGini.csv)')
+```
