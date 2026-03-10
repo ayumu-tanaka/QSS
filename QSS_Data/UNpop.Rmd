@@ -1,0 +1,26 @@
+---
+title: "UNpop.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## UNpop.csv
+
+このデータセットは、1950年から2010年までの世界人口推計データを含んでいます。
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("UNpop.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+# filter = "top" で各列のヘッダーにフィルターを追加
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 世界人口推計 (UNpop.csv)')
+```

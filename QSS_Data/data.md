@@ -2,10 +2,10 @@
 
 このページでは、『社会科学のためのデータ分析入門 (QSS)』で使用されるデータセットを公開しています。各リンクからCSVファイルをダウンロードできます。
 
-| ファイル名 | 概要 |
-|:---|:---|
-| [UNpop.csv](UNpop.csv) | 世界人口推計データ |
-| [turnout.csv](turnout.csv) | 米国選挙の投票率データ |
+| ファイル名 | 概要 | プレビュー |
+|:---|:---|:---:|
+| [UNpop.csv](UNpop.csv) | 世界人口推計データ | [表示](UNpop.html) |
+| [turnout.csv](turnout.csv) | 米国選挙の投票率データ | |
 | [World.csv](World.csv) | 世界の出生率と死亡率の推計データ |
 | [Kenya.csv](Kenya.csv) | ケニアの出生率と死亡率の推計データ |
 | [Sweden.csv](Sweden.csv) | スウェーデンの出生率と死亡率の推計データ |
