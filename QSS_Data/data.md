@@ -20,11 +20,11 @@
 | [congress.csv](congress.csv) | 議員の理想点（思想スコア）データ | [表示](congress.html) |
 | [USGini.csv](USGini.csv) | 米国のジニ係数データ | [表示](USGini.html) |
 | [gayreshaped.csv](gayreshaped.csv) | 同性婚研究データ（整形済み） | [表示](gayreshaped.html) |
-| [ccap2012.csv](ccap2012.csv) | 選挙キャンペーン分析プロジェクト（CCAP）データ | |
-| [vignettes.csv](vignettes.csv) | 政治的効力感データ | |
-| [unvoting.csv](unvoting.csv) | 国連総会投票データ | |
-| [pres08.csv](pres08.csv) | 2008年米国大統領選挙結果データ | |
-| [polls08.csv](polls08.csv) | 2008年米国大統領選挙世論調査データ | |
+| [ccap2012.csv](ccap2012.csv) | 選挙キャンペーン分析プロジェクト（CCAP）データ | [表示](ccap2012.html) |
+| [vignettes.csv](vignettes.csv) | 政治的効力感データ | [表示](vignettes.html) |
+| [unvoting.csv](unvoting.csv) | 国連総会投票データ | [表示](unvoting.html) |
+| [pres08.csv](pres08.csv) | 2008年米国大統領選挙結果データ | [表示](pres08.html) |
+| [polls08.csv](polls08.csv) | 2008年米国大統領選挙世論調査データ | [表示](polls08.html) |
 | [pollsUS08.csv](pollsUS08.csv) | 2008年米国大統領選挙全国世論調査データ | |
 | [face.csv](face.csv) | 顔の印象実験データ | |
 | [pres12.csv](pres12.csv) | 2012年米国大統領選挙結果データ | |

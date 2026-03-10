@@ -1,0 +1,30 @@
+---
+title: "ccap2012.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## ccap2012.csv
+
+このデータセットは、選挙キャンペーン分析プロジェクト（CCAP）のデータです（QSS 表3.6）。
+
+### 変数定義
+
+- `caseid`: 回答者ID
+- `gaytherm`: ゲイ・レズビアンへの感情温度計スコア（0〜100）
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("ccap2012.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: CCAP データ (ccap2012.csv)')
+```
