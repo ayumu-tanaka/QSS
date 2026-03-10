@@ -1,0 +1,37 @@
+---
+title: "turnout.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## turnout.csv
+
+このデータセットは、1980年から2008年までの米国選挙の投票率データを含んでいます（QSS 表1.3）。
+
+### 変数定義
+
+- `year`: 選挙年
+- `VEP`: 投票資格保有人口 (Voting Eligible Population; 単位：千人)
+- `VAP`: 投票年齢人口 (Voting Age Population; 単位：千人)
+- `total`: 大統領選または中間選挙での総得票数 (単位：千人)
+- `ANES`: 全米選挙調査 (ANES) による自己申告の投票率 (%)
+- `felons`: 投票資格のない重罪犯の数 (単位：千人)
+- `noncit`: 投票資格のない非市民の数 (単位：千人)
+- `overseas`: 国外に居住する投票資格保有者の数 (単位：千人)
+- `osvoters`: 国外から投じられた票数 (単位：千人)
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("turnout.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 米国選挙投票率 (turnout.csv)')
+```

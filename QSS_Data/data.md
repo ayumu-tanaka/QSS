@@ -5,7 +5,7 @@
 | ファイル名 | 概要 | プレビュー |
 |:---|:---|:---:|
 | [UNpop.csv](UNpop.csv) | 世界人口推計データ | [表示](UNpop.html) |
-| [turnout.csv](turnout.csv) | 米国選挙の投票率データ | |
+| [turnout.csv](turnout.csv) | 米国選挙の投票率データ | [表示](turnout.html) |
 | [World.csv](World.csv) | 世界の出生率と死亡率の推計データ |
 | [Kenya.csv](Kenya.csv) | ケニアの出生率と死亡率の推計データ |
 | [Sweden.csv](Sweden.csv) | スウェーデンの出生率と死亡率の推計データ |
