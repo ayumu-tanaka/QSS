@@ -1,4 +1,4 @@
-# QSSスライド
+# Quantitative Social Science (QSS) スライド
 
 ## 概要
 このリポジトリには、以下の書籍に基づく講義スライドが含まれています。
@@ -16,15 +16,19 @@ GitHub Pages: [https://ayumu-tanaka.github.io/QSS/](https://ayumu-tanaka.github.
 | No | 章タイトル | PDF | RMD |
 |:---|:---|:---|:---|
 | 1 | 第1章 イントロダクション | [PDF](QSS_Ch01/QSS_Ch01.pdf) | [RMD](QSS_Ch01/QSS_Ch01.Rmd) |
-| 2 | 第2章 因果関係 | [PDF](QSS_Ch02/QSS_Ch02.pdf) | [RMD](QSS_Ch02/QSS_Ch02.Rmd) |
-| 3 | 第3章 測定 | [PDF](QSS_Ch03/QSS_Ch03.pdf) | [RMD](QSS_Ch03/QSS_Ch03.Rmd) |
-| 4 | 第4章 予測 | [PDF](QSS_Ch04/QSS_Ch04.pdf) | [RMD](QSS_Ch04/QSS_Ch04.Rmd) |
-| 5 | 第5章 発見 (5.1. テキストデータ) | [PDF](QSS_Ch05/QSS_Ch05_1.pdf) | [RMD](QSS_Ch05/QSS_Ch05_1.Rmd) |
-| 6 | 第5章 発見 (5.2. ネットワークデータ) | [PDF](QSS_Ch05/QSS_Ch05_2.pdf) | [RMD](QSS_Ch05/QSS_Ch05_2.Rmd) |
-| 7 | 第5章 発見 (5.3. 空間データ) | [PDF](QSS_Ch05/QSS_Ch05_3.pdf) | [RMD](QSS_Ch05/QSS_Ch05_3.Rmd) |
-| 8 | 第6章 確率 | [PDF](QSS_Ch06/QSS_Ch06.pdf) | [RMD](QSS_Ch06/QSS_Ch06.Rmd) |
-| 9 | 第7章 不確実性 | [PDF](QSS_Ch07/QSS_Ch07.pdf) | [RMD](QSS_Ch07/QSS_Ch07.Rmd) |
-| 10 | 第8章 次の一歩 | [PDF](QSS_Ch08/QSS_Ch08.pdf) | [RMD](QSS_Ch08/QSS_Ch08.Rmd) |
+| 2 | 第2章 因果関係 (2.1. 労働市場における人種差別) | [PDF](QSS_Ch02/QSS_Ch02_1.pdf) | [RMD](QSS_Ch02/QSS_Ch02_1.Rmd) |
+| 3 | 第2章 因果関係 (2.2. Rでデータを部分集合化する) | [PDF](QSS_Ch02/QSS_Ch02_2.pdf) | [RMD](QSS_Ch02/QSS_Ch02_2.Rmd) |
+| 4 | 第2章 因果関係 (2.3. 因果効果と反事実 / 2.4. ランダム化比較試験) | [PDF](QSS_Ch02/QSS_Ch02_3.pdf) | [RMD](QSS_Ch02/QSS_Ch02_3.Rmd) |
+| 5 | 第2章 因果関係 (2.5. 観察研究) | [PDF](QSS_Ch02/QSS_Ch02_4.pdf) | [RMD](QSS_Ch02/QSS_Ch02_4.Rmd) |
+| 6 | 第2章 因果関係 (2.6. 1変数の記述統計量) | [PDF](QSS_Ch02/QSS_Ch02_5.pdf) | [RMD](QSS_Ch02/QSS_Ch02_5.Rmd) |
+| 7 | 第3章 測定 | [PDF](QSS_Ch03/QSS_Ch03.pdf) | [RMD](QSS_Ch03/QSS_Ch03.Rmd) |
+| 8 | 第4章 予測 | [PDF](QSS_Ch04/QSS_Ch04.pdf) | [RMD](QSS_Ch04/QSS_Ch04.Rmd) |
+| 9 | 第5章 発見 (5.1. テキストデータ) | [PDF](QSS_Ch05/QSS_Ch05_1.pdf) | [RMD](QSS_Ch05/QSS_Ch05_1.Rmd) |
+| 10 | 第5章 発見 (5.2. ネットワークデータ) | [PDF](QSS_Ch05/QSS_Ch05_2.pdf) | [RMD](QSS_Ch05/QSS_Ch05_2.Rmd) |
+| 11 | 第5章 発見 (5.3. 空間データ) | [PDF](QSS_Ch05/QSS_Ch05_3.pdf) | [RMD](QSS_Ch05/QSS_Ch05_3.Rmd) |
+| 12 | 第6章 確率 | [PDF](QSS_Ch06/QSS_Ch06.pdf) | [RMD](QSS_Ch06/QSS_Ch06.Rmd) |
+| 13 | 第7章 不確実性 | [PDF](QSS_Ch07/QSS_Ch07.pdf) | [RMD](QSS_Ch07/QSS_Ch07.Rmd) |
+| 14 | 第8章 次の一歩 | [PDF](QSS_Ch08/QSS_Ch08.pdf) | [RMD](QSS_Ch08/QSS_Ch08.Rmd) |
 
 
 ## 出典

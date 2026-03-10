@@ -1,0 +1,398 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{Montpellier}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{第2章: 因果関係\\
+(2.3. 因果効果と反事実 / 2.4. ランダム化比較試験)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\section{2.3
+因果効果と反事実}\label{ux56e0ux679cux52b9ux679cux3068ux53cdux4e8bux5b9f}
+
+\begin{frame}{因果関係の定義}
+\phantomsection\label{ux56e0ux679cux95a2ux4fc2ux306eux5b9aux7fa9}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{因果関係}:
+  ある変数（処置）の変化が別の変数（結果）の変化を引き起こすこと。
+\item
+  \textbf{反事実} (Counterfactual):
+  「もし処置が行われなかったら、結果はどうなっていたか？」という、現実には観察できないシナリオ。
+\item
+  \textbf{因果効果}: 「処置が行われた場合の結果
+  (\(Y(1)\))」と「反事実の結果 (\(Y(0)\))」の差。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\text{因果効果} = \tau_i = Y_i(1) - Y_i(0)\)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{因果推論の根本問題}
+\phantomsection\label{ux56e0ux679cux63a8ux8ad6ux306eux6839ux672cux554fux984c}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{根本問題}:
+  同じ個人について、処置を受けた場合と受けなかった場合の両方の結果を同時に観察することは不可能。
+\item
+  解決策：個人の効果ではなく、グループ全体の\textbf{平均因果効果 (ATE)}
+  を推定することを目指す。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{標本平均因果効果 (SATE)}: 標本における \(Y(1)\) の平均と
+    \(Y(0)\) の平均の差。
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{2.4 ランダム化比較試験
+(RCT)}\label{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13-rct}
+
+\begin{frame}{社会的圧力と投票率の実験}
+\phantomsection\label{ux793eux4f1aux7684ux5727ux529bux3068ux6295ux7968ux7387ux306eux5b9fux9a13}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{問い}:
+  「あなたの投票状況を近所に知らせる」というメッセージは投票率を上げるか？
+\item
+  \textbf{実験デザイン}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    多数の有権者を、異なるメッセージを送るグループに\textbf{無作為（ランダム）}に割り当てる。
+  \item
+    「無作為化」により、各グループの特徴が平均的に等しくなるため、グループ間の差を因果効果として解釈できる。
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{データの読み込みと確認}
+\phantomsection\label{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux78baux8a8d}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. データの読み込み (social.csv)}
+\NormalTok{social }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"social.csv"}\NormalTok{)}
+
+\CommentTok{\# 2. データの構造を確認}
+\CommentTok{\# messages: 処置の種類（Control, Civic Duty, Neighbors 等）}
+\CommentTok{\# primary2006: 2006年予備選挙で投票したか (1=Yes, 0=No)}
+\FunctionTok{head}\NormalTok{(social, }\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      sex yearofbirth primary2004   messages primary2006 hhsize
+## 1   male        1941           0 Civic Duty           0      2
+## 2 female        1947           0 Civic Duty           0      2
+## 3   male        1951           0  Hawthorne           1      3
+## 4 female        1950           0  Hawthorne           1      3
+## 5 female        1982           0  Hawthorne           1      3
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{各グループの投票率の計算}
+\phantomsection\label{ux5404ux30b0ux30ebux30fcux30d7ux306eux6295ux7968ux7387ux306eux8a08ux7b97}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. グループごとの平均（投票率）を計算する}
+\CommentTok{\# tapply(結果変数, 分類変数, 関数) を使用}
+\FunctionTok{tapply}\NormalTok{(social}\SpecialCharTok{$}\NormalTok{primary2006, social}\SpecialCharTok{$}\NormalTok{messages, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Civic Duty    Control  Hawthorne  Neighbors 
+##  0.3145377  0.2966383  0.3223746  0.3779482
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. 全体の平均投票率}
+\FunctionTok{mean}\NormalTok{(social}\SpecialCharTok{$}\NormalTok{primary2006)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3122446
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{因果効果 (SATE) の推定}
+\phantomsection\label{ux56e0ux679cux52b9ux679c-sate-ux306eux63a8ux5b9a}
+\begin{itemize}
+\tightlist
+\item
+  「Neighbors（近所に知らせる）」メッセージの因果効果を、何も送らない「Control」グループと比較して求めます。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Neighbors グループの投票率}
+\NormalTok{mean\_neighbors }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(social}\SpecialCharTok{$}\NormalTok{primary2006[social}\SpecialCharTok{$}\NormalTok{messages }\SpecialCharTok{==} \StringTok{"Neighbors"}\NormalTok{])}
+
+\CommentTok{\# Control グループの投票率}
+\NormalTok{mean\_control }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(social}\SpecialCharTok{$}\NormalTok{primary2006[social}\SpecialCharTok{$}\NormalTok{messages }\SpecialCharTok{==} \StringTok{"Control"}\NormalTok{])}
+
+\CommentTok{\# SATE (平均因果効果) の推定値}
+\NormalTok{mean\_neighbors }\SpecialCharTok{{-}}\NormalTok{ mean\_control}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.08130991
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{解釈}:
+  「近所に知らせる」という社会的圧力をかけることで、投票率が約 8.1
+  パーセントポイント上昇した。
+\end{itemize}
+\end{frame}
+
+\section{2.4.1
+グラフによる比較}\label{ux30b0ux30e9ux30d5ux306bux3088ux308bux6bd4ux8f03}
+
+\begin{frame}[fragile]{グループ別投票率の可視化: コード}
+\phantomsection\label{ux30b0ux30ebux30fcux30d7ux5225ux6295ux7968ux7387ux306eux53efux8996ux5316-ux30b3ux30fcux30c9}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 棒グラフ (barplot) の作成}
+\CommentTok{\# 各グループの投票率を計算してプロット}
+\NormalTok{out }\OtherTok{\textless{}{-}} \FunctionTok{tapply}\NormalTok{(social}\SpecialCharTok{$}\NormalTok{primary2006, social}\SpecialCharTok{$}\NormalTok{messages, mean)}
+
+\FunctionTok{barplot}\NormalTok{(out, }
+        \AttributeTok{names.arg =} \FunctionTok{c}\NormalTok{(}\StringTok{"Civic Duty"}\NormalTok{, }\StringTok{"Control"}\NormalTok{, }\StringTok{"Hawthorne"}\NormalTok{, }\StringTok{"Neighbors"}\NormalTok{),}
+        \AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.5}\NormalTok{),}
+        \AttributeTok{ylab =} \StringTok{"Voter Turnout Proportion"}\NormalTok{,}
+        \AttributeTok{main =} \StringTok{"Social Pressure and Voter Turnout"}\NormalTok{)}
+
+\CommentTok{\# 2. 全体平均の線を追加}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FunctionTok{mean}\NormalTok{(social}\SpecialCharTok{$}\NormalTok{primary2006), }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{グループ別投票率の可視化: プロット}
+\phantomsection\label{ux30b0ux30ebux30fcux30d7ux5225ux6295ux7968ux7387ux306eux53efux8996ux5316-ux30d7ux30edux30c3ux30c8}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.45\textheight]{QSS_Ch02_3_files/figure-beamer/unnamed-chunk-5-1} \end{center}
+\normalsize
+\end{frame}
+
+\section{2.5 まとめ}\label{ux307eux3068ux3081}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{因果効果}: \(Y(1) - Y(0)\)
+  で定義されるが、片方は常に観察できない。
+\item
+  \textbf{ランダム化比較試験 (RCT)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    無作為割り当てによって「処置が行われなかった場合の世界（反事実）」を代表する対照群（Control
+    Group）を作り出す。
+  \item
+    社会的圧力の実験では、Neighbors
+    グループにおいて非常に強力な因果効果が確認された。
+  \end{itemize}
+\item
+  \textbf{Rの操作}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{tapply()} を使ったグループごとの統計量の一括計算。
+  \item
+    \texttt{barplot()} を用いたカテゴリ別の可視化。
+  \item
+    \texttt{abline()} による基準線の追加。
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}

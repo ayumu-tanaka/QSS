@@ -1,4 +1,4 @@
-# DSSスライド
+# Data Analysis for Social Science (DSS) スライド
 
 ## 概要
 このページには、以下の書籍に基づく講義スライドが含まれています。

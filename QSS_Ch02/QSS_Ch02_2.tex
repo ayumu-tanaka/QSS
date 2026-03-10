@@ -1,0 +1,481 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第2章: 因果関係\\
+(2.2. Rでデータを部分集合化する)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{rux3067ux30c7ux30fcux30bfux3092ux90e8ux5206ux96c6ux5408ux5316ux3059ux308b}{%
+\section{2.2
+Rでデータを部分集合化する}\label{rux3067ux30c7ux30fcux30bfux3092ux90e8ux5206ux96c6ux5408ux5316ux3059ux308b}}
+
+\begin{frame}[fragile]{データの抽出（部分集合化）の目的}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux62bdux51faux90e8ux5206ux96c6ux5408ux5316ux306eux76eeux7684}{}
+\begin{itemize}
+\tightlist
+\item
+  大規模なデータセット全体を分析するだけでなく、特定の条件を満たす「部分集合」に注目したい場合が多い。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    例：男性だけのデータ、特定の州のデータ、ある年齢層のデータなど。
+  \end{itemize}
+\item
+  Rでは、\textbf{論理演算子}と\textbf{インデックス（\texttt{{[}{]}} や
+  \texttt{subset()}）}を組み合わせて、柔軟にデータを抽出できる。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux8ad6ux7406ux6f14ux7b97ux5b50-logical-operators}{%
+\section{2.2.1 論理演算子 (Logical
+Operators)}\label{ux8ad6ux7406ux6f14ux7b97ux5b50-logical-operators}}
+
+\begin{frame}[fragile]{基本的な論理演算子}
+\protect\hypertarget{ux57faux672cux7684ux306aux8ad6ux7406ux6f14ux7b97ux5b50}{}
+\begin{itemize}
+\tightlist
+\item
+  2つの値を比較し、\texttt{TRUE}（真）か \texttt{FALSE}（偽）を返す。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 等しい (==)}
+\DecValTok{5} \SpecialCharTok{==} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{5} \SpecialCharTok{==} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. 等しくない (!=)}
+\DecValTok{5} \SpecialCharTok{!=} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3. 大なり、小なり (\textgreater{}, \textless{}, \textgreater{}=, \textless{}=)}
+\DecValTok{5} \SpecialCharTok{\textgreater{}} \DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{複数の条件の組み合わせ}
+\protect\hypertarget{ux8907ux6570ux306eux6761ux4ef6ux306eux7d44ux307fux5408ux308fux305b}{}
+\begin{itemize}
+\tightlist
+\item
+  「かつ（AND）」や「または（OR）」を使って条件を繋げる。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. かつ (\&): 両方の条件が真なら TRUE}
+\NormalTok{(}\DecValTok{5} \SpecialCharTok{\textgreater{}} \DecValTok{3}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ (}\DecValTok{2} \SpecialCharTok{\textless{}} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. または (|): どちらか一方が真なら TRUE}
+\NormalTok{(}\DecValTok{5} \SpecialCharTok{\textgreater{}} \DecValTok{3}\NormalTok{) }\SpecialCharTok{|}\NormalTok{ (}\DecValTok{2} \SpecialCharTok{\textgreater{}} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux30d9ux30afux30c8ux30ebux306bux5bfeux3059ux308bux8ad6ux7406ux6f14ux7b97}{%
+\section{2.2.2
+ベクトルに対する論理演算}\label{ux30d9ux30afux30c8ux30ebux306bux5bfeux3059ux308bux8ad6ux7406ux6f14ux7b97}}
+
+\begin{frame}[fragile]{ベクトルの要素ごとに比較する}
+\protect\hypertarget{ux30d9ux30afux30c8ux30ebux306eux8981ux7d20ux3054ux3068ux306bux6bd4ux8f03ux3059ux308b}{}
+\begin{itemize}
+\tightlist
+\item
+  Rの論理演算はベクトル全体に対して一度に行われ、各要素についての
+  \texttt{TRUE/FALSE} が返される。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# サンプルの読み込み}
+\NormalTok{resume }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"resume.csv"}\NormalTok{)}
+
+\CommentTok{\# race 変数の最初の5つの要素が "black" かどうかを確認}
+\FunctionTok{head}\NormalTok{(resume}\SpecialCharTok{$}\NormalTok{race }\SpecialCharTok{==} \StringTok{"black"}\NormalTok{, }\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE  TRUE  TRUE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# コールバック (call) が 1 であった行の TRUE/FALSE}
+\FunctionTok{head}\NormalTok{(resume}\SpecialCharTok{$}\NormalTok{call }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE FALSE FALSE FALSE
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux30c7ux30fcux30bfux306eux62bdux51fa-indexing}{%
+\section{2.2.3 データの抽出
+(Indexing)}\label{ux30c7ux30fcux30bfux306eux62bdux51fa-indexing}}
+
+\begin{frame}[fragile]{角括弧 \texttt{{[}{]}} を使った抽出 (1)}
+\protect\hypertarget{ux89d2ux62ecux5f27-ux3092ux4f7fux3063ux305fux62bdux51fa-1}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{データ{[}行の条件,\ 列の指定{]}}
+  という形式でデータを抽出する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 黒人 (race == "black") の行だけを抽出}
+\CommentTok{\# カンマの後は空にすると「全ての列」を意味する}
+\NormalTok{resumeB }\OtherTok{\textless{}{-}}\NormalTok{ resume[resume}\SpecialCharTok{$}\NormalTok{race }\SpecialCharTok{==} \StringTok{"black"}\NormalTok{, ]}
+
+\CommentTok{\# 2. 白人 (race == "white") の行だけを抽出}
+\NormalTok{resumeW }\OtherTok{\textless{}{-}}\NormalTok{ resume[resume}\SpecialCharTok{$}\NormalTok{race }\SpecialCharTok{==} \StringTok{"white"}\NormalTok{, ]}
+
+\CommentTok{\# 抽出したデータの行数を確認}
+\FunctionTok{nrow}\NormalTok{(resumeB)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2435
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(resumeW)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2435
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{角括弧 \texttt{{[}{]}} を使った抽出 (2)}
+\protect\hypertarget{ux89d2ux62ecux5f27-ux3092ux4f7fux3063ux305fux62bdux51fa-2}{}
+\begin{itemize}
+\tightlist
+\item
+  抽出したサブセットに対して、統計量を計算する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 黒人のコールバック率（平均）}
+\FunctionTok{mean}\NormalTok{(resumeB}\SpecialCharTok{$}\NormalTok{call)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.06447639
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 白人のコールバック率（平均）}
+\FunctionTok{mean}\NormalTok{(resumeW}\SpecialCharTok{$}\NormalTok{call)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.09650924
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{subset-ux95a2ux6570ux306eux6d3bux7528}{%
+\section{2.2.4 subset()
+関数の活用}\label{subset-ux95a2ux6570ux306eux6d3bux7528}}
+
+\begin{frame}[fragile]{subset() による直感的な抽出}
+\protect\hypertarget{subset-ux306bux3088ux308bux76f4ux611fux7684ux306aux62bdux51fa}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{subset(データ,\ subset\ =\ 条件)}
+  という書き方で、より読みやすく抽出できる。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 黒人かつ男性 (sex == "male") のデータを抽出}
+\NormalTok{resumeBm }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(resume, }\AttributeTok{subset =}\NormalTok{ (race }\SpecialCharTok{==} \StringTok{"black"} \SpecialCharTok{\&}\NormalTok{ sex }\SpecialCharTok{==} \StringTok{"male"}\NormalTok{))}
+
+\CommentTok{\# データの最初の数行を表示}
+\FunctionTok{head}\NormalTok{(resumeBm, }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    firstname  sex  race call
+## 10    Tyrone male black    0
+## 21     Leroy male black    0
+## 42    Tyrone male black    0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 黒人男性のコールバック率}
+\FunctionTok{mean}\NormalTok{(resumeBm}\SpecialCharTok{$}\NormalTok{call)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0582878
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{2.2.5 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{論理演算子}: \texttt{==}, \texttt{!=},
+  \texttt{\textgreater{}}, \texttt{\textless{}}, \texttt{\&},
+  \texttt{\textbar{}} を使って、データが条件を満たすかを判定する。
+\item
+  \textbf{データの抽出}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{角括弧 \texttt{{[}{]}}}:
+    \texttt{resume{[}resume\$race\ ==\ "black",\ {]}} のように記述。
+  \item
+    \textbf{subset() 関数}: \texttt{subset(resume,\ race\ ==\ "black")}
+    のように、よりシンプルに記述可能。
+  \end{itemize}
+\item
+  \textbf{因果推論への応用}:
+  グループごとにデータを切り分けることで、処置群と対照群の平均を簡単に比較できる。
+\end{itemize}
+\end{frame}
+
+\end{document}

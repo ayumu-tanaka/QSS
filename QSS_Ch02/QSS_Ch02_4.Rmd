@@ -1,0 +1,181 @@
+---
+title: |
+    | 第2章: 因果関係
+    | (2.5. 観察研究)
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 2.5 観察研究 (Observational Studies)
+
+---
+
+## 観察研究とは
+
+* **観察研究**: 研究者が処置を無作為に割り当て**ない**研究。
+    * 実世界のデータ（自然に発生したデータ）を分析する。
+* **課題**: **交絡バイアス** (Confounding Bias)。
+    * 処置群と対照群が、処置以外の要因（共変量）についても異なっている可能性がある。
+* **解決策のデザイン**:
+    1. **前後比較** (Before-and-After) デザイン
+    2. **差の差** (Difference-in-Differences: DiD) デザイン
+
+# 2.5.1 最低賃金と雇用
+
+---
+
+## カード＝クルーガー研究 (1994)
+
+* **問い**: 最低賃金を引き上げると、雇用（失業）はどう変化するか？
+* **事例**: 
+    * 1992年にニュージャージー州 (NJ) が最低賃金を引き上げた。
+    * 隣接するペンシルベニア州 (PA) は引き上げなかった。
+* **データ**: 両州のファストフード店の雇用データ (`minwage.csv`)。
+
+---
+
+## データの読み込みと州別の分割
+
+\scriptsize
+```{r}
+# 1. データの読み込み
+minwage <- read.csv("minwage.csv")
+
+# 2. ニュージャージー州 (NJ) とペンシルベニア州 (PA) にデータを分ける
+# location列が "PA" かどうかで判定
+minwageNJ <- subset(minwage, subset = (location != "PA"))
+minwagePA <- subset(minwage, subset = (location == "PA"))
+
+# 3. データの規模を確認
+dim(minwageNJ) # NJの店舗数
+dim(minwagePA) # PAの店舗数
+```
+\normalsize
+
+---
+
+## 賃金引き上げの確認
+
+* 実際にNJ州だけで賃金が上がったかを確認します。
+
+\scriptsize
+```{r}
+# 時給が $5.05（以前の最低賃金）未満の店舗の割合を計算
+# 引き上げ前 (wageBefore)
+mean(minwageNJ$wageBefore < 5.05) 
+mean(minwagePA$wageBefore < 5.05)
+
+# 引き上げ後 (wageAfter)
+mean(minwageNJ$wageAfter < 5.05)  # NJは 0 に近いはず
+mean(minwagePA$wageAfter < 5.05)  # PAは高いままのはず
+```
+\normalsize
+
+# 2.5.2 交絡バイアス (Confounding Bias)
+
+---
+
+## 単純な比較の危険性
+
+* 引き上げ後のNJ州とPA州の雇用率を単純に比較します。
+
+\scriptsize
+```{r}
+# フルタイム雇用率 (fullPropAfter) を計算
+# フルタイム数 / (フルタイム数 + パートタイム数)
+minwageNJ$fullPropAfter <- minwageNJ$fullAfter / 
+    (minwageNJ$fullAfter + minwageNJ$partAfter)
+minwagePA$fullPropAfter <- minwagePA$fullAfter / 
+    (minwagePA$fullAfter + minwagePA$partAfter)
+
+# NJ州とPA州の平均の差を計算
+mean(minwageNJ$fullPropAfter) - mean(minwagePA$fullPropAfter)
+```
+\normalsize
+
+* **問題**: NJとPAは州そのものが異なる（経済状況など）。この差が「最低賃金」によるものか「州の違い」によるものか区別できない。これが**交絡**である。
+
+# 2.5.3 前後比較と差の差 (DiD) デザイン
+
+---
+
+## 1. 前後比較 (Before-and-After) デザイン
+
+* 同じNJ州の中で、引き上げ前と後を比較します。
+
+\scriptsize
+```{r}
+# NJ州の引き上げ前の雇用率を計算
+minwageNJ$fullPropBefore <- minwageNJ$fullBefore / 
+    (minwageNJ$fullBefore + minwageNJ$partBefore)
+
+# 前後の差を計算
+NJdiff <- mean(minwageNJ$fullPropAfter) - mean(minwageNJ$fullPropBefore)
+NJdiff
+```
+\normalsize
+
+* **問題**: 時間の経過とともに、最低賃金とは無関係に経済全体が変化した可能性がある。
+
+---
+
+## 2. 差の差 (Difference-in-Differences: DiD)
+
+* **アイデア**: NJ州の変化から、PA州（対照群）で起きた変化（自然なトレンド）を差し引く。
+* **数式**: $\text{DiD} = (NJ_{\text{after}} - NJ_{\text{before}}) - (PA_{\text{after}} - PA_{\text{before}})$
+
+\scriptsize
+```{r}
+# PA州の引き上げ前後の雇用率の変化を計算
+minwagePA$fullPropBefore <- minwagePA$fullBefore / 
+    (minwagePA$fullBefore + minwagePA$partBefore)
+PAdiff <- mean(minwagePA$fullPropAfter) - mean(minwagePA$fullPropBefore)
+
+# 差の差 (DiD) を計算
+NJdiff - PAdiff
+```
+\normalsize
+
+* **結論**: 最低賃金引き上げ後、NJ州のフルタイム雇用率はPA州に比べて相対的に約 6.2 パーセントポイント上昇した（雇用は減らなかった）。
+
+---
+
+## 差の差 (DiD) の概念図
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{fig2_2.png}
+\end{center}
+
+* **平行トレンド仮定**: もし処置がなければ、処置群と対照群は同じトレンドを辿るという仮定が重要。
+
+# 2.5.4 まとめ
+
+---
+
+## このセクションのまとめ
+
+* **観察研究**: 現実世界のデータには交絡因子が潜んでいるため、慎重なデザインが必要。
+* **交絡バイアス**: 処置以外の要因が結果に影響を与え、因果推論を妨げること。
+* **差の差 (DiD) デザイン**: 
+    * 処置群の変化から、比較可能な対照群の変化を差し引くことで、共通のトレンドを制御する。
+    * 社会科学において非常に多用される強力な手法。
+* **Rの操作**: 
+    * 複雑な数式（雇用率の計算など）をデータフレームの列同士の演算で行う。
+    * `subset()` を用いた州や時期の切り分け。

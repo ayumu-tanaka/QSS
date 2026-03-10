@@ -1,0 +1,360 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第2章: 因果関係\\
+(2.6. 1変数の記述統計量)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux5909ux6570ux306eux8a18ux8ff0ux7d71ux8a08ux91cf}{%
+\section{2.6
+1変数の記述統計量}\label{ux5909ux6570ux306eux8a18ux8ff0ux7d71ux8a08ux91cf}}
+
+\begin{frame}{記述統計の目的}
+\protect\hypertarget{ux8a18ux8ff0ux7d71ux8a08ux306eux76eeux7684}{}
+\begin{itemize}
+\tightlist
+\item
+  大規模なデータの分布（散らばり具合や中心的な傾向）を、少数の数値で要約する。
+\item
+  主要な指標：
+
+  \begin{enumerate}
+  \tightlist
+  \item
+    \textbf{中心傾向の尺度}: 平均値 (Mean)、中央値 (Median)
+  \item
+    \textbf{散らばりの尺度}: 分位数 (Quantiles)、四分位範囲
+    (IQR)、標準偏差 (Standard Deviation)
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux5206ux4f4dux6570-quantiles}{%
+\section{2.6.1 分位数 (Quantiles)}\label{ux5206ux4f4dux6570-quantiles}}
+
+\begin{frame}[fragile]{中央値 (Median)}
+\protect\hypertarget{ux4e2dux592eux5024-median}{}
+\begin{itemize}
+\tightlist
+\item
+  データを大きさの順に並べたときに、ちょうど真ん中にくる値。
+\item
+  外れ値（極端に大きい・小さい値）の影響を受けにくいという特徴がある。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 最低賃金データの読み込みと準備}
+\NormalTok{minwage }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"minwage.csv"}\NormalTok{)}
+\NormalTok{minwageNJ }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(minwage, }\AttributeTok{subset =}\NormalTok{ (location }\SpecialCharTok{!=} \StringTok{"PA"}\NormalTok{))}
+\NormalTok{minwagePA }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(minwage, }\AttributeTok{subset =}\NormalTok{ (location }\SpecialCharTok{==} \StringTok{"PA"}\NormalTok{))}
+
+\CommentTok{\# NJ州の引き上げ後のフルタイム雇用率の中央値を計算}
+\FunctionTok{median}\NormalTok{(minwageNJ}\SpecialCharTok{$}\NormalTok{fullAfter }\SpecialCharTok{/}\NormalTok{ (minwageNJ}\SpecialCharTok{$}\NormalTok{fullAfter }\SpecialCharTok{+}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{partAfter), }
+       \AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2916667
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{4分位数と summary() 関数}
+\protect\hypertarget{ux5206ux4f4dux6570ux3068-summary-ux95a2ux6570}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{4分位数}: データを4等分する境界の値（25\%, 50\%, 75\%）。
+\item
+  \texttt{summary()}
+  を使うと、最小値、最大値、平均、中央値、4分位数を一括で確認できる。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# NJ州の引き上げ前の賃金 (wageBefore) の要約}
+\FunctionTok{summary}\NormalTok{(minwageNJ}\SpecialCharTok{$}\NormalTok{wageBefore)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    4.25    4.25    4.50    4.61    4.87    5.75
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 4分位範囲 (Interquartile Range: IQR)}
+\CommentTok{\# 75\%点 と 25\%点 の差（真ん中の50\%のデータの広がり）}
+\FunctionTok{IQR}\NormalTok{(minwageNJ}\SpecialCharTok{$}\NormalTok{wageBefore)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.62
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{任意の分位数の計算 (quantile関数)}
+\protect\hypertarget{ux4efbux610fux306eux5206ux4f4dux6570ux306eux8a08ux7b97-quantileux95a2ux6570}{}
+\begin{itemize}
+\tightlist
+\item
+  10\%刻み（10分位数）などで分布を詳しく見る場合に便利。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 0\%から100\%まで10\%刻みの分位数を計算}
+\FunctionTok{quantile}\NormalTok{(minwageNJ}\SpecialCharTok{$}\NormalTok{wageBefore, }\AttributeTok{probs =} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \DecValTok{0}\NormalTok{, }\AttributeTok{to =} \DecValTok{1}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
+## 4.25 4.25 4.25 4.25 4.50 4.50 4.65 4.75 5.00 5.00 5.75
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux6a19ux6e96ux504fux5dee-standard-deviation}{%
+\section{2.6.2 標準偏差 (Standard
+Deviation)}\label{ux6a19ux6e96ux504fux5dee-standard-deviation}}
+
+\begin{frame}[fragile]{平均からのばらつき}
+\protect\hypertarget{ux5e73ux5747ux304bux3089ux306eux3070ux3089ux3064ux304d}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{標準偏差}:
+  各データが平均からどれくらい離れているかの平均的な距離。
+\item
+  値が大きいほど、データが平均の周りに広く散らばっていることを示す。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# NJ州の引き上げ前後の雇用率の変化を計算}
+\NormalTok{minwageNJ}\SpecialCharTok{$}\NormalTok{fullPropBefore }\OtherTok{\textless{}{-}}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{fullBefore }\SpecialCharTok{/} 
+\NormalTok{    (minwageNJ}\SpecialCharTok{$}\NormalTok{fullBefore }\SpecialCharTok{+}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{partBefore)}
+\NormalTok{minwageNJ}\SpecialCharTok{$}\NormalTok{fullPropAfter }\OtherTok{\textless{}{-}}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{fullAfter }\SpecialCharTok{/} 
+\NormalTok{    (minwageNJ}\SpecialCharTok{$}\NormalTok{fullAfter }\SpecialCharTok{+}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{partAfter)}
+\NormalTok{minwageNJ}\SpecialCharTok{$}\NormalTok{diff }\OtherTok{\textless{}{-}}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{fullPropAfter }\SpecialCharTok{{-}}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{fullPropBefore}
+
+\CommentTok{\# 雇用率の変化の標準偏差を計算}
+\FunctionTok{sd}\NormalTok{(minwageNJ}\SpecialCharTok{$}\NormalTok{diff, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3010377
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{2.6.3 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{中央値と分位数}:
+  データの順位に基づく要約。外れ値に強い（ロバスト）。
+\item
+  \textbf{summary()}:
+  データの分布を素早く把握するための最も基本的なコマンド。
+\item
+  \textbf{標準偏差}: 平均の周りのばらつきを測定する。
+\item
+  \textbf{Rの操作}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{median()}, \texttt{quantile()}, \texttt{IQR()}
+    を用いた分位数の計算。
+  \item
+    \texttt{sd()}, \texttt{var()} を用いたばらつきの計算。
+  \item
+    \texttt{summary()} による一括集計。
+  \item
+    \texttt{na.rm\ =\ TRUE} オプションによる欠損値の除外。
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}
