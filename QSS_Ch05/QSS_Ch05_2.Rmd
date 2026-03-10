@@ -1,0 +1,180 @@
+---
+title: |
+    | 第5章: 発見
+    | (5.2. ネットワークデータ)
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 5.2 ネットワークデータ
+
+---
+
+## 社会ネットワーク分析
+
+* **ノード** (Nodes/Vertices): 個人や組織などの実体。
+* **エッジ** (Edges/Links): ノード間の関係（友人、取引、引用など）。
+* **目標**: ネットワークの構造を理解し、中心的な役割を果たすノードを特定する。
+
+# 5.2.1 ルネサンス期フィレンツェの婚姻ネットワーク
+
+---
+
+## 隣接行列 (Adjacency Matrix)
+
+* ネットワークを行列形式で表現する。
+* 行と列が各家族を表し、関係があれば 1、なければ 0。
+
+\scriptsize
+```{r}
+# データの読み込み（FAMILY列を行名にする）
+florence <- read.csv("florentine.csv", row.names = "FAMILY")
+# 最初の5家族分を表示
+as.matrix(florence)[1:5, 1:5]
+```
+\normalsize
+
+# 5.2.2 グラフと中心性指標
+
+---
+
+## igraph によるネットワークの作成
+
+* **無向グラフ**: 関係に方向がない場合（婚姻など）。
+
+\scriptsize
+```{r, fig.height=3.5, out.height="45%", fig.align="center"}
+library(igraph)
+# 隣接行列からグラフを作成
+g <- graph_from_adjacency_matrix(as.matrix(florence), mode = "undirected")
+# プロット
+plot(g, main = "Marriage Network in Florence")
+```
+\normalsize
+
+---
+
+## 中心性指標 (1): 次数中心性
+
+* **次数中心性 (Degree)**: 直接つながっているエッジの数。
+
+\scriptsize
+```{r}
+# つながりが多い家族トップ3
+sort(degree(g), decreasing = TRUE)[1:3]
+```
+\normalsize
+
+---
+
+## 中心性指標 (2): 近接中心性
+
+* **近接中心性 (Closeness)**: 他の全てのノードへの距離の短さ。
+
+\scriptsize
+```{r}
+# 他の家族へのアクセスが容易な家族
+sort(closeness(g), decreasing = TRUE)[1:3]
+```
+\normalsize
+
+---
+
+## 中心性指標 (3): 間中心性
+
+* **間中心性 (Betweenness)**: ノード間の最短経路上の通過回数。
+* 「仲介者」としての重要度を測る。
+
+\scriptsize
+```{r}
+# ネットワークのハブとなる家族
+sort(betweenness(g), decreasing = TRUE)[1:3]
+```
+\normalsize
+
+# 5.2.3 Twitterのフォローネットワーク
+
+---
+
+## 有向グラフ (Directed Graph)
+
+* **有向グラフ**: フォロー関係のように、向きがあるエッジ。
+* 入次数 (In-degree) と出次数 (Out-degree) を区別する。
+
+\scriptsize
+```{r}
+twitter <- read.csv("twitter-following.csv", stringsAsFactors = FALSE)
+senator <- read.csv("twitter-senator.csv", stringsAsFactors = FALSE)
+# 隣接行列の初期化と作成（コード省略）
+n <- nrow(senator); twitter.adj <- matrix(0, nrow = n, ncol = n)
+colnames(twitter.adj) <- rownames(twitter.adj) <- senator$screen_name
+for (i in 1:nrow(twitter)) { 
+    twitter.adj[twitter$following[i], twitter$followed[i]] <- 1 
+}
+g.tw <- graph_from_adjacency_matrix(twitter.adj, mode = "directed")
+```
+\normalsize
+
+# 5.2.4 PageRank アルゴリズム
+
+---
+
+## PageRank とは
+
+* 重要なノードからフォローされているノードをより高く評価する指標。
+* Googleの検索エンジンでも使われる基本的なアルゴリズム。
+
+\scriptsize
+```{r}
+# PageRankの計算
+senator$pagerank <- page_rank(g.tw)$vector
+# PageRankが高い上院議員トップ3
+senator$name[order(senator$pagerank, decreasing = TRUE)][1:3]
+```
+\normalsize
+
+---
+
+## ネットワークの視覚化（PageRank）
+
+\scriptsize
+```{r, fig.height=4, out.height="70%", fig.align="center"}
+# 政党別の色分け (D=Blue, R=Red)
+col <- ifelse(senator$party == "D", "blue", "red")
+# PageRankに基づくサイズ調整
+plot(g.tw, vertex.size = senator$pagerank * 500, 
+     vertex.color = col, vertex.label = NA, 
+     edge.arrow.size = 0.1, main = "US Senators Twitter Network")
+```
+\normalsize
+
+# 5.2.5 まとめ
+
+---
+
+## まとめ
+
+* **ネットワークデータ**: 要素間の「つながり」を隣接行列やグラフで表現する。
+* **中心性指標**:
+    * **次数**: つながりの多さ。
+    * **近接**: 全体へのアクセスの良さ。
+    * **間**: 仲介役としての重要性。
+* **PageRank**: つながりの「質」を考慮した重要度。
+* **視覚化**: グラフの描画によって直感的な理解を促す。

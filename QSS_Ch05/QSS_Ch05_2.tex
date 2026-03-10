@@ -1,0 +1,439 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第5章: 発見\\
+(5.2. ネットワークデータ)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux30cdux30c3ux30c8ux30efux30fcux30afux30c7ux30fcux30bf}{%
+\section{5.2
+ネットワークデータ}\label{ux30cdux30c3ux30c8ux30efux30fcux30afux30c7ux30fcux30bf}}
+
+\begin{frame}{社会ネットワーク分析}
+\protect\hypertarget{ux793eux4f1aux30cdux30c3ux30c8ux30efux30fcux30afux5206ux6790}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{ノード} (Nodes/Vertices): 個人や組織などの実体。
+\item
+  \textbf{エッジ} (Edges/Links):
+  ノード間の関係（友人、取引、引用など）。
+\item
+  \textbf{目標}:
+  ネットワークの構造を理解し、中心的な役割を果たすノードを特定する。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux30ebux30cdux30b5ux30f3ux30b9ux671fux30d5ux30a3ux30ecux30f3ux30c4ux30a7ux306eux5a5aux59fbux30cdux30c3ux30c8ux30efux30fcux30af}{%
+\section{5.2.1
+ルネサンス期フィレンツェの婚姻ネットワーク}\label{ux30ebux30cdux30b5ux30f3ux30b9ux671fux30d5ux30a3ux30ecux30f3ux30c4ux30a7ux306eux5a5aux59fbux30cdux30c3ux30c8ux30efux30fcux30af}}
+
+\begin{frame}[fragile]{隣接行列 (Adjacency Matrix)}
+\protect\hypertarget{ux96a3ux63a5ux884cux5217-adjacency-matrix}{}
+\begin{itemize}
+\tightlist
+\item
+  ネットワークを行列形式で表現する。
+\item
+  行と列が各家族を表し、関係があれば 1、なければ 0。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# データの読み込み（FAMILY列を行名にする）}
+\NormalTok{florence }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"florentine.csv"}\NormalTok{, }\AttributeTok{row.names =} \StringTok{"FAMILY"}\NormalTok{)}
+\CommentTok{\# 最初の5家族分を表示}
+\FunctionTok{as.matrix}\NormalTok{(florence)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           ACCIAIUOL ALBIZZI BARBADORI BISCHERI CASTELLAN
+## ACCIAIUOL         0       0         0        0         0
+## ALBIZZI           0       0         0        0         0
+## BARBADORI         0       0         0        0         1
+## BISCHERI          0       0         0        0         0
+## CASTELLAN         0       0         1        0         0
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux30b0ux30e9ux30d5ux3068ux4e2dux5fc3ux6027ux6307ux6a19}{%
+\section{5.2.2
+グラフと中心性指標}\label{ux30b0ux30e9ux30d5ux3068ux4e2dux5fc3ux6027ux6307ux6a19}}
+
+\begin{frame}[fragile]{igraph によるネットワークの作成}
+\protect\hypertarget{igraph-ux306bux3088ux308bux30cdux30c3ux30c8ux30efux30fcux30afux306eux4f5cux6210}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{無向グラフ}: 関係に方向がない場合（婚姻など）。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(igraph)}
+\CommentTok{\# 隣接行列からグラフを作成}
+\NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{graph\_from\_adjacency\_matrix}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(florence), }\AttributeTok{mode =} \StringTok{"undirected"}\NormalTok{)}
+\CommentTok{\# プロット}
+\FunctionTok{plot}\NormalTok{(g, }\AttributeTok{main =} \StringTok{"Marriage Network in Florence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.45\textheight]{QSS_Ch05_2_files/figure-beamer/unnamed-chunk-2-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{中心性指標 (1): 次数中心性}
+\protect\hypertarget{ux4e2dux5fc3ux6027ux6307ux6a19-1-ux6b21ux6570ux4e2dux5fc3ux6027}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{次数中心性 (Degree)}: 直接つながっているエッジの数。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# つながりが多い家族トップ3}
+\FunctionTok{sort}\NormalTok{(}\FunctionTok{degree}\NormalTok{(g), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   MEDICI GUADAGNI  STROZZI 
+##        6        4        4
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{中心性指標 (2): 近接中心性}
+\protect\hypertarget{ux4e2dux5fc3ux6027ux6307ux6a19-2-ux8fd1ux63a5ux4e2dux5fc3ux6027}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{近接中心性 (Closeness)}: 他の全てのノードへの距離の短さ。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 他の家族へのアクセスが容易な家族}
+\FunctionTok{sort}\NormalTok{(}\FunctionTok{closeness}\NormalTok{(g), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     MEDICI    RIDOLFI    ALBIZZI 
+## 0.04000000 0.03571429 0.03448276
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{中心性指標 (3): 間中心性}
+\protect\hypertarget{ux4e2dux5fc3ux6027ux6307ux6a19-3-ux9593ux4e2dux5fc3ux6027}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{間中心性 (Betweenness)}: ノード間の最短経路上の通過回数。
+\item
+  「仲介者」としての重要度を測る。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ネットワークのハブとなる家族}
+\FunctionTok{sort}\NormalTok{(}\FunctionTok{betweenness}\NormalTok{(g), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   MEDICI GUADAGNI  ALBIZZI 
+## 47.50000 23.16667 19.33333
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{twitterux306eux30d5ux30a9ux30edux30fcux30cdux30c3ux30c8ux30efux30fcux30af}{%
+\section{5.2.3
+Twitterのフォローネットワーク}\label{twitterux306eux30d5ux30a9ux30edux30fcux30cdux30c3ux30c8ux30efux30fcux30af}}
+
+\begin{frame}[fragile]{有向グラフ (Directed Graph)}
+\protect\hypertarget{ux6709ux5411ux30b0ux30e9ux30d5-directed-graph}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{有向グラフ}: フォロー関係のように、向きがあるエッジ。
+\item
+  入次数 (In-degree) と出次数 (Out-degree) を区別する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{twitter }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"twitter{-}following.csv"}\NormalTok{, }\AttributeTok{stringsAsFactors =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{senator }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"twitter{-}senator.csv"}\NormalTok{, }\AttributeTok{stringsAsFactors =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{\# 隣接行列の初期化と作成（コード省略）}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(senator); twitter.adj }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n, }\AttributeTok{ncol =}\NormalTok{ n)}
+\FunctionTok{colnames}\NormalTok{(twitter.adj) }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(twitter.adj) }\OtherTok{\textless{}{-}}\NormalTok{ senator}\SpecialCharTok{$}\NormalTok{screen\_name}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(twitter)) \{ }
+\NormalTok{    twitter.adj[twitter}\SpecialCharTok{$}\NormalTok{following[i], twitter}\SpecialCharTok{$}\NormalTok{followed[i]] }\OtherTok{\textless{}{-}} \DecValTok{1} 
+\NormalTok{\}}
+\NormalTok{g.tw }\OtherTok{\textless{}{-}} \FunctionTok{graph\_from\_adjacency\_matrix}\NormalTok{(twitter.adj, }\AttributeTok{mode =} \StringTok{"directed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\hypertarget{pagerank-ux30a2ux30ebux30b4ux30eaux30baux30e0}{%
+\section{5.2.4 PageRank
+アルゴリズム}\label{pagerank-ux30a2ux30ebux30b4ux30eaux30baux30e0}}
+
+\begin{frame}[fragile]{PageRank とは}
+\protect\hypertarget{pagerank-ux3068ux306f}{}
+\begin{itemize}
+\tightlist
+\item
+  重要なノードからフォローされているノードをより高く評価する指標。
+\item
+  Googleの検索エンジンでも使われる基本的なアルゴリズム。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# PageRankの計算}
+\NormalTok{senator}\SpecialCharTok{$}\NormalTok{pagerank }\OtherTok{\textless{}{-}} \FunctionTok{page\_rank}\NormalTok{(g.tw)}\SpecialCharTok{$}\NormalTok{vector}
+\CommentTok{\# PageRankが高い上院議員トップ3}
+\NormalTok{senator}\SpecialCharTok{$}\NormalTok{name[}\FunctionTok{order}\NormalTok{(senator}\SpecialCharTok{$}\NormalTok{pagerank, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)][}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "John McCain"     "John Cornyn"     "Martin Heinrich"
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{ネットワークの視覚化（PageRank）}
+\protect\hypertarget{ux30cdux30c3ux30c8ux30efux30fcux30afux306eux8996ux899aux5316pagerank}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 政党別の色分け (D=Blue, R=Red)}
+\NormalTok{col }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(senator}\SpecialCharTok{$}\NormalTok{party }\SpecialCharTok{==} \StringTok{"D"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{)}
+\CommentTok{\# PageRankに基づくサイズ調整}
+\FunctionTok{plot}\NormalTok{(g.tw, }\AttributeTok{vertex.size =}\NormalTok{ senator}\SpecialCharTok{$}\NormalTok{pagerank }\SpecialCharTok{*} \DecValTok{500}\NormalTok{, }
+     \AttributeTok{vertex.color =}\NormalTok{ col, }\AttributeTok{vertex.label =} \ConstantTok{NA}\NormalTok{, }
+     \AttributeTok{edge.arrow.size =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{main =} \StringTok{"US Senators Twitter Network"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.7\textheight]{QSS_Ch05_2_files/figure-beamer/unnamed-chunk-8-1} \end{center}
+\normalsize
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{5.2.5 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}{まとめ}
+\protect\hypertarget{ux307eux3068ux3081-1}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{ネットワークデータ}:
+  要素間の「つながり」を隣接行列やグラフで表現する。
+\item
+  \textbf{中心性指標}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{次数}: つながりの多さ。
+  \item
+    \textbf{近接}: 全体へのアクセスの良さ。
+  \item
+    \textbf{間}: 仲介役としての重要性。
+  \end{itemize}
+\item
+  \textbf{PageRank}: つながりの「質」を考慮した重要度。
+\item
+  \textbf{視覚化}: グラフの描画によって直感的な理解を促す。
+\end{itemize}
+\end{frame}
+
+\end{document}

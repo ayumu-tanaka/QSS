@@ -1,0 +1,270 @@
+---
+title: |
+    | 第5章: 発見
+    | (5.3. 空間データ)
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 5.3 空間データ
+
+---
+
+## 地理空間情報の分析
+
+* **空間データ**: 位置情報（緯度・経度など）を持つデータ。
+* **目標**: 現象の地理的な広がりを視覚化し、地域間のパターンや関係を理解する。
+* 古典的な例: スノーによるコレラ発生源の特定。
+
+# 5.3.1 Rにおける空間データの扱い
+
+---
+
+## maps パッケージ: プロットのコード
+
+* Rで地図を描画するための標準的なパッケージ。
+
+\scriptsize
+```{r, eval=FALSE}
+library(maps)
+# 1. 米国地図の描画
+map(database = "usa") 
+
+# 2. 州都のデータ (us.cities) を読み込む
+data(us.cities) 
+# capital == 2 が州都を表す
+capitals <- subset(us.cities, capital == 2) 
+
+# 3. 州都の位置を地図上にプロット
+# cex は点の大きさ、pch は点の形
+points(x = capitals$long, y = capitals$lat,
+       cex = capitals$pop / 500000, pch = 19, col = "red")
+```
+\normalsize
+
+---
+
+## maps パッケージ: 描画結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+library(maps)
+map(database = "usa")
+data(us.cities)
+capitals <- subset(us.cities, capital == 2)
+points(x = capitals$long, y = capitals$lat,
+       cex = capitals$pop / 500000, pch = 19, col = "red")
+title("US State Capitals")
+```
+\normalsize
+
+---
+
+## 特定の地域の拡大: プロットのコード
+
+* `regions` 引数で特定の州などを指定できます。
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. カリフォルニア州のみを描画
+map(database = "state", regions = "California")
+
+# 2. カリフォルニア州の都市データを抽出
+cal.cities <- subset(us.cities, subset = (country.etc == "CA"))
+
+# 3. 人口上位7都市を特定し、プロット
+top7 <- order(cal.cities$pop, decreasing = TRUE)[1:7]
+points(x = cal.cities$long[top7], y = cal.cities$lat[top7], pch = 19)
+
+# 4. 都市名を追加
+text(x = cal.cities$long[top7] + 2, y = cal.cities$lat[top7],
+     label = cal.cities$name[top7], cex = 0.8)
+```
+\normalsize
+
+---
+
+## 特定の地域の拡大: 描画結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+library(maps)
+map(database = "state", regions = "California")
+cal.cities <- subset(us.cities, subset = (country.etc == "CA"))
+top7 <- order(cal.cities$pop, decreasing = TRUE)[1:7]
+points(x = cal.cities$long[top7], y = cal.cities$lat[top7], pch = 19)
+text(x = cal.cities$long[top7] + 2, y = cal.cities$lat[top7],
+     label = cal.cities$name[top7], cex = 0.8)
+title("Largest Cities of California")
+```
+\normalsize
+
+# 5.3.2 Rにおける色の指定
+
+---
+
+## rgb() 関数と透明度
+
+* `rgb()` で赤・緑・青の強度 (0〜1) と、透明度 (`alpha`) を指定できます。
+
+\scriptsize
+```{r, fig.height=2.8, out.height="40%", fig.align="center"}
+# 半透明の青 (alpha=0.5) を作成
+blue.trans <- rgb(red = 0, green = 0, blue = 1, alpha = 0.5)
+
+# 重なりを確認するためのプロット
+plot(x = c(1, 1.2), y = c(1, 1), xlim = c(0.5, 2), ylim = c(0.5, 1.5), 
+     pch = 16, cex = 10, col = blue.trans, main = "Transparency Example")
+```
+\normalsize
+
+# 5.3.3 米国大統領選挙のマップ
+
+---
+
+## 州別の色分け (1): 州のリストを作成
+
+* 民主党が勝った州と共和党が勝った州の名前を、それぞれ別々のリストにまとめます。
+
+\scriptsize
+```{r}
+pres08 <- read.csv("pres08.csv")
+
+# 1. オバマ（民主党）が勝った州の名前を取り出す
+# Obama > McCain という条件に合う state.name を抽出
+blue_states <- pres08$state.name[pres08$Obama > pres08$McCain]
+
+# 2. マケイン（共和党）が勝った州の名前を取り出す
+# McCain > Obama という条件に合う state.name を抽出
+red_states <- pres08$state.name[pres08$McCain > pres08$Obama]
+
+# リストの最初の方を確認
+head(blue_states, n = 5)
+```
+\normalsize
+
+---
+
+## 州別の色分け (2): 地図を塗るコード
+
+* 作成したリストを使って、指定した州をまとめて塗りつぶします。
+
+\scriptsize
+```{r, eval=FALSE}
+library(maps)
+# 1. まず米国本土の白地図を描く
+map(database = "state") 
+
+# 2. 「青い州のリスト」に含まれる州を青色(blue)で一気に塗る
+# regions 引数に名前のリストを渡す
+map(database = "state", regions = blue_states, 
+    col = "blue", fill = TRUE, add = TRUE)
+
+# 3. 「赤い州のリスト」に含まれる州を赤色(red)で一気に塗る
+map(database = "state", regions = red_states, 
+    col = "red", fill = TRUE, add = TRUE)
+```
+\normalsize
+
+---
+
+## 州別の色分け (3): 選挙結果のマップ
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+library(maps)
+map(database = "state") 
+map(database = "state", regions = blue_states, 
+    col = "blue", fill = TRUE, add = TRUE)
+map(database = "state", regions = red_states, 
+    col = "red", fill = TRUE, add = TRUE)
+title("2008 Election: Red and Blue States")
+```
+\normalsize
+
+# 5.3.4 ウォルマートの拡大
+
+---
+
+## 拡大プロセスの視覚化 (1): 準備
+
+\scriptsize
+```{r}
+walmart <- read.csv("walmart.csv")
+
+# 1. 出店形態に応じた「色の列」をデータに追加する
+walmart$col <- NA # 初期化
+
+# 店舗タイプごとに、rgb()で透過色を指定
+# Wal-MartStore は赤(red)
+walmart$col[walmart$type == "Wal-MartStore"] <- rgb(1, 0, 0, 0.2)
+# SuperCenter は緑(green)
+walmart$col[walmart$type == "SuperCenter"] <- rgb(0, 1, 0, 0.2)
+# DistributionCenter は青(blue)
+walmart$col[walmart$type == "DistributionCenter"] <- rgb(0, 0, 1, 0.5)
+```
+\normalsize
+
+---
+
+## 拡大プロセスの視覚化 (2): プロットのコード
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. 白地図を描く
+map(database = "state")
+
+# 2. 店舗の位置(long, lat)を、設定した色(col)でプロット
+# cex (点の大きさ) は、配送センター(DistributionCenter)のみ大きくする
+points(walmart$long, walmart$lat, col = walmart$col, 
+       pch = 19, cex = ifelse(walmart$type == "DistributionCenter", 1, 0.5))
+
+# 3. 凡例を追加
+legend("bottomright", legend = c("Store", "Supercenter", "Dist. Center"),
+       col = c("red", "green", "blue"), pch = 19, bty = "n", cex = 0.7)
+```
+\normalsize
+
+---
+
+## 拡大プロセスの視覚化 (3): ウォルマートの拡大マップ
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+map(database = "state")
+points(walmart$long, walmart$lat, col = walmart$col, 
+       pch = 19, cex = ifelse(walmart$type == "DistributionCenter", 1, 0.5))
+legend("bottomright", legend = c("Store", "Supercenter", "Dist. Center"),
+       col = c("red", "green", "blue"), pch = 19, bty = "n", cex = 0.7)
+title("Expansion of Walmart")
+```
+\normalsize
+
+# 5.3.5 まとめ
+
+---
+
+## まとめ
+
+* **空間分析**: 現象の地理的パターンを視覚化する強力な手法。
+* **maps パッケージ**: 基本的な地図描画と、特定地域の拡大が可能。
+* **座標とプロット**: 緯度・経度を `points()` 等で地図上に重ねる。
+* **色の活用**: `rgb()` と `alpha` を用いて、データの密度や属性を表現する。
+* **コロプレスマップ**: 地域（州など）を属性データに基づいて色分けする。

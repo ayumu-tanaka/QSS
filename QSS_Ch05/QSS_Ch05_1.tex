@@ -1,0 +1,454 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第5章: 発見\\
+(5.1. テキストデータ)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux30c6ux30adux30b9ux30c8ux30c7ux30fcux30bf}{%
+\section{5.1
+テキストデータ}\label{ux30c6ux30adux30b9ux30c8ux30c7ux30fcux30bf}}
+
+\begin{frame}{Federalist Papers の著者推定}
+\protect\hypertarget{federalist-papers-ux306eux8457ux8005ux63a8ux5b9a}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Federalist Papers}:
+  米国憲法の批准を促すために書かれた85編のエッセイ。
+\item
+  ハミルトン、マディソン、ジェイの3人が執筆したが、一部の論文については著者が不明確であった。
+\item
+  \textbf{目標}:
+  テキスト分析を用いて、著者不明の論文の執筆者を推定する。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux30c6ux30adux30b9ux30c8ux30c7ux30fcux30bfux306eux51e6ux7406}{%
+\section{5.1.1
+テキストデータの処理}\label{ux30c6ux30adux30b9ux30c8ux30c7ux30fcux30bfux306eux51e6ux7406}}
+
+\begin{frame}[fragile]{tm パッケージによる前処理}
+\protect\hypertarget{tm-ux30d1ux30c3ux30b1ux30fcux30b8ux306bux3088ux308bux524dux51e6ux7406}{}
+\begin{itemize}
+\tightlist
+\item
+  Rの \texttt{tm}
+  パッケージを使用して、文書集合（コーパス）を作成し、クリーニングを行う。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tm)}
+\NormalTok{corpus.raw }\OtherTok{\textless{}{-}} \FunctionTok{VCorpus}\NormalTok{(}\FunctionTok{DirSource}\NormalTok{(}\AttributeTok{directory =} \StringTok{"federalist"}\NormalTok{, }\AttributeTok{pattern =} \StringTok{"fp"}\NormalTok{))}
+\NormalTok{corpus.prep }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus.raw, }\FunctionTok{content\_transformer}\NormalTok{(tolower))}
+\NormalTok{corpus.prep }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus.prep, stripWhitespace)}
+\NormalTok{corpus.prep }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus.prep, removePunctuation)}
+\NormalTok{corpus.prep }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus.prep, removeNumbers)}
+
+\CommentTok{\# ステミング前の DTM (著者推定用)}
+\NormalTok{dtm.pre }\OtherTok{\textless{}{-}} \FunctionTok{DocumentTermMatrix}\NormalTok{(corpus.prep)}
+
+\CommentTok{\# ステミングありの DTM (トピック発見用)}
+\NormalTok{corpus }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus.prep, removeWords, }\FunctionTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{))}
+\NormalTok{corpus }\OtherTok{\textless{}{-}} \FunctionTok{tm\_map}\NormalTok{(corpus, stemDocument)}
+\NormalTok{dtm }\OtherTok{\textless{}{-}} \FunctionTok{DocumentTermMatrix}\NormalTok{(corpus)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux6587ux66f8ux5358ux8a9eux884cux5217-dtm}{%
+\section{5.1.2 文書単語行列
+(DTM)}\label{ux6587ux66f8ux5358ux8a9eux884cux5217-dtm}}
+
+\begin{frame}[fragile]{DTM の作成}
+\protect\hypertarget{dtm-ux306eux4f5cux6210}{}
+\begin{itemize}
+\tightlist
+\item
+  文書を「単語の出現頻度のベクトル」として表現する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 行列のサイズを確認}
+\FunctionTok{dim}\NormalTok{(dtm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]   85 4849
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 一部を表示}
+\FunctionTok{inspect}\NormalTok{(dtm[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <<DocumentTermMatrix (documents: 5, terms: 5)>>
+## Non-/sparse entries: 0/25
+## Sparsity           : 100%
+## Maximal term length: 7
+## Weighting          : term frequency (tf)
+## Sample             :
+##           Terms
+## Docs       abandon abat abb abet abhorr
+##   fp01.txt       0    0   0    0      0
+##   fp02.txt       0    0   0    0      0
+##   fp03.txt       0    0   0    0      0
+##   fp04.txt       0    0   0    0      0
+##   fp05.txt       0    0   0    0      0
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux30c8ux30d4ux30c3ux30afux306eux767aux898b}{%
+\section{5.1.3
+トピックの発見}\label{ux30c8ux30d4ux30c3ux30afux306eux767aux898b}}
+
+\begin{frame}[fragile]{ワードクラウドによる可視化}
+\protect\hypertarget{ux30efux30fcux30c9ux30afux30e9ux30a6ux30c9ux306bux3088ux308bux53efux8996ux5316}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(wordcloud)}
+\NormalTok{dtm.mat }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(dtm)}
+\CommentTok{\# 第12論文の頻出単語}
+\FunctionTok{wordcloud}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(dtm.mat), dtm.mat[}\DecValTok{12}\NormalTok{, ], }\AttributeTok{max.words =} \DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[height=0.6\textheight]{QSS_Ch05_1_files/figure-beamer/unnamed-chunk-3-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{tf-idf による重要語の抽出}
+\protect\hypertarget{tf-idf-ux306bux3088ux308bux91cdux8981ux8a9eux306eux62bdux51fa}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{tf-idf}:
+  特定の文書で頻出するが、他の文書ではあまり使われない単語を重視する指標。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dtm.tfidf }\OtherTok{\textless{}{-}} \FunctionTok{weightTfIdf}\NormalTok{(dtm)}
+\NormalTok{dtm.tfidf.mat }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(dtm.tfidf)}
+\CommentTok{\# 第12論文の重要語トップ10}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{sort}\NormalTok{(dtm.tfidf.mat[}\DecValTok{12}\NormalTok{, ], }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{), }\AttributeTok{n =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     revenu contraband     patrol      excis      coast      trade        per 
+## 0.01905877 0.01886965 0.01886965 0.01876560 0.01592559 0.01473504 0.01420342 
+##        tax       cent     gallon 
+## 0.01295466 0.01257977 0.01257977
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux8457ux8005ux63a8ux5b9aux306eux4e88ux6e2c}{%
+\section{5.1.4
+著者推定の予測}\label{ux8457ux8005ux63a8ux5b9aux306eux4e88ux6e2c}}
+
+\begin{frame}[fragile]{著者の特徴語}
+\protect\hypertarget{ux8457ux8005ux306eux7279ux5fb4ux8a9e}{}
+\begin{itemize}
+\tightlist
+\item
+  ハミルトンとマディソンで使い方が異なる「機能語」（upon, there
+  等）に注目する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ステミング前の行列を使用}
+\NormalTok{dtm.pre.mat }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(dtm.pre)}
+\CommentTok{\# 出現頻度（1000語あたり）に変換}
+\NormalTok{tfm }\OtherTok{\textless{}{-}}\NormalTok{ dtm.pre.mat }\SpecialCharTok{/} \FunctionTok{rowSums}\NormalTok{(dtm.pre.mat) }\SpecialCharTok{*} \DecValTok{1000}
+\NormalTok{words }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"although"}\NormalTok{, }\StringTok{"always"}\NormalTok{, }\StringTok{"commonly"}\NormalTok{, }\StringTok{"consequently"}\NormalTok{, }
+           \StringTok{"considerable"}\NormalTok{, }\StringTok{"enough"}\NormalTok{, }\StringTok{"there"}\NormalTok{, }\StringTok{"upon"}\NormalTok{, }\StringTok{"while"}\NormalTok{, }\StringTok{"whilst"}\NormalTok{)}
+\NormalTok{tfm }\OtherTok{\textless{}{-}}\NormalTok{ tfm[, words]}
+
+\CommentTok{\# 既知の著者のラベル付け (Hamilton=1, Madison={-}1)}
+\NormalTok{hamilton }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{6}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\DecValTok{11}\SpecialCharTok{:}\DecValTok{13}\NormalTok{, }\DecValTok{15}\SpecialCharTok{:}\DecValTok{17}\NormalTok{, }\DecValTok{21}\SpecialCharTok{:}\DecValTok{36}\NormalTok{, }\DecValTok{59}\SpecialCharTok{:}\DecValTok{61}\NormalTok{, }\DecValTok{65}\SpecialCharTok{:}\DecValTok{85}\NormalTok{)}
+\NormalTok{madison }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{37}\SpecialCharTok{:}\DecValTok{48}\NormalTok{, }\DecValTok{58}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{回帰による著者予測}
+\protect\hypertarget{ux56deux5e30ux306bux3088ux308bux8457ux8005ux4e88ux6e2c}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{author }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(tfm))}
+\NormalTok{author[hamilton] }\OtherTok{\textless{}{-}} \DecValTok{1}\NormalTok{; author[madison] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\DecValTok{1}
+\NormalTok{author.data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{author =}\NormalTok{ author[}\FunctionTok{c}\NormalTok{(hamilton, madison)], }
+\NormalTok{                          tfm[}\FunctionTok{c}\NormalTok{(hamilton, madison), ])}
+
+\CommentTok{\# 4つの単語を用いた線形回帰モデル}
+\NormalTok{hm.fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(author }\SpecialCharTok{\textasciitilde{}}\NormalTok{ upon }\SpecialCharTok{+}\NormalTok{ there }\SpecialCharTok{+}\NormalTok{ consequently }\SpecialCharTok{+}\NormalTok{ whilst, }
+             \AttributeTok{data =}\NormalTok{ author.data)}
+\CommentTok{\# 著者不明の論文 (disputed) の予測}
+\NormalTok{disputed }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{49}\NormalTok{, }\DecValTok{50}\SpecialCharTok{:}\DecValTok{57}\NormalTok{, }\DecValTok{62}\NormalTok{, }\DecValTok{63}\NormalTok{)}
+\NormalTok{pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(hm.fit, }\AttributeTok{newdata =} \FunctionTok{as.data.frame}\NormalTok{(tfm[disputed, ]))}
+\NormalTok{pred }\CommentTok{\# 全て負の値であればマディソンの可能性が高い}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    fp49.txt    fp50.txt    fp51.txt    fp52.txt    fp53.txt    fp54.txt 
+## -0.99831799 -0.06759254 -1.53243206 -0.26288400 -0.54584900 -0.56566555 
+##    fp55.txt    fp56.txt    fp57.txt    fp62.txt    fp63.txt 
+##  0.04376632 -0.57115610 -1.22289415 -1.00675456 -0.21939646
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux4ea4ux5deeux59a5ux5f53ux6027-cross-validation}{%
+\section{5.1.5 交差妥当性
+(Cross-Validation)}\label{ux4ea4ux5deeux59a5ux5f53ux6027-cross-validation}}
+
+\begin{frame}[fragile]{LOOCV の実行}
+\protect\hypertarget{loocv-ux306eux5b9fux884c}{}
+\begin{itemize}
+\tightlist
+\item
+  1つのデータを除いてモデルを学習し、除いた1つを予測することを繰り返して、モデルの汎化性能を評価する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(author.data); hm.classify }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, n)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n) \{}
+\NormalTok{    sub.fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(author }\SpecialCharTok{\textasciitilde{}}\NormalTok{ upon }\SpecialCharTok{+}\NormalTok{ there }\SpecialCharTok{+}\NormalTok{ consequently }\SpecialCharTok{+}\NormalTok{ whilst, }
+                  \AttributeTok{data =}\NormalTok{ author.data[}\SpecialCharTok{{-}}\NormalTok{i, ])}
+\NormalTok{    hm.classify[i] }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(sub.fit, }\AttributeTok{newdata =}\NormalTok{ author.data[i, ])}
+\NormalTok{\}}
+\CommentTok{\# 正答率}
+\FunctionTok{mean}\NormalTok{(hm.classify[author.data}\SpecialCharTok{$}\NormalTok{author }\SpecialCharTok{==} \DecValTok{1}\NormalTok{] }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\CommentTok{\# Hamilton}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(hm.classify[author.data}\SpecialCharTok{$}\NormalTok{author }\SpecialCharTok{==} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) }\CommentTok{\# Madison}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{5.1.6 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}{まとめ}
+\protect\hypertarget{ux307eux3068ux3081-1}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{テキストマイニング}:
+  構造化されていない文章を数値化し、分析可能にする。
+\item
+  \textbf{前処理}: 小文字化、ストップワード削除、ステミングなどが重要。
+\item
+  \textbf{DTM / tf-idf}: 単語の重要度を重み付けする。
+\item
+  \textbf{著者推定}:
+  単語の使用パターンの違いを利用して、未知の文書の執筆者を統計的に予測できる。
+\item
+  \textbf{交差妥当性}: モデルの信頼性を客観的に評価する。
+\end{itemize}
+\end{frame}
+
+\end{document}

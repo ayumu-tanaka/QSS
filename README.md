@@ -19,17 +19,19 @@ GitHub Pages: [https://ayumu-tanaka.github.io/QSS/](https://ayumu-tanaka.github.
 | 2 | QSS | 第2章 因果関係 | [PDF](QSS_Ch02/QSS_Ch02.pdf) | [RMD](QSS_Ch02/QSS_Ch02.Rmd) |
 | 3 | QSS | 第3章 測定 | [PDF](QSS_Ch03/QSS_Ch03.pdf) | [RMD](QSS_Ch03/QSS_Ch03.Rmd) |
 | 4 | QSS | 第4章 予測 | [PDF](QSS_Ch04/QSS_Ch04.pdf) | [RMD](QSS_Ch04/QSS_Ch04.Rmd) |
-| 5 | QSS | 第5章 発見 | [PDF](QSS_Ch05/QSS_Ch05.pdf) | [RMD](QSS_Ch05/QSS_Ch05.Rmd) |
-| 6 | QSS | 第6章 確率 | [PDF](QSS_Ch06/QSS_Ch06.pdf) | [RMD](QSS_Ch06/QSS_Ch06.Rmd) |
-| 7 | QSS | 第7章 不確実性 | [PDF](QSS_Ch07/QSS_Ch07.pdf) | [RMD](QSS_Ch07/QSS_Ch07.Rmd) |
-| 8 | QSS | 第8章 次の一歩 | [PDF](QSS_Ch08/QSS_Ch08.pdf) | [RMD](QSS_Ch08/QSS_Ch08.Rmd) |
-| 9 | DSS | 第1章 イントロダクション | [PDF](DSS_Ch01/DSS_Ch01.pdf) | [RMD](DSS_Ch01/DSS_Ch01.Rmd) |
-| 10 | DSS | 第2章 無作為化実験による因果効果の推定 | [PDF](DSS_Ch02/DSS_Ch02.pdf) | [RMD](DSS_Ch02/DSS_Ch02.Rmd) |
-| 11 | DSS | 第3章 社会調査研究による母集団の特徴の推論 | [PDF](DSS_Ch03/DSS_Ch03.pdf) | [RMD](DSS_Ch03/DSS_Ch03.Rmd) |
-| 12 | DSS | 第4章 予測 | [PDF](DSS_Ch04/DSS_Ch04.pdf) | [RMD](DSS_Ch04/DSS_Ch04.Rmd) |
-| 13 | DSS | 第5章 観察データによる因果効果の推定 | [PDF](DSS_Ch05/DSS_Ch05.pdf) | [RMD](DSS_Ch05/DSS_Ch05.Rmd) |
-| 14 | DSS | 第6章 確率 | [PDF](DSS_Ch06/DSS_Ch06.pdf) | [RMD](DSS_Ch06/DSS_Ch06.Rmd) |
-| 15 | DSS | 第7章 不確実性の数値化 | [PDF](DSS_Ch07/DSS_Ch07.pdf) | [RMD](DSS_Ch07/DSS_Ch07.Rmd) |
+| 5 | QSS | 第5章 発見 (5.1. テキストデータ) | [PDF](QSS_Ch05/QSS_Ch05_1.pdf) | [RMD](QSS_Ch05/QSS_Ch05_1.Rmd) |
+| 6 | QSS | 第5章 発見 (5.2. ネットワークデータ) | [PDF](QSS_Ch05/QSS_Ch05_2.pdf) | [RMD](QSS_Ch05/QSS_Ch05_2.Rmd) |
+| 7 | QSS | 第5章 発見 (5.3. 空間データ) | [PDF](QSS_Ch05/QSS_Ch05_3.pdf) | [RMD](QSS_Ch05/QSS_Ch05_3.Rmd) |
+| 8 | QSS | 第6章 確率 | [PDF](QSS_Ch06/QSS_Ch06.pdf) | [RMD](QSS_Ch06/QSS_Ch06.Rmd) |
+| 9 | QSS | 第7章 不確実性 | [PDF](QSS_Ch07/QSS_Ch07.pdf) | [RMD](QSS_Ch07/QSS_Ch07.Rmd) |
+| 10 | QSS | 第8章 次の一歩 | [PDF](QSS_Ch08/QSS_Ch08.pdf) | [RMD](QSS_Ch08/QSS_Ch08.Rmd) |
+| 11 | DSS | 第1章 イントロダクション | [PDF](DSS_Ch01/DSS_Ch01.pdf) | [RMD](DSS_Ch01/DSS_Ch01.Rmd) |
+| 12 | DSS | 第2章 無作為化実験による因果効果の推定 | [PDF](DSS_Ch02/DSS_Ch02.pdf) | [RMD](DSS_Ch02/DSS_Ch02.Rmd) |
+| 13 | DSS | 第3章 社会調査研究による母集団の特徴の推論 | [PDF](DSS_Ch03/DSS_Ch03.pdf) | [RMD](DSS_Ch03/DSS_Ch03.Rmd) |
+| 14 | DSS | 第4章 予測 | [PDF](DSS_Ch04/DSS_Ch04.pdf) | [RMD](DSS_Ch04/DSS_Ch04.Rmd) |
+| 15 | DSS | 第5章 観察データによる因果効果の推定 | [PDF](DSS_Ch05/DSS_Ch05.pdf) | [RMD](DSS_Ch05/DSS_Ch05.Rmd) |
+| 16 | DSS | 第6章 確率 | [PDF](DSS_Ch06/DSS_Ch06.pdf) | [RMD](DSS_Ch06/DSS_Ch06.Rmd) |
+| 17 | DSS | 第7章 不確実性の数値化 | [PDF](DSS_Ch07/DSS_Ch07.pdf) | [RMD](DSS_Ch07/DSS_Ch07.Rmd) |
 
 
 ## 参考・出典
