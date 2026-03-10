@@ -10,7 +10,6 @@
 
 GitHub Pages: [https://ayumu-tanaka.github.io/QSS/](https://ayumu-tanaka.github.io/QSS/)
 
-
 ## スライド一覧
 
 | No | 章タイトル | PDF | RMD |
@@ -36,6 +35,7 @@ GitHub Pages: [https://ayumu-tanaka.github.io/QSS/](https://ayumu-tanaka.github.
 | 19 | 6. 確率 | [PDF](QSS_Ch06/QSS_Ch06.pdf) | [RMD](QSS_Ch06/QSS_Ch06.Rmd) |
 | 20 | 7. 不確実性 | [PDF](QSS_Ch07/QSS_Ch07.pdf) | [RMD](QSS_Ch07/QSS_Ch07.Rmd) |
 | 21 | 8. 次の一歩 | [PDF](QSS_Ch08/QSS_Ch08.pdf) | [RMD](QSS_Ch08/QSS_Ch08.Rmd) |
+
 ## 出典
 
 ### 社会科学のためのデータ分析入門 (QSS)

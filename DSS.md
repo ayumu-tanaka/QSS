@@ -10,13 +10,13 @@
 
 | No | 章タイトル | PDF | RMD |
 |:---|:---|:---|:---|
-| 1 | 第1章 イントロダクション | [PDF](DSS_Ch01/DSS_Ch01.pdf) | [RMD](DSS_Ch01/DSS_Ch01.Rmd) |
-| 2 | 第2章 無作為化実験による因果効果の推定 | [PDF](DSS_Ch02/DSS_Ch02.pdf) | [RMD](DSS_Ch02/DSS_Ch02.Rmd) |
-| 3 | 第3章 社会調査研究による母集団の特徴の推論 | [PDF](DSS_Ch03/DSS_Ch03.pdf) | [RMD](DSS_Ch03/DSS_Ch03.Rmd) |
-| 4 | 第4章 予測 | [PDF](DSS_Ch04/DSS_Ch04.pdf) | [RMD](DSS_Ch04/DSS_Ch04.Rmd) |
-| 5 | 第5章 観察データによる因果効果の推定 | [PDF](DSS_Ch05/DSS_Ch05.pdf) | [RMD](DSS_Ch05/DSS_Ch05.Rmd) |
-| 6 | 第6章 確率 | [PDF](DSS_Ch06/DSS_Ch06.pdf) | [RMD](DSS_Ch06/DSS_Ch06.Rmd) |
-| 7 | 第7章 不確実性の数値化 | [PDF](DSS_Ch07/DSS_Ch07.pdf) | [RMD](DSS_Ch07/DSS_Ch07.Rmd) |
+| 1 | 1. イントロダクション | [PDF](DSS_Ch01/DSS_Ch01.pdf) | [RMD](DSS_Ch01/DSS_Ch01.Rmd) |
+| 2 | 2. 無作為化実験による因果効果の推定 | [PDF](DSS_Ch02/DSS_Ch02.pdf) | [RMD](DSS_Ch02/DSS_Ch02.Rmd) |
+| 3 | 3. 社会調査研究による母集団の特徴の推論 | [PDF](DSS_Ch03/DSS_Ch03.pdf) | [RMD](DSS_Ch03/DSS_Ch03.Rmd) |
+| 4 | 4. 予測 | [PDF](DSS_Ch04/DSS_Ch04.pdf) | [RMD](DSS_Ch04/DSS_Ch04.Rmd) |
+| 5 | 5. 観察データによる因果効果の推定 | [PDF](DSS_Ch05/DSS_Ch05.pdf) | [RMD](DSS_Ch05/DSS_Ch05.Rmd) |
+| 6 | 6. 確率 | [PDF](DSS_Ch06/DSS_Ch06.pdf) | [RMD](DSS_Ch06/DSS_Ch06.Rmd) |
+| 7 | 7. 不確実性の数値化 | [PDF](DSS_Ch07/DSS_Ch07.pdf) | [RMD](DSS_Ch07/DSS_Ch07.Rmd) |
 
 ## 出典
 
