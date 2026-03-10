@@ -1,0 +1,396 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{Montpellier}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{第3章: 測定\\
+(3.3. 1変量の分布をビジュアル化する)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\section{3.3
+1変量の分布をビジュアル化する}\label{ux5909ux91cfux306eux5206ux5e03ux3092ux30d3ux30b8ux30e5ux30a2ux30ebux5316ux3059ux308b}
+
+\begin{frame}{データの可視化の重要性}
+\phantomsection\label{ux30c7ux30fcux30bfux306eux53efux8996ux5316ux306eux91cdux8981ux6027}
+\begin{itemize}
+\tightlist
+\item
+  数値の羅列（平均や標準偏差など）だけでは、データの全体像を把握しきれない。
+\item
+  グラフを用いることで、以下を確認できる：
+
+  \begin{itemize}
+  \tightlist
+  \item
+    分布の形状（対称性、偏り）
+  \item
+    外れ値の存在
+  \item
+    グループ間の違い
+  \end{itemize}
+\item
+  変数の種類（カテゴリ変数か数値変数か）によって、適切なグラフを選択する必要がある。
+\end{itemize}
+\end{frame}
+
+\section{3.3.1 棒グラフ (Bar
+Plot)}\label{ux68d2ux30b0ux30e9ux30d5-bar-plot}
+
+\begin{frame}[fragile]{カテゴリ変数の可視化}
+\phantomsection\label{ux30abux30c6ux30b4ux30eaux5909ux6570ux306eux53efux8996ux5316}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{棒グラフ}: 各カテゴリの度数や比率を棒の高さで表現する。
+\item
+  アフガニスタン調査の「被害経験」を例にします。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# データの準備}
+\NormalTok{afghan }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"afghan.csv"}\NormalTok{)}
+
+\CommentTok{\# 1. ISAFによる被害経験の比率表を作成 (欠損値 NA も含める)}
+\NormalTok{isaf.ptable }\OtherTok{\textless{}{-}} \FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(}\AttributeTok{ISAF =}\NormalTok{ afghan}\SpecialCharTok{$}\NormalTok{violent.exp.ISAF, }
+                                \AttributeTok{exclude =} \ConstantTok{NULL}\NormalTok{))}
+\NormalTok{isaf.ptable}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## ISAF
+##           0           1        <NA> 
+## 0.619462600 0.371459695 0.009077705
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{棒グラフの描画: コード}
+\phantomsection\label{ux68d2ux30b0ux30e9ux30d5ux306eux63cfux753b-ux30b3ux30fcux30c9}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. barplot() 関数で棒グラフを作成}
+\FunctionTok{barplot}\NormalTok{(isaf.ptable,}
+        \AttributeTok{names.arg =} \FunctionTok{c}\NormalTok{(}\StringTok{"No harm"}\NormalTok{, }\StringTok{"Harm"}\NormalTok{, }\StringTok{"Nonresponse"}\NormalTok{), }\CommentTok{\# X軸のラベル名}
+        \AttributeTok{main =} \StringTok{"Civilian Victimization by the ISAF"}\NormalTok{,     }\CommentTok{\# タイトル}
+        \AttributeTok{xlab =} \StringTok{"Response Category"}\NormalTok{,                      }\CommentTok{\# X軸ラベル}
+        \AttributeTok{ylab =} \StringTok{"Proportion"}\NormalTok{,                             }\CommentTok{\# Y軸ラベル}
+        \AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.7}\NormalTok{))                                }\CommentTok{\# Y軸の範囲}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{棒グラフの描画: 結果}
+\phantomsection\label{ux68d2ux30b0ux30e9ux30d5ux306eux63cfux753b-ux7d50ux679c}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.55\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-3-1} \end{center}
+\normalsize
+\end{frame}
+
+\section{3.3.2 ヒストグラム
+(Histogram)}\label{ux30d2ux30b9ux30c8ux30b0ux30e9ux30e0-histogram}
+
+\begin{frame}[fragile]{数値変数の密度を可視化する}
+\phantomsection\label{ux6570ux5024ux5909ux6570ux306eux5bc6ux5ea6ux3092ux53efux8996ux5316ux3059ux308b}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{ヒストグラム}:
+  連続的な数値変数の分布を、「ビン」と呼ばれる階級ごとに集計して表示する。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. hist() 関数でヒストグラムを作成}
+\CommentTok{\# freq = FALSE とすることで、度数ではなく「密度（面積の合計が1）」で表示}
+\FunctionTok{hist}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{age, }
+     \AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }
+     \AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.04}\NormalTok{), }
+     \AttributeTok{xlab =} \StringTok{"Age"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Distribution of Respondent\textquotesingle{}s Age"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{年齢の分布: 結果}
+\phantomsection\label{ux5e74ux9f62ux306eux5206ux5e03-ux7d50ux679c}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.55\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-5-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{ヒストグラムのカスタマイズ（教育年数）}
+\phantomsection\label{ux30d2ux30b9ux30c8ux30b0ux30e9ux30e0ux306eux30abux30b9ux30bfux30deux30a4ux30baux6559ux80b2ux5e74ux6570}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{breaks} 引数でビンの幅を細かく制御し、\texttt{abline()}
+  で中央値を重ねます。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 教育年数のヒストグラム (1年刻みのビンを設定)}
+\FunctionTok{hist}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{educ.years, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }
+     \AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\AttributeTok{to =} \FloatTok{18.5}\NormalTok{, }\AttributeTok{by =} \DecValTok{1}\NormalTok{),}
+     \AttributeTok{xlab =} \StringTok{"Years of Education"}\NormalTok{, }
+     \AttributeTok{main =} \StringTok{"Distribution of Education"}\NormalTok{)}
+
+\CommentTok{\# 2. 中央値 (median) を示す垂直線 (Vertical line) を追加}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \FunctionTok{median}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{educ.years), }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# 3. テキストラベルを追加}
+\FunctionTok{text}\NormalTok{(}\AttributeTok{x =} \FunctionTok{median}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{educ.years) }\SpecialCharTok{+} \DecValTok{2}\NormalTok{, }\AttributeTok{y =} \FloatTok{0.4}\NormalTok{, }\StringTok{"Median"}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{教育年数の分布: 結果}
+\phantomsection\label{ux6559ux80b2ux5e74ux6570ux306eux5206ux5e03-ux7d50ux679c}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.55\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-7-1} \end{center}
+\normalsize
+\end{frame}
+
+\section{3.3.3 箱ひげ図 (Box
+Plot)}\label{ux7bb1ux3072ux3052ux56f3-box-plot}
+
+\begin{frame}[fragile]{グループ間の分布の比較}
+\phantomsection\label{ux30b0ux30ebux30fcux30d7ux9593ux306eux5206ux5e03ux306eux6bd4ux8f03}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{箱ひげ図}:
+  5数要約（最小値、第1四分位数、中央値、第3四分位数、最大値）を可視化する。
+\item
+  グループごとの分布の「位置」と「広がり」を比較するのに適している。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. boxplot(数値変数 \textasciitilde{} 分類変数) という形式で描画}
+\CommentTok{\# 州 (province) ごとの教育年数 (educ.years) を比較}
+\FunctionTok{boxplot}\NormalTok{(educ.years }\SpecialCharTok{\textasciitilde{}}\NormalTok{ province, }
+        \AttributeTok{data =}\NormalTok{ afghan, }
+        \AttributeTok{main =} \StringTok{"Education by Province"}\NormalTok{, }
+        \AttributeTok{ylab =} \StringTok{"Years of Education"}\NormalTok{,}
+        \AttributeTok{xlab =} \StringTok{"Province"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{州別の教育年数: 結果}
+\phantomsection\label{ux5ddeux5225ux306eux6559ux80b2ux5e74ux6570-ux7d50ux679c}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.55\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-9-1} \end{center}
+\normalsize
+\end{frame}
+
+\section{3.3.4 まとめ}\label{ux307eux3068ux3081}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{棒グラフ}: カテゴリ変数に適しており、比率や度数を比較する。
+\item
+  \textbf{ヒストグラム}:
+  数値変数の分布の形（山がどこにあるかなど）を確認する。
+\item
+  \textbf{箱ひげ図}: 複数のグループ間で分布を比較する際に非常に強力。
+\item
+  \textbf{グラフの調整}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    タイトル (\texttt{main}) や軸ラベル (\texttt{xlab}, \texttt{ylab})
+    を適切につける。
+  \item
+    色や線 (\texttt{abline})、テキスト (\texttt{text})
+    を追加して情報を強調する。
+  \end{itemize}
+\item
+  \textbf{Rの操作}: \texttt{barplot()}, \texttt{hist()},
+  \texttt{boxplot()}, \texttt{abline()}, \texttt{text()}。
+\end{itemize}
+\end{frame}
+
+\end{document}

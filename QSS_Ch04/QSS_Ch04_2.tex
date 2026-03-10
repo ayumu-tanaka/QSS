@@ -1,0 +1,455 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{Montpellier}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{第4章: 予測\\
+(4.2. 線形回帰)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\section{4.2 線形回帰 (Linear
+Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}
+
+\begin{frame}{線形回帰の基本概念}
+\phantomsection\label{ux7ddaux5f62ux56deux5e30ux306eux57faux672cux6982ux5ff5}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{線形回帰}: 結果変数 \(Y\) と説明変数 \(X\)
+  の関係を直線で近似する手法。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    数式: \(\hat{Y} = \hat{\alpha} + \hat{\beta} X\)
+  \item
+    \(\hat{Y}\): 予測値（Fitted value）
+  \item
+    \(\hat{\alpha}\): 切片（Intercept）
+  \item
+    \(\hat{\beta}\): 傾き（Slope / 係数）
+  \end{itemize}
+\item
+  \textbf{最小二乗法 (OLS)}: 観測値 \(Y\) と予測値 \(\hat{Y}\)
+  の差（残差）の二乗和を最小にする \(\hat{\alpha}\) と \(\hat{\beta}\)
+  を選ぶ。
+\end{itemize}
+\end{frame}
+
+\section{4.2.1
+外見と選挙結果}\label{ux5916ux898bux3068ux9078ux6319ux7d50ux679c}
+
+\begin{frame}[fragile]{顔の印象と得票率のデータ}
+\phantomsection\label{ux9854ux306eux5370ux8c61ux3068ux5f97ux7968ux7387ux306eux30c7ux30fcux30bf}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{問い}:
+  候補者の「有能そうな顔立ち」は、実際の得票率に影響するか？
+\item
+  データ: 2000〜2004年の米議会選データ (\texttt{face.csv})。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. データの読み込み}
+\NormalTok{face }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"face.csv"}\NormalTok{)}
+
+\CommentTok{\# 2. 民主党と共和党の得票率、およびその差（マージン）を計算}
+\NormalTok{face}\SpecialCharTok{$}\NormalTok{d.share }\OtherTok{\textless{}{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{d.votes }\SpecialCharTok{/}\NormalTok{ (face}\SpecialCharTok{$}\NormalTok{d.votes }\SpecialCharTok{+}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.votes)}
+\NormalTok{face}\SpecialCharTok{$}\NormalTok{r.share }\OtherTok{\textless{}{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.votes }\SpecialCharTok{/}\NormalTok{ (face}\SpecialCharTok{$}\NormalTok{d.votes }\SpecialCharTok{+}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.votes)}
+\NormalTok{face}\SpecialCharTok{$}\NormalTok{diff.share }\OtherTok{\textless{}{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{d.share }\SpecialCharTok{{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.share}
+
+\CommentTok{\# 3. データの確認 (d.comp は有能さのスコア)}
+\FunctionTok{head}\NormalTok{(face[, }\FunctionTok{c}\NormalTok{(}\StringTok{"d.comp"}\NormalTok{, }\StringTok{"diff.share"}\NormalTok{)], }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      d.comp diff.share
+## 1 0.5645676 0.21012941
+## 2 0.3419122 0.11943099
+## 3 0.6123680 0.04990747
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{相関係数の計算}
+\phantomsection\label{ux76f8ux95a2ux4fc2ux6570ux306eux8a08ux7b97}
+\begin{itemize}
+\tightlist
+\item
+  2変数の線形な関係の強さを確認します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 有能さスコア (d.comp) と得票率の差 (diff.share) の相関}
+\FunctionTok{cor}\NormalTok{(face}\SpecialCharTok{$}\NormalTok{d.comp, face}\SpecialCharTok{$}\NormalTok{diff.share)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4327743
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\section{4.2.2
+最小二乗法による推定}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306bux3088ux308bux63a8ux5b9a}
+
+\begin{frame}[fragile]{lm() 関数の使用: コード}
+\phantomsection\label{lm-ux95a2ux6570ux306eux4f7fux7528-ux30b3ux30fcux30c9}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{lm(結果変数\ \textasciitilde{}\ 説明変数,\ data\ =\ データフレーム)}
+  という形式で回帰分析を行います。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 回帰モデルの推定}
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(diff.share }\SpecialCharTok{\textasciitilde{}}\NormalTok{ d.comp, }\AttributeTok{data =}\NormalTok{ face)}
+
+\CommentTok{\# 2. 推定された係数（切片と傾き）の表示}
+\FunctionTok{coef}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (Intercept)      d.comp 
+##  -0.3122259   0.6603815
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3. 予測値（Fitted values）の最初の数件を確認}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{fitted}\NormalTok{(fit))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           1           2           3           4           5           6 
+##  0.06060411 -0.08643340  0.09217061  0.04539236  0.13698690 -0.10057206
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{回帰直線のプロット: コード}
+\phantomsection\label{ux56deux5e30ux76f4ux7ddaux306eux30d7ux30edux30c3ux30c8-ux30b3ux30fcux30c9}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 散布図の作成}
+\FunctionTok{plot}\NormalTok{(face}\SpecialCharTok{$}\NormalTok{d.comp, face}\SpecialCharTok{$}\NormalTok{diff.share, }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{1.05}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+     \AttributeTok{xlab =} \StringTok{"Competence scores for Democrats"}\NormalTok{,}
+     \AttributeTok{ylab =} \StringTok{"Democratic margin in vote share"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Facial competence and vote share"}\NormalTok{)}
+
+\CommentTok{\# 2. 推定された回帰直線を重ねる}
+\FunctionTok{abline}\NormalTok{(fit, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{回帰直線のプロット: 描画結果}
+\phantomsection\label{ux56deux5e30ux76f4ux7ddaux306eux30d7ux30edux30c3ux30c8-ux63cfux753bux7d50ux679c}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.55\textheight]{QSS_Ch04_2_files/figure-beamer/unnamed-chunk-5-1} \end{center}
+\normalsize
+\end{frame}
+
+\section{4.2.3
+データの結合と平均への回帰}\label{ux30c7ux30fcux30bfux306eux7d50ux5408ux3068ux5e73ux5747ux3078ux306eux56deux5e30}
+
+\begin{frame}[fragile]{merge() によるデータの結合}
+\phantomsection\label{merge-ux306bux3088ux308bux30c7ux30fcux30bfux306eux7d50ux5408}
+\begin{itemize}
+\tightlist
+\item
+  異なる年のデータを州名などの「キー」を使って統合します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. データの読み込み}
+\NormalTok{pres08 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"pres08.csv"}\NormalTok{)}
+\NormalTok{pres12 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"pres12.csv"}\NormalTok{)}
+
+\CommentTok{\# 2. state 列を共通キーとして結合}
+\NormalTok{pres }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(pres08, pres12, }\AttributeTok{by =} \StringTok{"state"}\NormalTok{)}
+
+\CommentTok{\# 3. 結合後のデータを確認 (Obama.x は2008年、Obama.y は2012年)}
+\FunctionTok{head}\NormalTok{(pres[, }\FunctionTok{c}\NormalTok{(}\StringTok{"state"}\NormalTok{, }\StringTok{"Obama.x"}\NormalTok{, }\StringTok{"Obama.y"}\NormalTok{)], }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   state Obama.x Obama.y
+## 1    AK      38      41
+## 2    AL      39      38
+## 3    AR      39      37
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\section{4.2.4
+モデルの適合度}\label{ux30e2ux30c7ux30ebux306eux9069ux5408ux5ea6}
+
+\begin{frame}[fragile]{決定係数 (\(R^2\)) の計算}
+\phantomsection\label{ux6c7aux5b9aux4fc2ux6570-r2-ux306eux8a08ux7b97}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\(R^2\)}:
+  モデルがデータの変動をどれだけ説明できているかを示す指標（0〜1）。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. フロリダ州の選挙データ}
+\NormalTok{florida }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"florida.csv"}\NormalTok{)}
+
+\CommentTok{\# 2. 回帰分析の実行}
+\NormalTok{fit2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Buchanan00 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Perot96, }\AttributeTok{data =}\NormalTok{ florida)}
+
+\CommentTok{\# 3. summary() 関数から決定係数を取り出す}
+\FunctionTok{summary}\NormalTok{(fit2)}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5130333
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{残差プロット (Residual Plot): コード}
+\phantomsection\label{ux6b8bux5deeux30d7ux30edux30c3ux30c8-residual-plot-ux30b3ux30fcux30c9}
+\begin{itemize}
+\tightlist
+\item
+  予測が系統的に外れていないか、外れ値がないかを確認します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 横軸に予測値、縦軸に残差をプロット}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{fitted}\NormalTok{(fit2), }\FunctionTok{resid}\NormalTok{(fit2), }
+     \AttributeTok{xlab =} \StringTok{"Fitted values"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Residuals"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Residual Plot"}\NormalTok{)}
+\CommentTok{\# 残差 0 の水平線を追加}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{残差プロット: 描画結果}
+\phantomsection\label{ux6b8bux5deeux30d7ux30edux30c3ux30c8-ux63cfux753bux7d50ux679c}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.55\textheight]{QSS_Ch04_2_files/figure-beamer/unnamed-chunk-9-1} \end{center}
+\normalsize
+\end{frame}
+
+\section{4.2.5 まとめ}\label{ux307eux3068ux3081}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{線形回帰}: \(Y\) と \(X\) の関係を直線
+  \(\hat{Y} = \hat{\alpha} + \hat{\beta} X\) でモデル化する。
+\item
+  \textbf{最小二乗法}:
+  残差の二乗和を最小にすることで、最適な係数を推定する。
+\item
+  \textbf{データの統合}: \texttt{merge()}
+  を使って、複数のソースからのデータを適切に結合する。
+\item
+  \textbf{適合度の評価}: 決定係数 (\(R^2\))
+  や残差プロットを用いて、モデルの良し悪しを判断する。
+\item
+  \textbf{Rの操作}: \texttt{lm()}, \texttt{coef()}, \texttt{fitted()},
+  \texttt{resid()}, \texttt{merge()}, \texttt{summary()\$r.squared}。
+\end{itemize}
+\end{frame}
+
+\end{document}

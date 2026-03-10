@@ -1,0 +1,432 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第3章: 測定\\
+(3.2. Rで欠損データを扱う)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{rux3067ux6b20ux640dux30c7ux30fcux30bfux3092ux6271ux3046}{%
+\section{3.2
+Rで欠損データを扱う}\label{rux3067ux6b20ux640dux30c7ux30fcux30bfux3092ux6271ux3046}}
+
+\begin{frame}[fragile]{欠損値 (Missing Data) とは}
+\protect\hypertarget{ux6b20ux640dux5024-missing-data-ux3068ux306f}{}
+\begin{itemize}
+\tightlist
+\item
+  調査において、回答者が質問に答えなかったり、回答を拒否したりした場合に生じる。
+\item
+  Rでは、欠損値は \textbf{\texttt{NA}} (Not Available)
+  という特別な記号で表される。
+\item
+  \textbf{注意}: \texttt{NA}
+  が含まれるデータに対してそのまま計算（平均など）を行うと、結果も
+  \texttt{NA} になってしまう。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux6b20ux640dux5024ux306eux78baux8a8d}{%
+\section{3.2.1
+欠損値の確認}\label{ux6b20ux640dux5024ux306eux78baux8a8d}}
+
+\begin{frame}[fragile]{is.na() 関数}
+\protect\hypertarget{is.na-ux95a2ux6570}{}
+\begin{itemize}
+\tightlist
+\item
+  データが \texttt{NA} かどうかを判定します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# アフガニスタン調査データの読み込み}
+\NormalTok{afghan }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"afghan.csv"}\NormalTok{)}
+
+\CommentTok{\# 1. 最初の10人分の収入データを確認}
+\FunctionTok{head}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{income, }\AttributeTok{n =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "2,001-10,000"  "2,001-10,000"  "2,001-10,000"  "2,001-10,000" 
+##  [5] "2,001-10,000"  NA              "10,001-20,000" "2,001-10,000" 
+##  [9] "2,001-10,000"  NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. 欠損値かどうかを判定 (TRUEが欠損)}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{income), }\AttributeTok{n =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{欠損値の数と割合の計算}
+\protect\hypertarget{ux6b20ux640dux5024ux306eux6570ux3068ux5272ux5408ux306eux8a08ux7b97}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{is.na()} の結果（TRUE/FALSE）を \texttt{sum()} や
+  \texttt{mean()} に渡すことで集計できます。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 欠損値の総数をカウント}
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{income))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 154
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. 全体に占める欠損値の割合を計算}
+\FunctionTok{mean}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{income))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.05591866
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux6b20ux640dux5024ux304cux3042ux308bux5834ux5408ux306eux8a08ux7b97}{%
+\section{3.2.2
+欠損値がある場合の計算}\label{ux6b20ux640dux5024ux304cux3042ux308bux5834ux5408ux306eux8a08ux7b97}}
+
+\begin{frame}[fragile]{na.rm オプション}
+\protect\hypertarget{na.rm-ux30aaux30d7ux30b7ux30e7ux30f3}{}
+\begin{itemize}
+\tightlist
+\item
+  多くの統計関数には、\texttt{NA} を除外して計算するための
+  \texttt{na.rm\ =\ TRUE} という引数があります。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# サンプルベクトルの作成}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\ConstantTok{NA}\NormalTok{)}
+
+\CommentTok{\# そのまま平均を計算すると NA になる}
+\FunctionTok{mean}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# NAを除外して平均を計算}
+\FunctionTok{mean}\NormalTok{(x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{集計表における欠損値の表示}
+\protect\hypertarget{ux96c6ux8a08ux8868ux306bux304aux3051ux308bux6b20ux640dux5024ux306eux8868ux793a}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{table()} 関数で \texttt{exclude\ =\ NULL}
+  を指定すると、\texttt{NA} も一つのカテゴリとして表示されます。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 被害経験のクロス集計に NA も含める}
+\CommentTok{\# exclude = NULL を入れないと NA は無視される}
+\FunctionTok{table}\NormalTok{(}\AttributeTok{ISAF =}\NormalTok{ afghan}\SpecialCharTok{$}\NormalTok{violent.exp.ISAF, }
+      \AttributeTok{Taliban =}\NormalTok{ afghan}\SpecialCharTok{$}\NormalTok{violent.exp.taliban, }
+      \AttributeTok{exclude =} \ConstantTok{NULL}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Taliban
+## ISAF      0    1 <NA>
+##   0    1330  354   22
+##   1     475  526   22
+##   <NA>    7    8   10
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux6b20ux640dux5024ux306eux9664ux5916}{%
+\section{3.2.3
+欠損値の除外}\label{ux6b20ux640dux5024ux306eux9664ux5916}}
+
+\begin{frame}[fragile]{na.omit() による一括除外}
+\protect\hypertarget{na.omit-ux306bux3088ux308bux4e00ux62ecux9664ux5916}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{リストワイズ削除}: 1つでも \texttt{NA}
+  を含む行（回答者）をデータセット全体から削除します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 1つでも欠損値がある行をすべて削除した新しいデータセットを作成}
+\NormalTok{afghan.sub }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(afghan)}
+
+\CommentTok{\# 2. 元の行数と、削除後の行数を比較}
+\FunctionTok{nrow}\NormalTok{(afghan)     }\CommentTok{\# 元のデータ}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2754
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(afghan.sub) }\CommentTok{\# 削除後のデータ}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2554
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3. 特定の変数だけから NA を除く}
+\FunctionTok{length}\NormalTok{(}\FunctionTok{na.omit}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{income))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2600
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{3.2.4 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{NAの理解}: Rにおいて欠損値は \texttt{NA}
+  で表され、計算に影響を及ぼす。
+\item
+  \textbf{確認と集計}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{is.na()} で確認し、\texttt{sum()} や \texttt{mean()}
+    で量を確認する。
+  \item
+    \texttt{table(...,\ exclude\ =\ NULL)}
+    で回答拒否なども含めた全体像を把握する。
+  \end{itemize}
+\item
+  \textbf{処理方法}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{mean(...,\ na.rm\ =\ TRUE)} のように、その都度除外する。
+  \item
+    \texttt{na.omit()}
+    でデータセットから欠損のある行を一括削除する（分析対象が減ることに注意）。
+  \end{itemize}
+\item
+  \textbf{Rの操作}: \texttt{is.na()}, \texttt{na.rm},
+  \texttt{na.omit()}, \texttt{nrow()}。
+\end{itemize}
+\end{frame}
+
+\end{document}

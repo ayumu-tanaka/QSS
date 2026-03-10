@@ -1,0 +1,180 @@
+---
+title: |
+    | 第3章: 測定
+    | (3.5. 政治的分極化を測定する / 3.6. 2変量関係の要約)
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 3.5 政治的分極化を測定する / 3.6 2変量関係の要約
+
+---
+
+## 政治的分極化 (Political Polarization)
+
+* **問い**: 米国の政治家は、時間の経過とともに思想的に離れていっているか？
+* **測定**: 議員の投票行動に基づく思想スコア (DW-NOMINATE) を使用。
+    * 第1次元: 経済的自由主義/保守主義
+    * 第2次元: 人種問題・社会問題
+* **2変量関係**: 2つの変数が互いにどのように関連しているかを、散布図や相関係数を用いて分析する。
+
+# 3.6.1 散布図 (Scatter Plot)
+
+---
+
+## 思想スコアの可視化 (1): データの準備
+
+\scriptsize
+```{r}
+# 1. 議会投票データの読み込み
+congress <- read.csv("congress.csv")
+
+# 2. 共和党 (Republican) と民主党 (Democrat) にデータを分ける
+rep <- subset(congress, subset = (party == "Republican"))
+dem <- subset(congress, subset = (party == "Democrat"))
+
+# 3. 第80議会と第112議会のデータを抽出
+dem80 <- subset(dem, subset = (congress == 80))
+rep80 <- subset(rep, subset = (congress == 80))
+dem112 <- subset(dem, subset = (congress == 112))
+rep112 <- subset(rep, subset = (congress == 112))
+```
+\normalsize
+
+---
+
+## 散布図の作成 (第80議会): コード
+
+\scriptsize
+```{r, eval=FALSE}
+# 散布図のプロット範囲とラベルの設定
+lim <- c(-1.5, 1.5)
+xlab <- "Economic liberalism/conservatism"
+ylab <- "Racial liberalism/conservatism"
+
+# 1. 民主党議員を青い丸 (pch=16) でプロット
+plot(dem80$dwnom1, dem80$dwnom2, pch = 16, col = "blue", 
+     xlim = lim, ylim = lim, xlab = xlab, ylab = ylab, main = "80th Congress")
+
+# 2. 共和党議員を赤い三角 (pch=17) で重ねてプロット
+points(rep80$dwnom1, rep80$dwnom2, pch = 17, col = "red")
+```
+\normalsize
+
+---
+
+## 散布図の作成 (第80議会): 描画結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+lim <- c(-1.5, 1.5); xlab <- "Economic"; ylab <- "Racial"
+plot(dem80$dwnom1, dem80$dwnom2, pch = 16, col = "blue", 
+     xlim = lim, ylim = lim, xlab = xlab, ylab = ylab, main = "80th Congress")
+points(rep80$dwnom1, rep80$dwnom2, pch = 17, col = "red")
+```
+\normalsize
+
+---
+
+## 散布図の作成 (第112議会): 描画結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+plot(dem112$dwnom1, dem112$dwnom2, pch = 16, col = "blue", 
+     xlim = lim, ylim = lim, xlab = xlab, ylab = ylab, main = "112th Congress")
+points(rep112$dwnom1, rep112$dwnom2, pch = 17, col = "red")
+```
+\normalsize
+
+* **観察**: 第80議会（1940年代）に比べ、第112議会（2010年代）では両党が思想的に大きく離れている（分極化）。
+
+---
+
+## 分極化の推移: コード
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. 各議会ごとの両党の中央値を計算 (tapplyを使用)
+dem.median <- tapply(dem$dwnom1, dem$congress, median)
+rep.median <- tapply(rep$dwnom1, rep$congress, median)
+
+# 2. 民主党の中央値の推移を折れ線グラフで描画
+plot(names(dem.median), dem.median, col = "blue", type = "l",
+     xlim = c(80, 115), ylim = c(-1, 1), xlab = "Congress",
+     ylab = "Median DW-NOMINATE score")
+
+# 3. 共和党の推移を重ねる
+lines(names(rep.median), rep.median, col = "red")
+```
+\normalsize
+
+---
+
+## 分極化の推移: 描画結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+dem.median <- tapply(dem$dwnom1, dem$congress, median)
+rep.median <- tapply(rep$dwnom1, rep$congress, median)
+plot(names(dem.median), dem.median, col = "blue", type = "l",
+     xlim = c(80, 115), ylim = c(-1, 1), xlab = "Congress",
+     ylab = "Median DW-NOMINATE score")
+lines(names(rep.median), rep.median, col = "red")
+```
+\normalsize
+
+# 3.6.2 相関 (Correlation)
+
+---
+
+## 分極化と経済的不平等の関係
+
+* **問い**: 政治の分極化は、経済的な格差と連動しているか？
+* ジニ係数（格差の指標）との相関を調べます。
+
+\scriptsize
+```{r}
+# 1. ジニ係数データの読み込み
+gini <- read.csv("USGini.csv")
+
+# 2. 分極化の指標（共和党中央値 - 民主党中央値）との相関を計算
+# 隔年（議会が開かれる年）のジニ係数のみを抽出して比較
+cor(gini$gini[seq(from = 2, to = nrow(gini), by = 2)], 
+    rep.median - dem.median)
+```
+\normalsize
+
+* **解釈**: 相関係数が約 0.94 と非常に高く、強い正の相関があることがわかる。
+
+# 3.6.3 まとめ
+
+---
+
+## このセクションのまとめ
+
+* **散布図**: 2つの数値変数の関係を視覚化する最も基本的な方法。
+* **分極化の測定**: 中央値の差や散布図上の分布の変化から、思想的な隔たりを捉える。
+* **相関係数**: 2変数の線形な関係の強さを数値化する（-1 から 1）。
+* **格差と政治**: 経済的な不平等と政治的な対立が強く関連している可能性を示唆。
+* **Rの操作**: 
+    * `plot()`, `points()`, `lines()` による重ね書き。
+    * `tapply()` によるグループ別集計。
+    * `cor()` による相関の算出。
+    * `seq()` を用いたデータの規則的な抽出。

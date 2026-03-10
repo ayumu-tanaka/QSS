@@ -1,0 +1,373 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第3章: 測定\\
+(3.5. 政治的分極化を測定する / 3.6. 2変量関係の要約)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux653fux6cbbux7684ux5206ux6975ux5316ux3092ux6e2cux5b9aux3059ux308b-3.6-2ux5909ux91cfux95a2ux4fc2ux306eux8981ux7d04}{%
+\section{3.5 政治的分極化を測定する / 3.6
+2変量関係の要約}\label{ux653fux6cbbux7684ux5206ux6975ux5316ux3092ux6e2cux5b9aux3059ux308b-3.6-2ux5909ux91cfux95a2ux4fc2ux306eux8981ux7d04}}
+
+\begin{frame}{政治的分極化 (Political Polarization)}
+\protect\hypertarget{ux653fux6cbbux7684ux5206ux6975ux5316-political-polarization}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{問い}:
+  米国の政治家は、時間の経過とともに思想的に離れていっているか？
+\item
+  \textbf{測定}: 議員の投票行動に基づく思想スコア (DW-NOMINATE) を使用。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    第1次元: 経済的自由主義/保守主義
+  \item
+    第2次元: 人種問題・社会問題
+  \end{itemize}
+\item
+  \textbf{2変量関係}:
+  2つの変数が互いにどのように関連しているかを、散布図や相関係数を用いて分析する。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux6563ux5e03ux56f3-scatter-plot}{%
+\section{3.6.1 散布図 (Scatter
+Plot)}\label{ux6563ux5e03ux56f3-scatter-plot}}
+
+\begin{frame}[fragile]{思想スコアの可視化 (1): データの準備}
+\protect\hypertarget{ux601dux60f3ux30b9ux30b3ux30a2ux306eux53efux8996ux5316-1-ux30c7ux30fcux30bfux306eux6e96ux5099}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 議会投票データの読み込み}
+\NormalTok{congress }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"congress.csv"}\NormalTok{)}
+
+\CommentTok{\# 2. 共和党 (Republican) と民主党 (Democrat) にデータを分ける}
+\NormalTok{rep }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(congress, }\AttributeTok{subset =}\NormalTok{ (party }\SpecialCharTok{==} \StringTok{"Republican"}\NormalTok{))}
+\NormalTok{dem }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(congress, }\AttributeTok{subset =}\NormalTok{ (party }\SpecialCharTok{==} \StringTok{"Democrat"}\NormalTok{))}
+
+\CommentTok{\# 3. 第80議会と第112議会のデータを抽出}
+\NormalTok{dem80 }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(dem, }\AttributeTok{subset =}\NormalTok{ (congress }\SpecialCharTok{==} \DecValTok{80}\NormalTok{))}
+\NormalTok{rep80 }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(rep, }\AttributeTok{subset =}\NormalTok{ (congress }\SpecialCharTok{==} \DecValTok{80}\NormalTok{))}
+\NormalTok{dem112 }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(dem, }\AttributeTok{subset =}\NormalTok{ (congress }\SpecialCharTok{==} \DecValTok{112}\NormalTok{))}
+\NormalTok{rep112 }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(rep, }\AttributeTok{subset =}\NormalTok{ (congress }\SpecialCharTok{==} \DecValTok{112}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{散布図の作成 (第80議会): コード}
+\protect\hypertarget{ux6563ux5e03ux56f3ux306eux4f5cux6210-ux7b2c80ux8b70ux4f1a-ux30b3ux30fcux30c9}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 散布図のプロット範囲とラベルの設定}
+\NormalTok{lim }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.5}\NormalTok{, }\FloatTok{1.5}\NormalTok{)}
+\NormalTok{xlab }\OtherTok{\textless{}{-}} \StringTok{"Economic liberalism/conservatism"}
+\NormalTok{ylab }\OtherTok{\textless{}{-}} \StringTok{"Racial liberalism/conservatism"}
+
+\CommentTok{\# 1. 民主党議員を青い丸 (pch=16) でプロット}
+\FunctionTok{plot}\NormalTok{(dem80}\SpecialCharTok{$}\NormalTok{dwnom1, dem80}\SpecialCharTok{$}\NormalTok{dwnom2, }\AttributeTok{pch =} \DecValTok{16}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }
+     \AttributeTok{xlim =}\NormalTok{ lim, }\AttributeTok{ylim =}\NormalTok{ lim, }\AttributeTok{xlab =}\NormalTok{ xlab, }\AttributeTok{ylab =}\NormalTok{ ylab, }\AttributeTok{main =} \StringTok{"80th Congress"}\NormalTok{)}
+
+\CommentTok{\# 2. 共和党議員を赤い三角 (pch=17) で重ねてプロット}
+\FunctionTok{points}\NormalTok{(rep80}\SpecialCharTok{$}\NormalTok{dwnom1, rep80}\SpecialCharTok{$}\NormalTok{dwnom2, }\AttributeTok{pch =} \DecValTok{17}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{散布図の作成 (第80議会): 描画結果}
+\protect\hypertarget{ux6563ux5e03ux56f3ux306eux4f5cux6210-ux7b2c80ux8b70ux4f1a-ux63cfux753bux7d50ux679c}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch03_5_files/figure-beamer/unnamed-chunk-3-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}{散布図の作成 (第112議会): 描画結果}
+\protect\hypertarget{ux6563ux5e03ux56f3ux306eux4f5cux6210-ux7b2c112ux8b70ux4f1a-ux63cfux753bux7d50ux679c}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch03_5_files/figure-beamer/unnamed-chunk-4-1} \end{center}
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{観察}:
+  第80議会（1940年代）に比べ、第112議会（2010年代）では両党が思想的に大きく離れている（分極化）。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{分極化の推移: コード}
+\protect\hypertarget{ux5206ux6975ux5316ux306eux63a8ux79fb-ux30b3ux30fcux30c9}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 各議会ごとの両党の中央値を計算 (tapplyを使用)}
+\NormalTok{dem.median }\OtherTok{\textless{}{-}} \FunctionTok{tapply}\NormalTok{(dem}\SpecialCharTok{$}\NormalTok{dwnom1, dem}\SpecialCharTok{$}\NormalTok{congress, median)}
+\NormalTok{rep.median }\OtherTok{\textless{}{-}} \FunctionTok{tapply}\NormalTok{(rep}\SpecialCharTok{$}\NormalTok{dwnom1, rep}\SpecialCharTok{$}\NormalTok{congress, median)}
+
+\CommentTok{\# 2. 民主党の中央値の推移を折れ線グラフで描画}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{names}\NormalTok{(dem.median), dem.median, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{,}
+     \AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{80}\NormalTok{, }\DecValTok{115}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{xlab =} \StringTok{"Congress"}\NormalTok{,}
+     \AttributeTok{ylab =} \StringTok{"Median DW{-}NOMINATE score"}\NormalTok{)}
+
+\CommentTok{\# 3. 共和党の推移を重ねる}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{names}\NormalTok{(rep.median), rep.median, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{分極化の推移: 描画結果}
+\protect\hypertarget{ux5206ux6975ux5316ux306eux63a8ux79fb-ux63cfux753bux7d50ux679c}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch03_5_files/figure-beamer/unnamed-chunk-6-1} \end{center}
+\normalsize
+\end{frame}
+
+\hypertarget{ux76f8ux95a2-correlation}{%
+\section{3.6.2 相関 (Correlation)}\label{ux76f8ux95a2-correlation}}
+
+\begin{frame}[fragile]{分極化と経済的不平等の関係}
+\protect\hypertarget{ux5206ux6975ux5316ux3068ux7d4cux6e08ux7684ux4e0dux5e73ux7b49ux306eux95a2ux4fc2}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{問い}: 政治の分極化は、経済的な格差と連動しているか？
+\item
+  ジニ係数（格差の指標）との相関を調べます。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. ジニ係数データの読み込み}
+\NormalTok{gini }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"USGini.csv"}\NormalTok{)}
+
+\CommentTok{\# 2. 分極化の指標（共和党中央値 {-} 民主党中央値）との相関を計算}
+\CommentTok{\# 隔年（議会が開かれる年）のジニ係数のみを抽出して比較}
+\FunctionTok{cor}\NormalTok{(gini}\SpecialCharTok{$}\NormalTok{gini[}\FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \DecValTok{2}\NormalTok{, }\AttributeTok{to =} \FunctionTok{nrow}\NormalTok{(gini), }\AttributeTok{by =} \DecValTok{2}\NormalTok{)], }
+\NormalTok{    rep.median }\SpecialCharTok{{-}}\NormalTok{ dem.median)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9418128
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{解釈}: 相関係数が約 0.94
+  と非常に高く、強い正の相関があることがわかる。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{3.6.3 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{散布図}: 2つの数値変数の関係を視覚化する最も基本的な方法。
+\item
+  \textbf{分極化の測定}:
+  中央値の差や散布図上の分布の変化から、思想的な隔たりを捉える。
+\item
+  \textbf{相関係数}: 2変数の線形な関係の強さを数値化する（-1 から 1）。
+\item
+  \textbf{格差と政治}:
+  経済的な不平等と政治的な対立が強く関連している可能性を示唆。
+\item
+  \textbf{Rの操作}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{plot()}, \texttt{points()}, \texttt{lines()}
+    による重ね書き。
+  \item
+    \texttt{tapply()} によるグループ別集計。
+  \item
+    \texttt{cor()} による相関の算出。
+  \item
+    \texttt{seq()} を用いたデータの規則的な抽出。
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}

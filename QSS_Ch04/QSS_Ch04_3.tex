@@ -1,0 +1,446 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第4章: 予測\\
+(4.3. 回帰分析と因果関係)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux56deux5e30ux5206ux6790ux3068ux56e0ux679cux95a2ux4fc2}{%
+\section{4.3
+回帰分析と因果関係}\label{ux56deux5e30ux5206ux6790ux3068ux56e0ux679cux95a2ux4fc2}}
+
+\begin{frame}{予測と因果関係}
+\protect\hypertarget{ux4e88ux6e2cux3068ux56e0ux679cux95a2ux4fc2}{}
+\begin{itemize}
+\tightlist
+\item
+  ここまで、回帰分析を「予測」のためのツールとして学んできた。
+\item
+  しかし、社会科学では回帰分析を「\textbf{因果関係の推定}」に使うことが非常に多い。
+\item
+  \textbf{ポイント}:
+
+  \begin{enumerate}
+  \tightlist
+  \item
+    RCT（無作為化比較試験）のデータを回帰分析にかけるとどうなるか？
+  \item
+    複数の説明変数を用いた「重回帰分析」によって、交絡因子をどのように制御するか？
+  \item
+    回帰不連続デザイン（RDD）による因果推論。
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13ux3068ux56deux5e30ux5206ux6790}{%
+\section{4.3.1
+ランダム化比較試験と回帰分析}\label{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13ux3068ux56deux5e30ux5206ux6790}}
+
+\begin{frame}[fragile]{RCTデータへの回帰の適用}
+\protect\hypertarget{rctux30c7ux30fcux30bfux3078ux306eux56deux5e30ux306eux9069ux7528}{}
+\begin{itemize}
+\tightlist
+\item
+  インドの村議会における女性のクオータ制（割当制）が、政策に与える影響（\texttt{women.csv}）。
+\item
+  処置変数 \texttt{reserved} が 1 ならクオータあり、0 ならなし。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# データの読み込み}
+\NormalTok{women }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"women.csv"}\NormalTok{)}
+
+\CommentTok{\# 1. 飲用水設備 (water) の平均の差（因果効果）を手計算}
+\FunctionTok{mean}\NormalTok{(women}\SpecialCharTok{$}\NormalTok{water[women}\SpecialCharTok{$}\NormalTok{reserved }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(women}\SpecialCharTok{$}\NormalTok{water[women}\SpecialCharTok{$}\NormalTok{reserved }\SpecialCharTok{==} \DecValTok{0}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9.252423
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. 単回帰分析による推定}
+\CommentTok{\# water を結果変数、reserved を説明変数とする}
+\FunctionTok{lm}\NormalTok{(water }\SpecialCharTok{\textasciitilde{}}\NormalTok{ reserved, }\AttributeTok{data =}\NormalTok{ women)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = water ~ reserved, data = women)
+## 
+## Coefficients:
+## (Intercept)     reserved  
+##      14.738        9.252
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{結論}: RCTにおいて、処置変数（0 or
+  1）を用いた単回帰分析の「傾き（係数）」は、\textbf{グループ間の平均の差（平均因果効果:
+  SATE）と完全に一致する}。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux8907ux6570ux306eux4e88ux6e2cux5909ux6570ux3092ux7528ux3044ux305fux56deux5e30ux5206ux6790}{%
+\section{4.3.2
+複数の予測変数を用いた回帰分析}\label{ux8907ux6570ux306eux4e88ux6e2cux5909ux6570ux3092ux7528ux3044ux305fux56deux5e30ux5206ux6790}}
+
+\begin{frame}[fragile]{重回帰分析 (Multiple Regression)}
+\protect\hypertarget{ux91cdux56deux5e30ux5206ux6790-multiple-regression}{}
+\begin{itemize}
+\tightlist
+\item
+  複数の説明変数を含めることで、他の要因を「一定に保った（コントロールした）」状態での効果を推定する。
+\item
+  第2章の社会的圧力実験 (\texttt{social.csv}) を使用。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{social }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"social.csv"}\NormalTok{)}
+
+\CommentTok{\# メッセージの種類 (messages) による投票率への影響}
+\CommentTok{\# messages はカテゴリ変数のため、Rが自動的にダミー変数に変換して計算する}
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(primary2006 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ messages, }\AttributeTok{data =}\NormalTok{ social)}
+\FunctionTok{coef}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       (Intercept)   messagesControl messagesHawthorne messagesNeighbors 
+##       0.314537652      -0.017899344       0.007836968       0.063410569
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{解釈}: \texttt{messagesNeighbors} の係数 (約0.081)
+  は、ベースライン（\texttt{Civic\ Duty}）と比較して、Neighborsメッセージが投票率を約8.1\%上げることを意味する。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux7570ux8ceaux306aux51e6ux7f6eux52b9ux679c}{%
+\section{4.3.3
+異質な処置効果}\label{ux7570ux8ceaux306aux51e6ux7f6eux52b9ux679c}}
+
+\begin{frame}[fragile]{交差項 (Interaction Terms) の導入}
+\protect\hypertarget{ux4ea4ux5deeux9805-interaction-terms-ux306eux5c0eux5165}{}
+\begin{itemize}
+\tightlist
+\item
+  処置の効果が、個人の属性（例：年齢）によって異なるかどうかを調べる（\textbf{異質な処置効果}）。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. データの前処理}
+\CommentTok{\# Control と Neighbors グループだけを抽出}
+\NormalTok{social.neighbor }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(social, messages }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Control"}\NormalTok{, }\StringTok{"Neighbors"}\NormalTok{))}
+\CommentTok{\# 年齢を計算}
+\NormalTok{social.neighbor}\SpecialCharTok{$}\NormalTok{age }\OtherTok{\textless{}{-}} \DecValTok{2006} \SpecialCharTok{{-}}\NormalTok{ social.neighbor}\SpecialCharTok{$}\NormalTok{yearofbirth}
+
+\CommentTok{\# 2. 交差項を含む回帰モデルの推定 (変数A * 変数B で交差項を指定)}
+\NormalTok{fit.age }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(primary2006 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{*}\NormalTok{ messages, }\AttributeTok{data =}\NormalTok{ social.neighbor)}
+\FunctionTok{coef}\NormalTok{(fit.age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           (Intercept)                   age     messagesNeighbors 
+##          0.0974732574          0.0039982107          0.0498294321 
+## age:messagesNeighbors 
+##          0.0006283079
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{age:messagesNeighbors}
+  の係数が負であるため、年齢が上がるほど「近所に知らせる」メッセージの効果は小さくなることがわかる。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux56deux5e30ux4e0dux9023ux7d9aux30c7ux30b6ux30a4ux30f3-rdd}{%
+\section{4.3.4 回帰不連続デザイン
+(RDD)}\label{ux56deux5e30ux4e0dux9023ux7d9aux30c7ux30b6ux30a4ux30f3-rdd}}
+
+\begin{frame}{RDD (Regression Discontinuity Design) とは}
+\protect\hypertarget{rdd-regression-discontinuity-design-ux3068ux306f}{}
+\begin{itemize}
+\tightlist
+\item
+  処置の割り当てが、ある\textbf{境界線 (Cutoff)}
+  を超えたかどうかで決定される状況を利用する。
+\item
+  境界のすぐ左側の人とすぐ右側の人は「平均的に似ている（実質的にランダム）」と仮定し、境界付近での結果の「ジャンプ」を因果効果とみなす。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{イギリス下院議員の選挙データ}
+\protect\hypertarget{ux30a4ux30aeux30eaux30b9ux4e0bux9662ux8b70ux54e1ux306eux9078ux6319ux30c7ux30fcux30bf}{}
+\begin{itemize}
+\tightlist
+\item
+  選挙で「僅差で勝った候補」と「僅差で負けた候補」は、能力や背景がほぼ同じだと考えられる。
+\item
+  \textbf{問い}:
+  議員になること（処置）は、その後の個人の蓄財（結果）に影響するか？
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MPs }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"MPs.csv"}\NormalTok{)}
+\CommentTok{\# 労働党 (labour) のデータを抽出}
+\NormalTok{MPs.labour }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(MPs, }\AttributeTok{subset =}\NormalTok{ (party }\SpecialCharTok{==} \StringTok{"labour"}\NormalTok{))}
+
+\CommentTok{\# 境界線（margin = 0）の左側（落選）と右側（当選）で別々に回帰分析}
+\NormalTok{labour.fit1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln.net }\SpecialCharTok{\textasciitilde{}}\NormalTok{ margin, }\AttributeTok{data =}\NormalTok{ MPs.labour[MPs.labour}\SpecialCharTok{$}\NormalTok{margin }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{, ])}
+\NormalTok{labour.fit2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln.net }\SpecialCharTok{\textasciitilde{}}\NormalTok{ margin, }\AttributeTok{data =}\NormalTok{ MPs.labour[MPs.labour}\SpecialCharTok{$}\NormalTok{margin }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{, ])}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{RDDの可視化: コード}
+\protect\hypertarget{rddux306eux53efux8996ux5316-ux30b3ux30fcux30c9}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 散布図のプロット}
+\FunctionTok{plot}\NormalTok{(MPs.labour}\SpecialCharTok{$}\NormalTok{margin, MPs.labour}\SpecialCharTok{$}\NormalTok{ln.net, }\AttributeTok{main =} \StringTok{"Labour"}\NormalTok{,}
+     \AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DecValTok{18}\NormalTok{), }
+     \AttributeTok{xlab =} \StringTok{"Margin of Victory"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Log Net Wealth at Death"}\NormalTok{)}
+
+\CommentTok{\# 2. 境界線 (margin = 0) を追加}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \DecValTok{0}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
+
+\CommentTok{\# 3. 予測値の計算と回帰直線の追加}
+\NormalTok{y1l.range }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{min}\NormalTok{(MPs.labour}\SpecialCharTok{$}\NormalTok{margin), }\DecValTok{0}\NormalTok{) }\CommentTok{\# 左側}
+\NormalTok{y2l.range }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{max}\NormalTok{(MPs.labour}\SpecialCharTok{$}\NormalTok{margin)) }\CommentTok{\# 右側}
+\FunctionTok{lines}\NormalTok{(y1l.range, }\FunctionTok{predict}\NormalTok{(labour.fit1, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{margin =}\NormalTok{ y1l.range)), }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(y2l.range, }\FunctionTok{predict}\NormalTok{(labour.fit2, }\AttributeTok{newdata =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{margin =}\NormalTok{ y2l.range)), }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{RDDの可視化: 描画結果}
+\protect\hypertarget{rddux306eux53efux8996ux5316-ux63cfux753bux7d50ux679c}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch04_3_files/figure-beamer/unnamed-chunk-6-1} \end{center}
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{結論}: 境界線 (\texttt{margin\ =\ 0})
+  において、線に大きな「ジャンプ」が見られないため、労働党において議員になることが死後の資産を増やしたとは言えない。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{4.3.5 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{RCTと回帰}: ダミー変数（0,
+  1）を用いた回帰係数は、グループ間の平均の差（因果効果）と一致する。
+\item
+  \textbf{重回帰と交絡}:
+  複数の変数をモデルに組み込むことで、観察研究でも交絡因子の影響を一定程度コントロールできる。
+\item
+  \textbf{異質な処置効果}: 交差項 (\texttt{*} または \texttt{:})
+  を用いることで、グループごとの効果の違いを検証できる。
+\item
+  \textbf{RDD}:
+  恣意的な境界線の前後を比較することで、実験ができない状況でも因果関係を推定する強力な手法。
+\item
+  \textbf{Rの操作}: \texttt{lm()} におけるカテゴリ変数や交差項の扱い。
+\end{itemize}
+\end{frame}
+
+\end{document}

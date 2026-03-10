@@ -1,0 +1,551 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{Montpellier}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{第3章: 測定\\
+(3.7. クラスター化)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\section{3.7 クラスター化
+(Clustering)}\label{ux30afux30e9ux30b9ux30bfux30fcux5316-clustering}
+
+\begin{frame}{クラスター分析の目的}
+\phantomsection\label{ux30afux30e9ux30b9ux30bfux30fcux5206ux6790ux306eux76eeux7684}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{クラスター分析}:
+  多数のデータの中から、互いに似た特徴を持つグループ（クラスター）を自動的に見つけ出す手法。
+\item
+  \textbf{教師なし学習}:
+  正解（ラベル）があらかじめ与えられていない状態で、データの構造を探索する。
+\item
+  社会科学における例：
+
+  \begin{itemize}
+  \tightlist
+  \item
+    投票行動が似ている議員のグループ化。
+  \item
+    似たような意識を持つ回答者のセグメンテーション。
+  \end{itemize}
+\item
+  今回は、代表的な手法である \textbf{k-means 法}（k平均法）を学びます。
+\end{itemize}
+\end{frame}
+
+\section{3.7.1
+Rでの行列操作}\label{rux3067ux306eux884cux5217ux64cdux4f5c}
+
+\begin{frame}[fragile]{行列 (Matrix) の作成}
+\phantomsection\label{ux884cux5217-matrix-ux306eux4f5cux6210}
+\begin{itemize}
+\tightlist
+\item
+  数値計算を効率的に行うために、同じ型のデータを並べた「行列」を使用します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 1から12までの数値で 3行4列の行列を作成}
+\CommentTok{\# byrow = TRUE で行方向に値を埋める}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{4}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# 2. 行名と列名をつける}
+\FunctionTok{rownames}\NormalTok{(x) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(x) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"d"}\NormalTok{, }\StringTok{"e"}\NormalTok{, }\StringTok{"f"}\NormalTok{, }\StringTok{"g"}\NormalTok{)}
+
+\CommentTok{\# 3. 行列の表示と次元の確認}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   d  e  f  g
+## a 1  2  3  4
+## b 5  6  7  8
+## c 9 10 11 12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 4
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{行・列ごとの計算 (apply関数)}
+\phantomsection\label{ux884cux5217ux3054ux3068ux306eux8a08ux7b97-applyux95a2ux6570}
+\begin{itemize}
+\tightlist
+\item
+  行列の各行や各列に対して、一括で関数を適用します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 各列の合計を計算 (2は「列」を意味する)}
+\FunctionTok{apply}\NormalTok{(x, }\DecValTok{2}\NormalTok{, sum) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  d  e  f  g 
+## 15 18 21 24
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. 各行の平均を計算 (1は「行」を意味する)}
+\FunctionTok{apply}\NormalTok{(x, }\DecValTok{1}\NormalTok{, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    a    b    c 
+##  2.5  6.5 10.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3. 各行の標準偏差を計算}
+\FunctionTok{apply}\NormalTok{(x, }\DecValTok{1}\NormalTok{, sd)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        a        b        c 
+## 1.290994 1.290994 1.290994
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\section{3.7.2 Rのリスト形式
+(List)}\label{rux306eux30eaux30b9ux30c8ux5f62ux5f0f-list}
+
+\begin{frame}[fragile]{異なる型のデータをまとめる}
+\phantomsection\label{ux7570ux306aux308bux578bux306eux30c7ux30fcux30bfux3092ux307eux3068ux3081ux308b}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{リスト}:
+  数値、文字列、データフレームなど、異なる種類のオブジェクトを一つにまとめたもの。
+\item
+  分析関数の結果（例：k-meansの結果）は、多くの場合リスト形式で返されます。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. リストの作成}
+\NormalTok{my\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{numbers =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }
+                \AttributeTok{text =} \FunctionTok{c}\NormalTok{(}\StringTok{"apple"}\NormalTok{, }\StringTok{"orange"}\NormalTok{),}
+                \AttributeTok{df =} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{a =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\AttributeTok{b =} \DecValTok{3}\SpecialCharTok{:}\DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{異なる型のデータをまとめる}
+\phantomsection\label{ux7570ux306aux308bux578bux306eux30c7ux30fcux30bfux3092ux307eux3068ux3081ux308b-1}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. 要素の取り出し方 (3つの方法)}
+\NormalTok{my\_list}\SpecialCharTok{$}\NormalTok{numbers }\CommentTok{\# 名前で指定}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_list[[}\DecValTok{2}\NormalTok{]]    }\CommentTok{\# 番号で指定}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "apple"  "orange"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_list[[}\StringTok{"df"}\NormalTok{]] }\CommentTok{\# 文字列で指定}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   a b
+## 1 1 3
+## 2 2 4
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\section{3.7.3 k-means 法 (k-Means
+Algorithm)}\label{k-means-ux6cd5-k-means-algorithm}
+
+\begin{frame}{アルゴリズムの仕組み}
+\phantomsection\label{ux30a2ux30ebux30b4ux30eaux30baux30e0ux306eux4ed5ux7d44ux307f}
+\begin{enumerate}
+\tightlist
+\item
+  グループ数 \(k\) を決める。
+\item
+  ランダムに \(k\) 個の中心点（セントロイド）を決める。
+\item
+  各データを、最も近い中心点のグループに割り当てる。
+\item
+  グループごとに新しい中心点（平均）を計算する。
+\item
+  中心点が動かなくなるまで 3 と 4 を繰り返す。
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{議会データの準備}
+\phantomsection\label{ux8b70ux4f1aux30c7ux30fcux30bfux306eux6e96ux5099}
+\begin{itemize}
+\tightlist
+\item
+  第80議会と第112議会の思想スコアを、行列形式にまとめます。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 議会データの読み込み}
+\NormalTok{congress }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"congress.csv"}\NormalTok{)}
+
+\CommentTok{\# 第80議会の2つの次元のスコアを結合 (cbind) して行列にする}
+\NormalTok{dwnom80 }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(congress}\SpecialCharTok{$}\NormalTok{dwnom1[congress}\SpecialCharTok{$}\NormalTok{congress }\SpecialCharTok{==} \DecValTok{80}\NormalTok{], }
+\NormalTok{                 congress}\SpecialCharTok{$}\NormalTok{dwnom2[congress}\SpecialCharTok{$}\NormalTok{congress }\SpecialCharTok{==} \DecValTok{80}\NormalTok{])}
+
+\CommentTok{\# 第112議会も同様に作成}
+\NormalTok{dwnom112 }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(congress}\SpecialCharTok{$}\NormalTok{dwnom1[congress}\SpecialCharTok{$}\NormalTok{congress }\SpecialCharTok{==} \DecValTok{112}\NormalTok{], }
+\NormalTok{                  congress}\SpecialCharTok{$}\NormalTok{dwnom2[congress}\SpecialCharTok{$}\NormalTok{congress }\SpecialCharTok{==} \DecValTok{112}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{k-means の実行}
+\phantomsection\label{k-means-ux306eux5b9fux884c}
+\begin{itemize}
+\tightlist
+\item
+  \(k=2\)（2つのグループ）として実行します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. k{-}meansの実行}
+\CommentTok{\# centers = 2 (グループ数), nstart = 5 (ランダムな初期値を変えて5回試行)}
+\NormalTok{k80.out }\OtherTok{\textless{}{-}} \FunctionTok{kmeans}\NormalTok{(dwnom80, }\AttributeTok{centers =} \DecValTok{2}\NormalTok{, }\AttributeTok{nstart =} \DecValTok{5}\NormalTok{)}
+\NormalTok{k112.out }\OtherTok{\textless{}{-}} \FunctionTok{kmeans}\NormalTok{(dwnom112, }\AttributeTok{centers =} \DecValTok{2}\NormalTok{, }\AttributeTok{nstart =} \DecValTok{5}\NormalTok{)}
+
+\CommentTok{\# 2. 結果（中心点）の確認}
+\NormalTok{k80.out}\SpecialCharTok{$}\NormalTok{centers}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          [,1]       [,2]
+## 1  0.14681029 -0.3389293
+## 2 -0.04843704  0.7827259
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{分類結果と政党の比較（1）}
+\phantomsection\label{ux5206ux985eux7d50ux679cux3068ux653fux515aux306eux6bd4ux8f031}
+\begin{itemize}
+\tightlist
+\item
+  アルゴリズムが分けたグループが、実際の政党とどれくらい一致しているか確認します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 第80議会 (1940年代)}
+\FunctionTok{table}\NormalTok{(}\AttributeTok{party =}\NormalTok{ congress}\SpecialCharTok{$}\NormalTok{party[congress}\SpecialCharTok{$}\NormalTok{congress }\SpecialCharTok{==} \DecValTok{80}\NormalTok{], }
+      \AttributeTok{cluster =}\NormalTok{ k80.out}\SpecialCharTok{$}\NormalTok{cluster)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             cluster
+## party          1   2
+##   Democrat    62 132
+##   Other        2   0
+##   Republican 247   3
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{分類結果と政党の比較（1）}
+\phantomsection\label{ux5206ux985eux7d50ux679cux3068ux653fux515aux306eux6bd4ux8f031-1}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. 第112議会 (2010年代)}
+\FunctionTok{table}\NormalTok{(}\AttributeTok{party =}\NormalTok{ congress}\SpecialCharTok{$}\NormalTok{party[congress}\SpecialCharTok{$}\NormalTok{congress }\SpecialCharTok{==} \DecValTok{112}\NormalTok{], }
+      \AttributeTok{cluster =}\NormalTok{ k112.out}\SpecialCharTok{$}\NormalTok{cluster)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             cluster
+## party          1   2
+##   Democrat   200   0
+##   Republican   1 242
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{観察}:
+  第112議会では、クラスターと政党がほぼ完全に一致しており、政党間の思想的隔たり（分極化）が非常に明確であることがわかります。
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{クラスターの視覚化: コード}
+\phantomsection\label{ux30afux30e9ux30b9ux30bfux30fcux306eux8996ux899aux5316-ux30b3ux30fcux30c9}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# クラスターごとに色を変えてプロット}
+\CommentTok{\# cluster列 (1 or 2) をそのまま色として使用}
+\FunctionTok{plot}\NormalTok{(dwnom112, }\AttributeTok{col =}\NormalTok{ k112.out}\SpecialCharTok{$}\NormalTok{cluster, }
+     \AttributeTok{xlab =} \StringTok{"Economic"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Racial"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"k{-}means Clustering (k=2)"}\NormalTok{)}
+
+\CommentTok{\# 中心点 (centers) を ×印 (pch=4) で追加}
+\FunctionTok{points}\NormalTok{(k112.out}\SpecialCharTok{$}\NormalTok{centers, }\AttributeTok{pch =} \DecValTok{4}\NormalTok{, }\AttributeTok{cex =} \DecValTok{2}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{クラスターの視覚化: 描画結果}
+\phantomsection\label{ux30afux30e9ux30b9ux30bfux30fcux306eux8996ux899aux5316-ux63cfux753bux7d50ux679c}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.55\textheight]{QSS_Ch03_7_files/figure-beamer/unnamed-chunk-10-1} \end{center}
+\normalsize
+\end{frame}
+
+\section{3.7.4 まとめ}\label{ux307eux3068ux3081}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{クラスター分析}:
+  データの類似性に基づいて、自動的にグループを生成する。
+\item
+  \textbf{k-means 法}:
+  中心点からの距離を最小化するようにグループを最適化する手法。
+\item
+  \textbf{政治分析への応用}:
+  議員の思想スコアを分類することで、現代の米国議会が政党ごとにきれいに分極化していることを確認できた。
+\item
+  \textbf{Rの操作}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{matrix()} と \texttt{apply()} による行列計算。
+  \item
+    \texttt{list()} と \texttt{{[}{[}{]}{]}} による複雑なデータの管理。
+  \item
+    \texttt{kmeans()} によるアルゴリズムの実行と、\texttt{table()}
+    による結果の検証。
+  \item
+    \texttt{points()} を使った中心点のプロット。
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,501 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第4章: 予測\\
+(4.1. 選挙結果の予測)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux9078ux6319ux7d50ux679cux306eux4e88ux6e2c}{%
+\section{4.1
+選挙結果の予測}\label{ux9078ux6319ux7d50ux679cux306eux4e88ux6e2c}}
+
+\begin{frame}{予測とは}
+\protect\hypertarget{ux4e88ux6e2cux3068ux306f}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{予測}:
+  既存のデータ（訓練データ）からパターンを学び、未知のデータや未来の結果を推測すること。
+\item
+  社会科学の例：
+
+  \begin{itemize}
+  \tightlist
+  \item
+    世論調査から選挙結果を予測する。
+  \item
+    経済指標から景気後退を予測する。
+  \end{itemize}
+\item
+  本節では、Rのプログラミングの基礎（ループと条件分岐）を学びながら、2008年米大統領選の予測に取り組みます。
+\end{itemize}
+\end{frame}
+
+\hypertarget{rux3067ux306eux30ebux30fcux30d7-loops}{%
+\section{4.1.1 Rでのループ
+(Loops)}\label{rux3067ux306eux30ebux30fcux30d7-loops}}
+
+\begin{frame}[fragile]{for ループの基本}
+\protect\hypertarget{for-ux30ebux30fcux30d7ux306eux57faux672c}{}
+\begin{itemize}
+\tightlist
+\item
+  同じ操作を繰り返し実行したい時に使用します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 計算対象のベクトルを作成}
+\NormalTok{values }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+
+\CommentTok{\# 2. 結果を保存するための空のベクトルを用意 (NAで初期化)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(values)}
+\NormalTok{results }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, n)}
+
+\CommentTok{\# 3. forループの実行}
+\CommentTok{\# i というカウンタが 1 から n まで順に変わる}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n) \{}
+    \CommentTok{\# valuesのi番目を2倍して、resultsのi番目に保存}
+\NormalTok{    results[i] }\OtherTok{\textless{}{-}}\NormalTok{ values[i] }\SpecialCharTok{*} \DecValTok{2}
+    \CommentTok{\# 進捗を表示 (cat関数)}
+    \FunctionTok{cat}\NormalTok{(values[i], }\StringTok{"times 2 is equal to"}\NormalTok{, results[i], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 2 times 2 is equal to 4 
+## 4 times 2 is equal to 8 
+## 6 times 2 is equal to 12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 最終的な結果の確認}
+\NormalTok{results}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  4  8 12
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{rux3067ux306eux6761ux4ef6ux5206ux5c90-conditional-statements}{%
+\section{4.1.2 Rでの条件分岐 (Conditional
+Statements)}\label{rux3067ux306eux6761ux4ef6ux5206ux5c90-conditional-statements}}
+
+\begin{frame}[fragile]{if 文の基本}
+\protect\hypertarget{if-ux6587ux306eux57faux672c}{}
+\begin{itemize}
+\tightlist
+\item
+  条件によって実行するコードを切り替えます。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 余り (\%\%) を使って偶数か奇数かを判定する例}
+\NormalTok{values }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
+\NormalTok{results }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\FunctionTok{length}\NormalTok{(values))}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(values)) \{}
+\NormalTok{    x }\OtherTok{\textless{}{-}}\NormalTok{ values[i]}
+    \ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{\%\%} \DecValTok{2} \SpecialCharTok{==} \DecValTok{0}\NormalTok{) \{ }\CommentTok{\# 2で割った余りが0なら (偶数)}
+        \FunctionTok{cat}\NormalTok{(x, }\StringTok{"is even. Adding itself.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{        results[i] }\OtherTok{\textless{}{-}}\NormalTok{ x }\SpecialCharTok{+}\NormalTok{ x}
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{ \{           }\CommentTok{\# そうでなければ (奇数)}
+        \FunctionTok{cat}\NormalTok{(x, }\StringTok{"is odd. Multiplying itself.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{        results[i] }\OtherTok{\textless{}{-}}\NormalTok{ x }\SpecialCharTok{*}\NormalTok{ x}
+\NormalTok{    \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 1 is odd. Multiplying itself.
+## 2 is even. Adding itself.
+## 3 is odd. Multiplying itself.
+## 4 is even. Adding itself.
+## 5 is odd. Multiplying itself.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  1  4  9  8 25
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux4e16ux8ad6ux8abfux67fbux306bux3088ux308bux4e88ux6e2c}{%
+\section{4.1.3
+世論調査による予測}\label{ux4e16ux8ad6ux8abfux67fbux306bux3088ux308bux4e88ux6e2c}}
+
+\begin{frame}[fragile]{データの読み込みと準備}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux6e96ux5099}{}
+\begin{itemize}
+\tightlist
+\item
+  2008年大統領選の確定結果 (\texttt{pres08.csv}) と世論調査
+  (\texttt{polls08.csv}) を使用します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. データの読み込み}
+\NormalTok{pres08 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"pres08.csv"}\NormalTok{)}
+\NormalTok{polls08 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"polls08.csv"}\NormalTok{)}
+
+\CommentTok{\# 2. オバマ候補の支持マージンを計算 (得票率/支持率の差)}
+\CommentTok{\# 正の値ならオバマ優勢、負の値ならマケイン優勢}
+\NormalTok{polls08}\SpecialCharTok{$}\NormalTok{margin }\OtherTok{\textless{}{-}}\NormalTok{ polls08}\SpecialCharTok{$}\NormalTok{Obama }\SpecialCharTok{{-}}\NormalTok{ polls08}\SpecialCharTok{$}\NormalTok{McCain}
+\NormalTok{pres08}\SpecialCharTok{$}\NormalTok{margin }\OtherTok{\textless{}{-}}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{Obama }\SpecialCharTok{{-}}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{McCain}
+
+\CommentTok{\# 3. 日付データの処理}
+\NormalTok{polls08}\SpecialCharTok{$}\NormalTok{middate }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(polls08}\SpecialCharTok{$}\NormalTok{middate)}
+\CommentTok{\# 選挙当日までの日数を計算}
+\NormalTok{polls08}\SpecialCharTok{$}\NormalTok{DaysToElection }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2008{-}11{-}04"}\NormalTok{) }\SpecialCharTok{{-}}\NormalTok{ polls08}\SpecialCharTok{$}\NormalTok{middate}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{州ごとの最新調査に基づく予測}
+\protect\hypertarget{ux5ddeux3054ux3068ux306eux6700ux65b0ux8abfux67fbux306bux57faux3065ux304fux4e88ux6e2c}{}
+\begin{itemize}
+\tightlist
+\item
+  50州＋DCごとに、選挙に最も近い日の調査結果を平均して予測値とします。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 全州名のリストを作成}
+\NormalTok{st.names }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(polls08}\SpecialCharTok{$}\NormalTok{state)}
+\CommentTok{\# 2. 予測値を保存する箱を作成}
+\NormalTok{poll.pred }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{51}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(poll.pred) }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(st.names)}
+
+\CommentTok{\# 3. ループで1州ずつ処理}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{51}\NormalTok{)\{}
+    \CommentTok{\# i番目の州のデータだけを取り出す}
+\NormalTok{    state.data }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(polls08, }\AttributeTok{subset =}\NormalTok{ (state }\SpecialCharTok{==}\NormalTok{ st.names[i]))}
+    \CommentTok{\# その州の中で「最も選挙日に近い」日のデータを抽出}
+\NormalTok{    latest }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(state.data, DaysToElection }\SpecialCharTok{==} \FunctionTok{min}\NormalTok{(DaysToElection))}
+    \CommentTok{\# 最新調査の平均値をその州の予測値として保存}
+\NormalTok{    poll.pred[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(latest}\SpecialCharTok{$}\NormalTok{margin)}
+\NormalTok{\}}
+\FunctionTok{head}\NormalTok{(poll.pred)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    AL    AK    AZ    AR    CA    CO 
+## -25.0 -19.0  -2.5  -7.0  24.0   7.0
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{予測誤差の分析}
+\protect\hypertarget{ux4e88ux6e2cux8aa4ux5deeux306eux5206ux6790}{}
+\begin{itemize}
+\tightlist
+\item
+  実際の選挙結果と予測値の差を確認します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 誤差の計算 (実際の結果 {-} 予測値)}
+\NormalTok{errors }\OtherTok{\textless{}{-}}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{margin }\SpecialCharTok{{-}}\NormalTok{ poll.pred}
+\FunctionTok{names}\NormalTok{(errors) }\OtherTok{\textless{}{-}}\NormalTok{ st.names}
+
+\CommentTok{\# 2. 平均予測誤差}
+\FunctionTok{mean}\NormalTok{(errors)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.062092
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3. 二乗平均平方根誤差 (RMSE)}
+\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{mean}\NormalTok{(errors}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.90894
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{予測誤差の分布: コード}
+\protect\hypertarget{ux4e88ux6e2cux8aa4ux5deeux306eux5206ux5e03-ux30b3ux30fcux30c9}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 予測誤差のヒストグラムを描画}
+\FunctionTok{hist}\NormalTok{(errors, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.08}\NormalTok{),}
+     \AttributeTok{main =} \StringTok{"Poll Prediction Error"}\NormalTok{,}
+     \AttributeTok{xlab =} \StringTok{"Error in Predicted Margin (percentage points)"}\NormalTok{)}
+
+\CommentTok{\# 平均誤差の場所に赤い点線を追加}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \FunctionTok{mean}\NormalTok{(errors), }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{予測誤差の分布: 描画結果}
+\protect\hypertarget{ux4e88ux6e2cux8aa4ux5deeux306eux5206ux5e03-ux63cfux753bux7d50ux679c}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch04_1_files/figure-beamer/unnamed-chunk-7-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{予測と実際の結果の比較: コード}
+\protect\hypertarget{ux4e88ux6e2cux3068ux5b9fux969bux306eux7d50ux679cux306eux6bd4ux8f03-ux30b3ux30fcux30c9}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 空のプロットを作成 (type = "n")}
+\FunctionTok{plot}\NormalTok{(poll.pred, pres08}\SpecialCharTok{$}\NormalTok{margin, }\AttributeTok{type =} \StringTok{"n"}\NormalTok{,}
+     \AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{40}\NormalTok{, }\DecValTok{90}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{40}\NormalTok{, }\DecValTok{90}\NormalTok{), }
+     \AttributeTok{xlab =} \StringTok{"Predicted Margin (Polls)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Actual Margin (Election)"}\NormalTok{)}
+
+\CommentTok{\# 州の略称をプロット上に表示}
+\FunctionTok{text}\NormalTok{(}\AttributeTok{x =}\NormalTok{ poll.pred, }\AttributeTok{y =}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{margin, }\AttributeTok{labels =}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{state, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+
+\CommentTok{\# 45度線 (予測=実際)、垂直・水平線を追加}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{a =} \DecValTok{0}\NormalTok{, }\AttributeTok{b =} \DecValTok{1}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \DecValTok{0}\NormalTok{); }\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{予測と実際の結果の比較: 描画結果}
+\protect\hypertarget{ux4e88ux6e2cux3068ux5b9fux969bux306eux7d50ux679cux306eux6bd4ux8f03-ux63cfux753bux7d50ux679c}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch04_1_files/figure-beamer/unnamed-chunk-9-1} \end{center}
+\normalsize
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{4.1.4 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{予測のプロセス}:
+  データのクリーニング（日付処理など）、サブセットの抽出、要約統計量の計算という一連の流れ。
+\item
+  \textbf{プログラミングの道具}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{for} ループ:
+    大量（今回は51州分）の繰り返し処理を自動化する。
+  \item
+    \texttt{if} 文: 条件によって処理を分岐させる。
+  \end{itemize}
+\item
+  \textbf{評価}: 実際の値と比較して、誤差（平均誤差や
+  RMSE）を算出することで予測精度を客観的に評価する。
+\item
+  \textbf{Rの操作}: \texttt{as.Date()}, \texttt{for}, \texttt{if},
+  \texttt{unique()}, \texttt{min()}, \texttt{mean()}, \texttt{text()}。
+\end{itemize}
+\end{frame}
+
+\end{document}

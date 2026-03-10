@@ -1,0 +1,213 @@
+---
+title: |
+    | 第4章: 予測
+    | (4.2. 線形回帰)
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+#  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 4.2 線形回帰 (Linear Regression)
+
+---
+
+## 線形回帰の基本概念
+
+* **線形回帰**: 結果変数 $Y$ と説明変数 $X$ の関係を直線で近似する手法。
+    * 数式: $\hat{Y} = \hat{\alpha} + \hat{\beta} X$
+    * $\hat{Y}$: 予測値（Fitted value）
+    * $\hat{\alpha}$: 切片（Intercept）
+    * $\hat{\beta}$: 傾き（Slope / 係数）
+* **最小二乗法 (OLS)**: 観測値 $Y$ と予測値 $\hat{Y}$ の差（残差）の二乗和を最小にする $\hat{\alpha}$ と $\hat{\beta}$ を選ぶ。
+
+# 4.2.1 外見と選挙結果
+
+---
+
+## 顔の印象と得票率のデータ
+
+* **問い**: 候補者の「有能そうな顔立ち」は、実際の得票率に影響するか？
+* データ: 2000〜2004年の米議会選データ (`face.csv`)。
+
+\scriptsize
+```{r}
+# 1. データの読み込み
+face <- read.csv("face.csv")
+
+# 2. 民主党と共和党の得票率、およびその差（マージン）を計算
+face$d.share <- face$d.votes / (face$d.votes + face$r.votes)
+face$r.share <- face$r.votes / (face$d.votes + face$r.votes)
+face$diff.share <- face$d.share - face$r.share
+
+# 3. データの確認 (d.comp は有能さのスコア)
+head(face[, c("d.comp", "diff.share")], n = 3)
+```
+\normalsize
+
+---
+
+## 相関係数の計算
+
+* 2変数の線形な関係の強さを確認します。
+
+\scriptsize
+```{r}
+# 有能さスコア (d.comp) と得票率の差 (diff.share) の相関
+cor(face$d.comp, face$diff.share)
+```
+\normalsize
+
+# 4.2.2 最小二乗法による推定
+
+---
+
+## lm() 関数の使用: コード
+
+* `lm(結果変数 ~ 説明変数, data = データフレーム)` という形式で回帰分析を行います。
+
+\scriptsize
+```{r}
+# 1. 回帰モデルの推定
+fit <- lm(diff.share ~ d.comp, data = face)
+
+# 2. 推定された係数（切片と傾き）の表示
+coef(fit)
+
+# 3. 予測値（Fitted values）の最初の数件を確認
+head(fitted(fit))
+```
+\normalsize
+
+---
+
+## 回帰直線のプロット: コード
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. 散布図の作成
+plot(face$d.comp, face$diff.share, xlim = c(0, 1.05), ylim = c(-1, 1),
+     xlab = "Competence scores for Democrats",
+     ylab = "Democratic margin in vote share",
+     main = "Facial competence and vote share")
+
+# 2. 推定された回帰直線を重ねる
+abline(fit, col = "red", lwd = 2)
+```
+\normalsize
+
+---
+
+## 回帰直線のプロット: 描画結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+plot(face$d.comp, face$diff.share, xlim = c(0, 1.05), ylim = c(-1, 1),
+     xlab = "Competence scores for Democrats",
+     ylab = "Democratic margin in vote share",
+     main = "Facial competence and vote share")
+abline(lm(diff.share ~ d.comp, data = face), col = "red", lwd = 2)
+```
+\normalsize
+
+# 4.2.3 データの結合と平均への回帰
+
+---
+
+## merge() によるデータの結合
+
+* 異なる年のデータを州名などの「キー」を使って統合します。
+
+\scriptsize
+```{r}
+# 1. データの読み込み
+pres08 <- read.csv("pres08.csv")
+pres12 <- read.csv("pres12.csv")
+
+# 2. state 列を共通キーとして結合
+pres <- merge(pres08, pres12, by = "state")
+
+# 3. 結合後のデータを確認 (Obama.x は2008年、Obama.y は2012年)
+head(pres[, c("state", "Obama.x", "Obama.y")], n = 3)
+```
+\normalsize
+
+# 4.2.4 モデルの適合度
+
+---
+
+## 決定係数 ($R^2$) の計算
+
+* **$R^2$**: モデルがデータの変動をどれだけ説明できているかを示す指標（0〜1）。
+
+\scriptsize
+```{r}
+# 1. フロリダ州の選挙データ
+florida <- read.csv("florida.csv")
+
+# 2. 回帰分析の実行
+fit2 <- lm(Buchanan00 ~ Perot96, data = florida)
+
+# 3. summary() 関数から決定係数を取り出す
+summary(fit2)$r.squared
+```
+\normalsize
+
+---
+
+## 残差プロット (Residual Plot): コード
+
+* 予測が系統的に外れていないか、外れ値がないかを確認します。
+
+\scriptsize
+```{r, eval=FALSE}
+# 横軸に予測値、縦軸に残差をプロット
+plot(fitted(fit2), resid(fit2), 
+     xlab = "Fitted values", ylab = "Residuals",
+     main = "Residual Plot")
+# 残差 0 の水平線を追加
+abline(h = 0, lty = "dashed")
+```
+\normalsize
+
+---
+
+## 残差プロット: 描画結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+florida <- read.csv("florida.csv")
+fit2 <- lm(Buchanan00 ~ Perot96, data = florida)
+plot(fitted(fit2), resid(fit2), 
+     xlab = "Fitted values", ylab = "Residuals",
+     main = "Residual Plot")
+abline(h = 0, lty = "dashed")
+```
+\normalsize
+
+# 4.2.5 まとめ
+
+---
+
+## このセクションのまとめ
+
+* **線形回帰**: $Y$ と $X$ の関係を直線 $\hat{Y} = \hat{\alpha} + \hat{\beta} X$ でモデル化する。
+* **最小二乗法**: 残差の二乗和を最小にすることで、最適な係数を推定する。
+* **データの統合**: `merge()` を使って、複数のソースからのデータを適切に結合する。
+* **適合度の評価**: 決定係数 ($R^2$) や残差プロットを用いて、モデルの良し悪しを判断する。
+* **Rの操作**: `lm()`, `coef()`, `fitted()`, `resid()`, `merge()`, `summary()$r.squared`。

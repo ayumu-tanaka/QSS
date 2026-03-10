@@ -1,0 +1,389 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第3章: 測定\\
+(3.4. 標本調査)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux6a19ux672cux8abfux67fb-survey-sampling}{%
+\section{3.4 標本調査 (Survey
+Sampling)}\label{ux6a19ux672cux8abfux67fb-survey-sampling}}
+
+\begin{frame}{標本調査の目的}
+\protect\hypertarget{ux6a19ux672cux8abfux67fbux306eux76eeux7684}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{母集団} (Population)
+  全体を調べるのが困難な場合、その一部である\textbf{標本} (Sample)
+  を抽出して調査する。
+\item
+  \textbf{無作為抽出} (Random Sampling):
+  母集団の全ての個体が選ばれる確率を等しくすることで、標本から母集団の特徴を正確に推測（推定）できるようにする。
+\item
+  社会科学における課題：
+
+  \begin{itemize}
+  \tightlist
+  \item
+    抽出の偏り
+  \item
+    無回答バイアス
+  \item
+    虚偽の回答
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux7121ux4f5cux70baux5316ux306eux5f79ux5272}{%
+\section{3.4.1
+無作為化の役割}\label{ux7121ux4f5cux70baux5316ux306eux5f79ux5272}}
+
+\begin{frame}[fragile]{抽出された村とされなかった村の比較}
+\protect\hypertarget{ux62bdux51faux3055ux308cux305fux6751ux3068ux3055ux308cux306aux304bux3063ux305fux6751ux306eux6bd4ux8f03}{}
+\begin{itemize}
+\tightlist
+\item
+  アフガニスタンの村レベルデータ (\texttt{afghan-village.csv})
+  を使用します。
+\item
+  実際に調査対象となった村と、そうでない村で特徴（標高や人口）に差がないか確認します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 村レベルデータの読み込み}
+\NormalTok{afghan.village }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"afghan{-}village.csv"}\NormalTok{)}
+
+\CommentTok{\# 2. データの構造を確認}
+\CommentTok{\# village.surveyed: 調査対象になったか (1=Yes, 0=No)}
+\CommentTok{\# altitude: 標高, population: 人口}
+\FunctionTok{head}\NormalTok{(afghan.village, }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   altitude population village.surveyed
+## 1  1959.08        197                1
+## 2  2425.88        744                0
+## 3  2236.60        179                1
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{標高の比較: プロットのコード}
+\protect\hypertarget{ux6a19ux9ad8ux306eux6bd4ux8f03-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# boxplot(数値変数 \textasciitilde{} 分類変数)}
+\CommentTok{\# 調査対象の有無によって標高 (altitude) の分布を比較}
+\FunctionTok{boxplot}\NormalTok{(altitude }\SpecialCharTok{\textasciitilde{}}\NormalTok{ village.surveyed, }
+        \AttributeTok{data =}\NormalTok{ afghan.village,}
+        \AttributeTok{ylab =} \StringTok{"Altitude (meter)"}\NormalTok{, }
+        \AttributeTok{names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Nonsampled"}\NormalTok{, }\StringTok{"Sampled"}\NormalTok{),}
+        \AttributeTok{main =} \StringTok{"Balance Check: Altitude"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{標高の比較: 描画結果}
+\protect\hypertarget{ux6a19ux9ad8ux306eux6bd4ux8f03-ux63cfux753bux7d50ux679c}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch03_4_files/figure-beamer/unnamed-chunk-3-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{人口の比較（対数）: プロットのコード}
+\protect\hypertarget{ux4ebaux53e3ux306eux6bd4ux8f03ux5bfeux6570-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 人口 (population) は分布が偏っているため、対数 (log) をとって比較}
+\FunctionTok{boxplot}\NormalTok{(}\FunctionTok{log}\NormalTok{(population) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ village.surveyed, }
+        \AttributeTok{data =}\NormalTok{ afghan.village,}
+        \AttributeTok{ylab =} \StringTok{"log population"}\NormalTok{, }
+        \AttributeTok{names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Nonsampled"}\NormalTok{, }\StringTok{"Sampled"}\NormalTok{),}
+        \AttributeTok{main =} \StringTok{"Balance Check: log Population"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{人口の比較（対数）: 描画結果}
+\protect\hypertarget{ux4ebaux53e3ux306eux6bd4ux8f03ux5bfeux6570-ux63cfux753bux7d50ux679c}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch03_4_files/figure-beamer/unnamed-chunk-5-1} \end{center}
+\normalsize
+\end{frame}
+
+\hypertarget{ux7121ux56deux7b54ux3068ux30d0ux30a4ux30a2ux30b9}{%
+\section{3.4.2
+無回答とバイアス}\label{ux7121ux56deux7b54ux3068ux30d0ux30a4ux30a2ux30b9}}
+
+\begin{frame}[fragile]{項目無回答 (Item Nonresponse)}
+\protect\hypertarget{ux9805ux76eeux7121ux56deux7b54-item-nonresponse}{}
+\begin{itemize}
+\tightlist
+\item
+  特定の質問（例：タリバンによる被害）に答えない人が、特定の地域に偏っていないか確認します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 個人の調査データを読み込み}
+\NormalTok{afghan }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"afghan.csv"}\NormalTok{)}
+
+\CommentTok{\# 州 (province) ごとの「タリバン被害」の欠損値 (NA) の割合を計算}
+\CommentTok{\# is.na() は欠損なら TRUE(1), そうでなければ FALSE(0) を返す}
+\FunctionTok{tapply}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{violent.exp.taliban), afghan}\SpecialCharTok{$}\NormalTok{province, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Helmand       Khost       Kunar       Logar     Uruzgan 
+## 0.030409357 0.006349206 0.000000000 0.000000000 0.062015504
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{敏感な質問への対処 (List Experiment)}
+\protect\hypertarget{ux654fux611fux306aux8ceaux554fux3078ux306eux5bfeux51e6-list-experiment}{}
+\begin{itemize}
+\tightlist
+\item
+  直接聞きにくい質問（例：武装勢力への支持）に対し、間接的に答えてもらう手法。
+\item
+  \textbf{リスト実験}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    統制群：無害な項目のリストを渡し、当てはまる「数」だけを答えてもらう。
+  \item
+    処置群：無害な項目に「敏感な項目」を1つ加えたリストを渡し、同じく「数」を答えてもらう。
+  \item
+    \textbf{差}が、敏感な項目に「はい」と答えた人の割合の推定値になる。
+  \end{itemize}
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 敏感な項目（ISAFへの支持）に関するリスト実験の結果}
+\CommentTok{\# list.group: "ISAF" (処置群) または "control" (統制群)}
+\CommentTok{\# list.response: 当てはまる項目の回答数}
+\FunctionTok{mean}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{list.response[afghan}\SpecialCharTok{$}\NormalTok{list.group }\SpecialCharTok{==} \StringTok{"ISAF"}\NormalTok{]) }\SpecialCharTok{{-}} 
+    \FunctionTok{mean}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{list.response[afghan}\SpecialCharTok{$}\NormalTok{list.group }\SpecialCharTok{==} \StringTok{"control"}\NormalTok{]) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.04901961
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{3.4.3 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{無作為抽出}: 母集団を代表する標本を得るための強力な方法。
+\item
+  \textbf{バランス確認}:
+  抽出されたグループとそうでないグループで、背景属性に差がないか（共変量のバランス）を箱ひげ図などで確認することが重要。
+\item
+  \textbf{バイアスへの警戒}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{無回答}:
+    欠損値がランダムに発生しているか、特定のグループに偏っていないかを確認する。
+  \item
+    \textbf{リスト実験}:
+    直接質問では得られない「本音」を統計的に推計する工夫。
+  \end{itemize}
+\item
+  \textbf{Rの操作}: \texttt{is.na()} による欠損値の判定、\texttt{log()}
+  による対数変換。
+\end{itemize}
+\end{frame}
+
+\end{document}

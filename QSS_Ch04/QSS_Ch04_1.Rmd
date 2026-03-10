@@ -1,0 +1,245 @@
+---
+title: |
+    | 第4章: 予測
+    | (4.1. 選挙結果の予測)
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 4.1 選挙結果の予測
+
+---
+
+## 予測とは
+
+* **予測**: 既存のデータ（訓練データ）からパターンを学び、未知のデータや未来の結果を推測すること。
+* 社会科学の例：
+    * 世論調査から選挙結果を予測する。
+    * 経済指標から景気後退を予測する。
+* 本節では、Rのプログラミングの基礎（ループと条件分岐）を学びながら、2008年米大統領選の予測に取り組みます。
+
+# 4.1.1 Rでのループ (Loops)
+
+---
+
+## for ループの基本
+
+* 同じ操作を繰り返し実行したい時に使用します。
+
+\scriptsize
+```{r}
+# 1. 計算対象のベクトルを作成
+values <- c(2, 4, 6)
+
+# 2. 結果を保存するための空のベクトルを用意 (NAで初期化)
+n <- length(values)
+results <- rep(NA, n)
+
+# 3. forループの実行
+# i というカウンタが 1 から n まで順に変わる
+for (i in 1:n) {
+    # valuesのi番目を2倍して、resultsのi番目に保存
+    results[i] <- values[i] * 2
+    # 進捗を表示 (cat関数)
+    cat(values[i], "times 2 is equal to", results[i], "\n")
+}
+
+# 最終的な結果の確認
+results
+```
+\normalsize
+
+# 4.1.2 Rでの条件分岐 (Conditional Statements)
+
+---
+
+## if 文の基本
+
+* 条件によって実行するコードを切り替えます。
+
+\scriptsize
+```{r}
+# 余り (%%) を使って偶数か奇数かを判定する例
+values <- 1:5
+results <- rep(NA, length(values))
+
+for (i in 1:length(values)) {
+    x <- values[i]
+    if (x %% 2 == 0) { # 2で割った余りが0なら (偶数)
+        cat(x, "is even. Adding itself.\n")
+        results[i] <- x + x
+    } else {           # そうでなければ (奇数)
+        cat(x, "is odd. Multiplying itself.\n")
+        results[i] <- x * x
+    }
+}
+results
+```
+\normalsize
+
+# 4.1.3 世論調査による予測
+
+---
+
+## データの読み込みと準備
+
+* 2008年大統領選の確定結果 (`pres08.csv`) と世論調査 (`polls08.csv`) を使用します。
+
+\scriptsize
+```{r}
+# 1. データの読み込み
+pres08 <- read.csv("pres08.csv")
+polls08 <- read.csv("polls08.csv")
+
+# 2. オバマ候補の支持マージンを計算 (得票率/支持率の差)
+# 正の値ならオバマ優勢、負の値ならマケイン優勢
+polls08$margin <- polls08$Obama - polls08$McCain
+pres08$margin <- pres08$Obama - pres08$McCain
+
+# 3. 日付データの処理
+polls08$middate <- as.Date(polls08$middate)
+# 選挙当日までの日数を計算
+polls08$DaysToElection <- as.Date("2008-11-04") - polls08$middate
+```
+\normalsize
+
+---
+
+## 州ごとの最新調査に基づく予測
+
+* 50州＋DCごとに、選挙に最も近い日の調査結果を平均して予測値とします。
+
+\scriptsize
+```{r}
+# 1. 全州名のリストを作成
+st.names <- unique(polls08$state)
+# 2. 予測値を保存する箱を作成
+poll.pred <- rep(NA, 51)
+names(poll.pred) <- as.character(st.names)
+
+# 3. ループで1州ずつ処理
+for (i in 1:51){
+    # i番目の州のデータだけを取り出す
+    state.data <- subset(polls08, subset = (state == st.names[i]))
+    # その州の中で「最も選挙日に近い」日のデータを抽出
+    latest <- subset(state.data, DaysToElection == min(DaysToElection))
+    # 最新調査の平均値をその州の予測値として保存
+    poll.pred[i] <- mean(latest$margin)
+}
+head(poll.pred)
+```
+\normalsize
+
+---
+
+## 予測誤差の分析
+
+* 実際の選挙結果と予測値の差を確認します。
+
+\scriptsize
+```{r}
+# 1. 誤差の計算 (実際の結果 - 予測値)
+errors <- pres08$margin - poll.pred
+names(errors) <- st.names
+
+# 2. 平均予測誤差
+mean(errors)
+
+# 3. 二乗平均平方根誤差 (RMSE)
+sqrt(mean(errors^2))
+```
+\normalsize
+
+---
+
+## 予測誤差の分布: コード
+
+\scriptsize
+```{r, eval=FALSE}
+# 予測誤差のヒストグラムを描画
+hist(errors, freq = FALSE, ylim = c(0, 0.08),
+     main = "Poll Prediction Error",
+     xlab = "Error in Predicted Margin (percentage points)")
+
+# 平均誤差の場所に赤い点線を追加
+abline(v = mean(errors), lty = "dashed", col = "red")
+```
+\normalsize
+
+---
+
+## 予測誤差の分布: 描画結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+hist(errors, freq = FALSE, ylim = c(0, 0.08),
+     main = "Poll Prediction Error",
+     xlab = "Error in Predicted Margin (percentage points)")
+abline(v = mean(errors), lty = "dashed", col = "red")
+```
+\normalsize
+
+---
+
+## 予測と実際の結果の比較: コード
+
+\scriptsize
+```{r, eval=FALSE}
+# 空のプロットを作成 (type = "n")
+plot(poll.pred, pres08$margin, type = "n",
+     xlim = c(-40, 90), ylim = c(-40, 90), 
+     xlab = "Predicted Margin (Polls)", ylab = "Actual Margin (Election)")
+
+# 州の略称をプロット上に表示
+text(x = poll.pred, y = pres08$margin, labels = pres08$state, col = "blue")
+
+# 45度線 (予測=実際)、垂直・水平線を追加
+abline(a = 0, b = 1, lty = "dashed")
+abline(v = 0); abline(h = 0)
+```
+\normalsize
+
+---
+
+## 予測と実際の結果の比較: 描画結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+plot(poll.pred, pres08$margin, type = "n",
+     xlim = c(-40, 90), ylim = c(-40, 90), 
+     xlab = "Predicted Margin (Polls)", ylab = "Actual Margin (Election)")
+text(x = poll.pred, y = pres08$margin, labels = pres08$state, col = "blue")
+abline(a = 0, b = 1, lty = "dashed")
+abline(v = 0); abline(h = 0)
+```
+\normalsize
+
+# 4.1.4 まとめ
+
+---
+
+## このセクションのまとめ
+
+* **予測のプロセス**: データのクリーニング（日付処理など）、サブセットの抽出、要約統計量の計算という一連の流れ。
+* **プログラミングの道具**: 
+    * `for` ループ: 大量（今回は51州分）の繰り返し処理を自動化する。
+    * `if` 文: 条件によって処理を分岐させる。
+* **評価**: 実際の値と比較して、誤差（平均誤差や RMSE）を算出することで予測精度を客観的に評価する。
+* **Rの操作**: `as.Date()`, `for`, `if`, `unique()`, `min()`, `mean()`, `text()`。

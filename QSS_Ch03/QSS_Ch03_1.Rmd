@@ -1,0 +1,111 @@
+---
+title: |
+    | 第3章: 測定
+    | (3.1. 戦時における民間人の被害を測定する)
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 3.1 戦時における民間人の被害を測定する
+
+---
+
+## アフガニスタンでの世論調査
+
+* **背景**: 2001年以来の紛争下にあるアフガニスタンで、民間人の被害実態を調査。
+* **目的**: 
+    * 戦闘員（ISAF: 国際治安支援部隊、および反政府勢力：タリバン）による直接的な被害を測定する。
+    * 被害が人々の政治的態度にどう影響するかを分析する。
+* **データ**: 2010〜2011年に実施された全国的な対面調査データ (`afghan.csv`)。
+
+# 3.1.1 データの読み込みと基本統計量
+
+---
+
+## データの読み込み
+
+* 調査結果が含まれる CSV ファイルを読み込みます。
+
+\scriptsize
+```{r}
+# 1. データの読み込み
+afghan <- read.csv("afghan.csv")
+
+# 2. データの次元（行数と列数）を確認
+# 2,754人の回答、10個の変数
+dim(afghan)
+```
+\normalsize
+
+---
+
+## 回答者の基本属性の確認
+
+* `summary()` 関数を使って、年齢や教育年数、職業などの分布を素早く把握します。
+
+\scriptsize
+```{r}
+# 1. 年齢 (age) の要約
+summary(afghan$age)
+
+# 2. 教育年数 (educ.years) の要約
+summary(afghan$educ.years)
+
+# 3. 収入 (income) の要約
+summary(afghan$income)
+```
+\normalsize
+
+# 3.1.2 カテゴリ変数の集計
+
+---
+
+## 被害経験のクロス集計
+
+* ISAF による被害経験とタリバンによる被害経験を同時に集計します。
+
+\scriptsize
+```{r}
+# 1. table() で2変数のクロス集計を行う
+# 1 = 被害あり, 0 = 被害なし
+victim.tab <- table(ISAF = afghan$violent.exp.ISAF, 
+                    Taliban = afghan$violent.exp.taliban)
+
+# 2. prop.table() で割合（比率）に変換
+prop.table(victim.tab)
+```
+\normalsize
+
+* **解釈**: 両者から被害を受けた人、どちらか一方から受けた人、どちらからも受けていない人の割合がわかる。
+
+# 3.1.3 まとめ
+
+---
+
+## このセクションのまとめ
+
+* **測定の重要性**: 直接観察が困難な紛争地の被害実態を、大規模な調査データから数値化する。
+* **データの理解**: 
+    * 数値変数の要約 (`summary()`) により、中央値や平均、欠損値の有無を確認できる。
+    * カテゴリ変数の集計 (`table()`, `prop.table()`) により、グループ間の関係を把握できる。
+* **Rの操作**: 
+    * `read.csv()` による読み込み。
+    * `dim()` や `summary()` によるデータ構造の把握。
+    * `table()` と `prop.table()` を組み合わせた比率の算出。

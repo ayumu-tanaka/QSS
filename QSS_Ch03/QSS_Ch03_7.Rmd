@@ -1,0 +1,236 @@
+---
+title: |
+    | 第3章: 測定
+    | (3.7. クラスター化)
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+#  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 3.7 クラスター化 (Clustering)
+
+---
+
+## クラスター分析の目的
+
+* **クラスター分析**: 多数のデータの中から、互いに似た特徴を持つグループ（クラスター）を自動的に見つけ出す手法。
+* **教師なし学習**: 正解（ラベル）があらかじめ与えられていない状態で、データの構造を探索する。
+* 社会科学における例：
+    * 投票行動が似ている議員のグループ化。
+    * 似たような意識を持つ回答者のセグメンテーション。
+* 今回は、代表的な手法である **k-means 法**（k平均法）を学びます。
+
+# 3.7.1 Rでの行列操作
+
+---
+
+## 行列 (Matrix) の作成
+
+* 数値計算を効率的に行うために、同じ型のデータを並べた「行列」を使用します。
+
+\scriptsize
+```{r}
+# 1. 1から12までの数値で 3行4列の行列を作成
+# byrow = TRUE で行方向に値を埋める
+x <- matrix(1:12, nrow = 3, ncol = 4, byrow = TRUE)
+
+# 2. 行名と列名をつける
+rownames(x) <- c("a", "b", "c")
+colnames(x) <- c("d", "e", "f", "g")
+
+# 3. 行列の表示と次元の確認
+x
+dim(x)
+```
+\normalsize
+
+---
+
+## 行・列ごとの計算 (apply関数)
+
+* 行列の各行や各列に対して、一括で関数を適用します。
+
+\scriptsize
+```{r}
+# 1. 各列の合計を計算 (2は「列」を意味する)
+apply(x, 2, sum) 
+
+# 2. 各行の平均を計算 (1は「行」を意味する)
+apply(x, 1, mean)
+
+# 3. 各行の標準偏差を計算
+apply(x, 1, sd)
+```
+\normalsize
+
+# 3.7.2 Rのリスト形式 (List)
+
+---
+
+## 異なる型のデータをまとめる
+
+* **リスト**: 数値、文字列、データフレームなど、異なる種類のオブジェクトを一つにまとめたもの。
+* 分析関数の結果（例：k-meansの結果）は、多くの場合リスト形式で返されます。
+
+\scriptsize
+```{r}
+# 1. リストの作成
+my_list <- list(numbers = 1:3, 
+                text = c("apple", "orange"),
+                df = data.frame(a = 1:2, b = 3:4))
+```
+
+
+---
+
+## 異なる型のデータをまとめる
+  
+\scriptsize
+```{r}
+# 2. 要素の取り出し方 (3つの方法)
+my_list$numbers # 名前で指定
+my_list[[2]]    # 番号で指定
+my_list[["df"]] # 文字列で指定
+```
+\normalsize
+
+
+# 3.7.3 k-means 法 (k-Means Algorithm)
+
+---
+
+## アルゴリズムの仕組み
+
+1. グループ数 $k$ を決める。
+2. ランダムに $k$ 個の中心点（セントロイド）を決める。
+3. 各データを、最も近い中心点のグループに割り当てる。
+4. グループごとに新しい中心点（平均）を計算する。
+5. 中心点が動かなくなるまで 3 と 4 を繰り返す。
+
+---
+
+## 議会データの準備
+
+* 第80議会と第112議会の思想スコアを、行列形式にまとめます。
+
+\scriptsize
+```{r}
+# 議会データの読み込み
+congress <- read.csv("congress.csv")
+
+# 第80議会の2つの次元のスコアを結合 (cbind) して行列にする
+dwnom80 <- cbind(congress$dwnom1[congress$congress == 80], 
+                 congress$dwnom2[congress$congress == 80])
+
+# 第112議会も同様に作成
+dwnom112 <- cbind(congress$dwnom1[congress$congress == 112], 
+                  congress$dwnom2[congress$congress == 112])
+```
+\normalsize
+
+---
+
+## k-means の実行
+
+* $k=2$（2つのグループ）として実行します。
+
+\scriptsize
+```{r}
+# 1. k-meansの実行
+# centers = 2 (グループ数), nstart = 5 (ランダムな初期値を変えて5回試行)
+k80.out <- kmeans(dwnom80, centers = 2, nstart = 5)
+k112.out <- kmeans(dwnom112, centers = 2, nstart = 5)
+
+# 2. 結果（中心点）の確認
+k80.out$centers
+```
+\normalsize
+
+---
+
+## 分類結果と政党の比較（1）
+
+* アルゴリズムが分けたグループが、実際の政党とどれくらい一致しているか確認します。
+
+\scriptsize
+```{r}
+# 1. 第80議会 (1940年代)
+table(party = congress$party[congress$congress == 80], 
+      cluster = k80.out$cluster)
+```
+\normalsize
+
+---
+
+## 分類結果と政党の比較（1）
+
+\scriptsize
+```{r}
+# 2. 第112議会 (2010年代)
+table(party = congress$party[congress$congress == 112], 
+      cluster = k112.out$cluster)
+```
+\normalsize
+
+* **観察**: 第112議会では、クラスターと政党がほぼ完全に一致しており、政党間の思想的隔たり（分極化）が非常に明確であることがわかります。
+
+---
+
+## クラスターの視覚化: コード
+
+\scriptsize
+```{r, eval=FALSE}
+# クラスターごとに色を変えてプロット
+# cluster列 (1 or 2) をそのまま色として使用
+plot(dwnom112, col = k112.out$cluster, 
+     xlab = "Economic", ylab = "Racial",
+     main = "k-means Clustering (k=2)")
+
+# 中心点 (centers) を ×印 (pch=4) で追加
+points(k112.out$centers, pch = 4, cex = 2, lwd = 3)
+```
+\normalsize
+
+---
+
+## クラスターの視覚化: 描画結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+plot(dwnom112, col = k112.out$cluster, 
+     xlab = "Economic", ylab = "Racial",
+     main = "k-means Clustering (k=2)")
+points(k112.out$centers, pch = 4, cex = 2, lwd = 3)
+```
+\normalsize
+
+# 3.7.4 まとめ
+
+---
+
+## このセクションのまとめ
+
+* **クラスター分析**: データの類似性に基づいて、自動的にグループを生成する。
+* **k-means 法**: 中心点からの距離を最小化するようにグループを最適化する手法。
+* **政治分析への応用**: 議員の思想スコアを分類することで、現代の米国議会が政党ごとにきれいに分極化していることを確認できた。
+* **Rの操作**: 
+    * `matrix()` と `apply()` による行列計算。
+    * `list()` と `[[]]` による複雑なデータの管理。
+    * `kmeans()` によるアルゴリズムの実行と、`table()` による結果の検証。
+    * `points()` を使った中心点のプロット。

@@ -1,0 +1,355 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Montpellier}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+%\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
+\usepackage{luatexja}% 日本語を使う場合は必須
+%\usepackage[japanese]{babel}	
+%\usefonttheme[onlymath]{serif}
+%\usepackage[T1]{fontenc} %これを使うと、ギリシャ文字が出ない
+%\usepackage{textcomp}
+%\usepackage[scale=1.0]{tgheros} % Sans serif font
+%\usepackage[scaled]{beramono} % Monospace font
+%\usepackage{luatexja-otf}
+%\renewcommand{\kanjifamilydefault}{\gtdefault}
+%\usepackage[haranoaji]{luatexja-preset}
+
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \insertframenumber{} \hspace*{2ex} % new version without total frames
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+% スライド番号の表示 %%%%%%%%%%%%%%%%%%%
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{第3章: 測定\\
+(3.1. 戦時における民間人の被害を測定する)}
+\subtitle{今井耕介 著\\
+『社会科学のためのデータ分析入門 (QSS)』}
+\author{}
+\date{\vspace{-2.5em}2026-03-09}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{ux6226ux6642ux306bux304aux3051ux308bux6c11ux9593ux4ebaux306eux88abux5bb3ux3092ux6e2cux5b9aux3059ux308b}{%
+\section{3.1
+戦時における民間人の被害を測定する}\label{ux6226ux6642ux306bux304aux3051ux308bux6c11ux9593ux4ebaux306eux88abux5bb3ux3092ux6e2cux5b9aux3059ux308b}}
+
+\begin{frame}[fragile]{アフガニスタンでの世論調査}
+\protect\hypertarget{ux30a2ux30d5ux30acux30cbux30b9ux30bfux30f3ux3067ux306eux4e16ux8ad6ux8abfux67fb}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{背景}:
+  2001年以来の紛争下にあるアフガニスタンで、民間人の被害実態を調査。
+\item
+  \textbf{目的}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    戦闘員（ISAF:
+    国際治安支援部隊、および反政府勢力：タリバン）による直接的な被害を測定する。
+  \item
+    被害が人々の政治的態度にどう影響するかを分析する。
+  \end{itemize}
+\item
+  \textbf{データ}: 2010〜2011年に実施された全国的な対面調査データ
+  (\texttt{afghan.csv})。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux57faux672cux7d71ux8a08ux91cf}{%
+\section{3.1.1
+データの読み込みと基本統計量}\label{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux57faux672cux7d71ux8a08ux91cf}}
+
+\begin{frame}[fragile]{データの読み込み}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f}{}
+\begin{itemize}
+\tightlist
+\item
+  調査結果が含まれる CSV ファイルを読み込みます。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. データの読み込み}
+\NormalTok{afghan }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"afghan.csv"}\NormalTok{)}
+
+\CommentTok{\# 2. データの次元（行数と列数）を確認}
+\CommentTok{\# 2,754人の回答、10個の変数}
+\FunctionTok{dim}\NormalTok{(afghan)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2754   11
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{回答者の基本属性の確認}
+\protect\hypertarget{ux56deux7b54ux8005ux306eux57faux672cux5c5eux6027ux306eux78baux8a8d}{}
+\begin{itemize}
+\tightlist
+\item
+  \texttt{summary()}
+  関数を使って、年齢や教育年数、職業などの分布を素早く把握します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 年齢 (age) の要約}
+\FunctionTok{summary}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   15.00   22.00   30.00   32.39   40.00   80.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. 教育年数 (educ.years) の要約}
+\FunctionTok{summary}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{educ.years)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   0.000   1.000   4.002   8.000  18.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3. 収入 (income) の要約}
+\FunctionTok{summary}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{income)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Length     Class      Mode 
+##      2754 character character
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\hypertarget{ux30abux30c6ux30b4ux30eaux5909ux6570ux306eux96c6ux8a08}{%
+\section{3.1.2
+カテゴリ変数の集計}\label{ux30abux30c6ux30b4ux30eaux5909ux6570ux306eux96c6ux8a08}}
+
+\begin{frame}[fragile]{被害経験のクロス集計}
+\protect\hypertarget{ux88abux5bb3ux7d4cux9a13ux306eux30afux30edux30b9ux96c6ux8a08}{}
+\begin{itemize}
+\tightlist
+\item
+  ISAF による被害経験とタリバンによる被害経験を同時に集計します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. table() で2変数のクロス集計を行う}
+\CommentTok{\# 1 = 被害あり, 0 = 被害なし}
+\NormalTok{victim.tab }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(}\AttributeTok{ISAF =}\NormalTok{ afghan}\SpecialCharTok{$}\NormalTok{violent.exp.ISAF, }
+                    \AttributeTok{Taliban =}\NormalTok{ afghan}\SpecialCharTok{$}\NormalTok{violent.exp.taliban)}
+
+\CommentTok{\# 2. prop.table() で割合（比率）に変換}
+\FunctionTok{prop.table}\NormalTok{(victim.tab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Taliban
+## ISAF         0         1
+##    0 0.4953445 0.1318436
+##    1 0.1769088 0.1959032
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{解釈}:
+  両者から被害を受けた人、どちらか一方から受けた人、どちらからも受けていない人の割合がわかる。
+\end{itemize}
+\end{frame}
+
+\hypertarget{ux307eux3068ux3081}{%
+\section{3.1.3 まとめ}\label{ux307eux3068ux3081}}
+
+\begin{frame}[fragile]{このセクションのまとめ}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{測定の重要性}:
+  直接観察が困難な紛争地の被害実態を、大規模な調査データから数値化する。
+\item
+  \textbf{データの理解}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    数値変数の要約 (\texttt{summary()})
+    により、中央値や平均、欠損値の有無を確認できる。
+  \item
+    カテゴリ変数の集計 (\texttt{table()}, \texttt{prop.table()})
+    により、グループ間の関係を把握できる。
+  \end{itemize}
+\item
+  \textbf{Rの操作}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{read.csv()} による読み込み。
+  \item
+    \texttt{dim()} や \texttt{summary()} によるデータ構造の把握。
+  \item
+    \texttt{table()} と \texttt{prop.table()} を組み合わせた比率の算出。
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,207 @@
+---
+title: |
+    | 第3章: 測定
+    | (3.3. 1変量の分布をビジュアル化する)
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+#  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 3.3 1変量の分布をビジュアル化する
+
+---
+
+## データの可視化の重要性
+
+* 数値の羅列（平均や標準偏差など）だけでは、データの全体像を把握しきれない。
+* グラフを用いることで、以下を確認できる：
+    * 分布の形状（対称性、偏り）
+    * 外れ値の存在
+    * グループ間の違い
+* 変数の種類（カテゴリ変数か数値変数か）によって、適切なグラフを選択する必要がある。
+
+# 3.3.1 棒グラフ (Bar Plot)
+
+---
+
+## カテゴリ変数の可視化
+
+* **棒グラフ**: 各カテゴリの度数や比率を棒の高さで表現する。
+* アフガニスタン調査の「被害経験」を例にします。
+
+\scriptsize
+```{r}
+# データの準備
+afghan <- read.csv("afghan.csv")
+
+# 1. ISAFによる被害経験の比率表を作成 (欠損値 NA も含める)
+isaf.ptable <- prop.table(table(ISAF = afghan$violent.exp.ISAF, 
+                                exclude = NULL))
+isaf.ptable
+```
+\normalsize
+
+---
+
+## 棒グラフの描画: コード
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. barplot() 関数で棒グラフを作成
+barplot(isaf.ptable,
+        names.arg = c("No harm", "Harm", "Nonresponse"), # X軸のラベル名
+        main = "Civilian Victimization by the ISAF",     # タイトル
+        xlab = "Response Category",                      # X軸ラベル
+        ylab = "Proportion",                             # Y軸ラベル
+        ylim = c(0, 0.7))                                # Y軸の範囲
+```
+\normalsize
+
+---
+
+## 棒グラフの描画: 結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+isaf.ptable <- prop.table(table(ISAF = afghan$violent.exp.ISAF, exclude = NULL))
+barplot(isaf.ptable,
+        names.arg = c("No harm", "Harm", "Nonresponse"), 
+        main = "Civilian Victimization by the ISAF",
+        xlab = "Response Category",
+        ylab = "Proportion",
+        ylim = c(0, 0.7))
+```
+\normalsize
+
+# 3.3.2 ヒストグラム (Histogram)
+
+---
+
+## 数値変数の密度を可視化する
+
+* **ヒストグラム**: 連続的な数値変数の分布を、「ビン」と呼ばれる階級ごとに集計して表示する。
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. hist() 関数でヒストグラムを作成
+# freq = FALSE とすることで、度数ではなく「密度（面積の合計が1）」で表示
+hist(afghan$age, 
+     freq = FALSE, 
+     ylim = c(0, 0.04), 
+     xlab = "Age",
+     main = "Distribution of Respondent's Age")
+```
+\normalsize
+
+---
+
+## 年齢の分布: 結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+hist(afghan$age, 
+     freq = FALSE, 
+     ylim = c(0, 0.04), 
+     xlab = "Age",
+     main = "Distribution of Respondent's Age")
+```
+\normalsize
+
+---
+
+## ヒストグラムのカスタマイズ（教育年数）
+
+* `breaks` 引数でビンの幅を細かく制御し、`abline()` で中央値を重ねます。
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. 教育年数のヒストグラム (1年刻みのビンを設定)
+hist(afghan$educ.years, freq = FALSE, 
+     breaks = seq(from = -0.5, to = 18.5, by = 1),
+     xlab = "Years of Education", 
+     main = "Distribution of Education")
+
+# 2. 中央値 (median) を示す垂直線 (Vertical line) を追加
+abline(v = median(afghan$educ.years), col = "red", lwd = 2)
+
+# 3. テキストラベルを追加
+text(x = median(afghan$educ.years) + 2, y = 0.4, "Median", col = "red")
+```
+\normalsize
+
+---
+
+## 教育年数の分布: 結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+hist(afghan$educ.years, freq = FALSE, 
+     breaks = seq(from = -0.5, to = 18.5, by = 1),
+     xlab = "Years of Education", 
+     main = "Distribution of Education")
+abline(v = median(afghan$educ.years), col = "red", lwd = 2)
+text(x = median(afghan$educ.years) + 2, y = 0.4, "Median", col = "red")
+```
+\normalsize
+
+# 3.3.3 箱ひげ図 (Box Plot)
+
+---
+
+## グループ間の分布の比較
+
+* **箱ひげ図**: 5数要約（最小値、第1四分位数、中央値、第3四分位数、最大値）を可視化する。
+* グループごとの分布の「位置」と「広がり」を比較するのに適している。
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. boxplot(数値変数 ~ 分類変数) という形式で描画
+# 州 (province) ごとの教育年数 (educ.years) を比較
+boxplot(educ.years ~ province, 
+        data = afghan, 
+        main = "Education by Province", 
+        ylab = "Years of Education",
+        xlab = "Province")
+```
+\normalsize
+
+---
+
+## 州別の教育年数: 結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+boxplot(educ.years ~ province, data = afghan, 
+        main = "Education by Province", ylab = "Years of education", xlab = "Province")
+```
+\normalsize
+
+# 3.3.4 まとめ
+
+---
+
+## このセクションのまとめ
+
+* **棒グラフ**: カテゴリ変数に適しており、比率や度数を比較する。
+* **ヒストグラム**: 数値変数の分布の形（山がどこにあるかなど）を確認する。
+* **箱ひげ図**: 複数のグループ間で分布を比較する際に非常に強力。
+* **グラフの調整**: 
+    * タイトル (`main`) や軸ラベル (`xlab`, `ylab`) を適切につける。
+    * 色や線 (`abline`)、テキスト (`text`) を追加して情報を強調する。
+* **Rの操作**: `barplot()`, `hist()`, `boxplot()`, `abline()`, `text()`。

@@ -1,0 +1,189 @@
+---
+title: |
+    | 第4章: 予測
+    | (4.3. 回帰分析と因果関係)
+subtitle: |
+    | 今井耕介 著 
+    | 『社会科学のためのデータ分析入門 (QSS)』
+author: ""
+date: "2026-03-09"
+output:
+  slidy_presentation: default
+  beamer_presentation:
+    theme: Montpellier
+    latex_engine: lualatex
+    keep_tex: true
+    includes:
+      in_header: header_beamer.tex
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+# 4.3 回帰分析と因果関係
+
+---
+
+## 予測と因果関係
+
+* ここまで、回帰分析を「予測」のためのツールとして学んできた。
+* しかし、社会科学では回帰分析を「**因果関係の推定**」に使うことが非常に多い。
+* **ポイント**: 
+    1. RCT（無作為化比較試験）のデータを回帰分析にかけるとどうなるか？
+    2. 複数の説明変数を用いた「重回帰分析」によって、交絡因子をどのように制御するか？
+    3. 回帰不連続デザイン（RDD）による因果推論。
+
+# 4.3.1 ランダム化比較試験と回帰分析
+
+---
+
+## RCTデータへの回帰の適用
+
+* インドの村議会における女性のクオータ制（割当制）が、政策に与える影響（`women.csv`）。
+* 処置変数 `reserved` が 1 ならクオータあり、0 ならなし。
+
+\scriptsize
+```{r}
+# データの読み込み
+women <- read.csv("women.csv")
+
+# 1. 飲用水設備 (water) の平均の差（因果効果）を手計算
+mean(women$water[women$reserved == 1]) - mean(women$water[women$reserved == 0])
+
+# 2. 単回帰分析による推定
+# water を結果変数、reserved を説明変数とする
+lm(water ~ reserved, data = women)
+```
+\normalsize
+
+* **結論**: RCTにおいて、処置変数（0 or 1）を用いた単回帰分析の「傾き（係数）」は、**グループ間の平均の差（平均因果効果: SATE）と完全に一致する**。
+
+# 4.3.2 複数の予測変数を用いた回帰分析
+
+---
+
+## 重回帰分析 (Multiple Regression)
+
+* 複数の説明変数を含めることで、他の要因を「一定に保った（コントロールした）」状態での効果を推定する。
+* 第2章の社会的圧力実験 (`social.csv`) を使用。
+
+\scriptsize
+```{r}
+social <- read.csv("social.csv")
+
+# メッセージの種類 (messages) による投票率への影響
+# messages はカテゴリ変数のため、Rが自動的にダミー変数に変換して計算する
+fit <- lm(primary2006 ~ messages, data = social)
+coef(fit)
+```
+\normalsize
+
+* **解釈**: `messagesNeighbors` の係数 (約0.081) は、ベースライン（`Civic Duty`）と比較して、Neighborsメッセージが投票率を約8.1%上げることを意味する。
+
+# 4.3.3 異質な処置効果
+
+---
+
+## 交差項 (Interaction Terms) の導入
+
+* 処置の効果が、個人の属性（例：年齢）によって異なるかどうかを調べる（**異質な処置効果**）。
+
+\scriptsize
+```{r}
+# 1. データの前処理
+# Control と Neighbors グループだけを抽出
+social.neighbor <- subset(social, messages %in% c("Control", "Neighbors"))
+# 年齢を計算
+social.neighbor$age <- 2006 - social.neighbor$yearofbirth
+
+# 2. 交差項を含む回帰モデルの推定 (変数A * 変数B で交差項を指定)
+fit.age <- lm(primary2006 ~ age * messages, data = social.neighbor)
+coef(fit.age)
+```
+\normalsize
+
+* `age:messagesNeighbors` の係数が負であるため、年齢が上がるほど「近所に知らせる」メッセージの効果は小さくなることがわかる。
+
+# 4.3.4 回帰不連続デザイン (RDD)
+
+---
+
+## RDD (Regression Discontinuity Design) とは
+
+* 処置の割り当てが、ある**境界線 (Cutoff)** を超えたかどうかで決定される状況を利用する。
+* 境界のすぐ左側の人とすぐ右側の人は「平均的に似ている（実質的にランダム）」と仮定し、境界付近での結果の「ジャンプ」を因果効果とみなす。
+
+---
+
+## イギリス下院議員の選挙データ
+
+* 選挙で「僅差で勝った候補」と「僅差で負けた候補」は、能力や背景がほぼ同じだと考えられる。
+* **問い**: 議員になること（処置）は、その後の個人の蓄財（結果）に影響するか？
+
+\scriptsize
+```{r}
+MPs <- read.csv("MPs.csv")
+# 労働党 (labour) のデータを抽出
+MPs.labour <- subset(MPs, subset = (party == "labour"))
+
+# 境界線（margin = 0）の左側（落選）と右側（当選）で別々に回帰分析
+labour.fit1 <- lm(ln.net ~ margin, data = MPs.labour[MPs.labour$margin < 0, ])
+labour.fit2 <- lm(ln.net ~ margin, data = MPs.labour[MPs.labour$margin > 0, ])
+```
+\normalsize
+
+---
+
+## RDDの可視化: コード
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. 散布図のプロット
+plot(MPs.labour$margin, MPs.labour$ln.net, main = "Labour",
+     xlim = c(-0.5, 0.5), ylim = c(6, 18), 
+     xlab = "Margin of Victory", ylab = "Log Net Wealth at Death")
+
+# 2. 境界線 (margin = 0) を追加
+abline(v = 0, lty = "dashed")
+
+# 3. 予測値の計算と回帰直線の追加
+y1l.range <- c(min(MPs.labour$margin), 0) # 左側
+y2l.range <- c(0, max(MPs.labour$margin)) # 右側
+lines(y1l.range, predict(labour.fit1, newdata = data.frame(margin = y1l.range)), col = "blue")
+lines(y2l.range, predict(labour.fit2, newdata = data.frame(margin = y2l.range)), col = "blue")
+```
+\normalsize
+
+---
+
+## RDDの可視化: 描画結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+plot(MPs.labour$margin, MPs.labour$ln.net, main = "Labour",
+     xlim = c(-0.5, 0.5), ylim = c(6, 18), 
+     xlab = "Margin of Victory", ylab = "Log Net Wealth at Death")
+abline(v = 0, lty = "dashed")
+y1l.range <- c(min(MPs.labour$margin), 0)
+y2l.range <- c(0, max(MPs.labour$margin))
+lines(y1l.range, predict(labour.fit1, newdata = data.frame(margin = y1l.range)), col = "blue")
+lines(y2l.range, predict(labour.fit2, newdata = data.frame(margin = y2l.range)), col = "blue")
+```
+\normalsize
+
+* **結論**: 境界線 (`margin = 0`) において、線に大きな「ジャンプ」が見られないため、労働党において議員になることが死後の資産を増やしたとは言えない。
+
+# 4.3.5 まとめ
+
+---
+
+## このセクションのまとめ
+
+* **RCTと回帰**: ダミー変数（0, 1）を用いた回帰係数は、グループ間の平均の差（因果効果）と一致する。
+* **重回帰と交絡**: 複数の変数をモデルに組み込むことで、観察研究でも交絡因子の影響を一定程度コントロールできる。
+* **異質な処置効果**: 交差項 (`*` または `:`) を用いることで、グループごとの効果の違いを検証できる。
+* **RDD**: 恣意的な境界線の前後を比較することで、実験ができない状況でも因果関係を推定する強力な手法。
+* **Rの操作**: `lm()` におけるカテゴリ変数や交差項の扱い。
