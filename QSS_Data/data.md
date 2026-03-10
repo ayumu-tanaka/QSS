@@ -9,7 +9,7 @@
 | [World.csv](World.csv) | 世界の出生率と死亡率の推計データ | [表示](World.html) |
 | [Kenya.csv](Kenya.csv) | ケニアの出生率と死亡率の推計データ | [表示](Kenya.html) |
 | [Sweden.csv](Sweden.csv) | スウェーデンの出生率と死亡率の推計データ | [表示](Sweden.html) |
-| [resume.csv](resume.csv) | 履歴書実験データ（人種差別） | |
+| [resume.csv](resume.csv) | 履歴書実験データ（人種差別） | [表示](resume.html) |
 | [social.csv](social.csv) | 社会的圧力実験データ（投票率） | |
 | [minwage.csv](minwage.csv) | 最低賃金研究データ（雇用効果） | |
 | [STAR.csv](STAR.csv) | STARプロジェクトデータ（少人数学級効果） | |
