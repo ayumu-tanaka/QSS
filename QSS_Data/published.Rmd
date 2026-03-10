@@ -1,0 +1,33 @@
+---
+title: "published.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## published.csv
+
+このデータセットは、出版された学術論文において、元の研究で行われた実験条件やアウトカムがどれくらい報告されているかを調査したデータです（QSS 表7.6）。
+
+### 変数定義
+
+- `id.p`: 論文のID（`filedrawer.csv` の `id` に対応）
+- `cond.s`: 元の研究における実験条件の数
+- `out.s`: 元の研究におけるアウトカム変数の数
+- `cond.p`: 論文で報告された実験条件の数
+- `out.p`: 論文で報告されたアウトカム変数の数
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("published.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 学術雑誌掲載論文データ (published.csv)')
+```

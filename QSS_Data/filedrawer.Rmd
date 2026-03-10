@@ -1,0 +1,33 @@
+---
+title: "filedrawer.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## filedrawer.csv
+
+このデータセットは、学術研究における「お蔵入り（File Drawer）問題」と出版バイアスを調査したTESSプログラムのデータです（QSS 表7.5）。
+
+### 変数定義
+
+- `id`: 研究プロジェクトのID
+- `journal`: 出版された雑誌名（未出版の場合は `NA`）
+- `DV`: アウトカム（結果）変数の性質
+- `IV`: 独立変数（処置）の性質
+- `max.h`: 著者の最高H指数（生産性と影響度の指標）
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("filedrawer.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: TESSプログラム学術研究データ (filedrawer.csv)')
+```

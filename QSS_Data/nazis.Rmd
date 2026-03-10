@@ -1,0 +1,35 @@
+---
+title: "nazis.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## nazis.csv
+
+このデータセットは、1932年のドイツ選挙においてどの社会階層がナチス（NSDAP）を支持したかを分析するための郡レベルのデータです（QSS 表7.7）。生態学的推論（Ecological Inference）の分析に使用されます。
+
+### 変数定義
+
+- `shareself`: 自営業者の割合 (0〜1)
+- `shareblue`: ブルーカラー労働者の割合 (0〜1)
+- `sharewhite`: ホワイトカラー労働者の割合 (0〜1)
+- `sharedomestic`: 家事使用人の割合 (0〜1)
+- `shareunemployed`: 失業者の割合 (0〜1)
+- `nvoter`: 有権者数
+- `nazivote`: ナチス党への得票数
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("nazis.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 1932年ドイツ選挙分析データ (nazis.csv)')
+```

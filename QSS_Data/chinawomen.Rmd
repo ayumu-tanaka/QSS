@@ -1,0 +1,37 @@
+---
+title: "chinawomen.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## chinawomen.csv
+
+このデータセットは、中国における茶の価格（女性の収入の代理指標）が、出生時の性比（女児の生存率）に与える影響を調査したデータです（QSS 表7.4）。
+
+### 変数定義
+
+- `admin`: 行政区画（郡）のコード
+- `biryr`: 出生年
+- `birpop`: 当該年の出生人口
+- `han`: 漢民族の割合 (0〜1)
+- `sex`: 出生時の男児の割合 (0〜1)
+- `teasown`: 茶の作付面積（女性の労働需要の代理指標）
+- `orch`: 果樹園の面積（男性の労働需要の代理指標）
+- `cashcrop`: 現金作物の面積
+- `post`: 経済改革後かどうかのダミー変数 (`1` = 改革後, `0` = 改革前)
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("chinawomen.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 中国における性比と農作物価格データ (chinawomen.csv)')
+```
