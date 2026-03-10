@@ -31,11 +31,11 @@
 | [florida.csv](florida.csv) | フロリダ州の郡別大統領選挙データ（1996年・2000年） | [表示](florida.html) |
 | [women.csv](women.csv) | 女性政策立案者実験データ | [表示](women.html) |
 | [MPs.csv](MPs.csv) | 英国下院議員の個人資産データ | [表示](MPs.html) |
-| [intrade08.csv](intrade08.csv) | 2008年Intrade予測市場データ | |
-| [intrade12.csv](intrade12.csv) | 2012年Intrade予測市場データ | |
-| [progresa.csv](progresa.csv) | Progresaプログラム（条件付き現金給付）データ | |
-| [transfer.csv](transfer.csv) | ブラジル政府の地方交付金データ | |
-| [florentine.csv](florentine.csv) | フィレンツェの婚姻ネットワークデータ | |
+| [intrade08.csv](intrade08.csv) | 2008年Intrade予測市場データ | [表示](intrade08.html) |
+| [intrade12.csv](intrade12.csv) | 2012年Intrade予測市場データ | [表示](intrade12.html) |
+| [progresa.csv](progresa.csv) | Progresaプログラム（条件付き現金給付）データ | [表示](progresa.html) |
+| [transfer.csv](transfer.csv) | ブラジル政府の地方交付金データ | [表示](transfer.html) |
+| [florentine.csv](florentine.csv) | フィレンツェの婚姻ネットワークデータ | [表示](florentine.html) |
 | [twitter-following.csv](twitter-following.csv) | 上院議員のTwitterフォローデータ | |
 | [twitter-senator.csv](twitter-senator.csv) | 上院議員の属性データ | |
 | [walmart.csv](walmart.csv) | ウォルマート出店データ | |

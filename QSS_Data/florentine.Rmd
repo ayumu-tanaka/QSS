@@ -1,0 +1,29 @@
+---
+title: "florentine.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## florentine.csv
+
+このデータセットは、ルネサンス期フィレンツェにおける16の主要な家族間の婚姻ネットワークを隣接行列形式で表したものです（QSS 表5.3）。
+
+### 変数定義
+
+- 行と列はそれぞれの家族名を表します。
+- セルの値が `1` の場合は家族間に婚姻関係があり、`0` の場合はないことを示します。
+
+```{r table, echo=FALSE}
+# データの読み込み (最初の列を家族名として扱う)
+data <- read.csv("florentine.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          options = list(pageLength = 16, autoWidth = TRUE, scrollX = TRUE),
+          caption = 'Table: フィレンツェ婚姻ネットワーク (florentine.csv)')
+```

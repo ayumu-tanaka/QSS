@@ -1,0 +1,36 @@
+---
+title: "transfer.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## transfer.csv
+
+このデータセットは、ブラジル政府から地方自治体への交付金が教育や貧困に与える影響を調査したデータです（QSS 表4.12）。
+
+### 変数定義
+
+- `state`: 州名略称
+- `region`: 地域（`N`, `NE`, `S`, `SE`, `CW`）
+- `literate91`: 1991年の識字率
+- `educ91`: 1991年の平均教育年数
+- `poverty91`: 1991年の貧困率
+- `poverty80`: 1980年の貧困率
+- `educ80`: 1980年の平均教育年数
+- `pop82`: 1982年の人口
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("transfer.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: ブラジル政府交付金データ (transfer.csv)')
+```

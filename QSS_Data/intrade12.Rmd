@@ -1,0 +1,35 @@
+---
+title: "intrade12.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## intrade12.csv
+
+このデータセットは、2012年米国大統領選挙に関するIntrade予測市場のデータです（QSS 表4.9）。
+
+### 変数定義
+
+- `day`: 取引日
+- `statename`: 州名
+- `PriceD`: 民主党候補（オバマ）の当選確率（価格; 0〜100）
+- `VolumeD`: 民主党候補に関する取引量
+- `PriceR`: 共和党候補（ロムニー）の当選確率（価格; 0〜100）
+- `VolumeR`: 共和党候補に関する取引量
+- `state`: 州名略称
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("intrade12.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 2012年Intrade予測市場データ (intrade12.csv)')
+```

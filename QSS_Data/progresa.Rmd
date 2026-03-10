@@ -1,0 +1,33 @@
+---
+title: "progresa.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## progresa.csv
+
+このデータセットは、メキシコの条件付き現金給付プログラム「Progresa」の影響を調査したデータです（QSS 表4.11）。
+
+### 変数定義（一部）
+
+- `treatment`: 処置変数（`1` = プログラム対象の村, `0` = 対象外の村）
+- `pri2000s`: 2000年選挙におけるPRI（制度的革命党）の得票率
+- `avgpoverty`: 村の平均貧困レベル
+- `pobtot1994`: 1994年の総人口
+- `villages`: 村の数
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("progresa.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: Progresaプログラムデータ (progresa.csv)')
+```
