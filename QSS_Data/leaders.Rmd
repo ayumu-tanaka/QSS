@@ -1,0 +1,39 @@
+---
+title: "leaders.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## leaders.csv
+
+このデータセットは、指導者の暗殺（試み）が政治制度に与える影響を調査した研究のデータです（QSS 表2.8）。
+
+### 変数定義
+
+- `year`: 暗殺試行の年
+- `country`: 国名
+- `leadername`: 対象となった指導者の名前
+- `age`: 指導者の年齢
+- `politybefore`: 暗殺試行前3年間の政治体制（Polity）スコアの平均
+- `polityafter`: 暗殺試行後3年間の政治体制（Polity）スコアの平均
+- `interwarbefore`: 前3年間に国際戦争があったか (`1`=Yes, `0`=No)
+- `interwarafter`: 後3年間に国際戦争があったか (`1`=Yes, `0`=No)
+- `civilwarbefore`: 前3年間に内戦があったか (`1`=Yes, `0`=No)
+- `civilwarafter`: 後3年間に内戦があったか (`1`=Yes, `0`=No)
+- `result`: 暗殺試行の結果（死亡、負傷、無傷など）
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("leaders.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 指導者暗殺データ (leaders.csv)')
+```

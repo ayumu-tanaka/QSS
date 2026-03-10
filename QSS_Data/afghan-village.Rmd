@@ -1,0 +1,31 @@
+---
+title: "afghan-village.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## afghan-village.csv
+
+このデータセットは、アフガニスタンの村レベルの地理・人口データです（QSS 表3.2）。標本抽出のバランス確認に使用されます。
+
+### 変数定義
+
+- `altitude`: 村の標高（メートル）
+- `population`: 村の人口
+- `village.surveyed`: 実際に調査対象となった村か (`1`=Yes, `0`=No)
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("afghan-village.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: アフガニスタン村レベルデータ (afghan-village.csv)')
+```

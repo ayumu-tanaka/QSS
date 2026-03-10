@@ -1,0 +1,39 @@
+---
+title: "afghan.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## afghan.csv
+
+このデータセットは、アフガニスタンでの民間人の被害実態を調査した世論調査データです（QSS 表3.1）。
+
+### 変数定義
+
+- `province`: 州名
+- `district`: 地区名
+- `village.id`: 村のID
+- `age`: 回答者の年齢
+- `educ.years`: 教育年数
+- `employed`: 雇用されているか (`1`=Yes, `0`=No)
+- `income`: 収入カテゴリ
+- `violent.exp.ISAF`: ISAFによる被害経験 (`1`=Yes, `0`=No)
+- `violent.exp.taliban`: タリバンによる被害経験 (`1`=Yes, `0`=No)
+- `list.group`: リスト実験のグループ (`control`, `ISAF`, `taliban`)
+- `list.response`: リスト実験における該当項目数
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("afghan.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: アフガニスタン世論調査データ (afghan.csv)')
+```

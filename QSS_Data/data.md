@@ -13,10 +13,10 @@
 | [social.csv](social.csv) | 社会的圧力実験データ（投票率） | [表示](social.html) |
 | [minwage.csv](minwage.csv) | 最低賃金研究データ（雇用効果） | [表示](minwage.html) |
 | [STAR.csv](STAR.csv) | STARプロジェクトデータ（少人数学級効果） | [表示](STAR.html) |
-| [gay.csv](gay.csv) | 同性婚研究データ | |
-| [leaders.csv](leaders.csv) | 指導者暗殺データ | |
-| [afghan.csv](afghan.csv) | アフガニスタン世論調査データ（個人レベル） | |
-| [afghan-village.csv](afghan-village.csv) | アフガニスタンの村レベルデータ | |
+| [gay.csv](gay.csv) | 同性婚研究データ | [表示](gay.html) |
+| [leaders.csv](leaders.csv) | 指導者暗殺データ | [表示](leaders.html) |
+| [afghan.csv](afghan.csv) | アフガニスタン世論調査データ（個人レベル） | [表示](afghan.html) |
+| [afghan-village.csv](afghan-village.csv) | アフガニスタンの村レベルデータ | [表示](afghan-village.html) |
 | [congress.csv](congress.csv) | 議員の理想点（思想スコア）データ | |
 | [USGini.csv](USGini.csv) | 米国のジニ係数データ | |
 | [gayreshaped.csv](gayreshaped.csv) | 同性婚研究データ（整形済み） | |

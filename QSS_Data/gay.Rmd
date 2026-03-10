@@ -1,0 +1,37 @@
+---
+title: "gay.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## gay.csv
+
+このデータセットは、同性婚への態度に関する戸別訪問実験のデータです（QSS 表2.7）。
+
+### 変数定義
+
+- `study`: 研究番号 (`1` または `2`)
+- `treatment`: 割り当てられた処置
+    - `No Contact`: 接触なし
+    - `Same-Sex Marriage Script by Gay Canvasser`: ゲイの調査員による同性婚に関する対話
+    - `Same-Sex Marriage Script by Straight Canvasser`: ヘテロセクシャルの調査員による同性婚に関する対話
+    - `Recycling Script by Gay Canvasser`: ゲイの調査員によるリサイクルに関する対話
+    - `Recycling Script by Straight Canvasser`: ヘテロセクシャルの調査員によるリサイクルに関する対話
+- `wave`: 調査のウェーブ（時期; `1`〜`7`）
+- `ssm`: 同性婚に対する支持スコア（高いほど支持）
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("gay.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 同性婚研究データ (gay.csv)')
+```
