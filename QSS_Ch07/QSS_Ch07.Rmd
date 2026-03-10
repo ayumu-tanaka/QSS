@@ -7,7 +7,7 @@ subtitle: |
 author: ""
 date: "2026-03-09"
 output:
-  slidy_presentation: default
+#  slidy_presentation: default
   beamer_presentation:
     theme: Montpellier
     latex_engine: lualatex
@@ -112,12 +112,12 @@ summary(fit)$coefficients
 ## 信頼区間のプロット
 
 \scriptsize
-```{r, fig.height=4, out.height="70%", fig.align="center"}
-library(maps)
+```{r, fig.height=8, out.height="70%", fig.align="center"}
 pres08 <- read.csv("pres08.csv")
 polls08 <- read.csv("polls08.csv")
 # 簡易的な予測誤差のプロット
-errors <- pres08$Obama - tapply(polls08$Obama, polls08$state, mean)[pres08$state]
+errors <- pres08$Obama - 
+  tapply(polls08$Obama, polls08$state, mean)[pres08$state]
 hist(errors, main = "Poll Prediction Error", xlab = "Error (%)")
 ```
 \normalsize

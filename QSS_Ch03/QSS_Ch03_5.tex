@@ -1,18 +1,16 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
+\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
+% remove section numbering
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -21,16 +19,19 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -43,19 +44,21 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
-\usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
+\usepackage{lmodern}
 \usetheme[]{Montpellier}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -72,14 +75,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
-\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -91,13 +86,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -105,7 +100,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -114,7 +109,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -123,7 +118,6 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -148,9 +142,12 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{第3章: 測定\\
 (3.5. 政治的分極化を測定する / 3.6. 2変量関係の要約)}
@@ -162,12 +159,11 @@
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{ux653fux6cbbux7684ux5206ux6975ux5316ux3092ux6e2cux5b9aux3059ux308b-3.6-2ux5909ux91cfux95a2ux4fc2ux306eux8981ux7d04}{%
 \section{3.5 政治的分極化を測定する / 3.6
-2変量関係の要約}\label{ux653fux6cbbux7684ux5206ux6975ux5316ux3092ux6e2cux5b9aux3059ux308b-3.6-2ux5909ux91cfux95a2ux4fc2ux306eux8981ux7d04}}
+2変量関係の要約}\label{ux653fux6cbbux7684ux5206ux6975ux5316ux3092ux6e2cux5b9aux3059ux308b-3.6-2ux5909ux91cfux95a2ux4fc2ux306eux8981ux7d04}
 
 \begin{frame}{政治的分極化 (Political Polarization)}
-\protect\hypertarget{ux653fux6cbbux7684ux5206ux6975ux5316-political-polarization}{}
+\phantomsection\label{ux653fux6cbbux7684ux5206ux6975ux5316-political-polarization}
 \begin{itemize}
 \tightlist
 \item
@@ -189,12 +185,11 @@
 \end{itemize}
 \end{frame}
 
-\hypertarget{ux6563ux5e03ux56f3-scatter-plot}{%
 \section{3.6.1 散布図 (Scatter
-Plot)}\label{ux6563ux5e03ux56f3-scatter-plot}}
+Plot)}\label{ux6563ux5e03ux56f3-scatter-plot}
 
 \begin{frame}[fragile]{思想スコアの可視化 (1): データの準備}
-\protect\hypertarget{ux601dux60f3ux30b9ux30b3ux30a2ux306eux53efux8996ux5316-1-ux30c7ux30fcux30bfux306eux6e96ux5099}{}
+\phantomsection\label{ux601dux60f3ux30b9ux30b3ux30a2ux306eux53efux8996ux5316-1-ux30c7ux30fcux30bfux306eux6e96ux5099}
 \scriptsize
 
 \begin{Shaded}
@@ -218,7 +213,7 @@ Plot)}\label{ux6563ux5e03ux56f3-scatter-plot}}
 \end{frame}
 
 \begin{frame}[fragile]{散布図の作成 (第80議会): コード}
-\protect\hypertarget{ux6563ux5e03ux56f3ux306eux4f5cux6210-ux7b2c80ux8b70ux4f1a-ux30b3ux30fcux30c9}{}
+\phantomsection\label{ux6563ux5e03ux56f3ux306eux4f5cux6210-ux7b2c80ux8b70ux4f1a-ux30b3ux30fcux30c9}
 \scriptsize
 
 \begin{Shaded}
@@ -241,7 +236,7 @@ Plot)}\label{ux6563ux5e03ux56f3-scatter-plot}}
 \end{frame}
 
 \begin{frame}{散布図の作成 (第80議会): 描画結果}
-\protect\hypertarget{ux6563ux5e03ux56f3ux306eux4f5cux6210-ux7b2c80ux8b70ux4f1a-ux63cfux753bux7d50ux679c}{}
+\phantomsection\label{ux6563ux5e03ux56f3ux306eux4f5cux6210-ux7b2c80ux8b70ux4f1a-ux63cfux753bux7d50ux679c}
 \scriptsize
 
 \begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch03_5_files/figure-beamer/unnamed-chunk-3-1} \end{center}
@@ -249,7 +244,7 @@ Plot)}\label{ux6563ux5e03ux56f3-scatter-plot}}
 \end{frame}
 
 \begin{frame}{散布図の作成 (第112議会): 描画結果}
-\protect\hypertarget{ux6563ux5e03ux56f3ux306eux4f5cux6210-ux7b2c112ux8b70ux4f1a-ux63cfux753bux7d50ux679c}{}
+\phantomsection\label{ux6563ux5e03ux56f3ux306eux4f5cux6210-ux7b2c112ux8b70ux4f1a-ux63cfux753bux7d50ux679c}
 \scriptsize
 
 \begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch03_5_files/figure-beamer/unnamed-chunk-4-1} \end{center}
@@ -264,7 +259,7 @@ Plot)}\label{ux6563ux5e03ux56f3-scatter-plot}}
 \end{frame}
 
 \begin{frame}[fragile]{分極化の推移: コード}
-\protect\hypertarget{ux5206ux6975ux5316ux306eux63a8ux79fb-ux30b3ux30fcux30c9}{}
+\phantomsection\label{ux5206ux6975ux5316ux306eux63a8ux79fb-ux30b3ux30fcux30c9}
 \scriptsize
 
 \begin{Shaded}
@@ -287,18 +282,17 @@ Plot)}\label{ux6563ux5e03ux56f3-scatter-plot}}
 \end{frame}
 
 \begin{frame}{分極化の推移: 描画結果}
-\protect\hypertarget{ux5206ux6975ux5316ux306eux63a8ux79fb-ux63cfux753bux7d50ux679c}{}
+\phantomsection\label{ux5206ux6975ux5316ux306eux63a8ux79fb-ux63cfux753bux7d50ux679c}
 \scriptsize
 
 \begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch03_5_files/figure-beamer/unnamed-chunk-6-1} \end{center}
 \normalsize
 \end{frame}
 
-\hypertarget{ux76f8ux95a2-correlation}{%
-\section{3.6.2 相関 (Correlation)}\label{ux76f8ux95a2-correlation}}
+\section{3.6.2 相関 (Correlation)}\label{ux76f8ux95a2-correlation}
 
 \begin{frame}[fragile]{分極化と経済的不平等の関係}
-\protect\hypertarget{ux5206ux6975ux5316ux3068ux7d4cux6e08ux7684ux4e0dux5e73ux7b49ux306eux95a2ux4fc2}{}
+\phantomsection\label{ux5206ux6975ux5316ux3068ux7d4cux6e08ux7684ux4e0dux5e73ux7b49ux306eux95a2ux4fc2}
 \begin{itemize}
 \tightlist
 \item
@@ -335,11 +329,10 @@ Plot)}\label{ux6563ux5e03ux56f3-scatter-plot}}
 \end{itemize}
 \end{frame}
 
-\hypertarget{ux307eux3068ux3081}{%
-\section{3.6.3 まとめ}\label{ux307eux3068ux3081}}
+\section{3.6.3 まとめ}\label{ux307eux3068ux3081}
 
 \begin{frame}[fragile]{このセクションのまとめ}
-\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
+\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
 \begin{itemize}
 \tightlist
 \item

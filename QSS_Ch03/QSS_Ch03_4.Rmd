@@ -8,7 +8,7 @@ subtitle: |
 author: ""
 date: "2026-03-09"
 output:
-  slidy_presentation: default
+#  slidy_presentation: default
   beamer_presentation:
     theme: Montpellier
     latex_engine: lualatex
@@ -78,7 +78,7 @@ boxplot(altitude ~ village.surveyed,
 ## 標高の比較: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="80%", fig.align="center"}
 afghan.village <- read.csv("afghan-village.csv")
 boxplot(altitude ~ village.surveyed, 
         data = afghan.village,
@@ -108,7 +108,7 @@ boxplot(log(population) ~ village.surveyed,
 ## 人口の比較（対数）: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="80%", fig.align="center"}
 boxplot(log(population) ~ village.surveyed, 
         data = afghan.village,
         ylab = "log population", 

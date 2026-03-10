@@ -8,7 +8,7 @@ subtitle: |
 author: ""
 date: "2026-03-09"
 output:
-  slidy_presentation: default
+#  slidy_presentation: default
   beamer_presentation:
     theme: Montpellier
     latex_engine: lualatex
@@ -155,7 +155,7 @@ senator$name[order(senator$pagerank, decreasing = TRUE)][1:3]
 ## ネットワークの視覚化（PageRank）
 
 \scriptsize
-```{r, fig.height=4, out.height="70%", fig.align="center"}
+```{r, fig.height=8, out.height="70%", fig.align="center"}
 # 政党別の色分け (D=Blue, R=Red)
 col <- ifelse(senator$party == "D", "blue", "red")
 # PageRankに基づくサイズ調整

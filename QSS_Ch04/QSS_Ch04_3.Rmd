@@ -8,7 +8,7 @@ subtitle: |
 author: ""
 date: "2026-03-09"
 output:
-  slidy_presentation: default
+#  slidy_presentation: default
   beamer_presentation:
     theme: Montpellier
     latex_engine: lualatex
@@ -162,7 +162,7 @@ lines(y2l.range, predict(labour.fit2, newdata = data.frame(margin = y2l.range)),
 ## RDDの可視化: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="80%", fig.align="center"}
 plot(MPs.labour$margin, MPs.labour$ln.net, main = "Labour",
      xlim = c(-0.5, 0.5), ylim = c(6, 18), 
      xlab = "Margin of Victory", ylab = "Log Net Wealth at Death")
@@ -172,9 +172,11 @@ y2l.range <- c(0, max(MPs.labour$margin))
 lines(y1l.range, predict(labour.fit1, newdata = data.frame(margin = y1l.range)), col = "blue")
 lines(y2l.range, predict(labour.fit2, newdata = data.frame(margin = y2l.range)), col = "blue")
 ```
-\normalsize
+
 
 * **結論**: 境界線 (`margin = 0`) において、線に大きな「ジャンプ」が見られないため、労働党において議員になることが死後の資産を増やしたとは言えない。
+
+\normalsize
 
 # 4.3.5 まとめ
 

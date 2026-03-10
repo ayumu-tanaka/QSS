@@ -1,18 +1,16 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
+\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
+% remove section numbering
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -21,16 +19,19 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -43,19 +44,21 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
-\usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
+\usepackage{lmodern}
 \usetheme[]{Montpellier}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -72,14 +75,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
-\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -91,13 +86,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -105,7 +100,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -114,7 +109,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -123,7 +118,6 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -148,9 +142,12 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{第5章: 発見\\
 (5.2. ネットワークデータ)}
@@ -162,12 +159,11 @@
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{ux30cdux30c3ux30c8ux30efux30fcux30afux30c7ux30fcux30bf}{%
 \section{5.2
-ネットワークデータ}\label{ux30cdux30c3ux30c8ux30efux30fcux30afux30c7ux30fcux30bf}}
+ネットワークデータ}\label{ux30cdux30c3ux30c8ux30efux30fcux30afux30c7ux30fcux30bf}
 
 \begin{frame}{社会ネットワーク分析}
-\protect\hypertarget{ux793eux4f1aux30cdux30c3ux30c8ux30efux30fcux30afux5206ux6790}{}
+\phantomsection\label{ux793eux4f1aux30cdux30c3ux30c8ux30efux30fcux30afux5206ux6790}
 \begin{itemize}
 \tightlist
 \item
@@ -181,12 +177,11 @@
 \end{itemize}
 \end{frame}
 
-\hypertarget{ux30ebux30cdux30b5ux30f3ux30b9ux671fux30d5ux30a3ux30ecux30f3ux30c4ux30a7ux306eux5a5aux59fbux30cdux30c3ux30c8ux30efux30fcux30af}{%
 \section{5.2.1
-ルネサンス期フィレンツェの婚姻ネットワーク}\label{ux30ebux30cdux30b5ux30f3ux30b9ux671fux30d5ux30a3ux30ecux30f3ux30c4ux30a7ux306eux5a5aux59fbux30cdux30c3ux30c8ux30efux30fcux30af}}
+ルネサンス期フィレンツェの婚姻ネットワーク}\label{ux30ebux30cdux30b5ux30f3ux30b9ux671fux30d5ux30a3ux30ecux30f3ux30c4ux30a7ux306eux5a5aux59fbux30cdux30c3ux30c8ux30efux30fcux30af}
 
 \begin{frame}[fragile]{隣接行列 (Adjacency Matrix)}
-\protect\hypertarget{ux96a3ux63a5ux884cux5217-adjacency-matrix}{}
+\phantomsection\label{ux96a3ux63a5ux884cux5217-adjacency-matrix}
 \begin{itemize}
 \tightlist
 \item
@@ -218,12 +213,11 @@
 \normalsize
 \end{frame}
 
-\hypertarget{ux30b0ux30e9ux30d5ux3068ux4e2dux5fc3ux6027ux6307ux6a19}{%
 \section{5.2.2
-グラフと中心性指標}\label{ux30b0ux30e9ux30d5ux3068ux4e2dux5fc3ux6027ux6307ux6a19}}
+グラフと中心性指標}\label{ux30b0ux30e9ux30d5ux3068ux4e2dux5fc3ux6027ux6307ux6a19}
 
 \begin{frame}[fragile]{igraph によるネットワークの作成}
-\protect\hypertarget{igraph-ux306bux3088ux308bux30cdux30c3ux30c8ux30efux30fcux30afux306eux4f5cux6210}{}
+\phantomsection\label{igraph-ux306bux3088ux308bux30cdux30c3ux30c8ux30efux30fcux30afux306eux4f5cux6210}
 \begin{itemize}
 \tightlist
 \item
@@ -247,7 +241,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{中心性指標 (1): 次数中心性}
-\protect\hypertarget{ux4e2dux5fc3ux6027ux6307ux6a19-1-ux6b21ux6570ux4e2dux5fc3ux6027}{}
+\phantomsection\label{ux4e2dux5fc3ux6027ux6307ux6a19-1-ux6b21ux6570ux4e2dux5fc3ux6027}
 \begin{itemize}
 \tightlist
 \item
@@ -272,7 +266,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{中心性指標 (2): 近接中心性}
-\protect\hypertarget{ux4e2dux5fc3ux6027ux6307ux6a19-2-ux8fd1ux63a5ux4e2dux5fc3ux6027}{}
+\phantomsection\label{ux4e2dux5fc3ux6027ux6307ux6a19-2-ux8fd1ux63a5ux4e2dux5fc3ux6027}
 \begin{itemize}
 \tightlist
 \item
@@ -297,7 +291,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{中心性指標 (3): 間中心性}
-\protect\hypertarget{ux4e2dux5fc3ux6027ux6307ux6a19-3-ux9593ux4e2dux5fc3ux6027}{}
+\phantomsection\label{ux4e2dux5fc3ux6027ux6307ux6a19-3-ux9593ux4e2dux5fc3ux6027}
 \begin{itemize}
 \tightlist
 \item
@@ -323,12 +317,11 @@
 \normalsize
 \end{frame}
 
-\hypertarget{twitterux306eux30d5ux30a9ux30edux30fcux30cdux30c3ux30c8ux30efux30fcux30af}{%
 \section{5.2.3
-Twitterのフォローネットワーク}\label{twitterux306eux30d5ux30a9ux30edux30fcux30cdux30c3ux30c8ux30efux30fcux30af}}
+Twitterのフォローネットワーク}\label{twitterux306eux30d5ux30a9ux30edux30fcux30cdux30c3ux30c8ux30efux30fcux30af}
 
 \begin{frame}[fragile]{有向グラフ (Directed Graph)}
-\protect\hypertarget{ux6709ux5411ux30b0ux30e9ux30d5-directed-graph}{}
+\phantomsection\label{ux6709ux5411ux30b0ux30e9ux30d5-directed-graph}
 \begin{itemize}
 \tightlist
 \item
@@ -356,12 +349,11 @@ Twitterのフォローネットワーク}\label{twitterux306eux30d5ux30a9ux30edu
 \normalsize
 \end{frame}
 
-\hypertarget{pagerank-ux30a2ux30ebux30b4ux30eaux30baux30e0}{%
 \section{5.2.4 PageRank
-アルゴリズム}\label{pagerank-ux30a2ux30ebux30b4ux30eaux30baux30e0}}
+アルゴリズム}\label{pagerank-ux30a2ux30ebux30b4ux30eaux30baux30e0}
 
 \begin{frame}[fragile]{PageRank とは}
-\protect\hypertarget{pagerank-ux3068ux306f}{}
+\phantomsection\label{pagerank-ux3068ux306f}
 \begin{itemize}
 \tightlist
 \item
@@ -389,7 +381,7 @@ Twitterのフォローネットワーク}\label{twitterux306eux30d5ux30a9ux30edu
 \end{frame}
 
 \begin{frame}[fragile]{ネットワークの視覚化（PageRank）}
-\protect\hypertarget{ux30cdux30c3ux30c8ux30efux30fcux30afux306eux8996ux899aux5316pagerank}{}
+\phantomsection\label{ux30cdux30c3ux30c8ux30efux30fcux30afux306eux8996ux899aux5316pagerank}
 \scriptsize
 
 \begin{Shaded}
@@ -407,11 +399,10 @@ Twitterのフォローネットワーク}\label{twitterux306eux30d5ux30a9ux30edu
 \normalsize
 \end{frame}
 
-\hypertarget{ux307eux3068ux3081}{%
-\section{5.2.5 まとめ}\label{ux307eux3068ux3081}}
+\section{5.2.5 まとめ}\label{ux307eux3068ux3081}
 
 \begin{frame}{まとめ}
-\protect\hypertarget{ux307eux3068ux3081-1}{}
+\phantomsection\label{ux307eux3068ux3081-1}
 \begin{itemize}
 \tightlist
 \item

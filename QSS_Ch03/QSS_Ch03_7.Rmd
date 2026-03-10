@@ -212,7 +212,7 @@ points(k112.out$centers, pch = 4, cex = 2, lwd = 3)
 ## クラスターの視覚化: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="80%", fig.align="center"}
 plot(dwnom112, col = k112.out$cluster, 
      xlab = "Economic", ylab = "Racial",
      main = "k-means Clustering (k=2)")

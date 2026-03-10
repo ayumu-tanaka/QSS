@@ -8,7 +8,7 @@ subtitle: |
 author: ""
 date: "2026-03-09"
 output:
-  slidy_presentation: default
+#  slidy_presentation: default
   beamer_presentation:
     theme: Montpellier
     latex_engine: lualatex
@@ -188,7 +188,7 @@ abline(v = mean(errors), lty = "dashed", col = "red")
 ## 予測誤差の分布: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 hist(errors, freq = FALSE, ylim = c(0, 0.08),
      main = "Poll Prediction Error",
      xlab = "Error in Predicted Margin (percentage points)")
@@ -221,7 +221,7 @@ abline(v = 0); abline(h = 0)
 ## 予測と実際の結果の比較: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 plot(poll.pred, pres08$margin, type = "n",
      xlim = c(-40, 90), ylim = c(-40, 90), 
      xlab = "Predicted Margin (Polls)", ylab = "Actual Margin (Election)")

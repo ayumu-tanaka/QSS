@@ -116,7 +116,7 @@ abline(fit, col = "red", lwd = 2)
 ## 回帰直線のプロット: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="80%", fig.align="center"}
 plot(face$d.comp, face$diff.share, xlim = c(0, 1.05), ylim = c(-1, 1),
      xlab = "Competence scores for Democrats",
      ylab = "Democratic margin in vote share",
@@ -190,7 +190,7 @@ abline(h = 0, lty = "dashed")
 ## 残差プロット: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="55%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="80%", fig.align="center"}
 florida <- read.csv("florida.csv")
 fit2 <- lm(Buchanan00 ~ Perot96, data = florida)
 plot(fitted(fit2), resid(fit2), 

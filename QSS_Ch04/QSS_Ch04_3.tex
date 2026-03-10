@@ -1,18 +1,16 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
+\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
+% remove section numbering
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -21,16 +19,19 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -43,19 +44,21 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
-\usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
+\usepackage{lmodern}
 \usetheme[]{Montpellier}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -72,14 +75,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
-\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -91,13 +86,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -105,7 +100,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -114,7 +109,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -123,7 +118,6 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -148,9 +142,12 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{第4章: 予測\\
 (4.3. 回帰分析と因果関係)}
@@ -162,12 +159,11 @@
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{ux56deux5e30ux5206ux6790ux3068ux56e0ux679cux95a2ux4fc2}{%
 \section{4.3
-回帰分析と因果関係}\label{ux56deux5e30ux5206ux6790ux3068ux56e0ux679cux95a2ux4fc2}}
+回帰分析と因果関係}\label{ux56deux5e30ux5206ux6790ux3068ux56e0ux679cux95a2ux4fc2}
 
 \begin{frame}{予測と因果関係}
-\protect\hypertarget{ux4e88ux6e2cux3068ux56e0ux679cux95a2ux4fc2}{}
+\phantomsection\label{ux4e88ux6e2cux3068ux56e0ux679cux95a2ux4fc2}
 \begin{itemize}
 \tightlist
 \item
@@ -189,12 +185,11 @@
 \end{itemize}
 \end{frame}
 
-\hypertarget{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13ux3068ux56deux5e30ux5206ux6790}{%
 \section{4.3.1
-ランダム化比較試験と回帰分析}\label{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13ux3068ux56deux5e30ux5206ux6790}}
+ランダム化比較試験と回帰分析}\label{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13ux3068ux56deux5e30ux5206ux6790}
 
 \begin{frame}[fragile]{RCTデータへの回帰の適用}
-\protect\hypertarget{rctux30c7ux30fcux30bfux3078ux306eux56deux5e30ux306eux9069ux7528}{}
+\phantomsection\label{rctux30c7ux30fcux30bfux3078ux306eux56deux5e30ux306eux9069ux7528}
 \begin{itemize}
 \tightlist
 \item
@@ -248,12 +243,11 @@
 \end{itemize}
 \end{frame}
 
-\hypertarget{ux8907ux6570ux306eux4e88ux6e2cux5909ux6570ux3092ux7528ux3044ux305fux56deux5e30ux5206ux6790}{%
 \section{4.3.2
-複数の予測変数を用いた回帰分析}\label{ux8907ux6570ux306eux4e88ux6e2cux5909ux6570ux3092ux7528ux3044ux305fux56deux5e30ux5206ux6790}}
+複数の予測変数を用いた回帰分析}\label{ux8907ux6570ux306eux4e88ux6e2cux5909ux6570ux3092ux7528ux3044ux305fux56deux5e30ux5206ux6790}
 
 \begin{frame}[fragile]{重回帰分析 (Multiple Regression)}
-\protect\hypertarget{ux91cdux56deux5e30ux5206ux6790-multiple-regression}{}
+\phantomsection\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}
 \begin{itemize}
 \tightlist
 \item
@@ -290,12 +284,11 @@
 \end{itemize}
 \end{frame}
 
-\hypertarget{ux7570ux8ceaux306aux51e6ux7f6eux52b9ux679c}{%
 \section{4.3.3
-異質な処置効果}\label{ux7570ux8ceaux306aux51e6ux7f6eux52b9ux679c}}
+異質な処置効果}\label{ux7570ux8ceaux306aux51e6ux7f6eux52b9ux679c}
 
 \begin{frame}[fragile]{交差項 (Interaction Terms) の導入}
-\protect\hypertarget{ux4ea4ux5deeux9805-interaction-terms-ux306eux5c0eux5165}{}
+\phantomsection\label{ux4ea4ux5deeux9805-interaction-terms-ux306eux5c0eux5165}
 \begin{itemize}
 \tightlist
 \item
@@ -335,12 +328,11 @@
 \end{itemize}
 \end{frame}
 
-\hypertarget{ux56deux5e30ux4e0dux9023ux7d9aux30c7ux30b6ux30a4ux30f3-rdd}{%
 \section{4.3.4 回帰不連続デザイン
-(RDD)}\label{ux56deux5e30ux4e0dux9023ux7d9aux30c7ux30b6ux30a4ux30f3-rdd}}
+(RDD)}\label{ux56deux5e30ux4e0dux9023ux7d9aux30c7ux30b6ux30a4ux30f3-rdd}
 
 \begin{frame}{RDD (Regression Discontinuity Design) とは}
-\protect\hypertarget{rdd-regression-discontinuity-design-ux3068ux306f}{}
+\phantomsection\label{rdd-regression-discontinuity-design-ux3068ux306f}
 \begin{itemize}
 \tightlist
 \item
@@ -352,7 +344,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{イギリス下院議員の選挙データ}
-\protect\hypertarget{ux30a4ux30aeux30eaux30b9ux4e0bux9662ux8b70ux54e1ux306eux9078ux6319ux30c7ux30fcux30bf}{}
+\phantomsection\label{ux30a4ux30aeux30eaux30b9ux4e0bux9662ux8b70ux54e1ux306eux9078ux6319ux30c7ux30fcux30bf}
 \begin{itemize}
 \tightlist
 \item
@@ -380,7 +372,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{RDDの可視化: コード}
-\protect\hypertarget{rddux306eux53efux8996ux5316-ux30b3ux30fcux30c9}{}
+\phantomsection\label{rddux306eux53efux8996ux5316-ux30b3ux30fcux30c9}
 \scriptsize
 
 \begin{Shaded}
@@ -405,11 +397,10 @@
 \end{frame}
 
 \begin{frame}[fragile]{RDDの可視化: 描画結果}
-\protect\hypertarget{rddux306eux53efux8996ux5316-ux63cfux753bux7d50ux679c}{}
+\phantomsection\label{rddux306eux53efux8996ux5316-ux63cfux753bux7d50ux679c}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch04_3_files/figure-beamer/unnamed-chunk-6-1} \end{center}
-\normalsize
+\begin{center}\includegraphics[height=0.8\textheight]{QSS_Ch04_3_files/figure-beamer/unnamed-chunk-6-1} \end{center}
 
 \begin{itemize}
 \tightlist
@@ -417,13 +408,14 @@
   \textbf{結論}: 境界線 (\texttt{margin\ =\ 0})
   において、線に大きな「ジャンプ」が見られないため、労働党において議員になることが死後の資産を増やしたとは言えない。
 \end{itemize}
+
+\normalsize
 \end{frame}
 
-\hypertarget{ux307eux3068ux3081}{%
-\section{4.3.5 まとめ}\label{ux307eux3068ux3081}}
+\section{4.3.5 まとめ}\label{ux307eux3068ux3081}
 
 \begin{frame}[fragile]{このセクションのまとめ}
-\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
+\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
 \begin{itemize}
 \tightlist
 \item
