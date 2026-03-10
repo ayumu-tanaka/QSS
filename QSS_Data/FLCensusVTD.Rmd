@@ -1,0 +1,36 @@
+---
+title: "FLCensusVTD.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## FLCensusVTD.csv
+
+このデータセットは、フロリダ州の投票区 (VTD) レベルの国勢調査データです（QSS 表6.4）。
+
+### 変数定義
+
+- `county`: 郡番号
+- `VTD`: 投票区番号
+- `total.pop`: 投票区の総人口
+- `white`: 投票区内の白人の割合 (0〜1)
+- `black`: 投票区内の黒人の割合 (0〜1)
+- `hispanic`: 投票区内のヒスパニックの割合 (0〜1)
+- `api`: 投票区内のアジア・太平洋諸島系の割合 (0〜1)
+- `others`: 投票区内のその他の人種の割合 (0〜1)
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("FLCensusVTD.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: フロリダ州投票区レベル国勢調査 (FLCensusVTD.csv)')
+```

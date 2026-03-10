@@ -1,0 +1,35 @@
+---
+title: "names.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## names.csv
+
+このデータセットは、米国国勢調査局による苗字別の人口統計データです（QSS 表6.3）。
+
+### 変数定義
+
+- `surname`: 苗字
+- `count`: 当該苗字を持つ全米の人数
+- `pctwhite`: 当該苗字を持つ人のうち白人の割合 (%)
+- `pctblack`: 当該苗字を持つ人のうち黒人の割合 (%)
+- `pctapi`: 当該苗字を持つ人のうちアジア・太平洋諸島系の割合 (%)
+- `pcthispanic`: 当該苗字を持つ人のうちヒスパニックの割合 (%)
+- `pctothers`: 当該苗字を持つ人のうちその他の人種の割合 (%)
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("names.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 米国苗字統計データ (names.csv)')
+```

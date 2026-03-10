@@ -41,11 +41,11 @@
 | [walmart.csv](walmart.csv) | ウォルマート出店データ | [表示](walmart.html) |
 | [constitution.csv](constitution.csv) | 憲法前文データ | [表示](constitution.html) |
 | [trade.csv](trade.csv) | 国際貿易ネットワークデータ | [表示](trade.html) |
-| [elections.csv](elections.csv) | 郡レベルの米国大統領選挙データ | |
-| [FLVoters.csv](FLVoters.csv) | フロリダ州有権者名簿サンプルデータ | |
-| [names.csv](names.csv) | 米国国勢調査局の苗字リストデータ | |
-| [FLCensusVTD.csv](FLCensusVTD.csv) | フロリダ州の投票区レベル国勢調査データ | |
-| [polls12.csv](polls12.csv) | 2012年米国大統領選挙世論調査データ | |
+| [elections.csv](elections.csv) | 郡レベルの米国大統領選挙データ | [表示](elections.html) |
+| [FLVoters.csv](FLVoters.csv) | フロリダ州有権者名簿サンプルデータ | [表示](FLVoters.html) |
+| [names.csv](names.csv) | 米国国勢調査局の苗字リストデータ | [表示](names.html) |
+| [FLCensusVTD.csv](FLCensusVTD.csv) | フロリダ州の投票区レベル国勢調査データ | [表示](FLCensusVTD.html) |
+| [polls12.csv](polls12.csv) | 2012年米国大統領選挙世論調査データ | [表示](polls12.html) |
 | [chinawomen.csv](chinawomen.csv) | 中国における性比と農作物価格データ | |
 | [filedrawer.csv](filedrawer.csv) | TESSプログラム学術研究データ | |
 | [published.csv](published.csv) | 学術雑誌掲載論文データ | |
