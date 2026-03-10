@@ -1,0 +1,36 @@
+---
+title: "Sweden.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## Sweden.csv
+
+このデータセットは、スウェーデンの出生率と死亡率の推計データを含んでいます（QSS 表1.4）。
+
+### 変数定義
+
+- `country`: 国・地域 (SWE)
+- `period`: 期間 (1950-1955 または 2005-2010)
+- `age`: 年齢層
+- `births`: 出生数（千人単位）
+- `deaths`: 死亡数（千人単位）
+- `py.men`: 男性の延べ生存年数 (person-years; 人口規模に相当、千人単位)
+- `py.women`: 女性の延べ生存年数 (person-years; 人口規模に相当、千人単位)
+- `l_x`: 生命表における生存数（100,000人あたり）
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("Sweden.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 15, autoWidth = TRUE),
+          caption = 'Table: スウェーデンの出生・死亡推計 (Sweden.csv)')
+```
