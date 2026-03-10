@@ -10,9 +10,9 @@
 | [Kenya.csv](Kenya.csv) | ケニアの出生率と死亡率の推計データ | [表示](Kenya.html) |
 | [Sweden.csv](Sweden.csv) | スウェーデンの出生率と死亡率の推計データ | [表示](Sweden.html) |
 | [resume.csv](resume.csv) | 履歴書実験データ（人種差別） | [表示](resume.html) |
-| [social.csv](social.csv) | 社会的圧力実験データ（投票率） | |
-| [minwage.csv](minwage.csv) | 最低賃金研究データ（雇用効果） | |
-| [STAR.csv](STAR.csv) | STARプロジェクトデータ（少人数学級効果） | |
+| [social.csv](social.csv) | 社会的圧力実験データ（投票率） | [表示](social.html) |
+| [minwage.csv](minwage.csv) | 最低賃金研究データ（雇用効果） | [表示](minwage.html) |
+| [STAR.csv](STAR.csv) | STARプロジェクトデータ（少人数学級効果） | [表示](STAR.html) |
 | [gay.csv](gay.csv) | 同性婚研究データ | |
 | [leaders.csv](leaders.csv) | 指導者暗殺データ | |
 | [afghan.csv](afghan.csv) | アフガニスタン世論調査データ（個人レベル） | |

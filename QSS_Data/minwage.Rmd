@@ -1,0 +1,36 @@
+---
+title: "minwage.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## minwage.csv
+
+このデータセットは、ニュージャージー州の最低賃金引き上げがファストフード店の雇用に与えた影響を調査した研究のデータです（QSS 表2.5）。
+
+### 変数定義
+
+- `chain`: チェーン店名 (`burgerking`, `kfc`, `roys`, `wendys`)
+- `location`: 店舗の所在地 (`NJ`: ニュージャージー州, `PA`: ペンシルベニア州)
+- `wageBefore`: 引き上げ前の最低賃金 (ドル/時)
+- `wageAfter`: 引き上げ後の最低賃金 (ドル/時)
+- `fullBefore`: 引き上げ前のフルタイム従業員数
+- `fullAfter`: 引き上げ後のフルタイム従業員数
+- `partBefore`: 引き上げ前のパートタイム従業員数
+- `partAfter`: 引き上げ後のパートタイム従業員数
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("minwage.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 最低賃金研究データ (minwage.csv)')
+```

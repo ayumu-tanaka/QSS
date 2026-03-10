@@ -1,0 +1,38 @@
+---
+title: "social.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## social.csv
+
+このデータセットは、社会的圧力が投票率に与える影響を調査した野外実験のデータです（QSS 表2.4）。
+
+### 変数定義
+
+- `sex`: 性別 (`female` または `male`)
+- `yearofbirth`: 出生年
+- `primary2004`: 2004年の予備選挙で投票したか (`1` = Yes, `0` = No)
+- `messages`: 割り当てられたメッセージの種類
+    - `Control`: メッセージなし
+    - `Civic Duty`: 「投票は市民の義務です」という葉書
+    - `Hawthorne`: 「あなたは調査対象です」という葉書
+    - `Neighbors`: 「あなたの投票状況を近所に知らせます」という葉書
+- `primary2006`: 2006年の予備選挙で投票したか（結果変数; `1` = Yes, `0` = No）
+- `hhsize`: 世帯人数
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("social.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 社会的圧力実験データ (social.csv)')
+```
