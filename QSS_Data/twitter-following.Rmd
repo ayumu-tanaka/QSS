@@ -1,0 +1,30 @@
+---
+title: "twitter-following.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## twitter-following.csv
+
+このデータセットは、米国上院議員のTwitterにおけるフォロー関係（誰が誰をフォローしているか）のデータです（QSS 表5.4）。
+
+### 変数定義
+
+- `following`: フォローしている議員（スクリーン名）
+- `followed`: フォローされている議員（スクリーン名）
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("twitter-following.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 上院議員のTwitterフォロー関係 (twitter-following.csv)')
+```

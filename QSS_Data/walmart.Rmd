@@ -1,0 +1,35 @@
+---
+title: "walmart.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## walmart.csv
+
+このデータセットは、ウォルマートの店舗展開（開店日と位置情報）に関するデータです（QSS 表5.5）。
+
+### 変数定義
+
+- `opendate`: 開店日
+- `st.address`: 住所
+- `city`: 都市名
+- `state`: 州名略称
+- `long`: 経度
+- `lat`: 緯度
+- `type`: 店舗タイプ (`Wal-MartStore`, `SuperCenter`, `DistributionCenter`)
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("walmart.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: ウォルマート出店データ (walmart.csv)')
+```

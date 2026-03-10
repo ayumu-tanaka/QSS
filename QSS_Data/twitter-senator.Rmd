@@ -1,0 +1,32 @@
+---
+title: "twitter-senator.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## twitter-senator.csv
+
+このデータセットは、Twitterを利用している米国上院議員の属性データです（QSS 表5.4）。
+
+### 変数定義
+
+- `screen_name`: Twitterのスクリーン名
+- `name`: 議員名
+- `party`: 政党 (`D` = 民主党, `R` = 共和党, `I` = 無所属)
+- `state`: 州名略称
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("twitter-senator.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 上院議員の属性データ (twitter-senator.csv)')
+```

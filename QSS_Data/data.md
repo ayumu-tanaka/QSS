@@ -36,11 +36,11 @@
 | [progresa.csv](progresa.csv) | Progresaプログラム（条件付き現金給付）データ | [表示](progresa.html) |
 | [transfer.csv](transfer.csv) | ブラジル政府の地方交付金データ | [表示](transfer.html) |
 | [florentine.csv](florentine.csv) | フィレンツェの婚姻ネットワークデータ | [表示](florentine.html) |
-| [twitter-following.csv](twitter-following.csv) | 上院議員のTwitterフォローデータ | |
-| [twitter-senator.csv](twitter-senator.csv) | 上院議員の属性データ | |
-| [walmart.csv](walmart.csv) | ウォルマート出店データ | |
-| [constitution.csv](constitution.csv) | 憲法前文データ | |
-| [trade.csv](trade.csv) | 国際貿易ネットワークデータ | |
+| [twitter-following.csv](twitter-following.csv) | 上院議員のTwitterフォローデータ | [表示](twitter-following.html) |
+| [twitter-senator.csv](twitter-senator.csv) | 上院議員の属性データ | [表示](twitter-senator.html) |
+| [walmart.csv](walmart.csv) | ウォルマート出店データ | [表示](walmart.html) |
+| [constitution.csv](constitution.csv) | 憲法前文データ | [表示](constitution.html) |
+| [trade.csv](trade.csv) | 国際貿易ネットワークデータ | [表示](trade.html) |
 | [elections.csv](elections.csv) | 郡レベルの米国大統領選挙データ | |
 | [FLVoters.csv](FLVoters.csv) | フロリダ州有権者名簿サンプルデータ | |
 | [names.csv](names.csv) | 米国国勢調査局の苗字リストデータ | |

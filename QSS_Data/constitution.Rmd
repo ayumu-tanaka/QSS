@@ -1,0 +1,31 @@
+---
+title: "constitution.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## constitution.csv
+
+このデータセットは、各国の憲法前文のテキストデータです（QSS 表5.6）。
+
+### 変数定義
+
+- `country`: 国名
+- `year`: 憲法が制定された年
+- `preamble`: 憲法前文のテキスト
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("constitution.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 各国の憲法前文データ (constitution.csv)')
+```

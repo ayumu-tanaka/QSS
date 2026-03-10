@@ -1,0 +1,32 @@
+---
+title: "trade.csv データプレビュー"
+author: ""
+date: "2026-03-09"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
+```
+
+## trade.csv
+
+このデータセットは、1900年から2000年までの各国の輸出入データです（QSS 表5.7）。
+
+### 変数定義
+
+- `country1`: 輸出国の名前
+- `country2`: 輸入国の名前
+- `year`: 西暦年
+- `exports`: 輸出額（単位：百万ドル）
+
+```{r table, echo=FALSE}
+# データの読み込み
+data <- read.csv("trade.csv")
+
+# DTパッケージを使ってインタラクティブなテーブルを表示
+datatable(data, 
+          filter = "top", 
+          options = list(pageLength = 10, autoWidth = TRUE),
+          caption = 'Table: 国際貿易データ (trade.csv)')
+```
