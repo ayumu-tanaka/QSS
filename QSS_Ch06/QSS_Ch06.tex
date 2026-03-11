@@ -357,6 +357,32 @@
 \hypertarget{ux78baux7387ux5206ux5e03}{%
 \section{6.3 確率分布}\label{ux78baux7387ux5206ux5e03}}
 
+\begin{frame}{二項分布 (Binomial Distribution)}
+\protect\hypertarget{ux4e8cux9805ux5206ux5e03-binomial-distribution}{}
+\begin{itemize}
+\tightlist
+\item
+  2つの結果（成功・失敗）のみを持つ独立な試行を \(n\)
+  回繰り返した時の、成功回数 \(X\) の分布。
+\item
+  \textbf{確率質量関数}: \(P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(n\): 試行回数
+  \item
+    \(p\): 1回の試行における成功確率
+  \item
+    \(\binom{n}{k}\): 組合せ（\(n\) 個から \(k\) 個選ぶ方法の数）
+  \end{itemize}
+\item
+  \textbf{期待値}: \(E[X] = np\)
+\item
+  \textbf{分散}: \(Var(X) = np(1-p)\)
+\end{itemize}
+\end{frame}
+
 \begin{frame}[fragile]{二項分布: コイン投げのコード}
 \protect\hypertarget{ux4e8cux9805ux5206ux5e03-ux30b3ux30a4ux30f3ux6295ux3052ux306eux30b3ux30fcux30c9}{}
 \begin{itemize}
@@ -399,7 +425,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{二項分布 (Binomial Distribution)}
-\protect\hypertarget{ux4e8cux9805ux5206ux5e03-binomial-distribution}{}
+\protect\hypertarget{ux4e8cux9805ux5206ux5e03-binomial-distribution-1}{}
 \begin{itemize}
 \tightlist
 \item
@@ -431,6 +457,32 @@
 \end{verbatim}
 
 \normalsize
+\end{frame}
+
+\begin{frame}{正規分布 (Normal Distribution)}
+\protect\hypertarget{ux6b63ux898fux5206ux5e03-normal-distribution}{}
+\begin{itemize}
+\tightlist
+\item
+  左右対称の釣鐘型の曲線を持つ、連続確率変数において最も重要な分布。
+\item
+  \textbf{確率密度関数}:
+  \(f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\mu\): 平均（中心の位置）
+  \item
+    \(\sigma\): 標準偏差（分布の広がり）
+  \end{itemize}
+\item
+  \textbf{期待値}: \(E[X] = \mu\)
+\item
+  \textbf{分散}: \(Var(X) = \sigma^2\)
+\item
+  \textbf{標準正規分布}: \(\mu=0, \sigma=1\) の特別なケース。
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{正規分布 (Normal Distribution): コード}
@@ -468,6 +520,70 @@
 \scriptsize
 
 \begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-13-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}{一様分布 (Uniform Distribution)}
+\protect\hypertarget{ux4e00ux69d8ux5206ux5e03-uniform-distribution}{}
+\begin{itemize}
+\tightlist
+\item
+  特定の範囲 \([a, b]\)
+  において、どの値も等しい確率（密度）で発生する分布。
+\item
+  \textbf{平均 (期待値)}: \(E[X] = \frac{a+b}{2}\)
+\item
+  \textbf{分散}: \(Var(X) = \frac{(b-a)^2}{12}\)
+\item
+  \textbf{標準一様分布} (\(a=0, b=1\)) の場合：
+
+  \begin{itemize}
+  \tightlist
+  \item
+    平均 = 0.5
+  \item
+    分散 = 1/12 (約 0.083)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{一様分布のプロット: コード}
+\protect\hypertarget{ux4e00ux69d8ux5206ux5e03ux306eux30d7ux30edux30c3ux30c8-ux30b3ux30fcux30c9}{}
+\begin{itemize}
+\tightlist
+\item
+  範囲 \([0, 1]\) の一様分布をグラフにします。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. X軸の範囲を設定}
+\NormalTok{x\_vals }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\FloatTok{1.5}\NormalTok{, }\AttributeTok{length.out =} \DecValTok{500}\NormalTok{)}
+
+\CommentTok{\# 2. 各点における確率密度 (dunif) を計算}
+\NormalTok{densities }\OtherTok{\textless{}{-}} \FunctionTok{dunif}\NormalTok{(x\_vals, }\AttributeTok{min =} \DecValTok{0}\NormalTok{, }\AttributeTok{max =} \DecValTok{1}\NormalTok{)}
+
+\CommentTok{\# 3. 描画}
+\FunctionTok{plot}\NormalTok{(x\_vals, densities, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{col =} \StringTok{"purple"}\NormalTok{,}
+     \AttributeTok{xlab =} \StringTok{"x"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Density"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Uniform Distribution U(0, 1)"}\NormalTok{)}
+
+\CommentTok{\# 4. 下の領域を塗りつぶす（オプション）}
+\FunctionTok{polygon}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, x\_vals[x\_vals}\SpecialCharTok{\textgreater{}=}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ x\_vals}\SpecialCharTok{\textless{}=}\DecValTok{1}\NormalTok{], }\DecValTok{1}\NormalTok{), }
+        \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, densities[x\_vals}\SpecialCharTok{\textgreater{}=}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ x\_vals}\SpecialCharTok{\textless{}=}\DecValTok{1}\NormalTok{], }\DecValTok{0}\NormalTok{), }
+        \AttributeTok{col =} \FunctionTok{rgb}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.2}\NormalTok{), }\AttributeTok{border =} \ConstantTok{NA}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{一様分布のプロット: 実行結果}
+\protect\hypertarget{ux4e00ux69d8ux5206ux5e03ux306eux30d7ux30edux30c3ux30c8-ux5b9fux884cux7d50ux679c}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-15-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -509,7 +625,7 @@
 \protect\hypertarget{ux5927ux6570ux306eux6cd5ux5247-ux30d7ux30edux30c3ux30c8}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-15-1} \end{center}
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-17-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -551,7 +667,7 @@
 \protect\hypertarget{ux4e2dux5fc3ux6975ux9650ux5b9aux7406-ux30d7ux30edux30c3ux30c8}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-17-1} \end{center}
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-19-1} \end{center}
 \normalsize
 \end{frame}
 

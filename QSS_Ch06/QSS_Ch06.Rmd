@@ -172,6 +172,18 @@ abline(0, 1, lty = "dashed", col = "blue")
 
 ---
 
+## 二項分布 (Binomial Distribution)
+
+* 2つの結果（成功・失敗）のみを持つ独立な試行を $n$ 回繰り返した時の、成功回数 $X$ の分布。
+* **確率質量関数**: $P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$
+    * $n$: 試行回数
+    * $p$: 1回の試行における成功確率
+    * $\binom{n}{k}$: 組合せ（$n$ 個から $k$ 個選ぶ方法の数）
+* **期待値**: $E[X] = np$
+* **分散**: $Var(X) = np(1-p)$
+
+---
+
 ## 二項分布: コイン投げのコード
 
 * 公平なコインを20回投げた時に、表が出る回数の確率分布を計算します。
@@ -231,6 +243,18 @@ pbinom(3, size = 10, prob = 0.5)
 
 ---
 
+## 正規分布 (Normal Distribution)
+
+* 左右対称の釣鐘型の曲線を持つ、連続確率変数において最も重要な分布。
+* **確率密度関数**: $f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$
+    * $\mu$: 平均（中心の位置）
+    * $\sigma$: 標準偏差（分布の広がり）
+* **期待値**: $E[X] = \mu$
+* **分散**: $Var(X) = \sigma^2$
+* **標準正規分布**: $\mu=0, \sigma=1$ の特別なケース。
+
+---
+
 ## 正規分布 (Normal Distribution): コード
 
 * 平均 0, 標準偏差 1 の「標準正規分布」を描画します。
@@ -263,6 +287,58 @@ densities <- dnorm(x_vals, mean = 0, sd = 1)
 plot(x_vals, densities, type = "l", lwd = 2, col = "darkgreen",
      xlab = "z-score", ylab = "Density", main = "Standard Normal Distribution")
 abline(v = c(-1.96, 1.96), lty = "dotted", col = "red")
+```
+\normalsize
+
+---
+
+## 一様分布 (Uniform Distribution)
+
+* 特定の範囲 $[a, b]$ において、どの値も等しい確率（密度）で発生する分布。
+* **平均 (期待値)**: $E[X] = \frac{a+b}{2}$
+* **分散**: $Var(X) = \frac{(b-a)^2}{12}$
+* **標準一様分布** ($a=0, b=1$) の場合：
+    * 平均 = 0.5
+    * 分散 = 1/12 (約 0.083)
+
+---
+
+## 一様分布のプロット: コード
+
+* 範囲 $[0, 1]$ の一様分布をグラフにします。
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. X軸の範囲を設定
+x_vals <- seq(-0.5, 1.5, length.out = 500)
+
+# 2. 各点における確率密度 (dunif) を計算
+densities <- dunif(x_vals, min = 0, max = 1)
+
+# 3. 描画
+plot(x_vals, densities, type = "l", lwd = 2, col = "purple",
+     xlab = "x", ylab = "Density", main = "Uniform Distribution U(0, 1)")
+
+# 4. 下の領域を塗りつぶす（オプション）
+polygon(c(0, x_vals[x_vals>=0 & x_vals<=1], 1), 
+        c(0, densities[x_vals>=0 & x_vals<=1], 0), 
+        col = rgb(0.5, 0, 0.5, 0.2), border = NA)
+```
+\normalsize
+
+---
+
+## 一様分布のプロット: 実行結果
+
+\scriptsize
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
+x_vals <- seq(-0.5, 1.5, length.out = 500)
+densities <- dunif(x_vals, min = 0, max = 1)
+plot(x_vals, densities, type = "l", lwd = 2, col = "purple",
+     xlab = "x", ylab = "Density", main = "Uniform Distribution U(0, 1)")
+polygon(c(0, x_vals[x_vals>=0 & x_vals<=1], 1), 
+        c(0, densities[x_vals>=0 & x_vals<=1], 0), 
+        col = rgb(0.5, 0, 0.5, 0.2), border = NA)
 ```
 \normalsize
 
