@@ -1,16 +1,18 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% remove section numbering
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -19,19 +21,16 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{section title}
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -44,21 +43,19 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
 \usetheme[]{Montpellier}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -75,6 +72,14 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -86,13 +91,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -100,7 +105,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -109,7 +114,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -118,6 +123,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -142,12 +148,9 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{第2章: 因果関係\\
 (2.3. 因果効果と反事実 / 2.4. ランダム化比較試験)}
@@ -159,11 +162,12 @@
 \begin{document}
 \frame{\titlepage}
 
+\hypertarget{ux56e0ux679cux52b9ux679cux3068ux53cdux4e8bux5b9f}{%
 \section{2.3
-因果効果と反事実}\label{ux56e0ux679cux52b9ux679cux3068ux53cdux4e8bux5b9f}
+因果効果と反事実}\label{ux56e0ux679cux52b9ux679cux3068ux53cdux4e8bux5b9f}}
 
 \begin{frame}{因果関係の定義}
-\phantomsection\label{ux56e0ux679cux95a2ux4fc2ux306eux5b9aux7fa9}
+\protect\hypertarget{ux56e0ux679cux95a2ux4fc2ux306eux5b9aux7fa9}{}
 \begin{itemize}
 \tightlist
 \item
@@ -185,7 +189,7 @@
 \end{frame}
 
 \begin{frame}{因果推論の根本問題}
-\phantomsection\label{ux56e0ux679cux63a8ux8ad6ux306eux6839ux672cux554fux984c}
+\protect\hypertarget{ux56e0ux679cux63a8ux8ad6ux306eux6839ux672cux554fux984c}{}
 \begin{itemize}
 \tightlist
 \item
@@ -204,11 +208,12 @@
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13-rct}{%
 \section{2.4 ランダム化比較試験
-(RCT)}\label{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13-rct}
+(RCT)}\label{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13-rct}}
 
 \begin{frame}{社会的圧力と投票率の実験}
-\phantomsection\label{ux793eux4f1aux7684ux5727ux529bux3068ux6295ux7968ux7387ux306eux5b9fux9a13}
+\protect\hypertarget{ux793eux4f1aux7684ux5727ux529bux3068ux6295ux7968ux7387ux306eux5b9fux9a13}{}
 \begin{itemize}
 \tightlist
 \item
@@ -227,16 +232,49 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{データの読み込みと確認}
-\phantomsection\label{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux78baux8a8d}
+\begin{frame}[fragile]{social データの読み込み (1)}
+\protect\hypertarget{social-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
+\begin{itemize}
+\tightlist
+\item
+  実験で収集されたデータをRに読み込みます。
+\end{itemize}
+
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1. データの読み込み (social.csv)}
+\CommentTok{\# 1. ローカルに保存したsocialデータの読み込み（推奨）}
 \NormalTok{social }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"social.csv"}\NormalTok{)}
 
-\CommentTok{\# 2. データの構造を確認}
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# social \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/social.csv")}
+
+\CommentTok{\# 2. データの次元（行数と列数）を確認}
+\FunctionTok{dim}\NormalTok{(social)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 305866      6
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{social データの読み込み (2)}
+\protect\hypertarget{social-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-2}{}
+\begin{itemize}
+\tightlist
+\item
+  データの最初の数行を表示して、変数の並びや中身を確認します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 最初の5行を表示}
 \CommentTok{\# messages: 処置の種類（Control, Civic Duty, Neighbors 等）}
 \CommentTok{\# primary2006: 2006年予備選挙で投票したか (1=Yes, 0=No)}
 \FunctionTok{head}\NormalTok{(social, }\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
@@ -256,7 +294,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{各グループの投票率の計算}
-\phantomsection\label{ux5404ux30b0ux30ebux30fcux30d7ux306eux6295ux7968ux7387ux306eux8a08ux7b97}
+\protect\hypertarget{ux5404ux30b0ux30ebux30fcux30d7ux306eux6295ux7968ux7387ux306eux8a08ux7b97}{}
 \scriptsize
 
 \begin{Shaded}
@@ -287,7 +325,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{因果効果 (SATE) の推定}
-\phantomsection\label{ux56e0ux679cux52b9ux679c-sate-ux306eux63a8ux5b9a}
+\protect\hypertarget{ux56e0ux679cux52b9ux679c-sate-ux306eux63a8ux5b9a}{}
 \begin{itemize}
 \tightlist
 \item
@@ -324,11 +362,12 @@
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux30b0ux30e9ux30d5ux306bux3088ux308bux6bd4ux8f03}{%
 \section{2.4.1
-グラフによる比較}\label{ux30b0ux30e9ux30d5ux306bux3088ux308bux6bd4ux8f03}
+グラフによる比較}\label{ux30b0ux30e9ux30d5ux306bux3088ux308bux6bd4ux8f03}}
 
 \begin{frame}[fragile]{グループ別投票率の可視化: コード}
-\phantomsection\label{ux30b0ux30ebux30fcux30d7ux5225ux6295ux7968ux7387ux306eux53efux8996ux5316-ux30b3ux30fcux30c9}
+\protect\hypertarget{ux30b0ux30ebux30fcux30d7ux5225ux6295ux7968ux7387ux306eux53efux8996ux5316-ux30b3ux30fcux30c9}{}
 \scriptsize
 
 \begin{Shaded}
@@ -352,17 +391,18 @@
 \end{frame}
 
 \begin{frame}{グループ別投票率の可視化: プロット}
-\phantomsection\label{ux30b0ux30ebux30fcux30d7ux5225ux6295ux7968ux7387ux306eux53efux8996ux5316-ux30d7ux30edux30c3ux30c8}
+\protect\hypertarget{ux30b0ux30ebux30fcux30d7ux5225ux6295ux7968ux7387ux306eux53efux8996ux5316-ux30d7ux30edux30c3ux30c8}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.45\textheight]{QSS_Ch02_3_files/figure-beamer/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[height=0.45\textheight]{QSS_Ch02_3_files/figure-beamer/unnamed-chunk-6-1} \end{center}
 \normalsize
 \end{frame}
 
-\section{2.5 まとめ}\label{ux307eux3068ux3081}
+\hypertarget{ux307eux3068ux3081}{%
+\section{2.5 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}[fragile]{このセクションのまとめ}
-\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
 \begin{itemize}
 \tightlist
 \item

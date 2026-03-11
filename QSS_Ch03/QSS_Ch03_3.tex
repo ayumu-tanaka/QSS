@@ -1,16 +1,18 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% remove section numbering
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -19,19 +21,16 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{section title}
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -44,21 +43,19 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
 \usetheme[]{Montpellier}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -75,6 +72,14 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -86,13 +91,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -100,7 +105,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -109,7 +114,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -118,6 +123,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -142,12 +148,9 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{第3章: 測定\\
 (3.3. 1変量の分布をビジュアル化する)}
@@ -159,11 +162,12 @@
 \begin{document}
 \frame{\titlepage}
 
+\hypertarget{ux5909ux91cfux306eux5206ux5e03ux3092ux30d3ux30b8ux30e5ux30a2ux30ebux5316ux3059ux308b}{%
 \section{3.3
-1変量の分布をビジュアル化する}\label{ux5909ux91cfux306eux5206ux5e03ux3092ux30d3ux30b8ux30e5ux30a2ux30ebux5316ux3059ux308b}
+1変量の分布をビジュアル化する}\label{ux5909ux91cfux306eux5206ux5e03ux3092ux30d3ux30b8ux30e5ux30a2ux30ebux5316ux3059ux308b}}
 
 \begin{frame}{データの可視化の重要性}
-\phantomsection\label{ux30c7ux30fcux30bfux306eux53efux8996ux5316ux306eux91cdux8981ux6027}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux53efux8996ux5316ux306eux91cdux8981ux6027}{}
 \begin{itemize}
 \tightlist
 \item
@@ -185,27 +189,47 @@
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux68d2ux30b0ux30e9ux30d5-bar-plot}{%
 \section{3.3.1 棒グラフ (Bar
-Plot)}\label{ux68d2ux30b0ux30e9ux30d5-bar-plot}
+Plot)}\label{ux68d2ux30b0ux30e9ux30d5-bar-plot}}
 
-\begin{frame}[fragile]{カテゴリ変数の可視化}
-\phantomsection\label{ux30abux30c6ux30b4ux30eaux5909ux6570ux306eux53efux8996ux5316}
+\begin{frame}[fragile]{afghan データの読み込み (1)}
+\protect\hypertarget{afghan-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{棒グラフ}: 各カテゴリの度数や比率を棒の高さで表現する。
-\item
-  アフガニスタン調査の「被害経験」を例にします。
+  カテゴリ変数の可視化（棒グラフ）のため、データを準備します。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# データの準備}
+\CommentTok{\# 1. ローカルに保存したafghanデータの読み込み（推奨）}
 \NormalTok{afghan }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"afghan.csv"}\NormalTok{)}
 
-\CommentTok{\# 1. ISAFによる被害経験の比率表を作成 (欠損値 NA も含める)}
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# afghan \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/afghan.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{カテゴリ変数の集計 (2)}
+\protect\hypertarget{ux30abux30c6ux30b4ux30eaux5909ux6570ux306eux96c6ux8a08-2}{}
+\begin{itemize}
+\tightlist
+\item
+  ISAFによる被害経験の比率表を作成します（欠損値 \texttt{NA}
+  も含める）。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ISAFによる被害経験の比率表}
 \NormalTok{isaf.ptable }\OtherTok{\textless{}{-}} \FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(}\AttributeTok{ISAF =}\NormalTok{ afghan}\SpecialCharTok{$}\NormalTok{violent.exp.ISAF, }
                                 \AttributeTok{exclude =} \ConstantTok{NULL}\NormalTok{))}
 \NormalTok{isaf.ptable}
@@ -222,7 +246,7 @@ Plot)}\label{ux68d2ux30b0ux30e9ux30d5-bar-plot}
 \end{frame}
 
 \begin{frame}[fragile]{棒グラフの描画: コード}
-\phantomsection\label{ux68d2ux30b0ux30e9ux30d5ux306eux63cfux753b-ux30b3ux30fcux30c9}
+\protect\hypertarget{ux68d2ux30b0ux30e9ux30d5ux306eux63cfux753b-ux30b3ux30fcux30c9}{}
 \scriptsize
 
 \begin{Shaded}
@@ -241,18 +265,19 @@ Plot)}\label{ux68d2ux30b0ux30e9ux30d5-bar-plot}
 \end{frame}
 
 \begin{frame}{棒グラフの描画: 結果}
-\phantomsection\label{ux68d2ux30b0ux30e9ux30d5ux306eux63cfux753b-ux7d50ux679c}
+\protect\hypertarget{ux68d2ux30b0ux30e9ux30d5ux306eux63cfux753b-ux7d50ux679c}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.7\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-3-1} \end{center}
+\begin{center}\includegraphics[height=0.7\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-4-1} \end{center}
 \normalsize
 \end{frame}
 
+\hypertarget{ux30d2ux30b9ux30c8ux30b0ux30e9ux30e0-histogram}{%
 \section{3.3.2 ヒストグラム
-(Histogram)}\label{ux30d2ux30b9ux30c8ux30b0ux30e9ux30e0-histogram}
+(Histogram)}\label{ux30d2ux30b9ux30c8ux30b0ux30e9ux30e0-histogram}}
 
 \begin{frame}[fragile]{数値変数の密度を可視化する}
-\phantomsection\label{ux6570ux5024ux5909ux6570ux306eux5bc6ux5ea6ux3092ux53efux8996ux5316ux3059ux308b}
+\protect\hypertarget{ux6570ux5024ux5909ux6570ux306eux5bc6ux5ea6ux3092ux53efux8996ux5316ux3059ux308b}{}
 \begin{itemize}
 \tightlist
 \item
@@ -278,15 +303,15 @@ Plot)}\label{ux68d2ux30b0ux30e9ux30d5-bar-plot}
 \end{frame}
 
 \begin{frame}{年齢の分布: 結果}
-\phantomsection\label{ux5e74ux9f62ux306eux5206ux5e03-ux7d50ux679c}
+\protect\hypertarget{ux5e74ux9f62ux306eux5206ux5e03-ux7d50ux679c}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.7\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[height=0.7\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-6-1} \end{center}
 \normalsize
 \end{frame}
 
 \begin{frame}[fragile]{ヒストグラムのカスタマイズ（教育年数）}
-\phantomsection\label{ux30d2ux30b9ux30c8ux30b0ux30e9ux30e0ux306eux30abux30b9ux30bfux30deux30a4ux30baux6559ux80b2ux5e74ux6570}
+\protect\hypertarget{ux30d2ux30b9ux30c8ux30b0ux30e9ux30e0ux306eux30abux30b9ux30bfux30deux30a4ux30baux6559ux80b2ux5e74ux6570}{}
 \begin{itemize}
 \tightlist
 \item
@@ -316,18 +341,19 @@ Plot)}\label{ux68d2ux30b0ux30e9ux30d5-bar-plot}
 \end{frame}
 
 \begin{frame}{教育年数の分布: 結果}
-\phantomsection\label{ux6559ux80b2ux5e74ux6570ux306eux5206ux5e03-ux7d50ux679c}
+\protect\hypertarget{ux6559ux80b2ux5e74ux6570ux306eux5206ux5e03-ux7d50ux679c}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.7\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-7-1} \end{center}
+\begin{center}\includegraphics[height=0.7\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-8-1} \end{center}
 \normalsize
 \end{frame}
 
+\hypertarget{ux7bb1ux3072ux3052ux56f3-box-plot}{%
 \section{3.3.3 箱ひげ図 (Box
-Plot)}\label{ux7bb1ux3072ux3052ux56f3-box-plot}
+Plot)}\label{ux7bb1ux3072ux3052ux56f3-box-plot}}
 
 \begin{frame}[fragile]{グループ間の分布の比較}
-\phantomsection\label{ux30b0ux30ebux30fcux30d7ux9593ux306eux5206ux5e03ux306eux6bd4ux8f03}
+\protect\hypertarget{ux30b0ux30ebux30fcux30d7ux9593ux306eux5206ux5e03ux306eux6bd4ux8f03}{}
 \begin{itemize}
 \tightlist
 \item
@@ -355,17 +381,18 @@ Plot)}\label{ux7bb1ux3072ux3052ux56f3-box-plot}
 \end{frame}
 
 \begin{frame}{州別の教育年数: 結果}
-\phantomsection\label{ux5ddeux5225ux306eux6559ux80b2ux5e74ux6570-ux7d50ux679c}
+\protect\hypertarget{ux5ddeux5225ux306eux6559ux80b2ux5e74ux6570-ux7d50ux679c}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.7\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics[height=0.7\textheight]{QSS_Ch03_3_files/figure-beamer/unnamed-chunk-10-1} \end{center}
 \normalsize
 \end{frame}
 
-\section{3.3.4 まとめ}\label{ux307eux3068ux3081}
+\hypertarget{ux307eux3068ux3081}{%
+\section{3.3.4 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}[fragile]{このセクションのまとめ}
-\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
 \begin{itemize}
 \tightlist
 \item

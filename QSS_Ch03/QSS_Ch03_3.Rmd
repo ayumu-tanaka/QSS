@@ -40,17 +40,29 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## カテゴリ変数の可視化
+## afghan データの読み込み (1)
 
-* **棒グラフ**: 各カテゴリの度数や比率を棒の高さで表現する。
-* アフガニスタン調査の「被害経験」を例にします。
+* カテゴリ変数の可視化（棒グラフ）のため、データを準備します。
 
 \scriptsize
 ```{r}
-# データの準備
+# 1. ローカルに保存したafghanデータの読み込み（推奨）
 afghan <- read.csv("afghan.csv")
 
-# 1. ISAFによる被害経験の比率表を作成 (欠損値 NA も含める)
+# （参考）URLから直接読み込むことも可能
+# afghan <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/afghan.csv")
+```
+\normalsize
+
+---
+
+## カテゴリ変数の集計 (2)
+
+* ISAFによる被害経験の比率表を作成します（欠損値 `NA` も含める）。
+
+\scriptsize
+```{r}
+# ISAFによる被害経験の比率表
 isaf.ptable <- prop.table(table(ISAF = afghan$violent.exp.ISAF, 
                                 exclude = NULL))
 isaf.ptable

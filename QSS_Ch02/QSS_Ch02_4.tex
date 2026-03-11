@@ -225,21 +225,54 @@ Studies)}\label{ux89b3ux5bdfux7814ux7a76-observational-studies}}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{データの読み込みと州別の分割}
-\protect\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux5ddeux5225ux306eux5206ux5272}{}
+\begin{frame}[fragile]{minwage データの読み込み (1)}
+\protect\hypertarget{minwage-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
+\begin{itemize}
+\tightlist
+\item
+  カード＝クルーガー研究のデータをRに読み込みます。
+\end{itemize}
+
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1. データの読み込み}
+\CommentTok{\# 1. ローカルに保存したminwageデータの読み込み（推奨）}
 \NormalTok{minwage }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"minwage.csv"}\NormalTok{)}
 
-\CommentTok{\# 2. ニュージャージー州 (NJ) とペンシルベニア州 (PA) にデータを分ける}
-\CommentTok{\# location列が "PA" かどうかで判定}
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# minwage \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/minwage.csv")}
+
+\CommentTok{\# 2. データの次元（行数と列数）を確認}
+\FunctionTok{dim}\NormalTok{(minwage)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 358   8
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{州別のデータ分割 (2)}
+\protect\hypertarget{ux5ddeux5225ux306eux30c7ux30fcux30bfux5206ux5272-2}{}
+\begin{itemize}
+\tightlist
+\item
+  ニュージャージー州 (NJ) とペンシルベニア州 (PA)
+  にデータを分け、規模を確認します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. location列が "PA" かどうかで判定して抽出}
 \NormalTok{minwageNJ }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(minwage, }\AttributeTok{subset =}\NormalTok{ (location }\SpecialCharTok{!=} \StringTok{"PA"}\NormalTok{))}
 \NormalTok{minwagePA }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(minwage, }\AttributeTok{subset =}\NormalTok{ (location }\SpecialCharTok{==} \StringTok{"PA"}\NormalTok{))}
 
-\CommentTok{\# 3. データの規模を確認}
+\CommentTok{\# 2. データの規模を確認}
 \FunctionTok{dim}\NormalTok{(minwageNJ) }\CommentTok{\# NJの店舗数}
 \end{Highlighting}
 \end{Shaded}

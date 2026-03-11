@@ -194,20 +194,23 @@
 \section{3.1.1
 データの読み込みと基本統計量}\label{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux57faux672cux7d71ux8a08ux91cf}}
 
-\begin{frame}[fragile]{データの読み込み}
-\protect\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f}{}
+\begin{frame}[fragile]{afghan データの読み込み (1)}
+\protect\hypertarget{afghan-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  調査結果が含まれる CSV ファイルを読み込みます。
+  アフガニスタンの調査データをRに読み込みます。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1. データの読み込み}
+\CommentTok{\# 1. ローカルに保存したafghanデータの読み込み（推奨）}
 \NormalTok{afghan }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"afghan.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# afghan \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/afghan.csv")}
 
 \CommentTok{\# 2. データの次元（行数と列数）を確認}
 \CommentTok{\# 2,754人の回答、10個の変数}
@@ -222,13 +225,13 @@
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{回答者の基本属性の確認}
-\protect\hypertarget{ux56deux7b54ux8005ux306eux57faux672cux5c5eux6027ux306eux78baux8a8d}{}
+\begin{frame}[fragile]{回答者の基本属性の確認 (2)}
+\protect\hypertarget{ux56deux7b54ux8005ux306eux57faux672cux5c5eux6027ux306eux78baux8a8d-2}{}
 \begin{itemize}
 \tightlist
 \item
   \texttt{summary()}
-  関数を使って、年齢や教育年数、職業などの分布を素早く把握します。
+  関数を使って、年齢や教育年数、収入などの分布を素早く把握します。
 \end{itemize}
 
 \scriptsize

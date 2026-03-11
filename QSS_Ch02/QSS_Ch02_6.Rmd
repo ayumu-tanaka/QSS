@@ -38,18 +38,33 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## 中央値 (Median)
+## minwage データの読み込み (1)
 
-* データを大きさの順に並べたときに、ちょうど真ん中にくる値。
-* 外れ値（極端に大きい・小さい値）の影響を受けにくいという特徴がある。
+* 最低賃金データの読み込みと準備を行います。
 
 \scriptsize
 ```{r}
-# 最低賃金データの読み込みと準備
+# 1. ローカルに保存したminwageデータの読み込み（推奨）
 minwage <- read.csv("minwage.csv")
+
+# （参考）URLから直接読み込むことも可能
+# minwage <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/minwage.csv")
+
+# 2. データの準備（州別の抽出）
 minwageNJ <- subset(minwage, subset = (location != "PA"))
 minwagePA <- subset(minwage, subset = (location == "PA"))
+```
+\normalsize
 
+---
+
+## 中央値 (Median) (2)
+
+* データを大きさの順に並べたときに、ちょうど真ん中にくる値。
+* 外れ値（極端に大きい・小さい値）の影響を受けにくい（ロバスト）。
+
+\scriptsize
+```{r}
 # NJ州の引き上げ後のフルタイム雇用率の中央値を計算
 median(minwageNJ$fullAfter / (minwageNJ$fullAfter + minwageNJ$partAfter), 
        na.rm = TRUE)

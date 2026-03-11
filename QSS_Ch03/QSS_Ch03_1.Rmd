@@ -39,14 +39,17 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## データの読み込み
+## afghan データの読み込み (1)
 
-* 調査結果が含まれる CSV ファイルを読み込みます。
+* アフガニスタンの調査データをRに読み込みます。
 
 \scriptsize
 ```{r}
-# 1. データの読み込み
+# 1. ローカルに保存したafghanデータの読み込み（推奨）
 afghan <- read.csv("afghan.csv")
+
+# （参考）URLから直接読み込むことも可能
+# afghan <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/afghan.csv")
 
 # 2. データの次元（行数と列数）を確認
 # 2,754人の回答、10個の変数
@@ -56,9 +59,9 @@ dim(afghan)
 
 ---
 
-## 回答者の基本属性の確認
+## 回答者の基本属性の確認 (2)
 
-* `summary()` 関数を使って、年齢や教育年数、職業などの分布を素早く把握します。
+* `summary()` 関数を使って、年齢や教育年数、収入などの分布を素早く把握します。
 
 \scriptsize
 ```{r}

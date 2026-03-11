@@ -40,17 +40,28 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## 抽出された村とされなかった村の比較
+## afghan-village データの読み込み (1)
 
-* アフガニスタンの村レベルデータ (`afghan-village.csv`) を使用します。
-* 実際に調査対象となった村と、そうでない村で特徴（標高や人口）に差がないか確認します。
+* アフガニスタンの村レベルデータ (`afghan-village.csv`) を読み込みます。
 
 \scriptsize
 ```{r}
-# 1. 村レベルデータの読み込み
+# 1. ローカルに保存したデータの読み込み（推奨）
 afghan.village <- read.csv("afghan-village.csv")
 
-# 2. データの構造を確認
+# （参考）URLから直接読み込むことも可能
+# afghan.village <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/afghan-village.csv")
+```
+\normalsize
+
+---
+
+## データの構造を確認 (2)
+
+* 実際に調査対象となった村 (`village.surveyed == 1`) と、そうでない村を確認します。
+
+\scriptsize
+```{r}
 # village.surveyed: 調査対象になったか (1=Yes, 0=No)
 # altitude: 標高, population: 人口
 head(afghan.village, n = 3)
@@ -78,8 +89,7 @@ boxplot(altitude ~ village.surveyed,
 ## 標高の比較: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=8, out.height="80%", fig.align="center"}
-afghan.village <- read.csv("afghan-village.csv")
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
 boxplot(altitude ~ village.surveyed, 
         data = afghan.village,
         ylab = "Altitude (meter)", 
@@ -108,7 +118,7 @@ boxplot(log(population) ~ village.surveyed,
 ## 人口の比較（対数）: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=8, out.height="80%", fig.align="center"}
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
 boxplot(log(population) ~ village.surveyed, 
         data = afghan.village,
         ylab = "log population", 
@@ -121,15 +131,28 @@ boxplot(log(population) ~ village.surveyed,
 
 ---
 
-## 項目無回答 (Item Nonresponse)
+## afghan データの読み込み (1)
+
+* 個人の調査データを読み込み、欠損値を確認します。
+
+\scriptsize
+```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
+afghan <- read.csv("afghan.csv")
+
+# （参考）URLから直接読み込むことも可能
+# afghan <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/afghan.csv")
+```
+\normalsize
+
+---
+
+## 項目無回答 (Item Nonresponse) (2)
 
 * 特定の質問（例：タリバンによる被害）に答えない人が、特定の地域に偏っていないか確認します。
 
 \scriptsize
 ```{r}
-# 個人の調査データを読み込み
-afghan <- read.csv("afghan.csv")
-
 # 州 (province) ごとの「タリバン被害」の欠損値 (NA) の割合を計算
 # is.na() は欠損なら TRUE(1), そうでなければ FALSE(0) を返す
 tapply(is.na(afghan$violent.exp.taliban), afghan$province, mean)

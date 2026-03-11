@@ -71,18 +71,37 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 \normalsize
 
-# 2.2.2 ベクトルに対する論理演算
+# 2.2.2 データの読み込みと論理演算
 
 ---
 
-## ベクトルの要素ごとに比較する
+## resume データの読み込み (1)
 
-* Rの論理演算はベクトル全体に対して一度に行われ、各要素についての `TRUE/FALSE` が返される。
+* 実験で収集されたデータをRに読み込みます。
 
 \scriptsize
 ```{r}
-# サンプルの読み込み
+# 1. ローカルに保存したresumeデータの読み込み（推奨）
 resume <- read.csv("resume.csv")
+
+# （参考）URLから直接読み込むことも可能
+# resume <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/resume.csv")
+
+# 2. データの次元（行数と列数）を確認
+dim(resume)
+```
+\normalsize
+
+---
+
+## ベクトルの要素ごとに比較する (2)
+
+* データの最初の数行を表示して確認し、論理演算を行います。
+
+\scriptsize
+```{r}
+# 最初の3行を表示
+head(resume, n = 3)
 
 # race 変数の最初の5つの要素が "black" かどうかを確認
 head(resume$race == "black", n = 5)

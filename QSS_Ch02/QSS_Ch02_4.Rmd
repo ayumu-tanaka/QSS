@@ -51,19 +51,36 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## データの読み込みと州別の分割
+## minwage データの読み込み (1)
+
+* カード＝クルーガー研究のデータをRに読み込みます。
 
 \scriptsize
 ```{r}
-# 1. データの読み込み
+# 1. ローカルに保存したminwageデータの読み込み（推奨）
 minwage <- read.csv("minwage.csv")
 
-# 2. ニュージャージー州 (NJ) とペンシルベニア州 (PA) にデータを分ける
-# location列が "PA" かどうかで判定
+# （参考）URLから直接読み込むことも可能
+# minwage <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/minwage.csv")
+
+# 2. データの次元（行数と列数）を確認
+dim(minwage)
+```
+\normalsize
+
+---
+
+## 州別のデータ分割 (2)
+
+* ニュージャージー州 (NJ) とペンシルベニア州 (PA) にデータを分け、規模を確認します。
+
+\scriptsize
+```{r}
+# 1. location列が "PA" かどうかで判定して抽出
 minwageNJ <- subset(minwage, subset = (location != "PA"))
 minwagePA <- subset(minwage, subset = (location == "PA"))
 
-# 3. データの規模を確認
+# 2. データの規模を確認
 dim(minwageNJ) # NJの店舗数
 dim(minwagePA) # PAの店舗数
 ```

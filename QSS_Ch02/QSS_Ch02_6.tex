@@ -152,8 +152,8 @@
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 
-\title{第3章: 測定\\
-(3.2. Rで欠損データを扱う)}
+\title{第2章: 因果関係\\
+(2.6. 1変数の記述統計量)}
 \subtitle{今井耕介 著\\
 『社会科学のためのデータ分析入門 (QSS)』}
 \author{}
@@ -162,290 +162,220 @@
 \begin{document}
 \frame{\titlepage}
 
-\hypertarget{rux3067ux6b20ux640dux30c7ux30fcux30bfux3092ux6271ux3046}{%
-\section{3.2
-Rで欠損データを扱う}\label{rux3067ux6b20ux640dux30c7ux30fcux30bfux3092ux6271ux3046}}
+\hypertarget{ux5909ux6570ux306eux8a18ux8ff0ux7d71ux8a08ux91cf}{%
+\section{2.6
+1変数の記述統計量}\label{ux5909ux6570ux306eux8a18ux8ff0ux7d71ux8a08ux91cf}}
 
-\begin{frame}[fragile]{欠損値 (Missing Data) とは}
-\protect\hypertarget{ux6b20ux640dux5024-missing-data-ux3068ux306f}{}
+\begin{frame}{記述統計の目的}
+\protect\hypertarget{ux8a18ux8ff0ux7d71ux8a08ux306eux76eeux7684}{}
 \begin{itemize}
 \tightlist
 \item
-  調査において、回答者が質問に答えなかったり、回答を拒否したりした場合に生じる。
+  大規模なデータの分布（散らばり具合や中心的な傾向）を、少数の数値で要約する。
 \item
-  Rでは、欠損値は \textbf{\texttt{NA}} (Not Available)
-  という特別な記号で表される。
-\item
-  \textbf{注意}: \texttt{NA}
-  が含まれるデータに対してそのまま計算（平均など）を行うと、結果も
-  \texttt{NA} になってしまう。
+  主要な指標：
+
+  \begin{enumerate}
+  \tightlist
+  \item
+    \textbf{中心傾向の尺度}: 平均値 (Mean)、中央値 (Median)
+  \item
+    \textbf{散らばりの尺度}: 分位数 (Quantiles)、四分位範囲
+    (IQR)、標準偏差 (Standard Deviation)
+  \end{enumerate}
 \end{itemize}
 \end{frame}
 
-\hypertarget{ux6b20ux640dux5024ux306eux78baux8a8d}{%
-\section{3.2.1
-欠損値の確認}\label{ux6b20ux640dux5024ux306eux78baux8a8d}}
+\hypertarget{ux5206ux4f4dux6570-quantiles}{%
+\section{2.6.1 分位数 (Quantiles)}\label{ux5206ux4f4dux6570-quantiles}}
 
-\begin{frame}[fragile]{afghan データの読み込み (1)}
-\protect\hypertarget{afghan-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
+\begin{frame}[fragile]{minwage データの読み込み (1)}
+\protect\hypertarget{minwage-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  アフガニスタン調査データの読み込みを行います。
+  最低賃金データの読み込みと準備を行います。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1. ローカルに保存したafghanデータの読み込み（推奨）}
-\NormalTok{afghan }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"afghan.csv"}\NormalTok{)}
+\CommentTok{\# 1. ローカルに保存したminwageデータの読み込み（推奨）}
+\NormalTok{minwage }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"minwage.csv"}\NormalTok{)}
 
 \CommentTok{\# （参考）URLから直接読み込むことも可能}
-\CommentTok{\# afghan \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/afghan.csv")}
+\CommentTok{\# minwage \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/minwage.csv")}
+
+\CommentTok{\# 2. データの準備（州別の抽出）}
+\NormalTok{minwageNJ }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(minwage, }\AttributeTok{subset =}\NormalTok{ (location }\SpecialCharTok{!=} \StringTok{"PA"}\NormalTok{))}
+\NormalTok{minwagePA }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(minwage, }\AttributeTok{subset =}\NormalTok{ (location }\SpecialCharTok{==} \StringTok{"PA"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{is.na() 関数 (2)}
-\protect\hypertarget{is.na-ux95a2ux6570-2}{}
+\begin{frame}[fragile]{中央値 (Median) (2)}
+\protect\hypertarget{ux4e2dux592eux5024-median-2}{}
 \begin{itemize}
 \tightlist
 \item
-  データが \texttt{NA} かどうかを判定します。
+  データを大きさの順に並べたときに、ちょうど真ん中にくる値。
+\item
+  外れ値（極端に大きい・小さい値）の影響を受けにくい（ロバスト）。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1. 最初の10人分の収入データを確認}
-\FunctionTok{head}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{income, }\AttributeTok{n =} \DecValTok{10}\NormalTok{)}
+\CommentTok{\# NJ州の引き上げ後のフルタイム雇用率の中央値を計算}
+\FunctionTok{median}\NormalTok{(minwageNJ}\SpecialCharTok{$}\NormalTok{fullAfter }\SpecialCharTok{/}\NormalTok{ (minwageNJ}\SpecialCharTok{$}\NormalTok{fullAfter }\SpecialCharTok{+}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{partAfter), }
+       \AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "2,001-10,000"  "2,001-10,000"  "2,001-10,000"  "2,001-10,000" 
-##  [5] "2,001-10,000"  NA              "10,001-20,000" "2,001-10,000" 
-##  [9] "2,001-10,000"  NA
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# 2. 欠損値かどうかを判定 (TRUEが欠損)}
-\FunctionTok{head}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{income), }\AttributeTok{n =} \DecValTok{10}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE  TRUE
+## [1] 0.2916667
 \end{verbatim}
 
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{欠損値の数と割合の計算}
-\protect\hypertarget{ux6b20ux640dux5024ux306eux6570ux3068ux5272ux5408ux306eux8a08ux7b97}{}
+\begin{frame}[fragile]{4分位数と summary() 関数}
+\protect\hypertarget{ux5206ux4f4dux6570ux3068-summary-ux95a2ux6570}{}
 \begin{itemize}
 \tightlist
 \item
-  \texttt{is.na()} の結果（TRUE/FALSE）を \texttt{sum()} や
-  \texttt{mean()} に渡すことで集計できます。
+  \textbf{4分位数}: データを4等分する境界の値（25\%, 50\%, 75\%）。
+\item
+  \texttt{summary()}
+  を使うと、最小値、最大値、平均、中央値、4分位数を一括で確認できる。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1. 欠損値の総数をカウント}
-\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{income))}
+\CommentTok{\# NJ州の引き上げ前の賃金 (wageBefore) の要約}
+\FunctionTok{summary}\NormalTok{(minwageNJ}\SpecialCharTok{$}\NormalTok{wageBefore)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 154
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    4.25    4.25    4.50    4.61    4.87    5.75
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 2. 全体に占める欠損値の割合を計算}
-\FunctionTok{mean}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{income))}
+\CommentTok{\# 4分位範囲 (Interquartile Range: IQR)}
+\CommentTok{\# 75\%点 と 25\%点 の差（真ん中の50\%のデータの広がり）}
+\FunctionTok{IQR}\NormalTok{(minwageNJ}\SpecialCharTok{$}\NormalTok{wageBefore)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.05591866
+## [1] 0.62
 \end{verbatim}
 
 \normalsize
 \end{frame}
 
-\hypertarget{ux6b20ux640dux5024ux304cux3042ux308bux5834ux5408ux306eux8a08ux7b97}{%
-\section{3.2.2
-欠損値がある場合の計算}\label{ux6b20ux640dux5024ux304cux3042ux308bux5834ux5408ux306eux8a08ux7b97}}
-
-\begin{frame}[fragile]{na.rm オプション}
-\protect\hypertarget{na.rm-ux30aaux30d7ux30b7ux30e7ux30f3}{}
+\begin{frame}[fragile]{任意の分位数の計算 (quantile関数)}
+\protect\hypertarget{ux4efbux610fux306eux5206ux4f4dux6570ux306eux8a08ux7b97-quantileux95a2ux6570}{}
 \begin{itemize}
 \tightlist
 \item
-  多くの統計関数には、\texttt{NA} を除外して計算するための
-  \texttt{na.rm\ =\ TRUE} という引数があります。
+  10\%刻み（10分位数）などで分布を詳しく見る場合に便利。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# サンプルベクトルの作成}
-\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\ConstantTok{NA}\NormalTok{)}
-
-\CommentTok{\# そのまま平均を計算すると NA になる}
-\FunctionTok{mean}\NormalTok{(x)}
+\CommentTok{\# 0\%から100\%まで10\%刻みの分位数を計算}
+\FunctionTok{quantile}\NormalTok{(minwageNJ}\SpecialCharTok{$}\NormalTok{wageBefore, }\AttributeTok{probs =} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \DecValTok{0}\NormalTok{, }\AttributeTok{to =} \DecValTok{1}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.1}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] NA
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# NAを除外して平均を計算}
-\FunctionTok{mean}\NormalTok{(x, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2
+##   0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
+## 4.25 4.25 4.25 4.25 4.50 4.50 4.65 4.75 5.00 5.00 5.75
 \end{verbatim}
 
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{集計表における欠損値の表示}
-\protect\hypertarget{ux96c6ux8a08ux8868ux306bux304aux3051ux308bux6b20ux640dux5024ux306eux8868ux793a}{}
+\hypertarget{ux6a19ux6e96ux504fux5dee-standard-deviation}{%
+\section{2.6.2 標準偏差 (Standard
+Deviation)}\label{ux6a19ux6e96ux504fux5dee-standard-deviation}}
+
+\begin{frame}[fragile]{平均からのばらつき}
+\protect\hypertarget{ux5e73ux5747ux304bux3089ux306eux3070ux3089ux3064ux304d}{}
 \begin{itemize}
 \tightlist
 \item
-  \texttt{table()} 関数で \texttt{exclude\ =\ NULL}
-  を指定すると、\texttt{NA} も一つのカテゴリとして表示されます。
+  \textbf{標準偏差}:
+  各データが平均からどれくらい離れているかの平均的な距離。
+\item
+  値が大きいほど、データが平均の周りに広く散らばっていることを示す。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 被害経験のクロス集計に NA も含める}
-\CommentTok{\# exclude = NULL を入れないと NA は無視される}
-\FunctionTok{table}\NormalTok{(}\AttributeTok{ISAF =}\NormalTok{ afghan}\SpecialCharTok{$}\NormalTok{violent.exp.ISAF, }
-      \AttributeTok{Taliban =}\NormalTok{ afghan}\SpecialCharTok{$}\NormalTok{violent.exp.taliban, }
-      \AttributeTok{exclude =} \ConstantTok{NULL}\NormalTok{)}
+\CommentTok{\# NJ州の引き上げ前後の雇用率の変化を計算}
+\NormalTok{minwageNJ}\SpecialCharTok{$}\NormalTok{fullPropBefore }\OtherTok{\textless{}{-}}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{fullBefore }\SpecialCharTok{/} 
+\NormalTok{    (minwageNJ}\SpecialCharTok{$}\NormalTok{fullBefore }\SpecialCharTok{+}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{partBefore)}
+\NormalTok{minwageNJ}\SpecialCharTok{$}\NormalTok{fullPropAfter }\OtherTok{\textless{}{-}}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{fullAfter }\SpecialCharTok{/} 
+\NormalTok{    (minwageNJ}\SpecialCharTok{$}\NormalTok{fullAfter }\SpecialCharTok{+}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{partAfter)}
+\NormalTok{minwageNJ}\SpecialCharTok{$}\NormalTok{diff }\OtherTok{\textless{}{-}}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{fullPropAfter }\SpecialCharTok{{-}}\NormalTok{ minwageNJ}\SpecialCharTok{$}\NormalTok{fullPropBefore}
+
+\CommentTok{\# 雇用率の変化の標準偏差を計算}
+\FunctionTok{sd}\NormalTok{(minwageNJ}\SpecialCharTok{$}\NormalTok{diff, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##       Taliban
-## ISAF      0    1 <NA>
-##   0    1330  354   22
-##   1     475  526   22
-##   <NA>    7    8   10
-\end{verbatim}
-
-\normalsize
-\end{frame}
-
-\hypertarget{ux6b20ux640dux5024ux306eux9664ux5916}{%
-\section{3.2.3
-欠損値の除外}\label{ux6b20ux640dux5024ux306eux9664ux5916}}
-
-\begin{frame}[fragile]{na.omit() による一括除外}
-\protect\hypertarget{na.omit-ux306bux3088ux308bux4e00ux62ecux9664ux5916}{}
-\begin{itemize}
-\tightlist
-\item
-  \textbf{リストワイズ削除}: 1つでも \texttt{NA}
-  を含む行（回答者）をデータセット全体から削除します。
-\end{itemize}
-
-\scriptsize
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# 1. 1つでも欠損値がある行をすべて削除した新しいデータセットを作成}
-\NormalTok{afghan.sub }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(afghan)}
-
-\CommentTok{\# 2. 元の行数と、削除後の行数を比較}
-\FunctionTok{nrow}\NormalTok{(afghan)     }\CommentTok{\# 元のデータ}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2754
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{nrow}\NormalTok{(afghan.sub) }\CommentTok{\# 削除後のデータ}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2554
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# 3. 特定の変数だけから NA を除く}
-\FunctionTok{length}\NormalTok{(}\FunctionTok{na.omit}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{income))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2600
+## [1] 0.3010377
 \end{verbatim}
 
 \normalsize
 \end{frame}
 
 \hypertarget{ux307eux3068ux3081}{%
-\section{3.2.4 まとめ}\label{ux307eux3068ux3081}}
+\section{2.6.3 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}[fragile]{このセクションのまとめ}
 \protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{NAの理解}: Rにおいて欠損値は \texttt{NA}
-  で表され、計算に影響を及ぼす。
+  \textbf{中央値と分位数}:
+  データの順位に基づく要約。外れ値に強い（ロバスト）。
 \item
-  \textbf{確認と集計}:
+  \textbf{summary()}:
+  データの分布を素早く把握するための最も基本的なコマンド。
+\item
+  \textbf{標準偏差}: 平均の周りのばらつきを測定する。
+\item
+  \textbf{Rの操作}:
 
   \begin{itemize}
   \tightlist
   \item
-    \texttt{is.na()} で確認し、\texttt{sum()} や \texttt{mean()}
-    で量を確認する。
+    \texttt{median()}, \texttt{quantile()}, \texttt{IQR()}
+    を用いた分位数の計算。
   \item
-    \texttt{table(...,\ exclude\ =\ NULL)}
-    で回答拒否なども含めた全体像を把握する。
+    \texttt{sd()}, \texttt{var()} を用いたばらつきの計算。
+  \item
+    \texttt{summary()} による一括集計。
+  \item
+    \texttt{na.rm\ =\ TRUE} オプションによる欠損値の除外。
   \end{itemize}
-\item
-  \textbf{処理方法}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \texttt{mean(...,\ na.rm\ =\ TRUE)} のように、その都度除外する。
-  \item
-    \texttt{na.omit()}
-    でデータセットから欠損のある行を一括削除する（分析対象が減ることに注意）。
-  \end{itemize}
-\item
-  \textbf{Rの操作}: \texttt{is.na()}, \texttt{na.rm},
-  \texttt{na.omit()}, \texttt{nrow()}。
 \end{itemize}
 \end{frame}
 

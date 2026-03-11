@@ -55,14 +55,32 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## データの読み込みと確認
+## social データの読み込み (1)
+
+* 実験で収集されたデータをRに読み込みます。
 
 \scriptsize
 ```{r}
-# 1. データの読み込み (social.csv)
+# 1. ローカルに保存したsocialデータの読み込み（推奨）
 social <- read.csv("social.csv")
 
-# 2. データの構造を確認
+# （参考）URLから直接読み込むことも可能
+# social <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/social.csv")
+
+# 2. データの次元（行数と列数）を確認
+dim(social)
+```
+\normalsize
+
+---
+
+## social データの読み込み (2)
+
+* データの最初の数行を表示して、変数の並びや中身を確認します。
+
+\scriptsize
+```{r}
+# 最初の5行を表示
 # messages: 処置の種類（Control, Civic Duty, Neighbors 等）
 # primary2006: 2006年予備選挙で投票したか (1=Yes, 0=No)
 head(social, n = 5)

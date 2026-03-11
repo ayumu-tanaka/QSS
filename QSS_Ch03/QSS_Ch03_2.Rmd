@@ -37,15 +37,28 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## is.na() 関数
+## afghan データの読み込み (1)
+
+* アフガニスタン調査データの読み込みを行います。
+
+\scriptsize
+```{r}
+# 1. ローカルに保存したafghanデータの読み込み（推奨）
+afghan <- read.csv("afghan.csv")
+
+# （参考）URLから直接読み込むことも可能
+# afghan <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/afghan.csv")
+```
+\normalsize
+
+---
+
+## is.na() 関数 (2)
 
 * データが `NA` かどうかを判定します。
 
 \scriptsize
 ```{r}
-# アフガニスタン調査データの読み込み
-afghan <- read.csv("afghan.csv")
-
 # 1. 最初の10人分の収入データを確認
 head(afghan$income, n = 10)
 

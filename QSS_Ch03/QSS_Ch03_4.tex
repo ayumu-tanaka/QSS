@@ -1,16 +1,18 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% remove section numbering
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -19,19 +21,16 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{section title}
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -44,21 +43,19 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
 \usetheme[]{Montpellier}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -75,6 +72,14 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -86,13 +91,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -100,7 +105,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -109,7 +114,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -118,6 +123,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -142,12 +148,9 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{第3章: 測定\\
 (3.4. 標本調査)}
@@ -159,11 +162,12 @@
 \begin{document}
 \frame{\titlepage}
 
+\hypertarget{ux6a19ux672cux8abfux67fb-survey-sampling}{%
 \section{3.4 標本調査 (Survey
-Sampling)}\label{ux6a19ux672cux8abfux67fb-survey-sampling}
+Sampling)}\label{ux6a19ux672cux8abfux67fb-survey-sampling}}
 
 \begin{frame}{標本調査の目的}
-\phantomsection\label{ux6a19ux672cux8abfux67fbux306eux76eeux7684}
+\protect\hypertarget{ux6a19ux672cux8abfux67fbux306eux76eeux7684}{}
 \begin{itemize}
 \tightlist
 \item
@@ -188,28 +192,47 @@ Sampling)}\label{ux6a19ux672cux8abfux67fb-survey-sampling}
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux7121ux4f5cux70baux5316ux306eux5f79ux5272}{%
 \section{3.4.1
-無作為化の役割}\label{ux7121ux4f5cux70baux5316ux306eux5f79ux5272}
+無作為化の役割}\label{ux7121ux4f5cux70baux5316ux306eux5f79ux5272}}
 
-\begin{frame}[fragile]{抽出された村とされなかった村の比較}
-\phantomsection\label{ux62bdux51faux3055ux308cux305fux6751ux3068ux3055ux308cux306aux304bux3063ux305fux6751ux306eux6bd4ux8f03}
+\begin{frame}[fragile]{afghan-village データの読み込み (1)}
+\protect\hypertarget{afghan-village-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
   アフガニスタンの村レベルデータ (\texttt{afghan-village.csv})
-  を使用します。
-\item
-  実際に調査対象となった村と、そうでない村で特徴（標高や人口）に差がないか確認します。
+  を読み込みます。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1. 村レベルデータの読み込み}
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
 \NormalTok{afghan.village }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"afghan{-}village.csv"}\NormalTok{)}
 
-\CommentTok{\# 2. データの構造を確認}
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# afghan.village \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/afghan{-}village.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{データの構造を確認 (2)}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux69cbux9020ux3092ux78baux8a8d-2}{}
+\begin{itemize}
+\tightlist
+\item
+  実際に調査対象となった村 (\texttt{village.surveyed\ ==\ 1})
+  と、そうでない村を確認します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# village.surveyed: 調査対象になったか (1=Yes, 0=No)}
 \CommentTok{\# altitude: 標高, population: 人口}
 \FunctionTok{head}\NormalTok{(afghan.village, }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
@@ -227,7 +250,7 @@ Sampling)}\label{ux6a19ux672cux8abfux67fb-survey-sampling}
 \end{frame}
 
 \begin{frame}[fragile]{標高の比較: プロットのコード}
-\phantomsection\label{ux6a19ux9ad8ux306eux6bd4ux8f03-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}
+\protect\hypertarget{ux6a19ux9ad8ux306eux6bd4ux8f03-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}{}
 \scriptsize
 
 \begin{Shaded}
@@ -246,15 +269,15 @@ Sampling)}\label{ux6a19ux672cux8abfux67fb-survey-sampling}
 \end{frame}
 
 \begin{frame}{標高の比較: 描画結果}
-\phantomsection\label{ux6a19ux9ad8ux306eux6bd4ux8f03-ux63cfux753bux7d50ux679c}
+\protect\hypertarget{ux6a19ux9ad8ux306eux6bd4ux8f03-ux63cfux753bux7d50ux679c}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.8\textheight]{QSS_Ch03_4_files/figure-beamer/unnamed-chunk-3-1} \end{center}
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch03_4_files/figure-beamer/unnamed-chunk-4-1} \end{center}
 \normalsize
 \end{frame}
 
 \begin{frame}[fragile]{人口の比較（対数）: プロットのコード}
-\phantomsection\label{ux4ebaux53e3ux306eux6bd4ux8f03ux5bfeux6570-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}
+\protect\hypertarget{ux4ebaux53e3ux306eux6bd4ux8f03ux5bfeux6570-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}{}
 \scriptsize
 
 \begin{Shaded}
@@ -272,18 +295,42 @@ Sampling)}\label{ux6a19ux672cux8abfux67fb-survey-sampling}
 \end{frame}
 
 \begin{frame}{人口の比較（対数）: 描画結果}
-\phantomsection\label{ux4ebaux53e3ux306eux6bd4ux8f03ux5bfeux6570-ux63cfux753bux7d50ux679c}
+\protect\hypertarget{ux4ebaux53e3ux306eux6bd4ux8f03ux5bfeux6570-ux63cfux753bux7d50ux679c}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.8\textheight]{QSS_Ch03_4_files/figure-beamer/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch03_4_files/figure-beamer/unnamed-chunk-6-1} \end{center}
 \normalsize
 \end{frame}
 
+\hypertarget{ux7121ux56deux7b54ux3068ux30d0ux30a4ux30a2ux30b9}{%
 \section{3.4.2
-無回答とバイアス}\label{ux7121ux56deux7b54ux3068ux30d0ux30a4ux30a2ux30b9}
+無回答とバイアス}\label{ux7121ux56deux7b54ux3068ux30d0ux30a4ux30a2ux30b9}}
 
-\begin{frame}[fragile]{項目無回答 (Item Nonresponse)}
-\phantomsection\label{ux9805ux76eeux7121ux56deux7b54-item-nonresponse}
+\begin{frame}[fragile]{afghan データの読み込み (1)}
+\protect\hypertarget{afghan-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
+\begin{itemize}
+\tightlist
+\item
+  個人の調査データを読み込み、欠損値を確認します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
+\NormalTok{afghan }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"afghan.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# afghan \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/afghan.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{項目無回答 (Item Nonresponse) (2)}
+\protect\hypertarget{ux9805ux76eeux7121ux56deux7b54-item-nonresponse-2}{}
 \begin{itemize}
 \tightlist
 \item
@@ -294,9 +341,6 @@ Sampling)}\label{ux6a19ux672cux8abfux67fb-survey-sampling}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 個人の調査データを読み込み}
-\NormalTok{afghan }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"afghan.csv"}\NormalTok{)}
-
 \CommentTok{\# 州 (province) ごとの「タリバン被害」の欠損値 (NA) の割合を計算}
 \CommentTok{\# is.na() は欠損なら TRUE(1), そうでなければ FALSE(0) を返す}
 \FunctionTok{tapply}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(afghan}\SpecialCharTok{$}\NormalTok{violent.exp.taliban), afghan}\SpecialCharTok{$}\NormalTok{province, mean)}
@@ -312,7 +356,7 @@ Sampling)}\label{ux6a19ux672cux8abfux67fb-survey-sampling}
 \end{frame}
 
 \begin{frame}[fragile]{敏感な質問への対処 (List Experiment)}
-\phantomsection\label{ux654fux611fux306aux8ceaux554fux3078ux306eux5bfeux51e6-list-experiment}
+\protect\hypertarget{ux654fux611fux306aux8ceaux554fux3078ux306eux5bfeux51e6-list-experiment}{}
 \begin{itemize}
 \tightlist
 \item
@@ -350,10 +394,11 @@ Sampling)}\label{ux6a19ux672cux8abfux67fb-survey-sampling}
 \normalsize
 \end{frame}
 
-\section{3.4.3 まとめ}\label{ux307eux3068ux3081}
+\hypertarget{ux307eux3068ux3081}{%
+\section{3.4.3 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}[fragile]{このセクションのまとめ}
-\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
 \begin{itemize}
 \tightlist
 \item
