@@ -164,7 +164,7 @@ errors <- pres08$Obama -
 ## 信頼区間のプロット (2)
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 hist(errors, main = "Poll Prediction Error", xlab = "Error (%)")
 ```
 \normalsize
