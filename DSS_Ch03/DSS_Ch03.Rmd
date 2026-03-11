@@ -39,7 +39,7 @@ knitr::opts_chunk$set(echo = TRUE,
 ## 標本と母集団
 
 * **母集団** (Population): 調査対象となる集団全体。観察数を $N$ で表す。
-* **標本** (Sample): 母集団から選ばれた個人の部分集合。観察数を $n$ で表す。
+* **標本** (Sample): 母集団から選ばれた個人の部分集合. 観察数を $n$ で表す。
 * **代表的な標本** (Representative sample): 母集団の特徴を正確に反映している標本。
 * **無作為抽出** (Random sampling): 母集団から無作為に標本を選ぶことで、平均的に母集団を代表することを保証する。
 
@@ -56,20 +56,33 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## データの読み込みと確認
+## BES データの読み込み (1)
 
+* 有権者の意識調査データをRに読み込みます。
+
+\scriptsize
 ```{r}
-# BESデータの読み込み
+# 1. ローカルに保存したBESデータの読み込み（推奨）
 bes <- read.csv("BES.csv")
-```
 
+# （参考）URLから直接読み込むことも可能
+# bes <- read.csv("https://ayumu-tanaka.github.io/QSS/DSS_Data/BES.csv")
+```
+\normalsize
+
+---
+
+## データの確認 (2)
+
+\scriptsize
 ```{r}
-# データの最初の数行を表示
+# 1. データの最初の数行を表示
 head(bes)
 
-# 標本サイズの確認
+# 2. 標本サイズの確認
 dim(bes)
 ```
+\normalsize
 
 ---
 
@@ -174,19 +187,37 @@ sd(bes1$age[bes1$leave == 1])
 
 ---
 
-## 散布図 (1)
+## UK_districts データの読み込み (1)
 
-* 地区レベルのデータを使用する。
+* 地区レベルのデータを読み込み、欠損値を除外します。
 
+\scriptsize
 ```{r}
-# 地区レベルデータの読み込み
+# 1. ローカルに保存したデータの読み込み（推奨）
 dis <- read.csv("UK_districts.csv")
+
+# （参考）URLから直接読み込むことも可能
+# dis <- read.csv("https://ayumu-tanaka.github.io/QSS/DSS_Data/UK_districts.csv")
+
+# 2. NAを除外
 dis1 <- na.omit(dis)
 ```
+\normalsize
 
 ---
 
-## 散布図 (2)
+## データの構造確認 (2)
+
+\scriptsize
+```{r}
+# 最初の数行を表示
+head(dis1)
+```
+\normalsize
+
+---
+
+## 散布図
 
 * `plot()` で2つの数値変数の関係をプロットする。
 * `abline()` で平均値を示す直線などを追加できる。

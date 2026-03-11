@@ -191,7 +191,7 @@ Introduction.}
   \textbf{母集団} (Population): 調査対象となる集団全体。観察数を \(N\)
   で表す。
 \item
-  \textbf{標本} (Sample): 母集団から選ばれた個人の部分集合。観察数を
+  \textbf{標本} (Sample): 母集団から選ばれた個人の部分集合. 観察数を
   \(n\) で表す。
 \item
   \textbf{代表的な標本} (Representative sample):
@@ -221,18 +221,36 @@ Introduction.}
 \section{3.3
 Brexitへの支持の測定}\label{brexitux3078ux306eux652fux6301ux306eux6e2cux5b9a}}
 
-\begin{frame}[fragile]{データの読み込みと確認}
-\protect\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux78baux8a8d}{}
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# BESデータの読み込み}
-\NormalTok{bes }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"BES.csv"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{frame}[fragile]{BES データの読み込み (1)}
+\protect\hypertarget{bes-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
+\begin{itemize}
+\tightlist
+\item
+  有権者の意識調査データをRに読み込みます。
+\end{itemize}
+
+\scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# データの最初の数行を表示}
+\CommentTok{\# 1. ローカルに保存したBESデータの読み込み（推奨）}
+\NormalTok{bes }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"BES.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# bes \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/DSS\_Data/BES.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{データの確認 (2)}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux78baux8a8d-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. データの最初の数行を表示}
 \FunctionTok{head}\NormalTok{(bes)}
 \end{Highlighting}
 \end{Shaded}
@@ -249,7 +267,7 @@ Brexitへの支持の測定}\label{brexitux3078ux306eux652fux6301ux306eux6e2cux5
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 標本サイズの確認}
+\CommentTok{\# 2. 標本サイズの確認}
 \FunctionTok{dim}\NormalTok{(bes)}
 \end{Highlighting}
 \end{Shaded}
@@ -257,6 +275,8 @@ Brexitへの支持の測定}\label{brexitux3078ux306eux652fux6301ux306eux6e2cux5
 \begin{verbatim}
 ## [1] 30895     4
 \end{verbatim}
+
+\normalsize
 \end{frame}
 
 \begin{frame}[fragile]{度数表と比率表}
@@ -470,25 +490,58 @@ Brexitを支持したのは誰？}\label{brexitux3092ux652fux6301ux3057ux305fux3
 \section{3.5
 教育と離脱派票との関係}\label{ux6559ux80b2ux3068ux96e2ux8131ux6d3eux7968ux3068ux306eux95a2ux4fc2}}
 
-\begin{frame}[fragile]{散布図 (1)}
-\protect\hypertarget{ux6563ux5e03ux56f3-1}{}
+\begin{frame}[fragile]{UK\_districts データの読み込み (1)}
+\protect\hypertarget{uk_districts-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  地区レベルのデータを使用する。
+  地区レベルのデータを読み込み、欠損値を除外します。
 \end{itemize}
+
+\scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 地区レベルデータの読み込み}
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
 \NormalTok{dis }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"UK\_districts.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# dis \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/DSS\_Data/UK\_districts.csv")}
+
+\CommentTok{\# 2. NAを除外}
 \NormalTok{dis1 }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(dis)}
 \end{Highlighting}
 \end{Shaded}
+
+\normalsize
 \end{frame}
 
-\begin{frame}[fragile]{散布図 (2)}
-\protect\hypertarget{ux6563ux5e03ux56f3-2}{}
+\begin{frame}[fragile]{データの構造確認 (2)}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux69cbux9020ux78baux8a8d-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 最初の数行を表示}
+\FunctionTok{head}\NormalTok{(dis1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             name leave high_education
+## 1     Birmingham 50.42          22.98
+## 2        Cardiff 39.98          32.33
+## 3 Edinburgh City 25.56          21.92
+## 4   Glasgow City 33.41          25.91
+## 5      Liverpool 41.81          22.44
+## 6        Swansea 51.51          25.85
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{散布図}
+\protect\hypertarget{ux6563ux5e03ux56f3}{}
 \begin{itemize}
 \tightlist
 \item
@@ -509,7 +562,7 @@ Brexitを支持したのは誰？}\label{brexitux3092ux652fux6301ux3057ux305fux3
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[height=0.4\textheight]{DSS_Ch03_files/figure-beamer/unnamed-chunk-11-1} \end{center}
+\begin{center}\includegraphics[height=0.4\textheight]{DSS_Ch03_files/figure-beamer/unnamed-chunk-12-1} \end{center}
 
 \normalsize
 \end{frame}

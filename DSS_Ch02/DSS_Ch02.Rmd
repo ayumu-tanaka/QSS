@@ -107,17 +107,30 @@ $$ X \rightarrow Y $$
 
 ---
 
-## データの読み込み
+## STAR データの読み込み (1)
 
+* 因果効果の推定のため、実験データをRに読み込みます。
+
+\scriptsize
 ```{r}
-# データセットの読み込み
+# 1. ローカルに保存したSTARデータの読み込み（推奨）
 star <- read.csv("STAR.csv")
-```
 
+# （参考）URLから直接読み込むことも可能
+# star <- read.csv("https://ayumu-tanaka.github.io/QSS/DSS_Data/STAR.csv")
+```
+\normalsize
+
+---
+
+## データの確認 (2)
+
+\scriptsize
 ```{r}
 # データの最初の数行を表示
 head(star)
 ```
+\normalsize
 
 ---
 

@@ -39,18 +39,29 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## データの読み込み (1)
+## precincts データの読み込み (1)
 
-* 2019年ウクライナ大統領選挙の投票区レベルデータを使用する。
+* 2019年ウクライナ大統領選挙の投票区レベルデータを読み込みます。
 
-\footnotesize
+\scriptsize
 ```{r}
-# データの読み込み
+# 1. ローカルに保存したデータの読み込み（推奨）
 precincts <- read.csv("UA_precincts.csv")
+
+# （参考）URLから直接読み込むことも可能
+# precincts <- read.csv("https://ayumu-tanaka.github.io/QSS/DSS_Data/UA_precincts.csv")
+```
+\normalsize
+
+---
+
+## データの確認 (2)
+
+\scriptsize
+```{r}
 # 最初の数行を表示
 head(precincts)
 ```
-
 \normalsize
 
 ---

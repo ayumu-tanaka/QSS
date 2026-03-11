@@ -326,14 +326,32 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}}
 \section{2.5
 少人数学級は生徒の成績を向上させるか？}\label{ux5c11ux4ebaux6570ux5b66ux7d1aux306fux751fux5f92ux306eux6210ux7e3eux3092ux5411ux4e0aux3055ux305bux308bux304b}}
 
-\begin{frame}[fragile]{データの読み込み}
-\protect\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f}{}
+\begin{frame}[fragile]{STAR データの読み込み (1)}
+\protect\hypertarget{star-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
+\begin{itemize}
+\tightlist
+\item
+  因果効果の推定のため、実験データをRに読み込みます。
+\end{itemize}
+
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# データセットの読み込み}
+\CommentTok{\# 1. ローカルに保存したSTARデータの読み込み（推奨）}
 \NormalTok{star }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"STAR.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# star \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/DSS\_Data/STAR.csv")}
 \end{Highlighting}
 \end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{データの確認 (2)}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux78baux8a8d-2}{}
+\scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -351,6 +369,8 @@ STARプロジェクト}\label{starux30d7ux30edux30b8ux30a7ux30afux30c8}}
 ## 5     small     614  636         1
 ## 6   regular     610  603         0
 \end{verbatim}
+
+\normalsize
 \end{frame}
 
 \begin{frame}[fragile]{Rの関係演算子と新しい変数の作成}
