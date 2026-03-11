@@ -64,7 +64,7 @@ points(x = capitals$long, y = capitals$lat,
 ## maps パッケージ: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 library(maps)
 map(database = "usa")
 data(us.cities)
@@ -104,7 +104,7 @@ text(x = cal.cities$long[top7] + 2, y = cal.cities$lat[top7],
 ## 特定の地域の拡大: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 library(maps)
 map(database = "state", regions = "California")
 cal.cities <- subset(us.cities, subset = (country.etc == "CA"))
@@ -200,7 +200,7 @@ map(database = "state", regions = red_states,
 ## 州別の色分け (3): 選挙結果のマップ
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 library(maps)
 map(database = "state") 
 map(database = "state", regions = blue_states, 
@@ -273,7 +273,7 @@ legend("bottomright", legend = c("Store", "Supercenter", "Dist. Center"),
 ## 拡大プロセスの視覚化 (4): ウォルマートの拡大マップ
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 map(database = "state")
 points(walmart$long, walmart$lat, col = walmart$col, 
        pch = 19, cex = ifelse(walmart$type == "DistributionCenter", 1, 0.5))

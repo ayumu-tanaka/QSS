@@ -192,7 +192,7 @@ lines(y2l.range, predict(labour.fit2, newdata = data.frame(margin = y2l.range)),
 ## RDDの可視化: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 plot(MPs.labour$margin, MPs.labour$ln.net, main = "Labour",
      xlim = c(-0.5, 0.5), ylim = c(6, 18), 
      xlab = "Margin of Victory", ylab = "Log Net Wealth at Death")

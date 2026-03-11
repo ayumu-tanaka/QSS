@@ -98,7 +98,7 @@ points(rep80$dwnom1, rep80$dwnom2, pch = 17, col = "red")
 ## 散布図の作成 (第80議会): 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 lim <- c(-1.5, 1.5); xlab <- "Economic"; ylab <- "Racial"
 plot(dem80$dwnom1, dem80$dwnom2, pch = 16, col = "blue", 
      xlim = lim, ylim = lim, xlab = xlab, ylab = ylab, main = "80th Congress")
@@ -111,7 +111,7 @@ points(rep80$dwnom1, rep80$dwnom2, pch = 17, col = "red")
 ## 散布図の作成 (第112議会): 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 lim <- c(-1.5, 1.5); xlab <- "Economic"; ylab <- "Racial"
 plot(dem112$dwnom1, dem112$dwnom2, pch = 16, col = "blue", 
      xlim = lim, ylim = lim, xlab = xlab, ylab = ylab, main = "112th Congress")
@@ -146,7 +146,7 @@ lines(names(rep.median), rep.median, col = "red")
 ## 分極化の推移: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 dem.median <- tapply(dem$dwnom1, dem$congress, median)
 rep.median <- tapply(rep$dwnom1, rep$congress, median)
 plot(names(dem.median), dem.median, col = "blue", type = "l",
