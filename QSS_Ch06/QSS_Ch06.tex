@@ -164,33 +164,59 @@
 \hypertarget{ux78baux7387ux306eux57faux672c}{%
 \section{6.1 確率の基本}\label{ux78baux7387ux306eux57faux672c}}
 
-\begin{frame}[fragile]{確率の定義と誕生日問題}
-\protect\hypertarget{ux78baux7387ux306eux5b9aux7fa9ux3068ux8a95ux751fux65e5ux554fux984c}{}
+\begin{frame}[fragile]{誕生日問題: 関数の定義 (1)}
+\protect\hypertarget{ux8a95ux751fux65e5ux554fux984c-ux95a2ux6570ux306eux5b9aux7fa9-1}{}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{頻度主義}: 無限回の試行における相対頻度。
-\item
-  \textbf{ベイズ主義}: 主観的な確信の度合い。
+  \(k\)
+  人のグループの中で、少なくとも2人の誕生日が同じである確率を計算する関数を定義します。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# 1. 誕生日が重複する確率を計算する関数}
 \NormalTok{birthday }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(k) \{}
+    \CommentTok{\# 対数を使って計算（大きな数値の階乗によるオーバーフローを避けるため）}
 \NormalTok{    logdenom }\OtherTok{\textless{}{-}}\NormalTok{ k }\SpecialCharTok{*} \FunctionTok{log}\NormalTok{(}\DecValTok{365}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{lfactorial}\NormalTok{(}\DecValTok{365} \SpecialCharTok{{-}}\NormalTok{ k)}
 \NormalTok{    lognumer }\OtherTok{\textless{}{-}} \FunctionTok{lfactorial}\NormalTok{(}\DecValTok{365}\NormalTok{)}
+    \CommentTok{\# 1から「全員の誕生日が異なる確率」を引く}
     \DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{exp}\NormalTok{(lognumer }\SpecialCharTok{{-}}\NormalTok{ logdenom)}
 \NormalTok{\}}
-\NormalTok{k }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{50}\NormalTok{; bday }\OtherTok{\textless{}{-}} \FunctionTok{birthday}\NormalTok{(k)}
-\FunctionTok{plot}\NormalTok{(k, bday, }\AttributeTok{xlab =} \StringTok{"Number of people"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Probability"}\NormalTok{,}
-     \AttributeTok{main =} \StringTok{"Birthday Problem"}\NormalTok{)}
-\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-1-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{誕生日問題: 計算とプロット準備 (2)}
+\protect\hypertarget{ux8a95ux751fux65e5ux554fux984c-ux8a08ux7b97ux3068ux30d7ux30edux30c3ux30c8ux6e96ux5099-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. 1人から50人までの場合を計算}
+\NormalTok{k }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{50}
+\NormalTok{prob\_duplicate }\OtherTok{\textless{}{-}} \FunctionTok{birthday}\NormalTok{(k)}
+
+\CommentTok{\# 3. グラフのプロット}
+\FunctionTok{plot}\NormalTok{(k, prob\_duplicate, }\AttributeTok{xlab =} \StringTok{"Number of people"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Probability"}\NormalTok{,}
+     \AttributeTok{main =} \StringTok{"Birthday Problem"}\NormalTok{)}
+\CommentTok{\# 確率 0.5 の場所に水平線を追加}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{誕生日問題: プロット}
+\protect\hypertarget{ux8a95ux751fux65e5ux554fux984c-ux30d7ux30edux30c3ux30c8}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-3-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -215,10 +241,8 @@
 \CommentTok{\# （参考）URLから直接読み込むことも可能}
 \CommentTok{\# FLVoters \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/FLVoters.csv")}
 
-\CommentTok{\# 2. 欠損値 (NA) を含む行を除外}
+\CommentTok{\# 2. 欠損値 (NA) を含む行を除外し、規模を確認}
 \NormalTok{FLVoters }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(FLVoters)}
-
-\CommentTok{\# 3. データの規模を確認}
 \FunctionTok{dim}\NormalTok{(FLVoters)}
 \end{Highlighting}
 \end{Shaded}
@@ -230,15 +254,28 @@
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{結合確率・周辺確率・条件付き確率 (2)}
-\protect\hypertarget{ux7d50ux5408ux78baux7387ux5468ux8fbaux78baux7387ux6761ux4ef6ux4ed8ux304dux78baux7387-2}{}
+\begin{frame}[fragile]{周辺確率と条件付き確率 (2)}
+\protect\hypertarget{ux5468ux8fbaux78baux7387ux3068ux6761ux4ef6ux4ed8ux304dux78baux7387-2}{}
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 周辺確率（人種）}
+\CommentTok{\# 1. 周辺確率（人種別の割合）を計算}
 \NormalTok{margin.race }\OtherTok{\textless{}{-}} \FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(FLVoters}\SpecialCharTok{$}\NormalTok{race))}
-\CommentTok{\# 条件付き確率（女性における人種の割合）}
+\NormalTok{margin.race}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##       asian       black    hispanic      native       other       white 
+## 0.019203336 0.131021617 0.130802151 0.003182267 0.034017338 0.681773291
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. 条件付き確率（女性における人種別の割合）を計算}
+\CommentTok{\# gender == "f" の行だけを抽出して集計}
 \FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(FLVoters}\SpecialCharTok{$}\NormalTok{race[FLVoters}\SpecialCharTok{$}\NormalTok{gender }\SpecialCharTok{==} \StringTok{"f"}\NormalTok{]))}
 \end{Highlighting}
 \end{Shaded}
@@ -249,9 +286,16 @@
 ## 0.016997747 0.138849068 0.136391563 0.003481466 0.032357157 0.671922998
 \end{verbatim}
 
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{結合確率 (3)}
+\protect\hypertarget{ux7d50ux5408ux78baux7387-3}{}
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 結合確率（人種と性別）}
+\CommentTok{\# 3. 結合確率（人種 × 性別）を計算}
 \NormalTok{joint.p }\OtherTok{\textless{}{-}} \FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(}\AttributeTok{race =}\NormalTok{ FLVoters}\SpecialCharTok{$}\NormalTok{race, }\AttributeTok{gender =}\NormalTok{ FLVoters}\SpecialCharTok{$}\NormalTok{gender))}
 \NormalTok{joint.p}
 \end{Highlighting}
@@ -271,47 +315,102 @@
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{独立性 (Independence)}
-\protect\hypertarget{ux72ecux7acbux6027-independence}{}
+\begin{frame}[fragile]{独立性の確認: コード}
+\protect\hypertarget{ux72ecux7acbux6027ux306eux78baux8a8d-ux30b3ux30fcux30c9}{}
 \begin{itemize}
 \tightlist
 \item
-  \(P(A, B) = P(A)P(B)\) が成り立つとき、\(A\) と \(B\) は独立である。
+  \(P(\text{race}, \text{female}) = P(\text{race}) \times P(\text{female})\)
+  が成り立つかを確認します。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# 1. 性別ごとの周辺確率を計算}
 \NormalTok{margin.gender }\OtherTok{\textless{}{-}} \FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(FLVoters}\SpecialCharTok{$}\NormalTok{gender))}
-\CommentTok{\# 周辺確率の積 vs 結合確率}
+
+\CommentTok{\# 2. 「周辺確率の積」 vs 「実際の結合確率」をプロット}
+\CommentTok{\# X軸: P(race) * P(female)}
+\CommentTok{\# Y軸: 結合確率の female 列}
 \FunctionTok{plot}\NormalTok{(}\FunctionTok{c}\NormalTok{(margin.race }\SpecialCharTok{*}\NormalTok{ margin.gender[}\StringTok{"f"}\NormalTok{]), }\FunctionTok{c}\NormalTok{(joint.p[, }\StringTok{"f"}\NormalTok{]),}
      \AttributeTok{xlab =} \StringTok{"P(race) * P(female)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"P(race and female)"}\NormalTok{,}
      \AttributeTok{main =} \StringTok{"Check for Independence"}\NormalTok{)}
-\FunctionTok{abline}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
+
+\CommentTok{\# 3. 45度線（独立ならこの線上に乗る）を追加}
+\FunctionTok{abline}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-4-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}{独立性の確認: プロット}
+\protect\hypertarget{ux72ecux7acbux6027ux306eux78baux8a8d-ux30d7ux30edux30c3ux30c8}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-8-1} \end{center}
 \normalsize
 \end{frame}
 
 \hypertarget{ux78baux7387ux5206ux5e03}{%
 \section{6.3 確率分布}\label{ux78baux7387ux5206ux5e03}}
 
-\begin{frame}[fragile]{二項分布 (Binomial Distribution)}
-\protect\hypertarget{ux4e8cux9805ux5206ux5e03-binomial-distribution}{}
+\begin{frame}[fragile]{二項分布: コイン投げのコード}
+\protect\hypertarget{ux4e8cux9805ux5206ux5e03-ux30b3ux30a4ux30f3ux6295ux3052ux306eux30b3ux30fcux30c9}{}
 \begin{itemize}
 \tightlist
 \item
-  \(n\) 回の試行で成功する回数の分布。
+  公平なコインを20回投げた時に、表が出る回数の確率分布を計算します。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# n=10, p=0.5 のとき、成功回数が5回となる確率}
+\CommentTok{\# 1. 試行回数 (n) と成功確率 (p) を設定}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{20}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FloatTok{0.5}
+
+\CommentTok{\# 2. 成功回数 (0回から20回) のベクトルを作成}
+\NormalTok{k\_vals }\OtherTok{\textless{}{-}} \DecValTok{0}\SpecialCharTok{:}\NormalTok{n}
+
+\CommentTok{\# 3. 各回数における確率 (dbinom) を計算}
+\NormalTok{probs }\OtherTok{\textless{}{-}} \FunctionTok{dbinom}\NormalTok{(k\_vals, }\AttributeTok{size =}\NormalTok{ n, }\AttributeTok{prob =}\NormalTok{ p)}
+
+\CommentTok{\# 4. 棒グラフで可視化}
+\FunctionTok{barplot}\NormalTok{(probs, }\AttributeTok{names.arg =}\NormalTok{ k\_vals, }
+        \AttributeTok{xlab =} \StringTok{"Number of Heads"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Probability"}\NormalTok{,}
+        \AttributeTok{main =} \StringTok{"Binomial Distribution (n=20, p=0.5)"}\NormalTok{,}
+        \AttributeTok{col =} \StringTok{"skyblue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}{二項分布: 成功回数のプロット}
+\protect\hypertarget{ux4e8cux9805ux5206ux5e03-ux6210ux529fux56deux6570ux306eux30d7ux30edux30c3ux30c8}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-10-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{二項分布 (Binomial Distribution)}
+\protect\hypertarget{ux4e8cux9805ux5206ux5e03-binomial-distribution}{}
+\begin{itemize}
+\tightlist
+\item
+  \(n\) 回の独立な試行で、\(p\) の確率で成功する回数の分布。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. n=10, p=0.5（公平なコイン10回投げ）で、ちょうど5回表が出る確率}
 \FunctionTok{dbinom}\NormalTok{(}\DecValTok{5}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{prob =} \FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -322,7 +421,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 累積分布関数: 成功回数が3回以下となる確率}
+\CommentTok{\# 2. 成功回数が3回以下となる累積確率}
 \FunctionTok{pbinom}\NormalTok{(}\DecValTok{3}\NormalTok{, }\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{prob =} \FloatTok{0.5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -334,93 +433,125 @@
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{正規分布 (Normal Distribution)}
-\protect\hypertarget{ux6b63ux898fux5206ux5e03-normal-distribution}{}
+\begin{frame}[fragile]{正規分布 (Normal Distribution): コード}
+\protect\hypertarget{ux6b63ux898fux5206ux5e03-normal-distribution-ux30b3ux30fcux30c9}{}
 \begin{itemize}
 \tightlist
 \item
-  連続変数の最も重要な分布。
+  平均 0, 標準偏差 1 の「標準正規分布」を描画します。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 標準正規分布において、平均から ±1 標準偏差の範囲に入る確率}
-\FunctionTok{pnorm}\NormalTok{(}\DecValTok{1}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
+\CommentTok{\# 1. X軸の範囲 ({-}4 から 4) を設定}
+\NormalTok{x\_vals }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\AttributeTok{length.out =} \DecValTok{100}\NormalTok{)}
+
+\CommentTok{\# 2. 各点における確率密度 (dnorm) を計算}
+\NormalTok{densities }\OtherTok{\textless{}{-}} \FunctionTok{dnorm}\NormalTok{(x\_vals, }\AttributeTok{mean =} \DecValTok{0}\NormalTok{, }\AttributeTok{sd =} \DecValTok{1}\NormalTok{)}
+
+\CommentTok{\# 3. 描画}
+\FunctionTok{plot}\NormalTok{(x\_vals, densities, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{col =} \StringTok{"darkgreen"}\NormalTok{,}
+     \AttributeTok{xlab =} \StringTok{"z{-}score"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Density"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Standard Normal Distribution"}\NormalTok{)}
+
+\CommentTok{\# 4. ±1.96 の範囲（約 95\%）を色付け（参考）}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.96}\NormalTok{, }\FloatTok{1.96}\NormalTok{), }\AttributeTok{lty =} \StringTok{"dotted"}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## [1] 0.6826895
-\end{verbatim}
+\normalsize
+\end{frame}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# ±2 標準偏差の範囲（約 95\%）}
-\FunctionTok{pnorm}\NormalTok{(}\DecValTok{2}\NormalTok{) }\SpecialCharTok{{-}} \FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{frame}{正規分布 (Normal Distribution): プロット}
+\protect\hypertarget{ux6b63ux898fux5206ux5e03-normal-distribution-ux30d7ux30edux30c3ux30c8}{}
+\scriptsize
 
-\begin{verbatim}
-## [1] 0.9544997
-\end{verbatim}
-
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-13-1} \end{center}
 \normalsize
 \end{frame}
 
 \hypertarget{ux5927ux6a19ux672cux5b9aux7406}{%
 \section{6.4 大標本定理}\label{ux5927ux6a19ux672cux5b9aux7406}}
 
-\begin{frame}[fragile]{大数の法則 (Law of Large Numbers)}
-\protect\hypertarget{ux5927ux6570ux306eux6cd5ux5247-law-of-large-numbers}{}
+\begin{frame}[fragile]{大数の法則 (LLN): コード}
+\protect\hypertarget{ux5927ux6570ux306eux6cd5ux5247-lln-ux30b3ux30fcux30c9}{}
 \begin{itemize}
 \tightlist
 \item
-  サンプルサイズが大きくなるほど、標本平均は期待値に収束する。
+  サンプルサイズが大きくなるほど、標本平均は期待値に近づく現象を確認します。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sims }\OtherTok{\textless{}{-}} \DecValTok{1000}
-\NormalTok{x.unif }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(sims) }\CommentTok{\# 一様分布 [0, 1]}
+\NormalTok{sims }\OtherTok{\textless{}{-}} \DecValTok{1000} \CommentTok{\# 最大のサンプルサイズ}
+\CommentTok{\# 1. 一様分布 [0, 1] からランダムに抽出 (期待値は 0.5)}
+\NormalTok{x.unif }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(sims)}
+
+\CommentTok{\# 2. 累積平均（1個目, 1〜2個目の平均, 1〜3個目の平均...）を計算}
 \NormalTok{mean.unif }\OtherTok{\textless{}{-}} \FunctionTok{cumsum}\NormalTok{(x.unif) }\SpecialCharTok{/} \DecValTok{1}\SpecialCharTok{:}\NormalTok{sims}
+
+\CommentTok{\# 3. 推移をプロット}
 \FunctionTok{plot}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{sims, mean.unif, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Sample size"}\NormalTok{, }
      \AttributeTok{ylab =} \StringTok{"Sample mean"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Law of Large Numbers"}\NormalTok{)}
-\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
+
+\CommentTok{\# 4. 真の期待値 (0.5) の線を追加}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{lty =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-7-1} \end{center}
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{中心極限定理 (Central Limit Theorem)}
-\protect\hypertarget{ux4e2dux5fc3ux6975ux9650ux5b9aux7406-central-limit-theorem}{}
+\begin{frame}{大数の法則: プロット}
+\protect\hypertarget{ux5927ux6570ux306eux6cd5ux5247-ux30d7ux30edux30c3ux30c8}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-15-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{中心極限定理 (CLT): コード}
+\protect\hypertarget{ux4e2dux5fc3ux6975ux9650ux5b9aux7406-clt-ux30b3ux30fcux30c9}{}
 \begin{itemize}
 \tightlist
 \item
-  サンプルサイズが大きければ、標本平均の分布は正規分布に従う。
+  元の分布が何であれ、標本平均の分布は正規分布に近づくことを確認します。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# 1. 標本平均を保存するベクトル}
 \NormalTok{z.unif }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
+
+\CommentTok{\# 2. 1000回のシミュレーション}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{) \{}
-\NormalTok{    x }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{, }\AttributeTok{min =} \DecValTok{0}\NormalTok{, }\AttributeTok{max =} \DecValTok{1}\NormalTok{) }\CommentTok{\# n=100}
+\NormalTok{    x }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{, }\AttributeTok{min =} \DecValTok{0}\NormalTok{, }\AttributeTok{max =} \DecValTok{1}\NormalTok{) }\CommentTok{\# 一様分布から n=100 抽出}
+    \CommentTok{\# 標準化 (平均を引いて標準誤差で割る)}
 \NormalTok{    z.unif[i] }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{mean}\NormalTok{(x) }\SpecialCharTok{{-}} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{/} \FunctionTok{sqrt}\NormalTok{(}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\DecValTok{12} \SpecialCharTok{*} \DecValTok{100}\NormalTok{))}
 \NormalTok{\}}
+
+\CommentTok{\# 3. ヒストグラムの描画}
 \FunctionTok{hist}\NormalTok{(z.unif, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{nclass =} \DecValTok{30}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"z{-}score"}\NormalTok{, }
      \AttributeTok{main =} \StringTok{"Central Limit Theorem (Uniform)"}\NormalTok{)}
-\FunctionTok{curve}\NormalTok{(}\FunctionTok{dnorm}\NormalTok{(x), }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
+
+\CommentTok{\# 4. 重ねて標準正規分布の曲線を描く}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dnorm}\NormalTok{(x), }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-8-1} \end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}{中心極限定理: プロット}
+\protect\hypertarget{ux4e2dux5fc3ux6975ux9650ux5b9aux7406-ux30d7ux30edux30c3ux30c8}{}
+\scriptsize
+
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-17-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -432,18 +563,34 @@
 \begin{itemize}
 \tightlist
 \item
-  \textbf{確率}: 不確実な出来事を記述するための数学的な枠組み。
+  \textbf{不確実性}:
+  社会科学のデータには常に偶然が伴う。確率を用いることで、その不確実性を数学的に記述できる。
 \item
-  \textbf{条件付き確率と独立性}: 変数間の関係を理解するための鍵。
-\item
-  \textbf{確率分布}:
-  データの発生メカニズムをモデル化する（二項分布、正規分布など）。
+  \textbf{確率の法則}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{条件付き確率}: 特定の条件下での発生確率。
+  \item
+    \textbf{独立性}: 片方の出来事がもう片方に影響しない状態。
+  \end{itemize}
 \item
   \textbf{大標本定理}:
-  標本から母集団を推測するための理論的基礎（大数の法則、中心極限定理）。
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{大数の法則}:
+    標本を増やせば、推測はより正確（母平均に近く）になる。
+  \item
+    \textbf{中心極限定理}:
+    サンプルサイズが大きければ、標本平均の分布は予測可能（正規分布）になる。これが推測統計の土台となる。
+  \end{itemize}
 \item
-  Rの操作: \texttt{sample()}, \texttt{dbinom()}, \texttt{pnorm()},
-  \texttt{runif()}, \texttt{rbinom()} などを習得した。
+  \textbf{Rの操作}: \texttt{sample()}, \texttt{dbinom()},
+  \texttt{pnorm()}, \texttt{runif()}, \texttt{curve()},
+  \texttt{hist()}。
 \end{itemize}
 \end{frame}
 

@@ -7,7 +7,7 @@ subtitle: |
 author: ""
 date: "2026-03-09"
 output:
-  slidy_presentation: default
+#  slidy_presentation: default
   beamer_presentation:
     theme: Montpellier
     latex_engine: lualatex
@@ -26,13 +26,47 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## 確率の定義と誕生日問題
+## 誕生日問題: 関数の定義 (1)
 
-* **頻度主義**: 無限回の試行における相対頻度。
-* **ベイズ主義**: 主観的な確信の度合い。
+* $k$ 人のグループの中で、少なくとも2人の誕生日が同じである確率を計算する関数を定義します。
 
 \scriptsize
-```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+```{r}
+# 1. 誕生日が重複する確率を計算する関数
+birthday <- function(k) {
+    # 対数を使って計算（大きな数値の階乗によるオーバーフローを避けるため）
+    logdenom <- k * log(365) + lfactorial(365 - k)
+    lognumer <- lfactorial(365)
+    # 1から「全員の誕生日が異なる確率」を引く
+    1 - exp(lognumer - logdenom)
+}
+```
+\normalsize
+
+---
+
+## 誕生日問題: 計算とプロット準備 (2)
+
+\scriptsize
+```{r, eval=FALSE}
+# 2. 1人から50人までの場合を計算
+k <- 1:50
+prob_duplicate <- birthday(k)
+
+# 3. グラフのプロット
+plot(k, prob_duplicate, xlab = "Number of people", ylab = "Probability",
+     main = "Birthday Problem")
+# 確率 0.5 の場所に水平線を追加
+abline(h = 0.5, lty = "dashed", col = "red")
+```
+\normalsize
+
+---
+
+## 誕生日問題: プロット
+
+\scriptsize
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 birthday <- function(k) {
     logdenom <- k * log(365) + lfactorial(365 - k)
     lognumer <- lfactorial(365)
@@ -41,7 +75,7 @@ birthday <- function(k) {
 k <- 1:50; bday <- birthday(k)
 plot(k, bday, xlab = "Number of people", ylab = "Probability",
      main = "Birthday Problem")
-abline(h = 0.5, lty = "dashed")
+abline(h = 0.5, lty = "dashed", col = "red")
 ```
 \normalsize
 
@@ -61,25 +95,35 @@ FLVoters <- read.csv("FLVoters.csv")
 # （参考）URLから直接読み込むことも可能
 # FLVoters <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/FLVoters.csv")
 
-# 2. 欠損値 (NA) を含む行を除外
+# 2. 欠損値 (NA) を含む行を除外し、規模を確認
 FLVoters <- na.omit(FLVoters)
-
-# 3. データの規模を確認
 dim(FLVoters)
 ```
 \normalsize
 
 ---
 
-## 結合確率・周辺確率・条件付き確率 (2)
+## 周辺確率と条件付き確率 (2)
 
 \scriptsize
 ```{r}
-# 周辺確率（人種）
+# 1. 周辺確率（人種別の割合）を計算
 margin.race <- prop.table(table(FLVoters$race))
-# 条件付き確率（女性における人種の割合）
+margin.race
+
+# 2. 条件付き確率（女性における人種別の割合）を計算
+# gender == "f" の行だけを抽出して集計
 prop.table(table(FLVoters$race[FLVoters$gender == "f"]))
-# 結合確率（人種と性別）
+```
+\normalsize
+
+---
+
+## 結合確率 (3)
+
+\scriptsize
+```{r}
+# 3. 結合確率（人種 × 性別）を計算
 joint.p <- prop.table(table(race = FLVoters$race, gender = FLVoters$gender))
 joint.p
 ```
@@ -87,18 +131,40 @@ joint.p
 
 ---
 
-## 独立性 (Independence)
+## 独立性の確認: コード
 
-* $P(A, B) = P(A)P(B)$ が成り立つとき、$A$ と $B$ は独立である。
+* $P(\text{race}, \text{female}) = P(\text{race}) \times P(\text{female})$ が成り立つかを確認します。
 
 \scriptsize
-```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+```{r, eval=FALSE}
+# 1. 性別ごとの周辺確率を計算
 margin.gender <- prop.table(table(FLVoters$gender))
-# 周辺確率の積 vs 結合確率
+
+# 2. 「周辺確率の積」 vs 「実際の結合確率」をプロット
+# X軸: P(race) * P(female)
+# Y軸: 結合確率の female 列
 plot(c(margin.race * margin.gender["f"]), c(joint.p[, "f"]),
      xlab = "P(race) * P(female)", ylab = "P(race and female)",
      main = "Check for Independence")
-abline(0, 1, lty = "dashed")
+
+# 3. 45度線（独立ならこの線上に乗る）を追加
+abline(0, 1, lty = "dashed", col = "blue")
+```
+\normalsize
+
+---
+
+## 独立性の確認: プロット
+
+\scriptsize
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
+margin.race <- prop.table(table(FLVoters$race))
+margin.gender <- prop.table(table(FLVoters$gender))
+joint.p <- prop.table(table(race = FLVoters$race, gender = FLVoters$gender))
+plot(c(margin.race * margin.gender["f"]), c(joint.p[, "f"]),
+     xlab = "P(race) * P(female)", ylab = "P(race and female)",
+     main = "Check for Independence")
+abline(0, 1, lty = "dashed", col = "blue")
 ```
 \normalsize
 
@@ -106,33 +172,97 @@ abline(0, 1, lty = "dashed")
 
 ---
 
+## 二項分布: コイン投げのコード
+
+* 公平なコインを20回投げた時に、表が出る回数の確率分布を計算します。
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. 試行回数 (n) と成功確率 (p) を設定
+n <- 20
+p <- 0.5
+
+# 2. 成功回数 (0回から20回) のベクトルを作成
+k_vals <- 0:n
+
+# 3. 各回数における確率 (dbinom) を計算
+probs <- dbinom(k_vals, size = n, prob = p)
+
+# 4. 棒グラフで可視化
+barplot(probs, names.arg = k_vals, 
+        xlab = "Number of Heads", ylab = "Probability",
+        main = "Binomial Distribution (n=20, p=0.5)",
+        col = "skyblue")
+```
+\normalsize
+
+---
+
+## 二項分布: 成功回数のプロット
+
+\scriptsize
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
+n <- 20
+p <- 0.5
+k_vals <- 0:n
+probs <- dbinom(k_vals, size = n, prob = p)
+barplot(probs, names.arg = k_vals, 
+        xlab = "Number of Heads", ylab = "Probability",
+        main = "Binomial Distribution (n=20, p=0.5)",
+        col = "skyblue")
+```
+\normalsize
+
+---
+
 ## 二項分布 (Binomial Distribution)
 
-* $n$ 回の試行で成功する回数の分布。
+* $n$ 回の独立な試行で、$p$ の確率で成功する回数の分布。
 
 \scriptsize
 ```{r}
-# n=10, p=0.5 のとき、成功回数が5回となる確率
+# 1. n=10, p=0.5（公平なコイン10回投げ）で、ちょうど5回表が出る確率
 dbinom(5, size = 10, prob = 0.5)
 
-# 累積分布関数: 成功回数が3回以下となる確率
+# 2. 成功回数が3回以下となる累積確率
 pbinom(3, size = 10, prob = 0.5)
 ```
 \normalsize
 
 ---
 
-## 正規分布 (Normal Distribution)
+## 正規分布 (Normal Distribution): コード
 
-* 連続変数の最も重要な分布。
+* 平均 0, 標準偏差 1 の「標準正規分布」を描画します。
 
 \scriptsize
-```{r}
-# 標準正規分布において、平均から ±1 標準偏差の範囲に入る確率
-pnorm(1) - pnorm(-1)
+```{r, eval=FALSE}
+# 1. X軸の範囲 (-4 から 4) を設定
+x_vals <- seq(-4, 4, length.out = 100)
 
-# ±2 標準偏差の範囲（約 95%）
-pnorm(2) - pnorm(-2)
+# 2. 各点における確率密度 (dnorm) を計算
+densities <- dnorm(x_vals, mean = 0, sd = 1)
+
+# 3. 描画
+plot(x_vals, densities, type = "l", lwd = 2, col = "darkgreen",
+     xlab = "z-score", ylab = "Density", main = "Standard Normal Distribution")
+
+# 4. ±1.96 の範囲（約 95%）を色付け（参考）
+abline(v = c(-1.96, 1.96), lty = "dotted", col = "red")
+```
+\normalsize
+
+---
+
+## 正規分布 (Normal Distribution): プロット
+
+\scriptsize
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
+x_vals <- seq(-4, 4, length.out = 100)
+densities <- dnorm(x_vals, mean = 0, sd = 1)
+plot(x_vals, densities, type = "l", lwd = 2, col = "darkgreen",
+     xlab = "z-score", ylab = "Density", main = "Standard Normal Distribution")
+abline(v = c(-1.96, 1.96), lty = "dotted", col = "red")
 ```
 \normalsize
 
@@ -140,37 +270,84 @@ pnorm(2) - pnorm(-2)
 
 ---
 
-## 大数の法則 (Law of Large Numbers)
+## 大数の法則 (LLN): コード
 
-* サンプルサイズが大きくなるほど、標本平均は期待値に収束する。
+* サンプルサイズが大きくなるほど、標本平均は期待値に近づく現象を確認します。
 
 \scriptsize
-```{r, fig.height=3.5, out.height="40%", fig.align="center"}
-sims <- 1000
-x.unif <- runif(sims) # 一様分布 [0, 1]
+```{r, eval=FALSE}
+sims <- 1000 # 最大のサンプルサイズ
+# 1. 一様分布 [0, 1] からランダムに抽出 (期待値は 0.5)
+x.unif <- runif(sims)
+
+# 2. 累積平均（1個目, 1〜2個目の平均, 1〜3個目の平均...）を計算
 mean.unif <- cumsum(x.unif) / 1:sims
+
+# 3. 推移をプロット
 plot(1:sims, mean.unif, type = "l", xlab = "Sample size", 
      ylab = "Sample mean", main = "Law of Large Numbers")
-abline(h = 0.5, lty = "dashed")
+
+# 4. 真の期待値 (0.5) の線を追加
+abline(h = 0.5, lty = "dashed", col = "red")
 ```
 \normalsize
 
 ---
 
-## 中心極限定理 (Central Limit Theorem)
-
-* サンプルサイズが大きければ、標本平均の分布は正規分布に従う。
+## 大数の法則: プロット
 
 \scriptsize
-```{r, fig.height=3.5, out.height="40%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
+sims <- 1000
+x.unif <- runif(sims)
+mean.unif <- cumsum(x.unif) / 1:sims
+plot(1:sims, mean.unif, type = "l", xlab = "Sample size", 
+     ylab = "Sample mean", main = "Law of Large Numbers")
+abline(h = 0.5, lty = "dashed", col = "red")
+```
+\normalsize
+
+---
+
+## 中心極限定理 (CLT): コード
+
+* 元の分布が何であれ、標本平均の分布は正規分布に近づくことを確認します。
+
+\scriptsize
+```{r, eval=FALSE}
+# 1. 標本平均を保存するベクトル
+z.unif <- rep(NA, 1000)
+
+# 2. 1000回のシミュレーション
+for (i in 1:1000) {
+    x <- runif(100, min = 0, max = 1) # 一様分布から n=100 抽出
+    # 標準化 (平均を引いて標準誤差で割る)
+    z.unif[i] <- (mean(x) - 0.5) / sqrt(1 / (12 * 100))
+}
+
+# 3. ヒストグラムの描画
+hist(z.unif, freq = FALSE, nclass = 30, xlab = "z-score", 
+     main = "Central Limit Theorem (Uniform)")
+
+# 4. 重ねて標準正規分布の曲線を描く
+curve(dnorm(x), add = TRUE, col = "red", lwd = 2)
+```
+\normalsize
+
+---
+
+## 中心極限定理: プロット
+
+\scriptsize
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 z.unif <- rep(NA, 1000)
 for (i in 1:1000) {
-    x <- runif(100, min = 0, max = 1) # n=100
+    x <- runif(100, min = 0, max = 1)
     z.unif[i] <- (mean(x) - 0.5) / sqrt(1 / (12 * 100))
 }
 hist(z.unif, freq = FALSE, nclass = 30, xlab = "z-score", 
      main = "Central Limit Theorem (Uniform)")
-curve(dnorm(x), add = TRUE, col = "red")
+curve(dnorm(x), add = TRUE, col = "red", lwd = 2)
 ```
 \normalsize
 
@@ -180,8 +357,11 @@ curve(dnorm(x), add = TRUE, col = "red")
 
 ## 第6章のまとめ
 
-* **確率**: 不確実な出来事を記述するための数学的な枠組み。
-* **条件付き確率と独立性**: 変数間の関係を理解するための鍵。
-* **確率分布**: データの発生メカニズムをモデル化する（二項分布、正規分布など）。
-* **大標本定理**: 標本から母集団を推測するための理論的基礎（大数の法則、中心極限定理）。
-* Rの操作: `sample()`, `dbinom()`, `pnorm()`, `runif()`, `rbinom()` などを習得した。
+* **不確実性**: 社会科学のデータには常に偶然が伴う。確率を用いることで、その不確実性を数学的に記述できる。
+* **確率の法則**: 
+    * **条件付き確率**: 特定の条件下での発生確率。
+    * **独立性**: 片方の出来事がもう片方に影響しない状態。
+* **大標本定理**:
+    * **大数の法則**: 標本を増やせば、推測はより正確（母平均に近く）になる。
+    * **中心極限定理**: サンプルサイズが大きければ、標本平均の分布は予測可能（正規分布）になる。これが推測統計の土台となる。
+* **Rの操作**: `sample()`, `dbinom()`, `pnorm()`, `runif()`, `curve()`, `hist()`。
