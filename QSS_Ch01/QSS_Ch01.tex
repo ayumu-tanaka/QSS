@@ -424,20 +424,28 @@
 \section{1.5 データファイル (Data
 Files)}\label{ux30c7ux30fcux30bfux30d5ux30a1ux30a4ux30eb-data-files}}
 
-\begin{frame}[fragile]{CSVファイルの読み込み}
-\protect\hypertarget{csvux30d5ux30a1ux30a4ux30ebux306eux8aadux307fux8fbcux307f}{}
+\begin{frame}[fragile]{CSVファイルの読み込み (1)}
+\protect\hypertarget{csvux30d5ux30a1ux30a4ux30ebux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
   \texttt{read.csv()} 関数を用いて、外部のデータセットをRに読み込む。
+\item
+  原則として、データファイル（\texttt{UNpop.csv}
+  など）を作業ディレクトリに保存して読み込むことが推奨される。
 \end{itemize}
+
+\scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# UNpopデータの読み込み}
+\CommentTok{\# 1. ローカルに保存したUNpopデータの読み込み（推奨）}
 \NormalTok{UNpop }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"UNpop.csv"}\NormalTok{) }
 
-\CommentTok{\# データフレームの確認}
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# UNpop \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/UNpop.csv")}
+
+\CommentTok{\# データフレームの次元（行数・列数）を確認}
 \FunctionTok{dim}\NormalTok{(UNpop)}
 \end{Highlighting}
 \end{Shaded}
@@ -446,8 +454,22 @@ Files)}\label{ux30c7ux30fcux30bfux30d5ux30a1ux30a4ux30eb-data-files}}
 ## [1] 7 2
 \end{verbatim}
 
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{CSVファイルの読み込み (2)}
+\protect\hypertarget{csvux30d5ux30a1ux30a4ux30ebux306eux8aadux307fux8fbcux307f-2}{}
+\begin{itemize}
+\tightlist
+\item
+  読み込んだデータの中身を \texttt{head()} で確認します。
+\end{itemize}
+
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# 最初の3行を表示}
 \FunctionTok{head}\NormalTok{(UNpop, }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -458,6 +480,8 @@ Files)}\label{ux30c7ux30fcux30bfux30d5ux30a1ux30a4ux30eb-data-files}}
 ## 2 1960   3026003
 ## 3 1970   3691173
 \end{verbatim}
+
+\normalsize
 \end{frame}
 
 \begin{frame}[fragile]{データフレームからの変数の抽出}

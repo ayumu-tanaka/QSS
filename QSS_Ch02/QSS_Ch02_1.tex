@@ -194,20 +194,23 @@
 \section{2.1.1
 データの読み込みと確認}\label{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux78baux8a8d}}
 
-\begin{frame}[fragile]{resume データセット}
-\protect\hypertarget{resume-ux30c7ux30fcux30bfux30bbux30c3ux30c8}{}
+\begin{frame}[fragile]{resume データの読み込み (1)}
+\protect\hypertarget{resume-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  実験で収集されたデータをRに読み込み、構造を確認します。
+  実験で収集されたデータをRに読み込みます。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1. データの読み込み (CSVファイル)}
+\CommentTok{\# 1. ローカルに保存したresumeデータの読み込み（推奨）}
 \NormalTok{resume }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"resume.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# resume \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/resume.csv")}
 
 \CommentTok{\# 2. データの次元（行数と列数）を確認}
 \FunctionTok{dim}\NormalTok{(resume)}
@@ -218,9 +221,22 @@
 ## [1] 4870    4
 \end{verbatim}
 
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{resume データの読み込み (2)}
+\protect\hypertarget{resume-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-2}{}
+\begin{itemize}
+\tightlist
+\item
+  データの最初の数行を表示して、変数の並びや中身を確認します。
+\end{itemize}
+
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 3. データの最初の数行を表示して中身を確認}
+\CommentTok{\# 最初の3行を表示}
 \FunctionTok{head}\NormalTok{(resume, }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}

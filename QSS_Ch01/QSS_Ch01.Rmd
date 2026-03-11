@@ -131,18 +131,36 @@ my.summary(world.pop)
 
 ---
 
-## CSVファイルの読み込み
+## CSVファイルの読み込み (1)
 
 * `read.csv()` 関数を用いて、外部のデータセットをRに読み込む。
+* 原則として、データファイル（`UNpop.csv` など）を作業ディレクトリに保存して読み込むことが推奨される。
 
+\scriptsize
 ```{r}
-# UNpopデータの読み込み
+# 1. ローカルに保存したUNpopデータの読み込み（推奨）
 UNpop <- read.csv("UNpop.csv") 
 
-# データフレームの確認
+# （参考）URLから直接読み込むことも可能
+# UNpop <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/UNpop.csv")
+
+# データフレームの次元（行数・列数）を確認
 dim(UNpop)
+```
+\normalsize
+
+---
+
+## CSVファイルの読み込み (2)
+
+* 読み込んだデータの中身を `head()` で確認します。
+
+\scriptsize
+```{r}
+# 最初の3行を表示
 head(UNpop, n = 3)
 ```
+\normalsize
 
 ---
 

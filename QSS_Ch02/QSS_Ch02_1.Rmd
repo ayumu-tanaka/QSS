@@ -40,19 +40,32 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## resume データセット
+## resume データの読み込み (1)
 
-* 実験で収集されたデータをRに読み込み、構造を確認します。
+* 実験で収集されたデータをRに読み込みます。
 
 \scriptsize
 ```{r}
-# 1. データの読み込み (CSVファイル)
+# 1. ローカルに保存したresumeデータの読み込み（推奨）
 resume <- read.csv("resume.csv")
+
+# （参考）URLから直接読み込むことも可能
+# resume <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/resume.csv")
 
 # 2. データの次元（行数と列数）を確認
 dim(resume)
+```
+\normalsize
 
-# 3. データの最初の数行を表示して中身を確認
+---
+
+## resume データの読み込み (2)
+
+* データの最初の数行を表示して、変数の並びや中身を確認します。
+
+\scriptsize
+```{r}
+# 最初の3行を表示
 head(resume, n = 3)
 ```
 \normalsize
