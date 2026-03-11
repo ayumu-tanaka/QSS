@@ -1,16 +1,18 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% remove section numbering
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -19,19 +21,16 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{section title}
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -44,21 +43,19 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
 \usetheme[]{Montpellier}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -75,6 +72,14 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -86,13 +91,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -100,7 +105,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -109,7 +114,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -118,6 +123,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -142,12 +148,9 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{第5章: 発見\\
 (5.3. 空間データ)}
@@ -159,10 +162,11 @@
 \begin{document}
 \frame{\titlepage}
 
-\section{5.3 空間データ}\label{ux7a7aux9593ux30c7ux30fcux30bf}
+\hypertarget{ux7a7aux9593ux30c7ux30fcux30bf}{%
+\section{5.3 空間データ}\label{ux7a7aux9593ux30c7ux30fcux30bf}}
 
 \begin{frame}{地理空間情報の分析}
-\phantomsection\label{ux5730ux7406ux7a7aux9593ux60c5ux5831ux306eux5206ux6790}
+\protect\hypertarget{ux5730ux7406ux7a7aux9593ux60c5ux5831ux306eux5206ux6790}{}
 \begin{itemize}
 \tightlist
 \item
@@ -175,11 +179,12 @@
 \end{itemize}
 \end{frame}
 
+\hypertarget{rux306bux304aux3051ux308bux7a7aux9593ux30c7ux30fcux30bfux306eux6271ux3044}{%
 \section{5.3.1
-Rにおける空間データの扱い}\label{rux306bux304aux3051ux308bux7a7aux9593ux30c7ux30fcux30bfux306eux6271ux3044}
+Rにおける空間データの扱い}\label{rux306bux304aux3051ux308bux7a7aux9593ux30c7ux30fcux30bfux306eux6271ux3044}}
 
 \begin{frame}[fragile]{maps パッケージ: プロットのコード}
-\phantomsection\label{maps-ux30d1ux30c3ux30b1ux30fcux30b8-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}
+\protect\hypertarget{maps-ux30d1ux30c3ux30b1ux30fcux30b8-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}{}
 \begin{itemize}
 \tightlist
 \item
@@ -210,7 +215,7 @@ Rにおける空間データの扱い}\label{rux306bux304aux3051ux308bux7a7aux95
 \end{frame}
 
 \begin{frame}{maps パッケージ: 描画結果}
-\phantomsection\label{maps-ux30d1ux30c3ux30b1ux30fcux30b8-ux63cfux753bux7d50ux679c}
+\protect\hypertarget{maps-ux30d1ux30c3ux30b1ux30fcux30b8-ux63cfux753bux7d50ux679c}{}
 \scriptsize
 
 \begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch05_3_files/figure-beamer/unnamed-chunk-2-1} \end{center}
@@ -218,7 +223,7 @@ Rにおける空間データの扱い}\label{rux306bux304aux3051ux308bux7a7aux95
 \end{frame}
 
 \begin{frame}[fragile]{特定の地域の拡大: プロットのコード}
-\phantomsection\label{ux7279ux5b9aux306eux5730ux57dfux306eux62e1ux5927-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}
+\protect\hypertarget{ux7279ux5b9aux306eux5730ux57dfux306eux62e1ux5927-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}{}
 \begin{itemize}
 \tightlist
 \item
@@ -249,18 +254,19 @@ Rにおける空間データの扱い}\label{rux306bux304aux3051ux308bux7a7aux95
 \end{frame}
 
 \begin{frame}{特定の地域の拡大: 描画結果}
-\phantomsection\label{ux7279ux5b9aux306eux5730ux57dfux306eux62e1ux5927-ux63cfux753bux7d50ux679c}
+\protect\hypertarget{ux7279ux5b9aux306eux5730ux57dfux306eux62e1ux5927-ux63cfux753bux7d50ux679c}{}
 \scriptsize
 
 \begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch05_3_files/figure-beamer/unnamed-chunk-4-1} \end{center}
 \normalsize
 \end{frame}
 
+\hypertarget{rux306bux304aux3051ux308bux8272ux306eux6307ux5b9a}{%
 \section{5.3.2
-Rにおける色の指定}\label{rux306bux304aux3051ux308bux8272ux306eux6307ux5b9a}
+Rにおける色の指定}\label{rux306bux304aux3051ux308bux8272ux306eux6307ux5b9a}}
 
 \begin{frame}[fragile]{rgb() 関数と透明度}
-\phantomsection\label{rgb-ux95a2ux6570ux3068ux900fux660eux5ea6}
+\protect\hypertarget{rgb-ux95a2ux6570ux3068ux900fux660eux5ea6}{}
 \begin{itemize}
 \tightlist
 \item
@@ -285,11 +291,12 @@ Rにおける色の指定}\label{rux306bux304aux3051ux308bux8272ux306eux6307ux5b
 \normalsize
 \end{frame}
 
+\hypertarget{ux7c73ux56fdux5927ux7d71ux9818ux9078ux6319ux306eux30deux30c3ux30d7}{%
 \section{5.3.3
-米国大統領選挙のマップ}\label{ux7c73ux56fdux5927ux7d71ux9818ux9078ux6319ux306eux30deux30c3ux30d7}
+米国大統領選挙のマップ}\label{ux7c73ux56fdux5927ux7d71ux9818ux9078ux6319ux306eux30deux30c3ux30d7}}
 
-\begin{frame}[fragile]{州別の色分け (1): 州のリストを作成}
-\phantomsection\label{ux5ddeux5225ux306eux8272ux5206ux3051-1-ux5ddeux306eux30eaux30b9ux30c8ux3092ux4f5cux6210}
+\begin{frame}[fragile]{pres08 データの読み込み (1)}
+\protect\hypertarget{pres08-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
@@ -300,8 +307,23 @@ Rにおける色の指定}\label{rux306bux304aux3051ux308bux8272ux306eux6307ux5b
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
 \NormalTok{pres08 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"pres08.csv"}\NormalTok{)}
 
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# pres08 \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/pres08.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{州のリストを作成 (2)}
+\protect\hypertarget{ux5ddeux306eux30eaux30b9ux30c8ux3092ux4f5cux6210-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# 1. オバマ（民主党）が勝った州の名前を取り出す}
 \CommentTok{\# Obama \textgreater{} McCain という条件に合う state.name を抽出}
 \NormalTok{blue\_states }\OtherTok{\textless{}{-}}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{state.name[pres08}\SpecialCharTok{$}\NormalTok{Obama }\SpecialCharTok{\textgreater{}}\NormalTok{ pres08}\SpecialCharTok{$}\NormalTok{McCain]}
@@ -323,7 +345,7 @@ Rにおける色の指定}\label{rux306bux304aux3051ux308bux8272ux306eux6307ux5b
 \end{frame}
 
 \begin{frame}[fragile]{州別の色分け (2): 地図を塗るコード}
-\phantomsection\label{ux5ddeux5225ux306eux8272ux5206ux3051-2-ux5730ux56f3ux3092ux5857ux308bux30b3ux30fcux30c9}
+\protect\hypertarget{ux5ddeux5225ux306eux8272ux5206ux3051-2-ux5730ux56f3ux3092ux5857ux308bux30b3ux30fcux30c9}{}
 \begin{itemize}
 \tightlist
 \item
@@ -353,24 +375,46 @@ Rにおける色の指定}\label{rux306bux304aux3051ux308bux8272ux306eux6307ux5b
 \end{frame}
 
 \begin{frame}{州別の色分け (3): 選挙結果のマップ}
-\phantomsection\label{ux5ddeux5225ux306eux8272ux5206ux3051-3-ux9078ux6319ux7d50ux679cux306eux30deux30c3ux30d7}
+\protect\hypertarget{ux5ddeux5225ux306eux8272ux5206ux3051-3-ux9078ux6319ux7d50ux679cux306eux30deux30c3ux30d7}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch05_3_files/figure-beamer/unnamed-chunk-8-1} \end{center}
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch05_3_files/figure-beamer/unnamed-chunk-9-1} \end{center}
 \normalsize
 \end{frame}
 
+\hypertarget{ux30a6ux30a9ux30ebux30deux30fcux30c8ux306eux62e1ux5927}{%
 \section{5.3.4
-ウォルマートの拡大}\label{ux30a6ux30a9ux30ebux30deux30fcux30c8ux306eux62e1ux5927}
+ウォルマートの拡大}\label{ux30a6ux30a9ux30ebux30deux30fcux30c8ux306eux62e1ux5927}}
 
-\begin{frame}[fragile]{拡大プロセスの視覚化 (1): 準備}
-\phantomsection\label{ux62e1ux5927ux30d7ux30edux30bbux30b9ux306eux8996ux899aux5316-1-ux6e96ux5099}
+\begin{frame}[fragile]{walmart データの読み込み (1)}
+\protect\hypertarget{walmart-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
+\begin{itemize}
+\tightlist
+\item
+  拡大プロセスの視覚化のため、出店データを読み込みます。
+\end{itemize}
+
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
 \NormalTok{walmart }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"walmart.csv"}\NormalTok{)}
 
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# walmart \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/walmart.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{拡大プロセスの視覚化 (2): 準備}
+\protect\hypertarget{ux62e1ux5927ux30d7ux30edux30bbux30b9ux306eux8996ux899aux5316-2-ux6e96ux5099}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# 1. 出店形態に応じた「色の列」をデータに追加する}
 \NormalTok{walmart}\SpecialCharTok{$}\NormalTok{col }\OtherTok{\textless{}{-}} \ConstantTok{NA} \CommentTok{\# 初期化}
 
@@ -387,8 +431,8 @@ Rにおける色の指定}\label{rux306bux304aux3051ux308bux8272ux306eux6307ux5b
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{拡大プロセスの視覚化 (2): プロットのコード}
-\phantomsection\label{ux62e1ux5927ux30d7ux30edux30bbux30b9ux306eux8996ux899aux5316-2-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}
+\begin{frame}[fragile]{拡大プロセスの視覚化 (3): プロットのコード}
+\protect\hypertarget{ux62e1ux5927ux30d7ux30edux30bbux30b9ux306eux8996ux899aux5316-3-ux30d7ux30edux30c3ux30c8ux306eux30b3ux30fcux30c9}{}
 \scriptsize
 
 \begin{Shaded}
@@ -410,18 +454,19 @@ Rにおける色の指定}\label{rux306bux304aux3051ux308bux8272ux306eux6307ux5b
 \normalsize
 \end{frame}
 
-\begin{frame}{拡大プロセスの視覚化 (3): ウォルマートの拡大マップ}
-\phantomsection\label{ux62e1ux5927ux30d7ux30edux30bbux30b9ux306eux8996ux899aux5316-3-ux30a6ux30a9ux30ebux30deux30fcux30c8ux306eux62e1ux5927ux30deux30c3ux30d7}
+\begin{frame}{拡大プロセスの視覚化 (4): ウォルマートの拡大マップ}
+\protect\hypertarget{ux62e1ux5927ux30d7ux30edux30bbux30b9ux306eux8996ux899aux5316-4-ux30a6ux30a9ux30ebux30deux30fcux30c8ux306eux62e1ux5927ux30deux30c3ux30d7}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch05_3_files/figure-beamer/unnamed-chunk-11-1} \end{center}
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch05_3_files/figure-beamer/unnamed-chunk-13-1} \end{center}
 \normalsize
 \end{frame}
 
-\section{5.3.5 まとめ}\label{ux307eux3068ux3081}
+\hypertarget{ux307eux3068ux3081}{%
+\section{5.3.5 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}[fragile]{まとめ}
-\phantomsection\label{ux307eux3068ux3081-1}
+\protect\hypertarget{ux307eux3068ux3081-1}{}
 \begin{itemize}
 \tightlist
 \item

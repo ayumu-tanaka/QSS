@@ -1,16 +1,18 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% remove section numbering
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -19,19 +21,16 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{section title}
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -44,21 +43,19 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
 \usetheme[]{Montpellier}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -75,6 +72,14 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -86,13 +91,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -100,7 +105,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -109,7 +114,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -118,6 +123,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -142,12 +148,9 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{第4章: 予測\\
 (4.3. 回帰分析と因果関係)}
@@ -159,11 +162,12 @@
 \begin{document}
 \frame{\titlepage}
 
+\hypertarget{ux56deux5e30ux5206ux6790ux3068ux56e0ux679cux95a2ux4fc2}{%
 \section{4.3
-回帰分析と因果関係}\label{ux56deux5e30ux5206ux6790ux3068ux56e0ux679cux95a2ux4fc2}
+回帰分析と因果関係}\label{ux56deux5e30ux5206ux6790ux3068ux56e0ux679cux95a2ux4fc2}}
 
 \begin{frame}{予測と因果関係}
-\phantomsection\label{ux4e88ux6e2cux3068ux56e0ux679cux95a2ux4fc2}
+\protect\hypertarget{ux4e88ux6e2cux3068ux56e0ux679cux95a2ux4fc2}{}
 \begin{itemize}
 \tightlist
 \item
@@ -185,15 +189,37 @@
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13ux3068ux56deux5e30ux5206ux6790}{%
 \section{4.3.1
-ランダム化比較試験と回帰分析}\label{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13ux3068ux56deux5e30ux5206ux6790}
+ランダム化比較試験と回帰分析}\label{ux30e9ux30f3ux30c0ux30e0ux5316ux6bd4ux8f03ux8a66ux9a13ux3068ux56deux5e30ux5206ux6790}}
 
-\begin{frame}[fragile]{RCTデータへの回帰の適用}
-\phantomsection\label{rctux30c7ux30fcux30bfux3078ux306eux56deux5e30ux306eux9069ux7528}
+\begin{frame}[fragile]{women データの読み込み (1)}
+\protect\hypertarget{women-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  インドの村議会における女性のクオータ制（割当制）が、政策に与える影響（\texttt{women.csv}）。
+  インドの村議会における女性のクオータ制（割当制）のデータを準備します（\texttt{women.csv}）。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
+\NormalTok{women }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"women.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# women \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/women.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{RCTデータへの回帰の適用 (2)}
+\protect\hypertarget{rctux30c7ux30fcux30bfux3078ux306eux56deux5e30ux306eux9069ux7528-2}{}
+\begin{itemize}
+\tightlist
 \item
   処置変数 \texttt{reserved} が 1 ならクオータあり、0 ならなし。
 \end{itemize}
@@ -202,9 +228,6 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# データの読み込み}
-\NormalTok{women }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"women.csv"}\NormalTok{)}
-
 \CommentTok{\# 1. 飲用水設備 (water) の平均の差（因果効果）を手計算}
 \FunctionTok{mean}\NormalTok{(women}\SpecialCharTok{$}\NormalTok{water[women}\SpecialCharTok{$}\NormalTok{reserved }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(women}\SpecialCharTok{$}\NormalTok{water[women}\SpecialCharTok{$}\NormalTok{reserved }\SpecialCharTok{==} \DecValTok{0}\NormalTok{])}
 \end{Highlighting}
@@ -243,15 +266,37 @@
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux8907ux6570ux306eux4e88ux6e2cux5909ux6570ux3092ux7528ux3044ux305fux56deux5e30ux5206ux6790}{%
 \section{4.3.2
-複数の予測変数を用いた回帰分析}\label{ux8907ux6570ux306eux4e88ux6e2cux5909ux6570ux3092ux7528ux3044ux305fux56deux5e30ux5206ux6790}
+複数の予測変数を用いた回帰分析}\label{ux8907ux6570ux306eux4e88ux6e2cux5909ux6570ux3092ux7528ux3044ux305fux56deux5e30ux5206ux6790}}
 
-\begin{frame}[fragile]{重回帰分析 (Multiple Regression)}
-\phantomsection\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}
+\begin{frame}[fragile]{social データの読み込み (1)}
+\protect\hypertarget{social-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  複数の説明変数を含めることで、他の要因を「一定に保った（コントロールした）」状態での効果を推定する。
+  複数の要因をコントロールするため、社会的圧力実験のデータを準備します（\texttt{social.csv}）。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
+\NormalTok{social }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"social.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# social \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/social.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{重回帰分析 (Multiple Regression) (2)}
+\protect\hypertarget{ux91cdux56deux5e30ux5206ux6790-multiple-regression-2}{}
+\begin{itemize}
+\tightlist
 \item
   第2章の社会的圧力実験 (\texttt{social.csv}) を使用。
 \end{itemize}
@@ -260,8 +305,6 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{social }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"social.csv"}\NormalTok{)}
-
 \CommentTok{\# メッセージの種類 (messages) による投票率への影響}
 \CommentTok{\# messages はカテゴリ変数のため、Rが自動的にダミー変数に変換して計算する}
 \NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(primary2006 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ messages, }\AttributeTok{data =}\NormalTok{ social)}
@@ -284,15 +327,16 @@
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux7570ux8ceaux306aux51e6ux7f6eux52b9ux679c}{%
 \section{4.3.3
-異質な処置効果}\label{ux7570ux8ceaux306aux51e6ux7f6eux52b9ux679c}
+異質な処置効果}\label{ux7570ux8ceaux306aux51e6ux7f6eux52b9ux679c}}
 
 \begin{frame}[fragile]{交差項 (Interaction Terms) の導入}
-\phantomsection\label{ux4ea4ux5deeux9805-interaction-terms-ux306eux5c0eux5165}
+\protect\hypertarget{ux4ea4ux5deeux9805-interaction-terms-ux306eux5c0eux5165}{}
 \begin{itemize}
 \tightlist
 \item
-  処置の効果が、個人の属性（例：年齢）によって異なるかどうかを調べる（\textbf{異質な処置効果}）。
+  処置の効果が、個人の属性（例：年齢）によって異なるかどうかを調べます（\textbf{異質な処置効果}）。
 \end{itemize}
 
 \scriptsize
@@ -328,41 +372,43 @@
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux56deux5e30ux4e0dux9023ux7d9aux30c7ux30b6ux30a4ux30f3-rdd}{%
 \section{4.3.4 回帰不連続デザイン
-(RDD)}\label{ux56deux5e30ux4e0dux9023ux7d9aux30c7ux30b6ux30a4ux30f3-rdd}
+(RDD)}\label{ux56deux5e30ux4e0dux9023ux7d9aux30c7ux30b6ux30a4ux30f3-rdd}}
 
-\begin{frame}{RDD (Regression Discontinuity Design) とは}
-\phantomsection\label{rdd-regression-discontinuity-design-ux3068ux306f}
+\begin{frame}[fragile]{MPs データの読み込み (1)}
+\protect\hypertarget{mps-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  処置の割り当てが、ある\textbf{境界線 (Cutoff)}
-  を超えたかどうかで決定される状況を利用する。
-\item
-  境界のすぐ左側の人とすぐ右側の人は「平均的に似ている（実質的にランダム）」と仮定し、境界付近での結果の「ジャンプ」を因果効果とみなす。
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{イギリス下院議員の選挙データ}
-\phantomsection\label{ux30a4ux30aeux30eaux30b9ux4e0bux9662ux8b70ux54e1ux306eux9078ux6319ux30c7ux30fcux30bf}
-\begin{itemize}
-\tightlist
-\item
-  選挙で「僅差で勝った候補」と「僅差で負けた候補」は、能力や背景がほぼ同じだと考えられる。
-\item
-  \textbf{問い}:
-  議員になること（処置）は、その後の個人の蓄財（結果）に影響するか？
+  当落の境界線付近を利用するため、イギリス下院議員のデータを準備します（\texttt{MPs.csv}）。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
 \NormalTok{MPs }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"MPs.csv"}\NormalTok{)}
-\CommentTok{\# 労働党 (labour) のデータを抽出}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# MPs \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/MPs.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{議会データの抽出と回帰 (2)}
+\protect\hypertarget{ux8b70ux4f1aux30c7ux30fcux30bfux306eux62bdux51faux3068ux56deux5e30-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 労働党 (labour) のデータを抽出}
 \NormalTok{MPs.labour }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(MPs, }\AttributeTok{subset =}\NormalTok{ (party }\SpecialCharTok{==} \StringTok{"labour"}\NormalTok{))}
 
-\CommentTok{\# 境界線（margin = 0）の左側（落選）と右側（当選）で別々に回帰分析}
+\CommentTok{\# 2. 境界線（margin = 0）の左側（落選）と右側（当選）で別々に回帰分析}
 \NormalTok{labour.fit1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln.net }\SpecialCharTok{\textasciitilde{}}\NormalTok{ margin, }\AttributeTok{data =}\NormalTok{ MPs.labour[MPs.labour}\SpecialCharTok{$}\NormalTok{margin }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{, ])}
 \NormalTok{labour.fit2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(ln.net }\SpecialCharTok{\textasciitilde{}}\NormalTok{ margin, }\AttributeTok{data =}\NormalTok{ MPs.labour[MPs.labour}\SpecialCharTok{$}\NormalTok{margin }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{, ])}
 \end{Highlighting}
@@ -372,7 +418,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{RDDの可視化: コード}
-\phantomsection\label{rddux306eux53efux8996ux5316-ux30b3ux30fcux30c9}
+\protect\hypertarget{rddux306eux53efux8996ux5316-ux30b3ux30fcux30c9}{}
 \scriptsize
 
 \begin{Shaded}
@@ -397,10 +443,11 @@
 \end{frame}
 
 \begin{frame}[fragile]{RDDの可視化: 描画結果}
-\phantomsection\label{rddux306eux53efux8996ux5316-ux63cfux753bux7d50ux679c}
+\protect\hypertarget{rddux306eux53efux8996ux5316-ux63cfux753bux7d50ux679c}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.8\textheight]{QSS_Ch04_3_files/figure-beamer/unnamed-chunk-6-1} \end{center}
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch04_3_files/figure-beamer/unnamed-chunk-9-1} \end{center}
+\normalsize
 
 \begin{itemize}
 \tightlist
@@ -408,14 +455,13 @@
   \textbf{結論}: 境界線 (\texttt{margin\ =\ 0})
   において、線に大きな「ジャンプ」が見られないため、労働党において議員になることが死後の資産を増やしたとは言えない。
 \end{itemize}
-
-\normalsize
 \end{frame}
 
-\section{4.3.5 まとめ}\label{ux307eux3068ux3081}
+\hypertarget{ux307eux3068ux3081}{%
+\section{4.3.5 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}[fragile]{このセクションのまとめ}
-\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
 \begin{itemize}
 \tightlist
 \item

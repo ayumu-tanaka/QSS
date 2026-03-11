@@ -8,7 +8,7 @@ subtitle: |
 author: ""
 date: "2026-03-09"
 output:
-#  slidy_presentation: default
+  slidy_presentation: default
   beamer_presentation:
     theme: Montpellier
     latex_engine: lualatex
@@ -64,7 +64,7 @@ points(x = capitals$long, y = capitals$lat,
 ## maps パッケージ: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
 library(maps)
 map(database = "usa")
 data(us.cities)
@@ -104,7 +104,7 @@ text(x = cal.cities$long[top7] + 2, y = cal.cities$lat[top7],
 ## 特定の地域の拡大: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
 library(maps)
 map(database = "state", regions = "California")
 cal.cities <- subset(us.cities, subset = (country.etc == "CA"))
@@ -125,7 +125,7 @@ title("Largest Cities of California")
 * `rgb()` で赤・緑・青の強度 (0〜1) と、透明度 (`alpha`) を指定できます。
 
 \scriptsize
-```{r, fig.height=8, out.height="40%", fig.align="center"}
+```{r, fig.height=2.8, out.height="40%", fig.align="center"}
 # 半透明の青 (alpha=0.5) を作成
 blue.trans <- rgb(red = 0, green = 0, blue = 1, alpha = 0.5)
 
@@ -139,14 +139,26 @@ plot(x = c(1, 1.2), y = c(1, 1), xlim = c(0.5, 2), ylim = c(0.5, 1.5),
 
 ---
 
-## 州別の色分け (1): 州のリストを作成
+## pres08 データの読み込み (1)
 
 * 民主党が勝った州と共和党が勝った州の名前を、それぞれ別々のリストにまとめます。
 
 \scriptsize
 ```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
 pres08 <- read.csv("pres08.csv")
 
+# （参考）URLから直接読み込むことも可能
+# pres08 <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/pres08.csv")
+```
+\normalsize
+
+---
+
+## 州のリストを作成 (2)
+
+\scriptsize
+```{r}
 # 1. オバマ（民主党）が勝った州の名前を取り出す
 # Obama > McCain という条件に合う state.name を抽出
 blue_states <- pres08$state.name[pres08$Obama > pres08$McCain]
@@ -188,7 +200,7 @@ map(database = "state", regions = red_states,
 ## 州別の色分け (3): 選挙結果のマップ
 
 \scriptsize
-```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
 library(maps)
 map(database = "state") 
 map(database = "state", regions = blue_states, 
@@ -203,12 +215,26 @@ title("2008 Election: Red and Blue States")
 
 ---
 
-## 拡大プロセスの視覚化 (1): 準備
+## walmart データの読み込み (1)
+
+* 拡大プロセスの視覚化のため、出店データを読み込みます。
 
 \scriptsize
 ```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
 walmart <- read.csv("walmart.csv")
 
+# （参考）URLから直接読み込むことも可能
+# walmart <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/walmart.csv")
+```
+\normalsize
+
+---
+
+## 拡大プロセスの視覚化 (2): 準備
+
+\scriptsize
+```{r}
 # 1. 出店形態に応じた「色の列」をデータに追加する
 walmart$col <- NA # 初期化
 
@@ -224,7 +250,7 @@ walmart$col[walmart$type == "DistributionCenter"] <- rgb(0, 0, 1, 0.5)
 
 ---
 
-## 拡大プロセスの視覚化 (2): プロットのコード
+## 拡大プロセスの視覚化 (3): プロットのコード
 
 \scriptsize
 ```{r, eval=FALSE}
@@ -244,10 +270,10 @@ legend("bottomright", legend = c("Store", "Supercenter", "Dist. Center"),
 
 ---
 
-## 拡大プロセスの視覚化 (3): ウォルマートの拡大マップ
+## 拡大プロセスの視覚化 (4): ウォルマートの拡大マップ
 
 \scriptsize
-```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
 map(database = "state")
 points(walmart$long, walmart$lat, col = walmart$col, 
        pch = 19, cex = ifelse(walmart$type == "DistributionCenter", 1, 0.5))

@@ -40,22 +40,32 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## 顔の印象と得票率のデータ
+## face データの読み込み (1)
 
-* **問い**: 候補者の「有能そうな顔立ち」は、実際の得票率に影響するか？
-* データ: 2000〜2004年の米議会選データ (`face.csv`)。
+* 候補者の顔の「有能さ」スコアと得票率のデータを準備します。
 
 \scriptsize
 ```{r}
-# 1. データの読み込み
+# 1. ローカルに保存したデータの読み込み（推奨）
 face <- read.csv("face.csv")
 
-# 2. 民主党と共和党の得票率、およびその差（マージン）を計算
+# （参考）URLから直接読み込むことも可能
+# face <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/face.csv")
+```
+\normalsize
+
+---
+
+## データの計算と確認 (2)
+
+\scriptsize
+```{r}
+# 1. 民主党と共和党の得票率、およびその差（マージン）を計算
 face$d.share <- face$d.votes / (face$d.votes + face$r.votes)
 face$r.share <- face$r.votes / (face$d.votes + face$r.votes)
 face$diff.share <- face$d.share - face$r.share
 
-# 3. データの確認 (d.comp は有能さのスコア)
+# 2. データの確認 (d.comp は有能さのスコア)
 head(face[, c("d.comp", "diff.share")], n = 3)
 ```
 \normalsize
@@ -116,7 +126,7 @@ abline(fit, col = "red", lwd = 2)
 ## 回帰直線のプロット: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=8, out.height="80%", fig.align="center"}
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
 plot(face$d.comp, face$diff.share, xlim = c(0, 1.05), ylim = c(-1, 1),
      xlab = "Competence scores for Democrats",
      ylab = "Democratic margin in vote share",
@@ -129,20 +139,32 @@ abline(lm(diff.share ~ d.comp, data = face), col = "red", lwd = 2)
 
 ---
 
-## merge() によるデータの結合
+## 選挙データの読み込みと結合 (1)
 
-* 異なる年のデータを州名などの「キー」を使って統合します。
+* 異なる年のデータを州名略称 (`state`) をキーにして統合します。
 
 \scriptsize
 ```{r}
-# 1. データの読み込み
+# 1. ローカルに保存したデータの読み込み（推奨）
 pres08 <- read.csv("pres08.csv")
 pres12 <- read.csv("pres12.csv")
 
-# 2. state 列を共通キーとして結合
-pres <- merge(pres08, pres12, by = "state")
+# （参考）URLから直接読み込むことも可能
+# pres08 <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/pres08.csv")
+# pres12 <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/pres12.csv")
 
-# 3. 結合後のデータを確認 (Obama.x は2008年、Obama.y は2012年)
+# 2. データの結合 (merge)
+pres <- merge(pres08, pres12, by = "state")
+```
+\normalsize
+
+---
+
+## 結合データの確認 (2)
+
+\scriptsize
+```{r}
+# 結合後のデータを確認 (Obama.x は2008年、Obama.y は2012年)
 head(pres[, c("state", "Obama.x", "Obama.y")], n = 3)
 ```
 \normalsize
@@ -151,19 +173,32 @@ head(pres[, c("state", "Obama.x", "Obama.y")], n = 3)
 
 ---
 
-## 決定係数 ($R^2$) の計算
+## florida データの読み込み (1)
 
-* **$R^2$**: モデルがデータの変動をどれだけ説明できているかを示す指標（0〜1）。
+* モデルの当てはまりを確認するため、フロリダ州のデータを使用します。
 
 \scriptsize
 ```{r}
-# 1. フロリダ州の選挙データ
+# 1. ローカルに保存したデータの読み込み（推奨）
 florida <- read.csv("florida.csv")
 
-# 2. 回帰分析の実行
+# （参考）URLから直接読み込むことも可能
+# florida <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/florida.csv")
+```
+\normalsize
+
+---
+
+## 決定係数 ($R^2$) の計算 (2)
+
+* $R^2$: モデルがデータの変動をどれだけ説明できているかを示す指標（0〜1）。
+
+\scriptsize
+```{r}
+# 1. 回帰分析の実行
 fit2 <- lm(Buchanan00 ~ Perot96, data = florida)
 
-# 3. summary() 関数から決定係数を取り出す
+# 2. summary() 関数から決定係数を取り出す
 summary(fit2)$r.squared
 ```
 \normalsize

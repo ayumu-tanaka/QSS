@@ -127,35 +127,35 @@ sqrt(four)
 
 ---
 
-## データの読み込み
+## データの読み込み (1)
 
-* `read.csv()` 関数を用いてCSVファイルを読み込み、オブジェクトに格納する。
+* `read.csv()` 関数を用いて、外部のデータセットをRに読み込みます。
 
+\scriptsize
 ```{r}
-# データセットの読み込み
+# 1. ローカルに保存したSTARデータの読み込み（推奨）
 star <- read.csv("STAR.csv")
+
+# （参考）URLから直接読み込むことも可能
+# star <- read.csv("https://ayumu-tanaka.github.io/QSS/DSS_Data/STAR.csv")
 ```
-
-
----
-
-## データの理解 (1)
-
-* 読み込んだデータの中身や構造を確認する。
-
-```{r}
-# 最初の6行を表示
-head(star)
-```
+\normalsize
 
 ---
 
 ## データの理解 (2)
 
+* 読み込んだデータの中身や構造を確認します。
+
+\scriptsize
 ```{r}
-# 次元の確認（行数, 列数）
+# 1. 最初の6行を表示
+head(star)
+
+# 2. 次元の確認（行数, 列数）
 dim(star)
 ```
+\normalsize
 
 ---
 

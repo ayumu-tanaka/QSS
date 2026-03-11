@@ -49,13 +49,32 @@ abline(h = 0.5, lty = "dashed")
 
 ---
 
-## 結合確率・周辺確率・条件付き確率
+## FLVoters データの読み込み (1)
 
-* フロリダ州の有権者データ（`FLVoters.csv`）を使用。
+* フロリダ州の有権者データを読み込み、欠損値を除外します。
 
 \scriptsize
 ```{r}
-FLVoters <- na.omit(read.csv("FLVoters.csv"))
+# 1. ローカルに保存したデータの読み込み（推奨）
+FLVoters <- read.csv("FLVoters.csv")
+
+# （参考）URLから直接読み込むことも可能
+# FLVoters <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/FLVoters.csv")
+
+# 2. 欠損値 (NA) を含む行を除外
+FLVoters <- na.omit(FLVoters)
+
+# 3. データの規模を確認
+dim(FLVoters)
+```
+\normalsize
+
+---
+
+## 結合確率・周辺確率・条件付き確率 (2)
+
+\scriptsize
+```{r}
 # 周辺確率（人種）
 margin.race <- prop.table(table(FLVoters$race))
 # 条件付き確率（女性における人種の割合）

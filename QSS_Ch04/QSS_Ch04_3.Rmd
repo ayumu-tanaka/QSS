@@ -40,16 +40,28 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## RCTデータへの回帰の適用
+## women データの読み込み (1)
 
-* インドの村議会における女性のクオータ制（割当制）が、政策に与える影響（`women.csv`）。
+* インドの村議会における女性のクオータ制（割当制）のデータを準備します（`women.csv`）。
+
+\scriptsize
+```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
+women <- read.csv("women.csv")
+
+# （参考）URLから直接読み込むことも可能
+# women <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/women.csv")
+```
+\normalsize
+
+---
+
+## RCTデータへの回帰の適用 (2)
+
 * 処置変数 `reserved` が 1 ならクオータあり、0 ならなし。
 
 \scriptsize
 ```{r}
-# データの読み込み
-women <- read.csv("women.csv")
-
 # 1. 飲用水設備 (water) の平均の差（因果効果）を手計算
 mean(women$water[women$reserved == 1]) - mean(women$water[women$reserved == 0])
 
@@ -65,15 +77,28 @@ lm(water ~ reserved, data = women)
 
 ---
 
-## 重回帰分析 (Multiple Regression)
+## social データの読み込み (1)
 
-* 複数の説明変数を含めることで、他の要因を「一定に保った（コントロールした）」状態での効果を推定する。
+* 複数の要因をコントロールするため、社会的圧力実験のデータを準備します（`social.csv`）。
+
+\scriptsize
+```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
+social <- read.csv("social.csv")
+
+# （参考）URLから直接読み込むことも可能
+# social <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/social.csv")
+```
+\normalsize
+
+---
+
+## 重回帰分析 (Multiple Regression) (2)
+
 * 第2章の社会的圧力実験 (`social.csv`) を使用。
 
 \scriptsize
 ```{r}
-social <- read.csv("social.csv")
-
 # メッセージの種類 (messages) による投票率への影響
 # messages はカテゴリ変数のため、Rが自動的にダミー変数に変換して計算する
 fit <- lm(primary2006 ~ messages, data = social)
@@ -89,7 +114,7 @@ coef(fit)
 
 ## 交差項 (Interaction Terms) の導入
 
-* 処置の効果が、個人の属性（例：年齢）によって異なるかどうかを調べる（**異質な処置効果**）。
+* 処置の効果が、個人の属性（例：年齢）によって異なるかどうかを調べます（**異質な処置効果**）。
 
 \scriptsize
 ```{r}
@@ -111,25 +136,30 @@ coef(fit.age)
 
 ---
 
-## RDD (Regression Discontinuity Design) とは
+## MPs データの読み込み (1)
 
-* 処置の割り当てが、ある**境界線 (Cutoff)** を超えたかどうかで決定される状況を利用する。
-* 境界のすぐ左側の人とすぐ右側の人は「平均的に似ている（実質的にランダム）」と仮定し、境界付近での結果の「ジャンプ」を因果効果とみなす。
-
----
-
-## イギリス下院議員の選挙データ
-
-* 選挙で「僅差で勝った候補」と「僅差で負けた候補」は、能力や背景がほぼ同じだと考えられる。
-* **問い**: 議員になること（処置）は、その後の個人の蓄財（結果）に影響するか？
+* 当落の境界線付近を利用するため、イギリス下院議員のデータを準備します（`MPs.csv`）。
 
 \scriptsize
 ```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
 MPs <- read.csv("MPs.csv")
-# 労働党 (labour) のデータを抽出
+
+# （参考）URLから直接読み込むことも可能
+# MPs <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/MPs.csv")
+```
+\normalsize
+
+---
+
+## 議会データの抽出と回帰 (2)
+
+\scriptsize
+```{r}
+# 1. 労働党 (labour) のデータを抽出
 MPs.labour <- subset(MPs, subset = (party == "labour"))
 
-# 境界線（margin = 0）の左側（落選）と右側（当選）で別々に回帰分析
+# 2. 境界線（margin = 0）の左側（落選）と右側（当選）で別々に回帰分析
 labour.fit1 <- lm(ln.net ~ margin, data = MPs.labour[MPs.labour$margin < 0, ])
 labour.fit2 <- lm(ln.net ~ margin, data = MPs.labour[MPs.labour$margin > 0, ])
 ```
@@ -162,7 +192,7 @@ lines(y2l.range, predict(labour.fit2, newdata = data.frame(margin = y2l.range)),
 ## RDDの可視化: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=8, out.height="80%", fig.align="center"}
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
 plot(MPs.labour$margin, MPs.labour$ln.net, main = "Labour",
      xlim = c(-0.5, 0.5), ylim = c(6, 18), 
      xlab = "Margin of Victory", ylab = "Log Net Wealth at Death")
@@ -172,11 +202,9 @@ y2l.range <- c(0, max(MPs.labour$margin))
 lines(y1l.range, predict(labour.fit1, newdata = data.frame(margin = y1l.range)), col = "blue")
 lines(y2l.range, predict(labour.fit2, newdata = data.frame(margin = y2l.range)), col = "blue")
 ```
-
+\normalsize
 
 * **結論**: 境界線 (`margin = 0`) において、線に大きな「ジャンプ」が見られないため、労働党において議員になることが死後の資産を増やしたとは言えない。
-
-\normalsize
 
 # 4.3.5 まとめ
 

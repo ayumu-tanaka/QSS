@@ -125,15 +125,26 @@ my_list[["df"]] # 文字列で指定
 
 ---
 
-## 議会データの準備
+## congress データの読み込み (1)
 
 * 第80議会と第112議会の思想スコアを、行列形式にまとめます。
 
 \scriptsize
 ```{r}
-# 議会データの読み込み
+# 1. ローカルに保存したデータの読み込み（推奨）
 congress <- read.csv("congress.csv")
 
+# （参考）URLから直接読み込むことも可能
+# congress <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/congress.csv")
+```
+\normalsize
+
+---
+
+## 議会データの準備 (2)
+
+\scriptsize
+```{r}
 # 第80議会の2つの次元のスコアを結合 (cbind) して行列にする
 dwnom80 <- cbind(congress$dwnom1[congress$congress == 80], 
                  congress$dwnom2[congress$congress == 80])

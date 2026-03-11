@@ -98,22 +98,35 @@ results
 
 ---
 
-## データの読み込みと準備
+## 選挙データの読み込み (1)
 
-* 2008年大統領選の確定結果 (`pres08.csv`) と世論調査 (`polls08.csv`) を使用します。
+* 2008年大統領選の確定結果 (`pres08.csv`) と世論調査 (`polls08.csv`) を読み込みます。
 
 \scriptsize
 ```{r}
-# 1. データの読み込み
+# 1. ローカルに保存したデータの読み込み（推奨）
 pres08 <- read.csv("pres08.csv")
 polls08 <- read.csv("polls08.csv")
 
-# 2. オバマ候補の支持マージンを計算 (得票率/支持率の差)
-# 正の値ならオバマ優勢、負の値ならマケイン優勢
+# （参考）URLから直接読み込むことも可能
+# pres08 <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/pres08.csv")
+# polls08 <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/polls08.csv")
+```
+\normalsize
+
+---
+
+## データの準備 (2)
+
+* 得票率のマージン計算と、日付データの処理を行います。
+
+\scriptsize
+```{r}
+# 1. オバマ候補の支持マージンを計算 (得票率/支持率の差)
 polls08$margin <- polls08$Obama - polls08$McCain
 pres08$margin <- pres08$Obama - pres08$McCain
 
-# 3. 日付データの処理
+# 2. 日付データの処理
 polls08$middate <- as.Date(polls08$middate)
 # 選挙当日までの日数を計算
 polls08$DaysToElection <- as.Date("2008-11-04") - polls08$middate

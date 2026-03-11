@@ -26,18 +26,33 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## 標準誤差 (Standard Error)
+## STAR データの読み込み (1)
 
-* 推定値のばらつき（標準偏差）を**標準誤差**と呼ぶ。
-* サンプルサイズ ($n$) が大きくなるほど、標準誤差は小さくなる。
+* 推定の不確実性を評価するため、STARプロジェクトのデータを読み込みます。
 
 \scriptsize
 ```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
 star <- read.csv("STAR.csv")
-# 小人数学級 (1) と標準学級 (2) の読解力スコア
+
+# （参考）URLから直接読み込むことも可能
+# star <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/STAR.csv")
+```
+\normalsize
+
+---
+
+## 標準誤差 (Standard Error) (2)
+
+* 推定値のばらつき（標準偏差）を**標準誤差**と呼びます。
+
+\scriptsize
+```{r}
+# 小人数学級 (1) の読解力スコアの標準誤差を計算
 n.small <- sum(star$classtype == 1 & !is.na(star$g4reading))
 est.small <- mean(star$g4reading[star$classtype == 1], na.rm = TRUE)
 se.small <- sd(star$g4reading[star$classtype == 1], na.rm = TRUE) / sqrt(n.small)
+
 est.small
 se.small
 ```
@@ -94,13 +109,28 @@ t.test(star$g4reading[star$classtype == 1],
 
 ---
 
-## 回帰係数の有意性
+## resume データの読み込み (1)
 
-* `summary()` で各係数の標準誤差、t値、p値を確認できる。
+* 回帰係数の有意性を確認するため、履歴書実験データを読み込みます。
 
 \scriptsize
 ```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
 resume <- read.csv("resume.csv")
+
+# （参考）URLから直接読み込むことも可能
+# resume <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/resume.csv")
+```
+\normalsize
+
+---
+
+## 回帰係数の有意性 (2)
+
+* `summary()` で各係数の標準誤差、t値、p値を確認できます。
+
+\scriptsize
+```{r}
 # 人種とコールバック率の回帰
 fit <- lm(call ~ race, data = resume)
 summary(fit)$coefficients
@@ -109,15 +139,32 @@ summary(fit)$coefficients
 
 ---
 
-## 信頼区間のプロット
+## 選挙データの読み込みと誤差計算 (1)
+
+* 予測の不確実性を視覚化するため、選挙結果と世論調査データを読み込みます。
 
 \scriptsize
-```{r, fig.height=8, out.height="70%", fig.align="center"}
+```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
 pres08 <- read.csv("pres08.csv")
 polls08 <- read.csv("polls08.csv")
-# 簡易的な予測誤差のプロット
+
+# （参考）URLから直接読み込むことも可能
+# pres08 <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/pres08.csv")
+# polls08 <- read.csv("https://ayumu-tanaka.github.io/QSS/QSS_Data/polls08.csv")
+
+# 2. 予測誤差の計算
 errors <- pres08$Obama - 
   tapply(polls08$Obama, polls08$state, mean)[pres08$state]
+```
+\normalsize
+
+---
+
+## 信頼区間のプロット (2)
+
+\scriptsize
+```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
 hist(errors, main = "Poll Prediction Error", xlab = "Error (%)")
 ```
 \normalsize

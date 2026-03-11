@@ -1,16 +1,18 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% remove section numbering
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -19,19 +21,16 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{section title}
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -44,21 +43,19 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
 \usetheme[]{Montpellier}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -75,6 +72,14 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -86,13 +91,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -100,7 +105,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -109,7 +114,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -118,6 +123,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -142,12 +148,9 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{第3章: 測定\\
 (3.7. クラスター化)}
@@ -159,11 +162,12 @@
 \begin{document}
 \frame{\titlepage}
 
+\hypertarget{ux30afux30e9ux30b9ux30bfux30fcux5316-clustering}{%
 \section{3.7 クラスター化
-(Clustering)}\label{ux30afux30e9ux30b9ux30bfux30fcux5316-clustering}
+(Clustering)}\label{ux30afux30e9ux30b9ux30bfux30fcux5316-clustering}}
 
 \begin{frame}{クラスター分析の目的}
-\phantomsection\label{ux30afux30e9ux30b9ux30bfux30fcux5206ux6790ux306eux76eeux7684}
+\protect\hypertarget{ux30afux30e9ux30b9ux30bfux30fcux5206ux6790ux306eux76eeux7684}{}
 \begin{itemize}
 \tightlist
 \item
@@ -187,11 +191,12 @@
 \end{itemize}
 \end{frame}
 
+\hypertarget{rux3067ux306eux884cux5217ux64cdux4f5c}{%
 \section{3.7.1
-Rでの行列操作}\label{rux3067ux306eux884cux5217ux64cdux4f5c}
+Rでの行列操作}\label{rux3067ux306eux884cux5217ux64cdux4f5c}}
 
 \begin{frame}[fragile]{行列 (Matrix) の作成}
-\phantomsection\label{ux884cux5217-matrix-ux306eux4f5cux6210}
+\protect\hypertarget{ux884cux5217-matrix-ux306eux4f5cux6210}{}
 \begin{itemize}
 \tightlist
 \item
@@ -236,7 +241,7 @@ Rでの行列操作}\label{rux3067ux306eux884cux5217ux64cdux4f5c}
 \end{frame}
 
 \begin{frame}[fragile]{行・列ごとの計算 (apply関数)}
-\phantomsection\label{ux884cux5217ux3054ux3068ux306eux8a08ux7b97-applyux95a2ux6570}
+\protect\hypertarget{ux884cux5217ux3054ux3068ux306eux8a08ux7b97-applyux95a2ux6570}{}
 \begin{itemize}
 \tightlist
 \item
@@ -284,11 +289,12 @@ Rでの行列操作}\label{rux3067ux306eux884cux5217ux64cdux4f5c}
 \normalsize
 \end{frame}
 
+\hypertarget{rux306eux30eaux30b9ux30c8ux5f62ux5f0f-list}{%
 \section{3.7.2 Rのリスト形式
-(List)}\label{rux306eux30eaux30b9ux30c8ux5f62ux5f0f-list}
+(List)}\label{rux306eux30eaux30b9ux30c8ux5f62ux5f0f-list}}
 
 \begin{frame}[fragile]{異なる型のデータをまとめる}
-\phantomsection\label{ux7570ux306aux308bux578bux306eux30c7ux30fcux30bfux3092ux307eux3068ux3081ux308b}
+\protect\hypertarget{ux7570ux306aux308bux578bux306eux30c7ux30fcux30bfux3092ux307eux3068ux3081ux308b}{}
 \begin{itemize}
 \tightlist
 \item
@@ -311,7 +317,7 @@ Rでの行列操作}\label{rux3067ux306eux884cux5217ux64cdux4f5c}
 \end{frame}
 
 \begin{frame}[fragile]{異なる型のデータをまとめる}
-\phantomsection\label{ux7570ux306aux308bux578bux306eux30c7ux30fcux30bfux3092ux307eux3068ux3081ux308b-1}
+\protect\hypertarget{ux7570ux306aux308bux578bux306eux30c7ux30fcux30bfux3092ux307eux3068ux3081ux308b-1}{}
 \scriptsize
 
 \begin{Shaded}
@@ -350,11 +356,12 @@ Rでの行列操作}\label{rux3067ux306eux884cux5217ux64cdux4f5c}
 \normalsize
 \end{frame}
 
+\hypertarget{k-means-ux6cd5-k-means-algorithm}{%
 \section{3.7.3 k-means 法 (k-Means
-Algorithm)}\label{k-means-ux6cd5-k-means-algorithm}
+Algorithm)}\label{k-means-ux6cd5-k-means-algorithm}}
 
 \begin{frame}{アルゴリズムの仕組み}
-\phantomsection\label{ux30a2ux30ebux30b4ux30eaux30baux30e0ux306eux4ed5ux7d44ux307f}
+\protect\hypertarget{ux30a2ux30ebux30b4ux30eaux30baux30e0ux306eux4ed5ux7d44ux307f}{}
 \begin{enumerate}
 \tightlist
 \item
@@ -370,8 +377,8 @@ Algorithm)}\label{k-means-ux6cd5-k-means-algorithm}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{議会データの準備}
-\phantomsection\label{ux8b70ux4f1aux30c7ux30fcux30bfux306eux6e96ux5099}
+\begin{frame}[fragile]{congress データの読み込み (1)}
+\protect\hypertarget{congress-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
@@ -382,9 +389,23 @@ Algorithm)}\label{k-means-ux6cd5-k-means-algorithm}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 議会データの読み込み}
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
 \NormalTok{congress }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"congress.csv"}\NormalTok{)}
 
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# congress \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/congress.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{議会データの準備 (2)}
+\protect\hypertarget{ux8b70ux4f1aux30c7ux30fcux30bfux306eux6e96ux5099-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# 第80議会の2つの次元のスコアを結合 (cbind) して行列にする}
 \NormalTok{dwnom80 }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(congress}\SpecialCharTok{$}\NormalTok{dwnom1[congress}\SpecialCharTok{$}\NormalTok{congress }\SpecialCharTok{==} \DecValTok{80}\NormalTok{], }
 \NormalTok{                 congress}\SpecialCharTok{$}\NormalTok{dwnom2[congress}\SpecialCharTok{$}\NormalTok{congress }\SpecialCharTok{==} \DecValTok{80}\NormalTok{])}
@@ -399,7 +420,7 @@ Algorithm)}\label{k-means-ux6cd5-k-means-algorithm}
 \end{frame}
 
 \begin{frame}[fragile]{k-means の実行}
-\phantomsection\label{k-means-ux306eux5b9fux884c}
+\protect\hypertarget{k-means-ux306eux5b9fux884c}{}
 \begin{itemize}
 \tightlist
 \item
@@ -430,7 +451,7 @@ Algorithm)}\label{k-means-ux6cd5-k-means-algorithm}
 \end{frame}
 
 \begin{frame}[fragile]{分類結果と政党の比較（1）}
-\phantomsection\label{ux5206ux985eux7d50ux679cux3068ux653fux515aux306eux6bd4ux8f031}
+\protect\hypertarget{ux5206ux985eux7d50ux679cux3068ux653fux515aux306eux6bd4ux8f031}{}
 \begin{itemize}
 \tightlist
 \item
@@ -459,7 +480,7 @@ Algorithm)}\label{k-means-ux6cd5-k-means-algorithm}
 \end{frame}
 
 \begin{frame}[fragile]{分類結果と政党の比較（1）}
-\phantomsection\label{ux5206ux985eux7d50ux679cux3068ux653fux515aux306eux6bd4ux8f031-1}
+\protect\hypertarget{ux5206ux985eux7d50ux679cux3068ux653fux515aux306eux6bd4ux8f031-1}{}
 \scriptsize
 
 \begin{Shaded}
@@ -473,8 +494,8 @@ Algorithm)}\label{k-means-ux6cd5-k-means-algorithm}
 \begin{verbatim}
 ##             cluster
 ## party          1   2
-##   Democrat   200   0
-##   Republican   1 242
+##   Democrat     0 200
+##   Republican 242   1
 \end{verbatim}
 
 \normalsize
@@ -488,7 +509,7 @@ Algorithm)}\label{k-means-ux6cd5-k-means-algorithm}
 \end{frame}
 
 \begin{frame}[fragile]{クラスターの視覚化: コード}
-\phantomsection\label{ux30afux30e9ux30b9ux30bfux30fcux306eux8996ux899aux5316-ux30b3ux30fcux30c9}
+\protect\hypertarget{ux30afux30e9ux30b9ux30bfux30fcux306eux8996ux899aux5316-ux30b3ux30fcux30c9}{}
 \scriptsize
 
 \begin{Shaded}
@@ -508,17 +529,18 @@ Algorithm)}\label{k-means-ux6cd5-k-means-algorithm}
 \end{frame}
 
 \begin{frame}{クラスターの視覚化: 描画結果}
-\phantomsection\label{ux30afux30e9ux30b9ux30bfux30fcux306eux8996ux899aux5316-ux63cfux753bux7d50ux679c}
+\protect\hypertarget{ux30afux30e9ux30b9ux30bfux30fcux306eux8996ux899aux5316-ux63cfux753bux7d50ux679c}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.8\textheight]{QSS_Ch03_7_files/figure-beamer/unnamed-chunk-10-1} \end{center}
+\begin{center}\includegraphics[height=0.8\textheight]{QSS_Ch03_7_files/figure-beamer/unnamed-chunk-11-1} \end{center}
 \normalsize
 \end{frame}
 
-\section{3.7.4 まとめ}\label{ux307eux3068ux3081}
+\hypertarget{ux307eux3068ux3081}{%
+\section{3.7.4 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}[fragile]{このセクションのまとめ}
-\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
 \begin{itemize}
 \tightlist
 \item

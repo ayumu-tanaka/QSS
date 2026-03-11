@@ -355,34 +355,43 @@ Introduction.}
 \section{1.7
 データを読み込んで理解する}\label{ux30c7ux30fcux30bfux3092ux8aadux307fux8fbcux3093ux3067ux7406ux89e3ux3059ux308b}}
 
-\begin{frame}[fragile]{データの読み込み}
-\protect\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f}{}
+\begin{frame}[fragile]{データの読み込み (1)}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
   \texttt{read.csv()}
-  関数を用いてCSVファイルを読み込み、オブジェクトに格納する。
+  関数を用いて、外部のデータセットをRに読み込みます。
 \end{itemize}
+
+\scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# データセットの読み込み}
+\CommentTok{\# 1. ローカルに保存したSTARデータの読み込み（推奨）}
 \NormalTok{star }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"STAR.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# star \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/DSS\_Data/STAR.csv")}
 \end{Highlighting}
 \end{Shaded}
+
+\normalsize
 \end{frame}
 
-\begin{frame}[fragile]{データの理解 (1)}
-\protect\hypertarget{ux30c7ux30fcux30bfux306eux7406ux89e3-1}{}
+\begin{frame}[fragile]{データの理解 (2)}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux7406ux89e3-2}{}
 \begin{itemize}
 \tightlist
 \item
-  読み込んだデータの中身や構造を確認する。
+  読み込んだデータの中身や構造を確認します。
 \end{itemize}
+
+\scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 最初の6行を表示}
+\CommentTok{\# 1. 最初の6行を表示}
 \FunctionTok{head}\NormalTok{(star)}
 \end{Highlighting}
 \end{Shaded}
@@ -396,13 +405,10 @@ Introduction.}
 ## 5     small     614  636         1
 ## 6   regular     610  603         0
 \end{verbatim}
-\end{frame}
 
-\begin{frame}[fragile]{データの理解 (2)}
-\protect\hypertarget{ux30c7ux30fcux30bfux306eux7406ux89e3-2}{}
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 次元の確認（行数, 列数）}
+\CommentTok{\# 2. 次元の確認（行数, 列数）}
 \FunctionTok{dim}\NormalTok{(star)}
 \end{Highlighting}
 \end{Shaded}
@@ -410,6 +416,8 @@ Introduction.}
 \begin{verbatim}
 ## [1] 1274    4
 \end{verbatim}
+
+\normalsize
 \end{frame}
 
 \begin{frame}{変数の種類}

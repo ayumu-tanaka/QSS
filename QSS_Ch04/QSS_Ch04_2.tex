@@ -1,16 +1,18 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% remove section numbering
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -19,19 +21,16 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{section title}
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -44,21 +43,19 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
 \usetheme[]{Montpellier}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -75,6 +72,14 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -86,13 +91,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -100,7 +105,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -109,7 +114,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -118,6 +123,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -142,12 +148,9 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{第4章: 予測\\
 (4.2. 線形回帰)}
@@ -159,11 +162,12 @@
 \begin{document}
 \frame{\titlepage}
 
+\hypertarget{ux7ddaux5f62ux56deux5e30-linear-regression}{%
 \section{4.2 線形回帰 (Linear
-Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}
+Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}}
 
 \begin{frame}{線形回帰の基本概念}
-\phantomsection\label{ux7ddaux5f62ux56deux5e30ux306eux57faux672cux6982ux5ff5}
+\protect\hypertarget{ux7ddaux5f62ux56deux5e30ux306eux57faux672cux6982ux5ff5}{}
 \begin{itemize}
 \tightlist
 \item
@@ -188,33 +192,45 @@ Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux5916ux898bux3068ux9078ux6319ux7d50ux679c}{%
 \section{4.2.1
-外見と選挙結果}\label{ux5916ux898bux3068ux9078ux6319ux7d50ux679c}
+外見と選挙結果}\label{ux5916ux898bux3068ux9078ux6319ux7d50ux679c}}
 
-\begin{frame}[fragile]{顔の印象と得票率のデータ}
-\phantomsection\label{ux9854ux306eux5370ux8c61ux3068ux5f97ux7968ux7387ux306eux30c7ux30fcux30bf}
+\begin{frame}[fragile]{face データの読み込み (1)}
+\protect\hypertarget{face-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{問い}:
-  候補者の「有能そうな顔立ち」は、実際の得票率に影響するか？
-\item
-  データ: 2000〜2004年の米議会選データ (\texttt{face.csv})。
+  候補者の顔の「有能さ」スコアと得票率のデータを準備します。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1. データの読み込み}
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
 \NormalTok{face }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"face.csv"}\NormalTok{)}
 
-\CommentTok{\# 2. 民主党と共和党の得票率、およびその差（マージン）を計算}
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# face \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/face.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{データの計算と確認 (2)}
+\protect\hypertarget{ux30c7ux30fcux30bfux306eux8a08ux7b97ux3068ux78baux8a8d-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. 民主党と共和党の得票率、およびその差（マージン）を計算}
 \NormalTok{face}\SpecialCharTok{$}\NormalTok{d.share }\OtherTok{\textless{}{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{d.votes }\SpecialCharTok{/}\NormalTok{ (face}\SpecialCharTok{$}\NormalTok{d.votes }\SpecialCharTok{+}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.votes)}
 \NormalTok{face}\SpecialCharTok{$}\NormalTok{r.share }\OtherTok{\textless{}{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.votes }\SpecialCharTok{/}\NormalTok{ (face}\SpecialCharTok{$}\NormalTok{d.votes }\SpecialCharTok{+}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.votes)}
 \NormalTok{face}\SpecialCharTok{$}\NormalTok{diff.share }\OtherTok{\textless{}{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{d.share }\SpecialCharTok{{-}}\NormalTok{ face}\SpecialCharTok{$}\NormalTok{r.share}
 
-\CommentTok{\# 3. データの確認 (d.comp は有能さのスコア)}
+\CommentTok{\# 2. データの確認 (d.comp は有能さのスコア)}
 \FunctionTok{head}\NormalTok{(face[, }\FunctionTok{c}\NormalTok{(}\StringTok{"d.comp"}\NormalTok{, }\StringTok{"diff.share"}\NormalTok{)], }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -230,7 +246,7 @@ Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}
 \end{frame}
 
 \begin{frame}[fragile]{相関係数の計算}
-\phantomsection\label{ux76f8ux95a2ux4fc2ux6570ux306eux8a08ux7b97}
+\protect\hypertarget{ux76f8ux95a2ux4fc2ux6570ux306eux8a08ux7b97}{}
 \begin{itemize}
 \tightlist
 \item
@@ -253,11 +269,12 @@ Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}
 \normalsize
 \end{frame}
 
+\hypertarget{ux6700ux5c0fux4e8cux4e57ux6cd5ux306bux3088ux308bux63a8ux5b9a}{%
 \section{4.2.2
-最小二乗法による推定}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306bux3088ux308bux63a8ux5b9a}
+最小二乗法による推定}\label{ux6700ux5c0fux4e8cux4e57ux6cd5ux306bux3088ux308bux63a8ux5b9a}}
 
 \begin{frame}[fragile]{lm() 関数の使用: コード}
-\phantomsection\label{lm-ux95a2ux6570ux306eux4f7fux7528-ux30b3ux30fcux30c9}
+\protect\hypertarget{lm-ux95a2ux6570ux306eux4f7fux7528-ux30b3ux30fcux30c9}{}
 \begin{itemize}
 \tightlist
 \item
@@ -298,7 +315,7 @@ Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}
 \end{frame}
 
 \begin{frame}[fragile]{回帰直線のプロット: コード}
-\phantomsection\label{ux56deux5e30ux76f4ux7ddaux306eux30d7ux30edux30c3ux30c8-ux30b3ux30fcux30c9}
+\protect\hypertarget{ux56deux5e30ux76f4ux7ddaux306eux30d7ux30edux30c3ux30c8-ux30b3ux30fcux30c9}{}
 \scriptsize
 
 \begin{Shaded}
@@ -318,36 +335,52 @@ Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}
 \end{frame}
 
 \begin{frame}{回帰直線のプロット: 描画結果}
-\phantomsection\label{ux56deux5e30ux76f4ux7ddaux306eux30d7ux30edux30c3ux30c8-ux63cfux753bux7d50ux679c}
+\protect\hypertarget{ux56deux5e30ux76f4ux7ddaux306eux30d7ux30edux30c3ux30c8-ux63cfux753bux7d50ux679c}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.8\textheight]{QSS_Ch04_2_files/figure-beamer/unnamed-chunk-5-1} \end{center}
+\begin{center}\includegraphics[height=0.75\textheight]{QSS_Ch04_2_files/figure-beamer/unnamed-chunk-6-1} \end{center}
 \normalsize
 \end{frame}
 
+\hypertarget{ux30c7ux30fcux30bfux306eux7d50ux5408ux3068ux5e73ux5747ux3078ux306eux56deux5e30}{%
 \section{4.2.3
-データの結合と平均への回帰}\label{ux30c7ux30fcux30bfux306eux7d50ux5408ux3068ux5e73ux5747ux3078ux306eux56deux5e30}
+データの結合と平均への回帰}\label{ux30c7ux30fcux30bfux306eux7d50ux5408ux3068ux5e73ux5747ux3078ux306eux56deux5e30}}
 
-\begin{frame}[fragile]{merge() によるデータの結合}
-\phantomsection\label{merge-ux306bux3088ux308bux30c7ux30fcux30bfux306eux7d50ux5408}
+\begin{frame}[fragile]{選挙データの読み込みと結合 (1)}
+\protect\hypertarget{ux9078ux6319ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux7d50ux5408-1}{}
 \begin{itemize}
 \tightlist
 \item
-  異なる年のデータを州名などの「キー」を使って統合します。
+  異なる年のデータを州名略称 (\texttt{state}) をキーにして統合します。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1. データの読み込み}
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
 \NormalTok{pres08 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"pres08.csv"}\NormalTok{)}
 \NormalTok{pres12 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"pres12.csv"}\NormalTok{)}
 
-\CommentTok{\# 2. state 列を共通キーとして結合}
-\NormalTok{pres }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(pres08, pres12, }\AttributeTok{by =} \StringTok{"state"}\NormalTok{)}
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# pres08 \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/pres08.csv")}
+\CommentTok{\# pres12 \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/pres12.csv")}
 
-\CommentTok{\# 3. 結合後のデータを確認 (Obama.x は2008年、Obama.y は2012年)}
+\CommentTok{\# 2. データの結合 (merge)}
+\NormalTok{pres }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(pres08, pres12, }\AttributeTok{by =} \StringTok{"state"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{結合データの確認 (2)}
+\protect\hypertarget{ux7d50ux5408ux30c7ux30fcux30bfux306eux78baux8a8d-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 結合後のデータを確認 (Obama.x は2008年、Obama.y は2012年)}
 \FunctionTok{head}\NormalTok{(pres[, }\FunctionTok{c}\NormalTok{(}\StringTok{"state"}\NormalTok{, }\StringTok{"Obama.x"}\NormalTok{, }\StringTok{"Obama.y"}\NormalTok{)], }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -362,15 +395,39 @@ Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}
 \normalsize
 \end{frame}
 
+\hypertarget{ux30e2ux30c7ux30ebux306eux9069ux5408ux5ea6}{%
 \section{4.2.4
-モデルの適合度}\label{ux30e2ux30c7ux30ebux306eux9069ux5408ux5ea6}
+モデルの適合度}\label{ux30e2ux30c7ux30ebux306eux9069ux5408ux5ea6}}
 
-\begin{frame}[fragile]{決定係数 (\(R^2\)) の計算}
-\phantomsection\label{ux6c7aux5b9aux4fc2ux6570-r2-ux306eux8a08ux7b97}
+\begin{frame}[fragile]{florida データの読み込み (1)}
+\protect\hypertarget{florida-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{\(R^2\)}:
+  モデルの当てはまりを確認するため、フロリダ州のデータを使用します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
+\NormalTok{florida }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"florida.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# florida \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/florida.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{決定係数 (\(R^2\)) の計算 (2)}
+\protect\hypertarget{ux6c7aux5b9aux4fc2ux6570-r2-ux306eux8a08ux7b97-2}{}
+\begin{itemize}
+\tightlist
+\item
+  \(R^2\):
   モデルがデータの変動をどれだけ説明できているかを示す指標（0〜1）。
 \end{itemize}
 
@@ -378,13 +435,10 @@ Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# 1. フロリダ州の選挙データ}
-\NormalTok{florida }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"florida.csv"}\NormalTok{)}
-
-\CommentTok{\# 2. 回帰分析の実行}
+\CommentTok{\# 1. 回帰分析の実行}
 \NormalTok{fit2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Buchanan00 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Perot96, }\AttributeTok{data =}\NormalTok{ florida)}
 
-\CommentTok{\# 3. summary() 関数から決定係数を取り出す}
+\CommentTok{\# 2. summary() 関数から決定係数を取り出す}
 \FunctionTok{summary}\NormalTok{(fit2)}\SpecialCharTok{$}\NormalTok{r.squared}
 \end{Highlighting}
 \end{Shaded}
@@ -397,7 +451,7 @@ Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}
 \end{frame}
 
 \begin{frame}[fragile]{残差プロット (Residual Plot): コード}
-\phantomsection\label{ux6b8bux5deeux30d7ux30edux30c3ux30c8-residual-plot-ux30b3ux30fcux30c9}
+\protect\hypertarget{ux6b8bux5deeux30d7ux30edux30c3ux30c8-residual-plot-ux30b3ux30fcux30c9}{}
 \begin{itemize}
 \tightlist
 \item
@@ -421,17 +475,18 @@ Regression)}\label{ux7ddaux5f62ux56deux5e30-linear-regression}
 \end{frame}
 
 \begin{frame}{残差プロット: 描画結果}
-\phantomsection\label{ux6b8bux5deeux30d7ux30edux30c3ux30c8-ux63cfux753bux7d50ux679c}
+\protect\hypertarget{ux6b8bux5deeux30d7ux30edux30c3ux30c8-ux63cfux753bux7d50ux679c}{}
 \scriptsize
 
-\begin{center}\includegraphics[height=0.8\textheight]{QSS_Ch04_2_files/figure-beamer/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics[height=0.8\textheight]{QSS_Ch04_2_files/figure-beamer/unnamed-chunk-12-1} \end{center}
 \normalsize
 \end{frame}
 
-\section{4.2.5 まとめ}\label{ux307eux3068ux3081}
+\hypertarget{ux307eux3068ux3081}{%
+\section{4.2.5 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}[fragile]{このセクションのまとめ}
-\phantomsection\label{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}
+\protect\hypertarget{ux3053ux306eux30bbux30afux30b7ux30e7ux30f3ux306eux307eux3068ux3081}{}
 \begin{itemize}
 \tightlist
 \item

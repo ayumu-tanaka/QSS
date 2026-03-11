@@ -197,19 +197,45 @@
 \hypertarget{ux6761ux4ef6ux4ed8ux304dux78baux7387}{%
 \section{6.2 条件付き確率}\label{ux6761ux4ef6ux4ed8ux304dux78baux7387}}
 
-\begin{frame}[fragile]{結合確率・周辺確率・条件付き確率}
-\protect\hypertarget{ux7d50ux5408ux78baux7387ux5468ux8fbaux78baux7387ux6761ux4ef6ux4ed8ux304dux78baux7387}{}
+\begin{frame}[fragile]{FLVoters データの読み込み (1)}
+\protect\hypertarget{flvoters-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  フロリダ州の有権者データ（\texttt{FLVoters.csv}）を使用。
+  フロリダ州の有権者データを読み込み、欠損値を除外します。
 \end{itemize}
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{FLVoters }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"FLVoters.csv"}\NormalTok{))}
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
+\NormalTok{FLVoters }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"FLVoters.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# FLVoters \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/QSS\_Data/FLVoters.csv")}
+
+\CommentTok{\# 2. 欠損値 (NA) を含む行を除外}
+\NormalTok{FLVoters }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(FLVoters)}
+
+\CommentTok{\# 3. データの規模を確認}
+\FunctionTok{dim}\NormalTok{(FLVoters)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9113    6
+\end{verbatim}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{結合確率・周辺確率・条件付き確率 (2)}
+\protect\hypertarget{ux7d50ux5408ux78baux7387ux5468ux8fbaux78baux7387ux6761ux4ef6ux4ed8ux304dux78baux7387-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# 周辺確率（人種）}
 \NormalTok{margin.race }\OtherTok{\textless{}{-}} \FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(FLVoters}\SpecialCharTok{$}\NormalTok{race))}
 \CommentTok{\# 条件付き確率（女性における人種の割合）}
@@ -266,7 +292,7 @@
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-3-1} \end{center}
+\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-4-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -367,7 +393,7 @@
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-6-1} \end{center}
+\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-7-1} \end{center}
 \normalsize
 \end{frame}
 
@@ -394,7 +420,7 @@
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-7-1} \end{center}
+\begin{center}\includegraphics[height=0.4\textheight]{QSS_Ch06_files/figure-beamer/unnamed-chunk-8-1} \end{center}
 \normalsize
 \end{frame}
 
