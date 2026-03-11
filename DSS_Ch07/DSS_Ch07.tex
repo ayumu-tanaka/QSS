@@ -1,16 +1,18 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% remove section numbering
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -19,19 +21,16 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{section title}
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -44,21 +43,19 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
 \usetheme[]{Montpellier}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -75,6 +72,14 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -86,13 +91,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -100,7 +105,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -109,7 +114,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -118,6 +123,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -142,12 +148,9 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{第7章: 不確実性の数値化}
 \subtitle{Elena Llaudet \& Kosuke Imai.\\
@@ -159,11 +162,12 @@ Introduction.}
 \begin{document}
 \frame{\titlepage}
 
+\hypertarget{ux306aux305cux4e0dux78baux5b9fux6027ux3092ux6e2cux308bux306eux304b}{%
 \section{7.1
-なぜ不確実性を測るのか？}\label{ux306aux305cux4e0dux78baux5b9fux6027ux3092ux6e2cux308bux306eux304b}
+なぜ不確実性を測るのか？}\label{ux306aux305cux4e0dux78baux5b9fux6027ux3092ux6e2cux308bux306eux304b}}
 
 \begin{frame}{推測統計学の課題}
-\phantomsection\label{ux63a8ux6e2cux7d71ux8a08ux5b66ux306eux8ab2ux984c}
+\protect\hypertarget{ux63a8ux6e2cux7d71ux8a08ux5b66ux306eux8ab2ux984c}{}
 \begin{itemize}
 \tightlist
 \item
@@ -187,33 +191,55 @@ Introduction.}
 \end{itemize}
 \end{frame}
 
-\section{7.2 信頼区間}\label{ux4fe1ux983cux533aux9593}
+\hypertarget{ux4fe1ux983cux533aux9593}{%
+\section{7.2 信頼区間}\label{ux4fe1ux983cux533aux9593}}
 
-\begin{frame}[fragile]{標本平均の95\%信頼区間}
-\phantomsection\label{ux6a19ux672cux5e73ux5747ux306e95ux4fe1ux983cux533aux9593}
+\begin{frame}[fragile]{BES データの読み込み (1)}
+\protect\hypertarget{bes-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
+\begin{itemize}
+\tightlist
+\item
+  推定の不確実性を評価するため、有権者の意識調査データを準備します。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
+\NormalTok{bes }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"BES.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# bes \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/DSS\_Data/BES.csv")}
+
+\CommentTok{\# 2. NAを除外}
+\NormalTok{bes1 }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(bes)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{標本平均の95\%信頼区間 (2)}
+\protect\hypertarget{ux6a19ux672cux5e73ux5747ux306e95ux4fe1ux983cux533aux9593-2}{}
 \begin{itemize}
 \tightlist
 \item
   標本平均を中心として、母平均が含まれる可能性が高い範囲。
 \item
-  数式（大標本の場合）: \(\bar{X} \pm 1.96 \times SE\)
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \(SE\) (標準誤差)
-    \(= \frac{\sigma}{\sqrt{n}} \approx \frac{S}{\sqrt{n}}\)
-  \end{itemize}
+  \(SE\) (標準誤差)
+  \(= \frac{\sigma}{\sqrt{n}} \approx \frac{S}{\sqrt{n}}\)
 \end{itemize}
+
+\scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{bes }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"BES.csv"}\NormalTok{))}
-\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(bes)}
-\NormalTok{sample\_mean }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(bes}\SpecialCharTok{$}\NormalTok{leave)}
-\NormalTok{se }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{var}\NormalTok{(bes}\SpecialCharTok{$}\NormalTok{leave)}\SpecialCharTok{/}\NormalTok{n)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(bes1)}
+\NormalTok{sample\_mean }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(bes1}\SpecialCharTok{$}\NormalTok{leave)}
+\NormalTok{se }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{var}\NormalTok{(bes1}\SpecialCharTok{$}\NormalTok{leave)}\SpecialCharTok{/}\NormalTok{n)}
 
-\CommentTok{\# 95\%信頼区間}
+\CommentTok{\# 95\%信頼区間 (大標本の場合: 推定値 ± 1.96 * SE)}
 \FunctionTok{c}\NormalTok{(sample\_mean }\SpecialCharTok{{-}} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ se, sample\_mean }\SpecialCharTok{+} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ se)}
 \end{Highlighting}
 \end{Shaded}
@@ -221,32 +247,48 @@ Introduction.}
 \begin{verbatim}
 ## [1] 0.4657127 0.4780655
 \end{verbatim}
+
+\normalsize
 \end{frame}
 
-\begin{frame}[fragile]{平均の差の信頼区間}
-\phantomsection\label{ux5e73ux5747ux306eux5deeux306eux4fe1ux983cux533aux9593}
+\begin{frame}[fragile]{STAR データの読み込み (1)}
+\protect\hypertarget{star-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  処置効果の推定値（平均の差）の不確実性を評価する。
+  処置効果の不確実性を評価するため、実験データを準備します。
 \end{itemize}
 
-\footnotesize
+\scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
 \NormalTok{star }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"STAR.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# star \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/DSS\_Data/STAR.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{平均の差の信頼区間 (2)}
+\protect\hypertarget{ux5e73ux5747ux306eux5deeux306eux4fe1ux983cux533aux9593-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{star}\SpecialCharTok{$}\NormalTok{small }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{classtype }\SpecialCharTok{==} \StringTok{"small"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
 \NormalTok{treatment }\OtherTok{\textless{}{-}}\NormalTok{ star}\SpecialCharTok{$}\NormalTok{reading[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]}
 \NormalTok{control }\OtherTok{\textless{}{-}}\NormalTok{ star}\SpecialCharTok{$}\NormalTok{reading[star}\SpecialCharTok{$}\NormalTok{small }\SpecialCharTok{==} \DecValTok{0}\NormalTok{]}
 
 \NormalTok{diff\_means }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(treatment) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(control)}
-\NormalTok{se\_diff }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{var}\NormalTok{(treatment)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(treatment) }
-                \SpecialCharTok{+} \FunctionTok{var}\NormalTok{(control)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(control))}
+\NormalTok{se\_diff }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{var}\NormalTok{(treatment)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(treatment) }\SpecialCharTok{+} \FunctionTok{var}\NormalTok{(control)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(control))}
 
 \CommentTok{\# 95\%信頼区間}
-\FunctionTok{c}\NormalTok{(diff\_means }\SpecialCharTok{{-}} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ se\_diff, }
-\NormalTok{  diff\_means }\SpecialCharTok{+} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ se\_diff)}
+\FunctionTok{c}\NormalTok{(diff\_means }\SpecialCharTok{{-}} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ se\_diff, diff\_means }\SpecialCharTok{+} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ se\_diff)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -257,10 +299,11 @@ Introduction.}
 \normalsize
 \end{frame}
 
-\section{7.3 仮説検定}\label{ux4eeeux8aacux691cux5b9a}
+\hypertarget{ux4eeeux8aacux691cux5b9a}{%
+\section{7.3 仮説検定}\label{ux4eeeux8aacux691cux5b9a}}
 
 \begin{frame}{帰無仮説と対立仮説}
-\phantomsection\label{ux5e30ux7121ux4eeeux8aacux3068ux5bfeux7acbux4eeeux8aac}
+\protect\hypertarget{ux5e30ux7121ux4eeeux8aacux3068ux5bfeux7acbux4eeeux8aac}{}
 \begin{itemize}
 \tightlist
 \item
@@ -283,7 +326,9 @@ Introduction.}
 \end{frame}
 
 \begin{frame}[fragile]{平均の差の検定 (Z検定/t検定)}
-\phantomsection\label{ux5e73ux5747ux306eux5deeux306eux691cux5b9a-zux691cux5b9atux691cux5b9a}
+\protect\hypertarget{ux5e73ux5747ux306eux5deeux306eux691cux5b9a-zux691cux5b9atux691cux5b9a}{}
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# テスト統計量 (Z{-}score)}
@@ -307,6 +352,8 @@ Introduction.}
 ## [1] 0.0004729011
 \end{verbatim}
 
+\normalsize
+
 \begin{itemize}
 \tightlist
 \item
@@ -314,24 +361,40 @@ Introduction.}
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux56deux5e30ux5206ux6790ux306bux304aux3051ux308bux4e0dux78baux5b9fux6027}{%
 \section{7.4
-回帰係数の有意性}\label{ux56deux5e30ux4fc2ux6570ux306eux6709ux610fux6027}
+回帰分析における不確実性}\label{ux56deux5e30ux5206ux6790ux306bux304aux3051ux308bux4e0dux78baux5b9fux6027}}
 
-\begin{frame}[fragile]{回帰分析の結果の解釈}
-\phantomsection\label{ux56deux5e30ux5206ux6790ux306eux7d50ux679cux306eux89e3ux91c8}
+\begin{frame}[fragile]{UA\_survey データの読み込み (1)}
+\protect\hypertarget{ua_survey-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  \texttt{summary()} で各係数の標準誤差、t統計量、p値を確認できる。
+  回帰係数の有意性を確認するため、ウクライナの調査データを準備します。
 \end{itemize}
 
-\footnotesize
+\scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
 \NormalTok{uas }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"UA\_survey.csv"}\NormalTok{)}
-\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(pro\_russian\_vote }\SpecialCharTok{\textasciitilde{}}\NormalTok{ russian\_tv }\SpecialCharTok{+}\NormalTok{ within\_25km, }
-          \AttributeTok{data =}\NormalTok{ uas)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# uas \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/DSS\_Data/UA\_survey.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{回帰分析の結果の解釈 (2)}
+\protect\hypertarget{ux56deux5e30ux5206ux6790ux306eux7d50ux679cux306eux89e3ux91c8-2}{}
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(pro\_russian\_vote }\SpecialCharTok{\textasciitilde{}}\NormalTok{ russian\_tv }\SpecialCharTok{+}\NormalTok{ within\_25km, }\AttributeTok{data =}\NormalTok{ uas)}
 \FunctionTok{summary}\NormalTok{(fit)}\SpecialCharTok{$}\NormalTok{coefficients}
 \end{Highlighting}
 \end{Shaded}
@@ -353,10 +416,11 @@ Introduction.}
 \end{itemize}
 \end{frame}
 
-\section{7.5 まとめ}\label{ux307eux3068ux3081}
+\hypertarget{ux307eux3068ux3081}{%
+\section{7.5 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}{第7章のまとめ}
-\phantomsection\label{ux7b2c7ux7ae0ux306eux307eux3068ux3081}
+\protect\hypertarget{ux7b2c7ux7ae0ux306eux307eux3068ux3081}{}
 \begin{itemize}
 \tightlist
 \item

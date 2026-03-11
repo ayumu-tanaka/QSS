@@ -54,17 +54,32 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## ウクライナの選挙データ
+## precincts データの読み込み (1)
 
-* 2014年ウクライナ議会選挙のデータ。
+* 2014年ウクライナ議会選挙のデータを読み込みます。
+
+\scriptsize
+```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
+precincts <- read.csv("UA_precincts.csv")
+
+# （参考）URLから直接読み込むことも可能
+# precincts <- read.csv("https://ayumu-tanaka.github.io/QSS/DSS_Data/UA_precincts.csv")
+```
+\normalsize
+
+---
+
+## ウクライナの選挙データ (2)
+
 * **関心**: ロシアのテレビ放送を視聴できることが、親ロシア派への投票に与える影響。
 
+\scriptsize
 ```{r}
-# データの読み込み
-precincts <- read.csv("UA_precincts.csv")
 # 最初の数行を表示
 head(precincts)
 ```
+\normalsize
 
 # 5.4 共変量の制御
 

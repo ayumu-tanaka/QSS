@@ -218,21 +218,42 @@ Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}}
 \section{5.3
 データの読み込みと準備}\label{ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307fux3068ux6e96ux5099}}
 
-\begin{frame}[fragile]{ウクライナの選挙データ}
-\protect\hypertarget{ux30a6ux30afux30e9ux30a4ux30caux306eux9078ux6319ux30c7ux30fcux30bf}{}
+\begin{frame}[fragile]{precincts データの読み込み (1)}
+\protect\hypertarget{precincts-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
 \begin{itemize}
 \tightlist
 \item
-  2014年ウクライナ議会選挙のデータ。
+  2014年ウクライナ議会選挙のデータを読み込みます。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
+\NormalTok{precincts }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"UA\_precincts.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# precincts \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/DSS\_Data/UA\_precincts.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{ウクライナの選挙データ (2)}
+\protect\hypertarget{ux30a6ux30afux30e9ux30a4ux30caux306eux9078ux6319ux30c7ux30fcux30bf-2}{}
+\begin{itemize}
+\tightlist
 \item
   \textbf{関心}:
   ロシアのテレビ放送を視聴できることが、親ロシア派への投票に与える影響。
 \end{itemize}
 
+\scriptsize
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# データの読み込み}
-\NormalTok{precincts }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"UA\_precincts.csv"}\NormalTok{)}
 \CommentTok{\# 最初の数行を表示}
 \FunctionTok{head}\NormalTok{(precincts)}
 \end{Highlighting}
@@ -247,6 +268,8 @@ Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}}
 ## 5          0   1.2820513          28.99408           0
 ## 6          1   1.4285714          45.58824           0
 \end{verbatim}
+
+\normalsize
 \end{frame}
 
 \hypertarget{ux5171ux5909ux91cfux306eux5236ux5fa1}{%
@@ -382,7 +405,7 @@ Regression)}\label{ux91cdux56deux5e30ux5206ux6790-multiple-regression}}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[height=0.3\textheight]{DSS_Ch05_files/figure-beamer/unnamed-chunk-4-1} \end{center}
+\begin{center}\includegraphics[height=0.3\textheight]{DSS_Ch05_files/figure-beamer/unnamed-chunk-5-1} \end{center}
 
 \normalsize
 \end{frame}

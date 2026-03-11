@@ -1,16 +1,18 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[
   ignorenonframetext,
 ]{beamer}
-\newif\ifbibliography
 \usepackage{pgfpages}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
 \beamertemplatenavigationsymbolsempty
-% remove section numbering
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
 \setbeamertemplate{part page}{
   \centering
   \begin{beamercolorbox}[sep=16pt,center]{part title}
@@ -19,19 +21,16 @@
 }
 \setbeamertemplate{section page}{
   \centering
-  \begin{beamercolorbox}[sep=12pt,center]{section title}
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
     \usebeamerfont{section title}\insertsection\par
   \end{beamercolorbox}
 }
 \setbeamertemplate{subsection page}{
   \centering
-  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
     \usebeamerfont{subsection title}\insertsubsection\par
   \end{beamercolorbox}
 }
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
 \AtBeginPart{
   \frame{\partpage}
 }
@@ -44,21 +43,19 @@
 \AtBeginSubsection{
   \frame{\subsectionpage}
 }
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-\usepackage{lmodern}
 \usetheme[]{Montpellier}
-\ifPDFTeX\else
-  % xetex/luatex font selection
-\fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -75,6 +72,14 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -86,13 +91,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -100,7 +105,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -109,7 +114,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -118,6 +123,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 %\documentclass[unicode,10pt]{beamer}% 'unicode'が必要
 \usepackage{luatexja}% 日本語を使う場合は必須
 %\usepackage[japanese]{babel}	
@@ -142,12 +148,9 @@
 }
 \makeatother
 % スライド番号の表示 %%%%%%%%%%%%%%%%%%%
-\usepackage{bookmark}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{第6章: 確率}
 \subtitle{Elena Llaudet \& Kosuke Imai.\\
@@ -159,10 +162,11 @@ Introduction.}
 \begin{document}
 \frame{\titlepage}
 
-\section{6.1 確率の重要性}\label{ux78baux7387ux306eux91cdux8981ux6027}
+\hypertarget{ux78baux7387ux306eux91cdux8981ux6027}{%
+\section{6.1 確率の重要性}\label{ux78baux7387ux306eux91cdux8981ux6027}}
 
 \begin{frame}{なぜ確率を学ぶのか？}
-\phantomsection\label{ux306aux305cux78baux7387ux3092ux5b66ux3076ux306eux304b}
+\protect\hypertarget{ux306aux305cux78baux7387ux3092ux5b66ux3076ux306eux304b}{}
 \begin{itemize}
 \tightlist
 \item
@@ -184,11 +188,12 @@ Introduction.}
 \end{itemize}
 \end{frame}
 
+\hypertarget{ux30d9ux30ebux30ccux30fcux30a4ux5206ux5e03}{%
 \section{6.2
-ベルヌーイ分布}\label{ux30d9ux30ebux30ccux30fcux30a4ux5206ux5e03}
+ベルヌーイ分布}\label{ux30d9ux30ebux30ccux30fcux30a4ux5206ux5e03}}
 
 \begin{frame}[fragile]{ベルヌーイ分布 (Bernoulli Distribution)}
-\phantomsection\label{ux30d9ux30ebux30ccux30fcux30a4ux5206ux5e03-bernoulli-distribution}
+\protect\hypertarget{ux30d9ux30ebux30ccux30fcux30a4ux5206ux5e03-bernoulli-distribution}{}
 \begin{itemize}
 \tightlist
 \item
@@ -214,7 +219,7 @@ Introduction.}
 \begin{verbatim}
 ## flips
 ##        0        1 
-## 0.500061 0.499939
+## 0.500048 0.499952
 \end{verbatim}
 
 \begin{Shaded}
@@ -225,16 +230,40 @@ Introduction.}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.499939
+## [1] 0.499952
 \end{verbatim}
 
 \normalsize
 \end{frame}
 
-\section{6.3 正規分布}\label{ux6b63ux898fux5206ux5e03}
+\hypertarget{ux6b63ux898fux5206ux5e03}{%
+\section{6.3 正規分布}\label{ux6b63ux898fux5206ux5e03}}
 
-\begin{frame}[fragile]{正規分布 (Normal Distribution)}
-\phantomsection\label{ux6b63ux898fux5206ux5e03-normal-distribution}
+\begin{frame}[fragile]{STAR データの読み込み (1)}
+\protect\hypertarget{star-ux30c7ux30fcux30bfux306eux8aadux307fux8fbcux307f-1}{}
+\begin{itemize}
+\tightlist
+\item
+  連続データの分布（正規分布）を確認するため、データを読み込みます。
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. ローカルに保存したデータの読み込み（推奨）}
+\NormalTok{star }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"STAR.csv"}\NormalTok{)}
+
+\CommentTok{\# （参考）URLから直接読み込むことも可能}
+\CommentTok{\# star \textless{}{-} read.csv("https://ayumu{-}tanaka.github.io/QSS/DSS\_Data/STAR.csv")}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]{正規分布 (Normal Distribution) (2)}
+\protect\hypertarget{ux6b63ux898fux5206ux5e03-normal-distribution-2}{}
 \begin{itemize}
 \tightlist
 \item
@@ -243,12 +272,10 @@ Introduction.}
   平均 (\(\mu\)) と標準偏差 (\(\sigma\)) で形状が決まる。
 \end{itemize}
 
-\footnotesize
+\scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# STARデータの読み込み}
-\NormalTok{star }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"STAR.csv"}\NormalTok{)}
 \CommentTok{\# 読解力テストの得点分布}
 \FunctionTok{hist}\NormalTok{(star}\SpecialCharTok{$}\NormalTok{reading, }\AttributeTok{freq =} \ConstantTok{FALSE}\NormalTok{, }
      \AttributeTok{main =} \StringTok{"Histogram of Reading Scores"}\NormalTok{, }
@@ -256,13 +283,12 @@ Introduction.}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[height=0.4\textheight]{DSS_Ch06_files/figure-beamer/unnamed-chunk-2-1} \end{center}
-
+\begin{center}\includegraphics[height=0.75\textheight]{DSS_Ch06_files/figure-beamer/unnamed-chunk-3-1} \end{center}
 \normalsize
 \end{frame}
 
 \begin{frame}[fragile]{標準正規分布 (Standard Normal Distribution)}
-\phantomsection\label{ux6a19ux6e96ux6b63ux898fux5206ux5e03-standard-normal-distribution}
+\protect\hypertarget{ux6a19ux6e96ux6b63ux898fux5206ux5e03-standard-normal-distribution}{}
 \begin{itemize}
 \tightlist
 \item
@@ -294,10 +320,11 @@ Introduction.}
 \end{verbatim}
 \end{frame}
 
-\section{6.4 大数の法則}\label{ux5927ux6570ux306eux6cd5ux5247}
+\hypertarget{ux5927ux6570ux306eux6cd5ux5247}{%
+\section{6.4 大数の法則}\label{ux5927ux6570ux306eux6cd5ux5247}}
 
 \begin{frame}[fragile]{大数の法則 (Law of Large Numbers)}
-\phantomsection\label{ux5927ux6570ux306eux6cd5ux5247-law-of-large-numbers}
+\protect\hypertarget{ux5927ux6570ux306eux6cd5ux5247-law-of-large-numbers}{}
 \begin{itemize}
 \tightlist
 \item
@@ -316,7 +343,7 @@ Introduction.}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.7
+## [1] 0.6
 \end{verbatim}
 
 \begin{Shaded}
@@ -328,7 +355,7 @@ Introduction.}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.59
+## [1] 0.601
 \end{verbatim}
 
 \begin{Shaded}
@@ -340,16 +367,17 @@ Introduction.}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.600568
+## [1] 0.599924
 \end{verbatim}
 
 \normalsize
 \end{frame}
 
-\section{6.5 中心極限定理}\label{ux4e2dux5fc3ux6975ux9650ux5b9aux7406}
+\hypertarget{ux4e2dux5fc3ux6975ux9650ux5b9aux7406}{%
+\section{6.5 中心極限定理}\label{ux4e2dux5fc3ux6975ux9650ux5b9aux7406}}
 
 \begin{frame}[fragile]{中心極限定理 (Central Limit Theorem)}
-\phantomsection\label{ux4e2dux5fc3ux6975ux9650ux5b9aux7406-central-limit-theorem}
+\protect\hypertarget{ux4e2dux5fc3ux6975ux9650ux5b9aux7406-central-limit-theorem}{}
 \begin{itemize}
 \tightlist
 \item
@@ -376,7 +404,7 @@ Introduction.}
 \end{frame}
 
 \begin{frame}[fragile]{中心極限定理の視覚化}
-\phantomsection\label{ux4e2dux5fc3ux6975ux9650ux5b9aux7406ux306eux8996ux899aux5316}
+\protect\hypertarget{ux4e2dux5fc3ux6975ux9650ux5b9aux7406ux306eux8996ux899aux5316}{}
 \footnotesize
 
 \begin{Shaded}
@@ -387,15 +415,16 @@ Introduction.}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[height=0.4\textheight]{DSS_Ch06_files/figure-beamer/unnamed-chunk-6-1} \end{center}
+\begin{center}\includegraphics[height=0.4\textheight]{DSS_Ch06_files/figure-beamer/unnamed-chunk-7-1} \end{center}
 
 \normalsize
 \end{frame}
 
-\section{6.6 まとめ}\label{ux307eux3068ux3081}
+\hypertarget{ux307eux3068ux3081}{%
+\section{6.6 まとめ}\label{ux307eux3068ux3081}}
 
 \begin{frame}{第6章のまとめ}
-\phantomsection\label{ux7b2c6ux7ae0ux306eux307eux3068ux3081}
+\protect\hypertarget{ux7b2c6ux7ae0ux306eux307eux3068ux3081}{}
 \begin{itemize}
 \tightlist
 \item

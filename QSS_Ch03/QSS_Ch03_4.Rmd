@@ -89,7 +89,7 @@ boxplot(altitude ~ village.surveyed,
 ## 標高の比較: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 boxplot(altitude ~ village.surveyed, 
         data = afghan.village,
         ylab = "Altitude (meter)", 
@@ -118,7 +118,7 @@ boxplot(log(population) ~ village.surveyed,
 ## 人口の比較（対数）: 描画結果
 
 \scriptsize
-```{r, echo=FALSE, fig.height=4, out.height="75%", fig.align="center"}
+```{r, echo=FALSE, fig.height=8, out.height="75%", fig.align="center"}
 boxplot(log(population) ~ village.surveyed, 
         data = afghan.village,
         ylab = "log population", 

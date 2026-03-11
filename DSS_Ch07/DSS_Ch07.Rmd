@@ -39,45 +39,73 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ---
 
-## 標本平均の95%信頼区間
+## BES データの読み込み (1)
 
-* 標本平均を中心として、母平均が含まれる可能性が高い範囲。
-* 数式（大標本の場合）: $\bar{X} \pm 1.96 \times SE$
-    * $SE$ (標準誤差) $= \frac{\sigma}{\sqrt{n}} \approx \frac{S}{\sqrt{n}}$
+* 推定の不確実性を評価するため、有権者の意識調査データを準備します。
 
+\scriptsize
 ```{r}
-bes <- na.omit(read.csv("BES.csv"))
-n <- nrow(bes)
-sample_mean <- mean(bes$leave)
-se <- sqrt(var(bes$leave)/n)
+# 1. ローカルに保存したデータの読み込み（推奨）
+bes <- read.csv("BES.csv")
 
-# 95%信頼区間
-c(sample_mean - 1.96 * se, sample_mean + 1.96 * se)
+# （参考）URLから直接読み込むことも可能
+# bes <- read.csv("https://ayumu-tanaka.github.io/QSS/DSS_Data/BES.csv")
+
+# 2. NAを除外
+bes1 <- na.omit(bes)
 ```
+\normalsize
 
 ---
 
-## 平均の差の信頼区間
+## 標本平均の95%信頼区間 (2)
 
-* 処置効果の推定値（平均の差）の不確実性を評価する。
+* 標本平均を中心として、母平均が含まれる可能性が高い範囲。
+* $SE$ (標準誤差) $= \frac{\sigma}{\sqrt{n}} \approx \frac{S}{\sqrt{n}}$
 
-\footnotesize
-
+\scriptsize
 ```{r}
+n <- nrow(bes1)
+sample_mean <- mean(bes1$leave)
+se <- sqrt(var(bes1$leave)/n)
+
+# 95%信頼区間 (大標本の場合: 推定値 ± 1.96 * SE)
+c(sample_mean - 1.96 * se, sample_mean + 1.96 * se)
+```
+\normalsize
+
+---
+
+## STAR データの読み込み (1)
+
+* 処置効果の不確実性を評価するため、実験データを準備します。
+
+\scriptsize
+```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
 star <- read.csv("STAR.csv")
+
+# （参考）URLから直接読み込むことも可能
+# star <- read.csv("https://ayumu-tanaka.github.io/QSS/DSS_Data/STAR.csv")
+```
+\normalsize
+
+---
+
+## 平均の差の信頼区間 (2)
+
+\scriptsize
+```{r}
 star$small <- ifelse(star$classtype == "small", 1, 0)
 treatment <- star$reading[star$small == 1]
 control <- star$reading[star$small == 0]
 
 diff_means <- mean(treatment) - mean(control)
-se_diff <- sqrt(var(treatment)/length(treatment) 
-                + var(control)/length(control))
+se_diff <- sqrt(var(treatment)/length(treatment) + var(control)/length(control))
 
 # 95%信頼区間
-c(diff_means - 1.96 * se_diff, 
-  diff_means + 1.96 * se_diff)
+c(diff_means - 1.96 * se_diff, diff_means + 1.96 * se_diff)
 ```
-
 \normalsize
 
 # 7.3 仮説検定
@@ -95,6 +123,7 @@ c(diff_means - 1.96 * se_diff,
 
 ## 平均の差の検定 (Z検定/t検定)
 
+\scriptsize
 ```{r}
 # テスト統計量 (Z-score)
 z_obs <- diff_means / se_diff
@@ -103,26 +132,37 @@ z_obs
 # p値の計算
 2 * pnorm(-abs(z_obs))
 ```
+\normalsize
 
 * p値が非常に小さいため、少人数学級の効果は統計的に有意である。
 
-# 7.4 回帰係数の有意性
+# 7.4 回帰分析における不確実性
 
 ---
 
-## 回帰分析の結果の解釈
+## UA_survey データの読み込み (1)
 
-* `summary()` で各係数の標準誤差、t統計量、p値を確認できる。
+* 回帰係数の有意性を確認するため、ウクライナの調査データを準備します。
 
-\footnotesize
-
+\scriptsize
 ```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
 uas <- read.csv("UA_survey.csv")
-fit <- lm(pro_russian_vote ~ russian_tv + within_25km, 
-          data = uas)
+
+# （参考）URLから直接読み込むことも可能
+# uas <- read.csv("https://ayumu-tanaka.github.io/QSS/DSS_Data/UA_survey.csv")
+```
+\normalsize
+
+---
+
+## 回帰分析の結果の解釈 (2)
+
+\scriptsize
+```{r}
+fit <- lm(pro_russian_vote ~ russian_tv + within_25km, data = uas)
 summary(fit)$coefficients
 ```
-
 \normalsize
 
 * `Pr(>|t|)` 列が 0.05 未満であれば、その変数の影響は統計的に有意である。

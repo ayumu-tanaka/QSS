@@ -64,22 +64,34 @@ mean(flips)
 
 ------------------------------------------------------------------------
 
-## 正規分布 (Normal Distribution)
+## STAR データの読み込み (1)
+
+* 連続データの分布（正規分布）を確認するため、データを読み込みます。
+
+\scriptsize
+```{r}
+# 1. ローカルに保存したデータの読み込み（推奨）
+star <- read.csv("STAR.csv")
+
+# （参考）URLから直接読み込むことも可能
+# star <- read.csv("https://ayumu-tanaka.github.io/QSS/DSS_Data/STAR.csv")
+```
+\normalsize
+
+---
+
+## 正規分布 (Normal Distribution) (2)
 
 -   左右対称の釣鐘型の分布。多くの自然・社会現象に現れる。
 -   平均 ($\mu$) と標準偏差 ($\sigma$) で形状が決まる。
 
-\footnotesize
-
-```{r, fig.height=3.5, out.height="40%", fig.align="center"}
-# STARデータの読み込み
-star <- read.csv("STAR.csv")
+\scriptsize
+```{r, fig.height=4, out.height="75%", fig.align="center"}
 # 読解力テストの得点分布
 hist(star$reading, freq = FALSE, 
      main = "Histogram of Reading Scores", 
      xlab = "Reading Score")
 ```
-
 \normalsize
 
 ------------------------------------------------------------------------
